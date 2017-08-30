@@ -9,8 +9,9 @@ Follow on Twitter [![Twitter Follow](https://img.shields.io/twitter/follow/disco
 * Use /Applications/XAMPP/manager-osx to start MySQL and Apache.
 * Open a browser to localhost/phpmyadmin.
 * Create a MySQL database called assessment_manager.
-* The default creds are root/blank. Modify includes/common.php as necessary.
-* Import assessment_manager.sql.
+* The default creds are root/blank.
+* Modify /assessment-manager/src/php/includes/common.php as necessary.
+* Import /assessment-manager/src/db/mysql/assessment_manager.sql.
 * Delete everything inside of /Applications/XAMPP/htdocs/.
 * Move the folder to /Applications/XAMPP/htdocs/.
 * Open a browser to localhost/assessment-manager/src/php/index.php,
