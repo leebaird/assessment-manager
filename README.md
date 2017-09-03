@@ -23,7 +23,6 @@ Follow on Twitter [![Twitter Follow](https://img.shields.io/twitter/follow/disco
 * ./amdb.sh setup
 
 ### Usage
-* Open a browser to localhost/assessment-manager/src/php/index.php,
 * Register for a new account, then login.
 
 ### Pages

@@ -11,14 +11,17 @@ check=`uname -a | awk '{print $1}'`
 
 if [ $check = 'Darwin' ]; then
     mysql=/Applications/XAMPP/xamppfiles/bin/mysql
+    web="open -a Safari http://localhost/assessment-manager/src/php/"
 else
     mysql=/usr/bin/mysql
+    web="firefox -new-tab http://localhost/assessment-manager/src/php/"
 fi
 
 case $1 in
     setup)
     $mysql -uroot < amdb-sys_create.sql
     $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_create.sql
+    $web
     ;;
 
     clear)
@@ -54,4 +57,3 @@ case $1 in
     echo
     echo
 esac
-
