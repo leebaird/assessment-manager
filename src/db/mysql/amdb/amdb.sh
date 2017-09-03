@@ -1,5 +1,4 @@
 #!/bin/bash
-clear
 
 DB_HOST=localhost
 DB_PORT=3306
@@ -8,13 +7,13 @@ DB_USERNAME=amuser
 DB_PASSWORD=AmUs3r0354
 
 # Check for OS X
-#check=`uname -a | awk '{print $1}'`
-#
-#if [ $check = 'Darwin' ]; then
-#    mysql=/Applications/XAMPP/xamppfiles/bin/mysql
-#else
-#    mysql=/usr/bin/mysql
-#fi
+check=`uname -a | awk '{print $1}'`
+
+if [ $check = 'Darwin' ]; then
+    mysql=/Applications/XAMPP/xamppfiles/bin/mysql
+else
+    mysql=/usr/bin/mysql
+fi
 
 case $1 in
     setup)

@@ -6,13 +6,11 @@ check=`uname -a | awk '{print $1}'`
 if [ $check = 'Darwin' ]; then
     export LAMPP_HOME=/Applications/XAMPP
     export PATH=$LAMPP_HOME/bin:$PATH
-    mysql=/Applications/XAMPP/xamppfiles/bin/mysql
     echo
     echo 'Environmental variables set for OS X.'
 else
     export LAMPP_HOME=/opt/lampp
     export PATH=$LAMPP_HOME/bin:$PATH
-    mysql=/usr/bin/mysql
     echo
     echo 'Environmental variables set for Linux.'
 fi
