@@ -31,12 +31,6 @@
     		<li><a href="http://projects.webappsec.org/w/page/13246978/Threat%20Classification" target="_blank">WASC Threat Classification</a></li>
 			<li><a href="notes.php">Notes</a></li>
 		</ul>
-		
-		<h4>Dev Work</h4>
-		<ul>
-			<li><a href="bugs.php">Bugs</a></li>
-			<li><a href="todo.php">To Do</a></li>			
-		</ul>
 	</div>
 
 	<div class="col-xs-12 col-md-8">
