@@ -2,7 +2,7 @@
     $username = "root";
     $password = "";
     $host = "localhost";
-    $dbname = "assessment_manager";
+    $dbname = "amdb";
 
 	// For login and register only.
     $db = new PDO("mysql:host={$host};dbname={$dbname}", $username, $password);
