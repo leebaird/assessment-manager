@@ -1,21 +1,21 @@
 #!/bin/bash
 
-case "$1" in
-  'linux')
-    # linux environment
-    export LAMPP_HOME=/opt/lampp
-    export PATH=$LAMPP_HOME/bin:$PATH
-    ;;
+# Check for OS X
+check=`uname -a | awk '{print $1}'`
 
-  'osx')
-    # osx environment
+if [ $check = 'Darwin' ]; then
     export LAMPP_HOME=/Applications/XAMPP
     export PATH=$LAMPP_HOME/bin:$PATH
-    ;;
-
-  *)
+    mysql=/Applications/XAMPP/xamppfiles/bin/mysql
     echo
-    echo "Usage: $0 {linux | osx}"
+    echo 'Environmental variables set for OS X.'
+else
+    export LAMPP_HOME=/opt/lampp
+    export PATH=$LAMPP_HOME/bin:$PATH
+    mysql=/usr/bin/mysql
     echo
+    echo 'Environmental variables set for Linux.'
+fi
 
-esac
+echo
+echo
