@@ -6,24 +6,23 @@ Follow on Twitter [![Twitter Follow](https://img.shields.io/twitter/follow/disco
 
 ### Requirements
 * Install XAMPP (PHP 5.6.31): https://www.apachefriends.org/download.html
+
+### OS X Setup
 * Use /Applications/XAMPP/manager-osx to start MySQL and Apache.
 * cd /Applications/XAMPP/htdocs/
 * git clone https://github.com/leebaird/assessment-manager.git
 
 ### Linux Setup
-* cd /opt/xampp/htdocs/assessment-manager/bin/
- * ./setenv.sh
-* cd ../src/db/mysql/amdb/
-* ./amdb.sh setup
+* Start MySQL and Apache.
+* cd /opt/xampp/htdocs/
+* git clone https://github.com/leebaird/assessment-manager.git
 
-### OS X Setup
-* cd /Applications/XAMPP/htdocs/assessment-manager/bin/
+### Usage
+* cd assessment-manager/bin/
 * ./setenv.sh
 * cd ../src/db/mysql/amdb/
 * ./amdb.sh setup
-
-### Usage
-* Register for a new account, then login.
+* Register for a new account and then login.
 
 ### Pages
 ```
