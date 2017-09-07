@@ -495,7 +495,6 @@ else {
             <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">CVSS</th>
             <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">Internal</th>
             <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">External</th>
-            <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">Modified</th>
             <th style="background-color:#E8E8E8; "></th>
         </tr>
 
@@ -510,16 +509,15 @@ else {
 
                 echo '
                 <tr>
-                    <td width="50">'.'<a class="btn btn-primary" href="hostvulns.php?read='.$row['script_id'].'"><span class="glyphicon glyphicon-play"></span></a>'.'</td>
-                    <td width="50">'.'<a class="btn btn-warning" href="hostvulns.php?update='.$row['script_id'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
+                    <td width="50">'.'<a class="btn btn-primary" href="hostvulns.php?read='.$row['hostvulnID'].'"><span class="glyphicon glyphicon-play"></span></a>'.'</td>
+                    <td width="50">'.'<a class="btn btn-warning" href="hostvulns.php?update='.$row['hostvulnID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                     <td width="100">'.$row["tool"].'</td>
                     <td width="500">'.$row["vulnerability"].'</td>
                     <td width="425">'.$finding["finding"].'</td>
                     <td width="100">'.$row["cvss_base"].'</td>
                     <td width="100">'.$row["internal"].'</td>
                     <td width="100">'.$row["external"].'</td>
-                    <td width="150">'.$myDateFormat.'</td>
-                    <td width="50">'.'<a class="btn btn-danger" href="hostvulns.php?delete='.$row['script_id'].'"
+                    <td width="50">'.'<a class="btn btn-danger" href="hostvulns.php?delete='.$row['hostvulnID'].'"
                         onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
                 </tr>';
             }

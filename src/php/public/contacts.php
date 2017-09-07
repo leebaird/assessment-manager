@@ -341,7 +341,6 @@ else {
             <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Contact</th>
             <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Client</th>
             <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Title</th>
-            <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Cell</th>
             <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">Modified</th>
             <th style="background-color:#E8E8E8;"></th>
         </tr>
@@ -362,7 +361,6 @@ else {
                     <td width="200">'.$row["contact"].'</td>
                     <td width="300">'.$client['client'].'</td>
                     <td width="350">'.$row["title"].'</td>
-                    <td width="125">'.$row["cell"].'</td>
                     <td width="175">'.$myDateFormat.'</td>
                     <td width="50">'.'<a class="btn btn-danger" href="contacts.php?delete='.$row['contactID'].'"
                         onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>

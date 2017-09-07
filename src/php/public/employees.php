@@ -349,7 +349,6 @@ else {
             <th style="background-color:#E8E8E8;"></th>
             <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Employee</th>
             <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Title</th>
-            <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Cell</th>
             <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">Modified</th>
             <th style="background-color:#E8E8E8;"></th>
         </tr>
@@ -364,7 +363,6 @@ else {
                     <td width="50">'.'<a class="btn btn-warning" href="employees.php?update='.$row['employeeID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                     <td width="200">'.$row["employee"].'</td>
                     <td width="350">'.$row["title"].'</td>
-                    <td width="125">'.$row["cell"].'</td>
                     <td width="175">'.$myDateFormat.'</td>
                     <td width="50">'.'<a class="btn btn-danger" href="employees.php?delete='.$row['employeeID'].'"
                         onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
