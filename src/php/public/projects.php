@@ -74,7 +74,7 @@ if (isset($_GET['create'])) {
 			            <form class="form-horizontal" action="projects.php" method="post">
 			                <div class="form-group">
 			                    <label class="col-sm-2 control-label">Project</label>
-			                    <div class="col-sm-10">
+			                    <div class="col-sm-5">
 			                        <input type="text" class="form-control" name="project" placeholder="Project">
 			                    </div>
 			                </div>

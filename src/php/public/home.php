@@ -29,7 +29,6 @@
     		<li><a href="https://www.exploit-db.com" target="_blank">Exploit Database</a></li>
     		<li><a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project#tab=OWASP_Top_10_for_2017_Release_Candidate_1" target="_blank">OWASP Top 10</a></li>
     		<li><a href="http://projects.webappsec.org/w/page/13246978/Threat%20Classification" target="_blank">WASC Threat Classification</a></li>
-			<li><a href="notes.php">Notes</a></li>
 		</ul>
 	</div>
 
