@@ -1,18 +1,18 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.3
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 30, 2017 at 07:12 PM
+-- Generation Time: Sep 16, 2017 at 08:01 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 use amdb;
-
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `assessment_manager`
+-- Database: `amdb`
 --
 
 -- --------------------------------------------------------
@@ -32,11 +32,11 @@ SET time_zone = "+00:00";
 CREATE TABLE `accountmgrs` (
   `accountmgrID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
-  `accountmgr` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `cell` varchar(12) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `notes` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `accountmgr` varchar(50) COLLATE utf8_bin NOT NULL,
+  `cell` varchar(12) COLLATE utf8_bin NOT NULL,
+  `email` varchar(50) COLLATE utf8_bin NOT NULL,
+  `notes` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -47,10 +47,25 @@ CREATE TABLE `accountmgrs` (
 CREATE TABLE `clients` (
   `clientID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
-  `client` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `notes` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `client` varchar(50) COLLATE utf8_bin NOT NULL,
+  `address1` varchar(25) COLLATE utf8_bin NOT NULL,
+  `address2` varchar(25) COLLATE utf8_bin NOT NULL,
+  `city` varchar(25) COLLATE utf8_bin NOT NULL,
+  `state` varchar(2) COLLATE utf8_bin NOT NULL,
+  `zip` varchar(10) COLLATE utf8_bin NOT NULL,
+  `notes` text COLLATE utf8_bin NOT NULL,
   `employeeID` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`clientID`, `modified`, `client`, `address1`, `address2`, `city`, `state`, `zip`, `notes`, `employeeID`) VALUES
+(1, '2017-09-15 23:27:22', 'Apple', '', '', '', '', '', '', 0),
+(2, '2017-09-16 00:01:30', 'Comcast', '', '', '', '', '', '', 0),
+(3, '2017-09-16 12:53:44', 'Palo Alto Networks', '', '', '', '', '', '', 0),
+(4, '2017-09-16 00:01:20', 'Verizon', '', '', '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -61,15 +76,25 @@ CREATE TABLE `clients` (
 CREATE TABLE `contacts` (
   `contactID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
-  `contact` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `work` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `cell` varchar(12) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `notes` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `contact` varchar(50) COLLATE utf8_bin NOT NULL,
+  `title` varchar(50) COLLATE utf8_bin NOT NULL,
+  `work` varchar(20) COLLATE utf8_bin NOT NULL,
+  `cell` varchar(12) COLLATE utf8_bin NOT NULL,
+  `email` varchar(50) COLLATE utf8_bin NOT NULL,
+  `notes` text COLLATE utf8_bin NOT NULL,
   `clientID` int(4) NOT NULL,
   `projectID` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`contactID`, `modified`, `contact`, `title`, `work`, `cell`, `email`, `notes`, `clientID`, `projectID`) VALUES
+(1, '2017-09-16 00:05:49', 'Tim Cook', 'CEO', '', '', '', '', 1, 0),
+(2, '2017-09-16 12:57:14', 'Brian L. Roberts', 'CEO', '', '', '', '', 2, 0),
+(3, '2017-09-16 12:57:36', 'Mark D. McLaughlin', 'CEO', '', '', '', '', 3, 0),
+(4, '2017-09-16 12:56:17', 'Lowell C. McAdam', 'CEO', '', '', '', '', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -80,16 +105,23 @@ CREATE TABLE `contacts` (
 CREATE TABLE `employees` (
   `employeeID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
-  `employee` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `title` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `type` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `accountmgr` varchar(3) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `projectmgr` varchar(3) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `cell` varchar(12) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `notes` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `employee` varchar(50) COLLATE utf8_bin NOT NULL,
+  `title` varchar(25) COLLATE utf8_bin NOT NULL,
+  `type` varchar(10) COLLATE utf8_bin NOT NULL,
+  `accountmgr` varchar(3) COLLATE utf8_bin NOT NULL,
+  `projectmgr` varchar(3) COLLATE utf8_bin NOT NULL,
+  `cell` varchar(12) COLLATE utf8_bin NOT NULL,
+  `email` varchar(50) COLLATE utf8_bin NOT NULL,
+  `notes` text COLLATE utf8_bin NOT NULL,
   `projectID` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`employeeID`, `modified`, `employee`, `title`, `type`, `accountmgr`, `projectmgr`, `cell`, `email`, `notes`, `projectID`) VALUES
+(1, '2017-09-16 12:51:29', 'root', 'Red Team Manager', 'Full Time', '', '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -100,13 +132,24 @@ CREATE TABLE `employees` (
 CREATE TABLE `findings` (
   `findingID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
-  `type` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `finding` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `observation` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `severity` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `remediation` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `see_also` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `type` varchar(25) COLLATE utf8_bin NOT NULL,
+  `finding` varchar(50) COLLATE utf8_bin NOT NULL,
+  `observation` text COLLATE utf8_bin NOT NULL,
+  `severity` text COLLATE utf8_bin NOT NULL,
+  `remediation` text COLLATE utf8_bin NOT NULL,
+  `see_also` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `findings`
+--
+
+INSERT INTO `findings` (`findingID`, `modified`, `type`, `finding`, `observation`, `severity`, `remediation`, `see_also`) VALUES
+(1, '2017-09-15 23:29:06', 'Host', 'Access to Administrative Interface Issues', '', '', '', ''),
+(2, '2017-09-15 23:28:25', 'Host', 'Apple Configuration Issues', '', '', '', ''),
+(3, '2017-09-15 23:28:37', 'Host', 'Apple Patching Issues', '', '', '', ''),
+(4, '2017-09-16 12:25:49', 'Web', 'Reflected XSS', '', '', '', ''),
+(5, '2017-09-16 12:25:59', 'Web', 'Stored XSS', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -117,18 +160,18 @@ CREATE TABLE `findings` (
 CREATE TABLE `hostvulns` (
   `hostvulnID` int(6) NOT NULL,
   `modified` datetime NOT NULL,
-  `tool` varchar(16) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `vulnerability` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `tool` varchar(16) COLLATE utf8_bin NOT NULL,
+  `vulnerability` varchar(128) COLLATE utf8_bin NOT NULL,
   `findingID` int(3) NOT NULL,
   `cvss_base` int(2) NOT NULL,
-  `internal` varchar(8) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `external` varchar(8) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `description` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `remediation` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `internal` varchar(8) COLLATE utf8_bin NOT NULL,
+  `external` varchar(8) COLLATE utf8_bin NOT NULL,
+  `description` text COLLATE utf8_bin NOT NULL,
+  `remediation` text COLLATE utf8_bin NOT NULL,
   `see_also` point NOT NULL,
   `published` date NOT NULL,
   `updated` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -139,12 +182,12 @@ CREATE TABLE `hostvulns` (
 CREATE TABLE `projectmgrs` (
   `projectmgrID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
-  `projectmgr` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `cell` varchar(12) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `notes` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `projectmgr` varchar(50) COLLATE utf8_bin NOT NULL,
+  `cell` varchar(12) COLLATE utf8_bin NOT NULL,
+  `email` varchar(50) COLLATE utf8_bin NOT NULL,
+  `notes` text COLLATE utf8_bin NOT NULL,
   `projectID` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -155,35 +198,35 @@ CREATE TABLE `projectmgrs` (
 CREATE TABLE `projects` (
   `projectID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
-  `project` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `client` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `accountmgr` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `projectmgr` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `employee` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `type` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `objective` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `billing` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `rate` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `address1` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `address2` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `city` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `state` varchar(2) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `zip` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `project` varchar(50) COLLATE utf8_bin NOT NULL,
+  `client` varchar(50) COLLATE utf8_bin NOT NULL,
+  `accountmgr` varchar(50) COLLATE utf8_bin NOT NULL,
+  `projectmgr` varchar(50) COLLATE utf8_bin NOT NULL,
+  `employee` varchar(50) COLLATE utf8_bin NOT NULL,
+  `type` varchar(50) COLLATE utf8_bin NOT NULL,
+  `objective` varchar(100) COLLATE utf8_bin NOT NULL,
+  `billing` varchar(25) COLLATE utf8_bin NOT NULL,
+  `rate` varchar(10) COLLATE utf8_bin NOT NULL,
+  `address1` varchar(25) COLLATE utf8_bin NOT NULL,
+  `address2` varchar(25) COLLATE utf8_bin NOT NULL,
+  `city` varchar(25) COLLATE utf8_bin NOT NULL,
+  `state` varchar(2) COLLATE utf8_bin NOT NULL,
+  `zip` varchar(10) COLLATE utf8_bin NOT NULL,
   `kickoff` date NOT NULL,
   `start` date NOT NULL,
   `finish` date NOT NULL,
-  `hours` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `hours` varchar(25) COLLATE utf8_bin NOT NULL,
   `tech_qa` date NOT NULL,
   `draft_delivery` date NOT NULL,
   `client_comments` date NOT NULL,
   `final_delivery` date NOT NULL,
-  `status` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `notes` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `status` varchar(10) COLLATE utf8_bin NOT NULL,
+  `notes` text COLLATE utf8_bin NOT NULL,
   `hold` date NOT NULL,
   `restart` date NOT NULL,
-  `percent_complete` varchar(3) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `complete` varchar(5) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `percent_complete` varchar(3) COLLATE utf8_bin NOT NULL,
+  `complete` varchar(5) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -194,17 +237,17 @@ CREATE TABLE `projects` (
 CREATE TABLE `scan` (
   `scanID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
-  `scan` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `location` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `severity` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `ip_address` varchar(15) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `fqdn` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `os` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `scan` varchar(50) COLLATE utf8_bin NOT NULL,
+  `location` varchar(10) COLLATE utf8_bin NOT NULL,
+  `severity` varchar(10) COLLATE utf8_bin NOT NULL,
+  `ip_address` varchar(15) COLLATE utf8_bin NOT NULL,
+  `fqdn` varchar(25) COLLATE utf8_bin NOT NULL,
+  `os` varchar(50) COLLATE utf8_bin NOT NULL,
   `port` int(5) NOT NULL,
-  `proof` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `proof` text COLLATE utf8_bin NOT NULL,
   `date` date NOT NULL,
   `projectID` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -215,14 +258,20 @@ CREATE TABLE `scan` (
 CREATE TABLE `users` (
   `userID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
-  `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `password` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `salt` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `activated` tinyint(1) NOT NULL,
-  `role` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `username` varchar(50) COLLATE utf8_bin NOT NULL,
+  `email` varchar(50) COLLATE utf8_bin NOT NULL,
+  `password` varchar(128) COLLATE utf8_bin NOT NULL,
+  `salt` varchar(128) COLLATE utf8_bin NOT NULL,
+  `role` varchar(25) COLLATE utf8_bin NOT NULL,
   `approved` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`userID`, `modified`, `username`, `email`, `password`, `salt`, `role`, `approved`) VALUES
+(1, '2017-09-15 23:22:02', 'admin', 'admin@acme.com', 'c368df3e5185de6bf9228c15a5a3f5e803d7ebe68cb32516bd4769573c9b7886', '5a73d21957fe79da', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -233,16 +282,16 @@ CREATE TABLE `users` (
 CREATE TABLE `vulnerabilities` (
   `vulnerabilityID` int(5) NOT NULL,
   `modified` datetime NOT NULL,
-  `vulnerability` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `description` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `solution` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `vulnerability` varchar(100) COLLATE utf8_bin NOT NULL,
+  `description` text COLLATE utf8_bin NOT NULL,
+  `solution` text COLLATE utf8_bin NOT NULL,
   `cvss_base_score` decimal(3,1) NOT NULL,
-  `see_also` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `cve` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `internal` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `external` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `see_also` text COLLATE utf8_bin NOT NULL,
+  `cve` varchar(50) COLLATE utf8_bin NOT NULL,
+  `internal` varchar(10) COLLATE utf8_bin NOT NULL,
+  `external` varchar(10) COLLATE utf8_bin NOT NULL,
   `scanID` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -253,14 +302,21 @@ CREATE TABLE `vulnerabilities` (
 CREATE TABLE `webvulns` (
   `webvulnID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
-  `tool` varchar(16) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `vulnerability` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `tool` varchar(16) COLLATE utf8_bin NOT NULL,
+  `vulnerability` varchar(50) COLLATE utf8_bin NOT NULL,
   `findingID` int(3) NOT NULL,
-  `severity` varchar(8) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `description` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `remediation` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `see_also` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `severity` varchar(8) COLLATE utf8_bin NOT NULL,
+  `description` text COLLATE utf8_bin NOT NULL,
+  `remediation` text COLLATE utf8_bin NOT NULL,
+  `see_also` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `webvulns`
+--
+
+INSERT INTO `webvulns` (`webvulnID`, `modified`, `tool`, `vulnerability`, `findingID`, `severity`, `description`, `remediation`, `see_also`) VALUES
+(1, '2017-09-16 12:27:14', 'Burp', 'Home page has reflected XSS', 0, '', '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -347,61 +403,73 @@ ALTER TABLE `webvulns`
 --
 ALTER TABLE `accountmgrs`
   MODIFY `accountmgrID` int(4) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `clientID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `clientID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `contactID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `contactID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
   MODIFY `employeeID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `findings`
 --
 ALTER TABLE `findings`
-  MODIFY `findingID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `findingID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `hostvulns`
 --
 ALTER TABLE `hostvulns`
-  MODIFY `hostvulnID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `hostvulnID` int(6) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `projectmgrs`
 --
 ALTER TABLE `projectmgrs`
   MODIFY `projectmgrID` int(4) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
   MODIFY `projectID` int(4) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `scan`
 --
 ALTER TABLE `scan`
   MODIFY `scanID` int(4) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `vulnerabilities`
 --
 ALTER TABLE `vulnerabilities`
   MODIFY `vulnerabilityID` int(5) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `webvulns`
 --
 ALTER TABLE `webvulns`
-  MODIFY `webvulnID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
+  MODIFY `webvulnID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

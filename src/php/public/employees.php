@@ -47,14 +47,14 @@ if (isset($_GET['create'])) {
             <form class="form-horizontal" action="employees.php" method="post">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Employee</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="employee" placeholder="Employee">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Title</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="title" placeholder="Title">
                     </div>
                 </div>
@@ -92,21 +92,21 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Cell</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="cell" placeholder="Cell">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="email" placeholder="Email">
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Notes</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <textarea class="form-control" name="notes" placeholder="Notes" rows="6"></textarea>
                     </div>
                 </div>
@@ -163,14 +163,14 @@ elseif (isset($_GET['read'])) {
             <form class="form-horizontal" action="employees.php" method="post">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Employee</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="Employee" value="<?php echo $row['employee'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Title</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="title" value="<?php echo $row['title'] ?>" readonly>
                     </div>
                 </div>
@@ -198,21 +198,21 @@ elseif (isset($_GET['read'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Cell</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="cell" value="<?php echo $row['cell'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="email" value="<?php echo $row['email'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Notes</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <textarea class="form-control" name="notes" rows="6" readonly><?php echo $row['notes'] ?></textarea>
                     </div>
                 </div>
@@ -248,14 +248,14 @@ elseif (isset($_GET['update'])) {
                 <input type = "hidden" name = "update" value = "<?php echo $row['employeeID'] ?>">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Employee</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="employee" value="<?php echo $row['employee'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Title</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="title" value="<?php echo $row['title'] ?>">
                     </div>
                 </div>
@@ -293,21 +293,21 @@ elseif (isset($_GET['update'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Cell</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="cell" value="<?php echo $row['cell'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="email" value="<?php echo $row['email'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Notes</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <textarea class="form-control" name="notes" rows="6"><?php echo $row['notes'] ?></textarea>
                     </div>
                 </div>

@@ -37,24 +37,24 @@ if (isset($_GET['read'])) {
             </div>
 
         <div class="panel-body">
-            <form class="form-horizontal" action="members.php" method="post">
+            <form class="form-horizontal" action="users.php" method="post">
             <input type = "hidden" name = "update" value = "<?php echo $row['userID'] ?>">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">User Name</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="username" placeholder="User Name" value="<?php echo $row['username'] ?>" readonly="readonly">
+                    <label class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo $row['username'] ?>" readonly="readonly">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $row['email'] ?>" readonly="readonly">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Activate</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 control-label">Role</label>
+                    <div class="col-sm-5">
                         
                         <?php
                         if($row['role']==1){
@@ -73,8 +73,8 @@ if (isset($_GET['read'])) {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Activate</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 control-label">Approved</label>
+                    <div class="col-sm-5">
                         <?php
                         if($row['approved']==1){
                         ?>
@@ -94,7 +94,7 @@ if (isset($_GET['read'])) {
 
                 <div class="form-actions">
                     <button class="btn btn-primary" type="submit">Update</button>
-                    <a class="btn btn-default" href="members.php">Back</a>
+                    <a class="btn btn-default" href="users.php">Back</a>
                 </div>
             </form>
 
@@ -120,25 +120,25 @@ else if (isset($_GET['update'])) {
             </div>
 
         <div class="panel-body">
-            <form class="form-horizontal" action="members.php" method="post">
+            <form class="form-horizontal" action="users.php" method="post">
             <input type = "hidden" name = "update" value = "<?php echo $row['userID'] ?>">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">User Name</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="username" placeholder="User Name" value="<?php echo $row['username'] ?>">
+                    <label class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo $row['username'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $row['email'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Activate</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 control-label">Role</label>
+                    <div class="col-sm-5">
                         <select class="form-control" name="role">
                         <?php   
                         if($row['role']==1){
@@ -160,8 +160,8 @@ else if (isset($_GET['update'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Activate</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 control-label">Approved</label>
+                    <div class="col-sm-5">
                         <select class="form-control" name="approved">
                         <?php   
                         if($row['approved']==1){
@@ -184,7 +184,7 @@ else if (isset($_GET['update'])) {
 
                 <div class="form-actions">
                     <button class="btn btn-primary" type="submit">Update</button>
-                    <a class="btn btn-default" href="members.php">Back</a>
+                    <a class="btn btn-default" href="users.php">Back</a>
                 </div>
             </form>
 
@@ -223,7 +223,7 @@ else {
         <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Email</th>
         <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Role</th>
         <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Approved</th>
-        <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">Modified</th>
+        <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Modified</th>
         <th style="background-color:#E8E8E8;"></th>
     </tr>
 
@@ -238,8 +238,8 @@ else {
 
             echo '
             <tr>
-                <td width="50">'.'<a class="btn btn-primary" href="members.php?read='.$row['userID'].'"><span class="glyphicon glyphicon-play"></span></a>'.'</td>
-                <td width="50">'.'<a class="btn btn-warning" href="members.php?update='.$row['userID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
+                <td width="50">'.'<a class="btn btn-primary" href="users.php?read='.$row['userID'].'"><span class="glyphicon glyphicon-play"></span></a>'.'</td>
+                <td width="50">'.'<a class="btn btn-warning" href="users.php?update='.$row['userID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                 <td width="200">'.$row["username"].'</td>
                 <td width="300">'.$row["email"].'</td>
                 ';
@@ -257,7 +257,7 @@ else {
             echo '
                 <td width="100">'.$row["approved"].'</td>
                 <td width="175">'.$myDateFormat.'</td>
-                <td width="50">'.'<a class="btn btn-danger" href="members.php?delete='.$row['userID'].'"
+                <td width="50">'.'<a class="btn btn-danger" href="users.php?delete='.$row['userID'].'"
                 onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
             </tr>';
         }

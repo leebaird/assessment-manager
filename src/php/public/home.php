@@ -12,7 +12,7 @@
         <h4>Settings</h4>
         <ul>
             <li><a href="../includes/edit_account.php">Edit Account</a></li>
-            <li><a href="../includes/members.php">Members</a></li>
+            <li><a href="../includes/users.php">Users</a></li>
         </ul>
 
         <h4>Tools</h4>

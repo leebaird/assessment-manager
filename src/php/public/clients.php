@@ -47,7 +47,7 @@ if (isset($_GET['create'])) {
             <form class="form-horizontal" action="clients.php" method="post">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Client</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="client" placeholder="Client">
                     </div>
                 </div>
@@ -60,7 +60,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <select class="form-control" name="employeeID">
                             <option value=""></option>
                             <?php
@@ -77,7 +77,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Notes</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <textarea class="form-control" name="notes" placeholder="Notes" rows="6"></textarea>
                     </div>
                 </div>
@@ -139,21 +139,21 @@ elseif (isset($_GET['read'])) {
             <form class="form-horizontal" action="clients.php" method="post">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Client</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="client" value="<?php echo $row['client'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="employeeID" value="<?php echo $c['employee'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Notes</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <textarea class="form-control" name="notes" rows="6" readonly><?php echo $row['notes'] ?></textarea>
                     </div>
                 </div>
@@ -189,7 +189,7 @@ elseif (isset($_GET['update'])) {
                 <input type="hidden" name="update" value="<?php echo $row['clientID'] ?>">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Client</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input type="text" class="form-control" name="client" value="<?php echo $row['client'] ?>">
                     </div>
                 </div>
@@ -202,7 +202,7 @@ elseif (isset($_GET['update'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <select class="form-control" name="employeeID">
                             <option value=""></option>
                             <?php
@@ -219,7 +219,7 @@ elseif (isset($_GET['update'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Notes</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <textarea class="form-control" name="notes" rows="6"><?php echo $row['notes'] ?></textarea>
                     </div>
                 </div>

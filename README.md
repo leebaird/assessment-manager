@@ -22,7 +22,8 @@ Follow on Twitter [![Twitter Follow](https://img.shields.io/twitter/follow/disco
 * ./setenv.sh
 * cd ../src/db/mysql/amdb/
 * ./amdb.sh setup
-* Register for a new account and then login.
+* Default account: admin
+* Default password: 1234!@#$qwerQWER
 
 ### Pages
 ```
