@@ -30,14 +30,12 @@ if (isset($_POST['create'])) {
     confirm_query($result);
 }
 
-
 if (isset($_POST['update'])) {
     // UPDATE RECORD.
     $query = "UPDATE webvulns SET tool='".addslashes($_POST['tool'])."', vulnerability='".addslashes($_POST['vulnerability'])."', findingID='".addslashes($_POST['findingID'])."', severity='".addslashes($_POST['severity'])."', modified=now(), description='".addslashes($_POST['description'])."', remediation='".addslashes($_POST['remediation'])."', see_also='".addslashes($_POST['see_also'])."' WHERE webvulnID=".intval($_POST['update']);
-  	$result = mysqli_query($connection, $query);
+    $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
-
 
 if (isset($_GET['delete'])) {
     // DELETE RECORD.
@@ -45,7 +43,6 @@ if (isset($_GET['delete'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
-
 
 if (isset($_GET['create'])) {
     ?>
@@ -154,27 +151,27 @@ elseif (isset($_GET['read'])) {
     confirm_query($result);
     $row = mysqli_fetch_assoc($result);
 
-	// Find number of records.
-	$query2 = "SELECT * FROM webvulns";
-	$result2 = mysqli_query($connection, $query2);
-	confirm_query($result2);
-	$limit = mysqli_num_rows($result2);
+    // Find number of records.
+    $query2 = "SELECT * FROM webvulns";
+    $result2 = mysqli_query($connection, $query2);
+    confirm_query($result2);
+    $limit = mysqli_num_rows($result2);
 
-	// Free result set.
-	mysqli_free_result($result2);
+    // Free result set.
+    mysqli_free_result($result2);
 
-	// Get the page number or set it to 1 if no page is set.
-	$read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
-	?>
+    // Get the page number or set it to 1 if no page is set.
+    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
+    ?>
 
-	<ul class="pager">
-	    <?php if ($read > 1): ?>
-	        <li class="previous"><a href="?read=<?= ($read - 1)?>">Previous</a></li>
-	    <?php endif ?>
-	    <?php if ($read < $limit): ?>
-	        <li class="previous"><a href="?read=<?= ($read + 1)?>">Next</a></li>
-	    <?php endif ?>
-	</ul>
+    <ul class="pager">
+        <?php if ($read > 1): ?>
+            <li class="previous"><a href="?read=<?= ($read - 1)?>">Previous</a></li>
+        <?php endif ?>
+        <?php if ($read < $limit): ?>
+            <li class="previous"><a href="?read=<?= ($read + 1)?>">Next</a></li>
+        <?php endif ?>
+    </ul>
 
     <div class="container">
         <div class="panel panel-primary">
@@ -182,7 +179,7 @@ elseif (isset($_GET['read'])) {
                 <h3 class="panel-title">Read Web Vulnerability</h3>
             </div>
             <div class="panel-body">
-    
+
             <form class="form-horizontal" action="webvulns.php" method="post">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Tool</label>
@@ -201,7 +198,12 @@ elseif (isset($_GET['read'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Finding Category</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" name="findingID" value="<?php echo $row['finding'] ?>" readonly>
+                    <?php 
+                    $sql = "select * from findings where findingID=".$row['findingID']; 
+                    $result = mysqli_query($connection,$sql);
+                    $find = mysqli_fetch_array($result);
+                    ?>
+                        <input type="text" class="form-control" name="findingID" value="<?php echo $find['type'] ?>" readonly>
                     </div>
                 </div>
 
@@ -238,9 +240,9 @@ elseif (isset($_GET['read'])) {
                 </div>
             </form>
             
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
     <?php
 }
 
@@ -257,11 +259,11 @@ elseif (isset($_GET['update'])) {
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Update Web Vulnerability</h3>
-            </div>	
+            </div>  
             <div class="panel-body">
 
             <form class="form-horizontal" action="webvulns.php" method="post">
-				<input type = "hidden" name = "update" value = "<?php echo $row['webvulnID'] ?>">
+                <input type = "hidden" name = "update" value = "<?php echo $row['webvulnID'] ?>">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Tool</label>
                     <div class="col-sm-2">
@@ -282,7 +284,7 @@ elseif (isset($_GET['update'])) {
                 </div>
 
                 <?php
-                    $query = "SELECT * FROM findings WHERE type='Web' ORDER BY finding ASC";
+                    $query = "SELECT * FROM findings WHERE type='Web App' ORDER BY finding ASC";
                     $result = mysqli_query($connection, $query);
                     confirm_query($result);
                 ?>
@@ -293,12 +295,12 @@ elseif (isset($_GET['update'])) {
                         <select class="form-control" name="findingID">
                             <option value=""></option>
                             <?php
-                            	while($c = mysqli_fetch_assoc($result)) {
-                            		echo '<option value = "'.$c["findingID"].'"'.($row['findingID'] == $c['findingID'] ? ' selected' : '').'>'.$c["finding"].'</option>';
-                            	}
+                                while($c = mysqli_fetch_assoc($result)) {
+                                    echo '<option value = "'.$c["findingID"].'"'.($row['findingID'] == $c['findingID'] ? ' selected' : '').'>'.$c["finding"].'</option>';
+                                }
 
-                            	// Release returned data.
-                            	mysqli_free_result($result);
+                                // Release returned data.
+                                mysqli_free_result($result);
                             ?>
                         </select>
                     </div>
@@ -345,9 +347,9 @@ elseif (isset($_GET['update'])) {
                 </div>
             </form>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
     <?php
 }
 
@@ -361,28 +363,28 @@ else {
     <br>
 
     <?php
-		// Number of rows per page.
-		$rec_limit = 25;
+        // Number of rows per page.
+        $rec_limit = 25;
 
-		if (isset($_SESSION['rec_limit']))
-			$rec_limit = $_SESSION['rec_limit'];
+        if (isset($_SESSION['rec_limit']))
+            $rec_limit = $_SESSION['rec_limit'];
 
-		// Get the total number of records.
-		$query = "SELECT COUNT(vulnerability) FROM webvulns";    
-		$result = mysqli_query($connection, $query);
-		confirm_query($result);
+        // Get the total number of records.
+        $query = "SELECT COUNT(vulnerability) FROM webvulns";
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
 
-		$row = mysqli_fetch_array ($result, MYSQLI_NUM);
-		$rec_count = $row[0];
-		$page = 0;
-		$offset = 0;
+        $row = mysqli_fetch_array ($result, MYSQLI_NUM);
+        $rec_count = $row[0];
+        $page = 0;
+        $offset = 0;
 
-		if (isset($_GET['page'])) {
-    		$page = $_GET['page'];
-    		$offset = $rec_limit * $page ;
-		}
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+            $offset = $rec_limit * $page ;
+        }
 
-		$left_rec = $rec_count - ($page * $rec_limit);
+        $left_rec = $rec_count - ($page * $rec_limit);
 
         // Perform db query.
         $query = "SELECT * FROM webvulns ORDER BY tool, vulnerability ASC LIMIT $offset, $rec_limit";
@@ -404,12 +406,12 @@ else {
 
         <?php
             while($row = mysqli_fetch_assoc($hostset)) {
-				$time = strtotime($row['modified']);
-				$myDateFormat = date("m-d-y g:i A", $time);
-				$query = "SELECT * FROM findings where findingID = ".intval($row['findingID']);
-				$finding = mysqli_query($connection, $query);
-				confirm_query($finding);
-				$finding = mysqli_fetch_assoc($finding);
+                $time = strtotime($row['modified']);
+                $myDateFormat = date("m-d-y g:i A", $time);
+                $query = "SELECT * FROM findings where findingID = ".intval($row['findingID']);
+                $finding = mysqli_query($connection, $query);
+                confirm_query($finding);
+                $finding = mysqli_fetch_assoc($finding);
 
                 echo '
                 <tr>
@@ -430,34 +432,34 @@ else {
         ?>
     </table>
 
-	<form method="post" action="">
+    <form method="post" action="">
         <?php
-    		if ( $left_rec < $rec_limit && $page > 0 ) {
-    			$last = $page - 1;
-    			echo '<a href="?page='.$last.'">Previous</a>';
-    		}
+            if ( $left_rec < $rec_limit && $page > 0 ) {
+                $last = $page - 1;
+                echo '<a href="?page='.$last.'">Previous</a>';
+            }
 
-    		elseif ( $page == 0 && $rec_limit < $rec_count ) {
-    			$page = 1;
-    			echo '<a href="?page='.$page.'">Next</a>';
-    		}
+            elseif ( $page == 0 && $rec_limit < $rec_count ) {
+                $page = 1;
+                echo '<a href="?page='.$page.'">Next</a>';
+            }
 
-    		elseif ( $page > 0 ) {
-    			$last = $page - 1;
-    			$page = $page + 1;
-    			echo '<a href="?page='.$last.'">Previous</a> | ';
-    			echo '<a href="?page='.$page.'">Next</a>';
-    		}
+            elseif ( $page > 0 ) {
+                $last = $page - 1;
+                $page = $page + 1;
+                echo '<a href="?page='.$last.'">Previous</a> | ';
+                echo '<a href="?page='.$page.'">Next</a>';
+            }
 
-    		echo '
-    		<select name="set_rec_limit" onchange="this.form.submit()">
-    			<option value="25"'.($rec_limit == 25 ? ' selected' : '').'>25</option>
-    			<option value="50"'.($rec_limit == 50 ? ' selected' : '').'>50</option>
-    			<option value="100"'.($rec_limit == 100 ? ' selected' : '').'>100</option>
-    			<option value="200"'.($rec_limit == 200 ? ' selected' : '').'>200</option>
-    		</select>
-    		';
-    	?>
+            echo '
+            <select name="set_rec_limit" onchange="this.form.submit()">
+                <option value="25"'.($rec_limit == 25 ? ' selected' : '').'>25</option>
+                <option value="50"'.($rec_limit == 50 ? ' selected' : '').'>50</option>
+                <option value="100"'.($rec_limit == 100 ? ' selected' : '').'>100</option>
+                <option value="200"'.($rec_limit == 200 ? ' selected' : '').'>200</option>
+            </select>
+            ';
+        ?>
     </form>
 
     <?php

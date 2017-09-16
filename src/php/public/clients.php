@@ -16,19 +16,17 @@ if (isset($_POST['create'])) {
         <?php exit;
     }
 
-	$query = "INSERT INTO clients (modified, client, employeeID, notes) VALUES (now(), '$_POST[client]', '$_POST[employeeID]', '$_POST[notes]')";
-	$result = mysqli_query($connection, $query);
-	confirm_query($result);
+    $query = "INSERT INTO clients (modified, client, employeeID, notes) VALUES (now(), '$_POST[client]', '$_POST[employeeID]', '$_POST[notes]')";
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
 }
-
 
 if (isset($_POST['update'])) {
     // UPDATE RECORD.
     $query = "UPDATE clients SET modified=now(), client='$_POST[client]', employeeID='$_POST[employeeID]', notes='$_POST[notes]' WHERE clientID=".intval($_POST['update']);
-  	$result = mysqli_query($connection, $query);
+    $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
-
 
 if (isset($_GET['delete'])) {
     // DELETE RECORD.
@@ -36,7 +34,6 @@ if (isset($_GET['delete'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
-
 
 if (isset($_GET['create'])) {
     ?>
@@ -64,17 +61,17 @@ if (isset($_GET['create'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
                     <div class="col-sm-10">
-    					<select class="form-control" name="employeeID">
+                        <select class="form-control" name="employeeID">
                             <option value=""></option>
                             <?php
-                            	while($c = mysqli_fetch_assoc($result)) {
-                            		echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                            	}
+                                while($c = mysqli_fetch_assoc($result)) {
+                                    echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
+                                }
 
-                            	// Release returned data.
-                            	mysqli_free_result($result);
+                                // Release returned data.
+                                mysqli_free_result($result);
                             ?>
-    					</select>
+                        </select>
                     </div>
                 </div>
 
@@ -109,28 +106,28 @@ elseif (isset($_GET['read'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
     $c = mysqli_fetch_assoc($result);
-	
-	// Find number of records.
-	$query2 = "SELECT * FROM clients";
-	$result2 = mysqli_query($connection, $query2);
-	confirm_query($result2);
-	$limit = mysqli_num_rows($result2);
+    
+    // Find number of records.
+    $query2 = "SELECT * FROM clients";
+    $result2 = mysqli_query($connection, $query2);
+    confirm_query($result2);
+    $limit = mysqli_num_rows($result2);
 
-	// Free result set.
-	mysqli_free_result($result2);
+    // Free result set.
+    mysqli_free_result($result2);
 
-	// Get the page number or set it to 1 if no page is set.
-	$read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
-	?>
+    // Get the page number or set it to 1 if no page is set.
+    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
+    ?>
 
-	<ul class="pager">
-	    <?php if ($read > 1): ?>
-	        <li class="previous"><a href="?read=<?= ($read - 1)?>">Previous</a></li>
-	    <?php endif ?>
-	    <?php if ($read < $limit): ?>
-	        <li class="previous"><a href="?read=<?= ($read + 1)?>">Next</a></li>
-	    <?php endif ?>
-	</ul>
+    <ul class="pager">
+        <?php if ($read > 1): ?>
+            <li class="previous"><a href="?read=<?= ($read - 1)?>">Previous</a></li>
+        <?php endif ?>
+        <?php if ($read < $limit): ?>
+            <li class="previous"><a href="?read=<?= ($read + 1)?>">Next</a></li>
+        <?php endif ?>
+    </ul>
 
     <div class="container">
         <div class="panel panel-primary">
@@ -166,9 +163,9 @@ elseif (isset($_GET['read'])) {
                 </div>
             </form>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
     <?php
 }
 
@@ -189,7 +186,7 @@ elseif (isset($_GET['update'])) {
             <div class="panel-body">
 
             <form class="form-horizontal" action="clients.php" method="post">
-				<input type="hidden" name="update" value="<?php echo $row['clientID'] ?>">
+                <input type="hidden" name="update" value="<?php echo $row['clientID'] ?>">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Client</label>
                     <div class="col-sm-10">
@@ -206,17 +203,17 @@ elseif (isset($_GET['update'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
                     <div class="col-sm-10">
-    					<select class="form-control" name="employeeID">
+                        <select class="form-control" name="employeeID">
                             <option value=""></option>
                             <?php
-                            	while($c = mysqli_fetch_assoc($result)) {
-                            		echo '<option value = "'.$c["employeeID"].'"'.($row['employeeID'] == $c['employeeID'] ? ' selected' : '').'>'.$c["employee"].'</option>';
-                            	}
+                                while($c = mysqli_fetch_assoc($result)) {
+                                    echo '<option value = "'.$c["employeeID"].'"'.($row['employeeID'] == $c['employeeID'] ? ' selected' : '').'>'.$c["employee"].'</option>';
+                                }
 
-                            	// Release returned data.
-                            	mysqli_free_result($result);
+                                // Release returned data.
+                                mysqli_free_result($result);
                             ?>
-    					</select>
+                        </select>
                     </div>
                 </div>
 
@@ -233,9 +230,9 @@ elseif (isset($_GET['update'])) {
                 </div>
             </form>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
     <?php
 }
 
@@ -269,10 +266,10 @@ else {
             while($row = mysqli_fetch_assoc($result)) {
                 $time = strtotime($row['modified']);
                 $myDateFormat = date("m-d-y g:i A", $time);
-				$query = "SELECT * FROM employees where employeeID = ".intval($row['employeeID']);
-				$finding = mysqli_query($connection, $query);
-				confirm_query($finding);
-				$finding = mysqli_fetch_assoc($finding);
+                $query = "SELECT * FROM employees where employeeID = ".intval($row['employeeID']);
+                $finding = mysqli_query($connection, $query);
+                confirm_query($finding);
+                $finding = mysqli_fetch_assoc($finding);
 
                 echo '
                 <tr>

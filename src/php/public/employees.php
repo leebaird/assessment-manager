@@ -21,14 +21,12 @@ if (isset($_POST['create'])) {
     confirm_query($result);
 }
 
-
 if (isset($_POST['update'])) {
     // UPDATE RECORD.
     $query = "UPDATE employees SET modified=now(), employee='$_POST[employee]', title='$_POST[title]', type='$_POST[type]', accountmgr='$_POST[accountmgr]', projectmgr='$_POST[projectmgr]', cell='$_POST[cell]', email='$_POST[email]', notes='$_POST[notes]' WHERE employeeID=".intval($_POST['update']);
-  	$result = mysqli_query($connection, $query);
+    $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
-
 
 if (isset($_GET['delete'])) {
     // DELETE RECORD.
@@ -36,7 +34,6 @@ if (isset($_GET['delete'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
-
 
 if (isset($_GET['create'])) {
     ?>
@@ -65,31 +62,31 @@ if (isset($_GET['create'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Type</label>
                     <div class="col-sm-2">
-						<select class="form-control" name="type">
+                        <select class="form-control" name="type">
                             <option value=""></option>
                             <option value="Full Time">Full Time</option>
                             <option value="1099">1099</option>
-						</select>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
                     <div class="col-sm-2">
-						<select class="form-control" name="accountmgr">
+                        <select class="form-control" name="accountmgr">
                             <option value=""></option>
                             <option value="Yes">Yes</option>
-						</select>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Project Mgr</label>
                     <div class="col-sm-2">
-						<select class="form-control" name="projectmgr">
+                        <select class="form-control" name="projectmgr">
                             <option value=""></option>
                             <option value="Yes">Yes</option>
-						</select>
+                        </select>
                     </div>
                 </div>
 
@@ -134,27 +131,27 @@ elseif (isset($_GET['read'])) {
     confirm_query($result);
     $row = mysqli_fetch_assoc($result);
 
-	// Find number of records.
-	$query2 = "SELECT * FROM employees";
-	$result2 = mysqli_query($connection, $query2);
-	confirm_query($result2);
-	$limit = mysqli_num_rows($result2);
+    // Find number of records.
+    $query2 = "SELECT * FROM employees";
+    $result2 = mysqli_query($connection, $query2);
+    confirm_query($result2);
+    $limit = mysqli_num_rows($result2);
 
-	// Free result set.
-	mysqli_free_result($result2);
+    // Free result set.
+    mysqli_free_result($result2);
 
-	// Get the page number or set it to 1 if no page is set.
-	$read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
-	?>
+    // Get the page number or set it to 1 if no page is set.
+    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
+    ?>
 
-	<ul class="pager">
-	    <?php if ($read > 1): ?>
-	        <li class="previous"><a href="?read=<?= ($read - 1)?>">Previous</a></li>
-	    <?php endif ?>
-	    <?php if ($read < $limit): ?>
-	        <li class="previous"><a href="?read=<?= ($read + 1)?>">Next</a></li>
-	    <?php endif ?>
-	</ul>
+    <ul class="pager">
+        <?php if ($read > 1): ?>
+            <li class="previous"><a href="?read=<?= ($read - 1)?>">Previous</a></li>
+        <?php endif ?>
+        <?php if ($read < $limit): ?>
+            <li class="previous"><a href="?read=<?= ($read + 1)?>">Next</a></li>
+        <?php endif ?>
+    </ul>
 
     <div class="container">
         <div class="panel panel-primary">
@@ -225,9 +222,9 @@ elseif (isset($_GET['read'])) {
                 </div>
             </form>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
     <?php
 }
 
@@ -248,7 +245,7 @@ elseif (isset($_GET['update'])) {
             <div class="panel-body">
 
             <form class="form-horizontal" action="employees.php" method="post">
-				<input type = "hidden" name = "update" value = "<?php echo $row['employeeID'] ?>">
+                <input type = "hidden" name = "update" value = "<?php echo $row['employeeID'] ?>">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Employee</label>
                     <div class="col-sm-10">
@@ -266,31 +263,31 @@ elseif (isset($_GET['update'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Type</label>
                     <div class="col-sm-2">
-						<select class="form-control" name="type">
+                        <select class="form-control" name="type">
                             <option value=""></option>
                             <option value="Full Time"<?php echo ($row['type'] == 'Full Time' ? " selected" : "")?>>Full Time</option>
                             <option value="1099"<?php echo ($row['type'] == '1099' ? " selected" : "")?>>1099</option>
-						</select>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
                     <div class="col-sm-2">
-						<select class="form-control" name="accountmgr">
+                        <select class="form-control" name="accountmgr">
                             <option value=""></option>
                             <option value="Yes"<?php echo ($row['accountmgr'] == 'Yes' ? " selected" : "")?>>Yes</option>
-						</select>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Project Mgr</label>
                     <div class="col-sm-2">
-						<select class="form-control" name="projectmgr">
+                        <select class="form-control" name="projectmgr">
                             <option value=""></option>
                             <option value="Yes"<?php echo ($row['projectmgr'] == 'Yes' ? " selected" : "")?>>Yes</option>
-						</select>
+                        </select>
                     </div>
                 </div>
 
@@ -321,9 +318,9 @@ elseif (isset($_GET['update'])) {
                 </div>
             </form>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
     <?php
 }
 

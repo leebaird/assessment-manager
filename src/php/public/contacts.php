@@ -21,14 +21,12 @@ if (isset($_POST['create'])) {
     confirm_query($result);
 }
 
-
 if (isset($_POST['update'])) {
     // UPDATE RECORD.
     $query = "UPDATE contacts SET modified=now(), contact='$_POST[contact]', clientID='$_POST[clientID]', title='$_POST[title]', work='$_POST[work]', cell='$_POST[cell]', email='$_POST[email]', notes='$_POST[notes]' WHERE contactID=".intval($_POST['update']);
-  	$result = mysqli_query($connection, $query);
+    $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
-
 
 if (isset($_GET['delete'])) {
     // DELETE RECORD.
@@ -36,7 +34,6 @@ if (isset($_GET['delete'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
-
 
 if (isset($_GET['create'])) {
     ?>
@@ -64,17 +61,17 @@ if (isset($_GET['create'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Client</label>
                     <div class="col-sm-10">
-						<select class="form-control" name="clientID">
+                        <select class="form-control" name="clientID">
                             <option value=""></option>
                             <?php
-                            	while($c = mysqli_fetch_assoc($result)) {
-                            		echo '<option value = "'.$c["clientID"].'">'.$c["client"].'</option>';
-                            	}
+                                while($c = mysqli_fetch_assoc($result)) {
+                                    echo '<option value = "'.$c["clientID"].'">'.$c["client"].'</option>';
+                                }
 
-                            	// Release returned data.
-                            	mysqli_free_result($result);
+                                // Release returned data.
+                                mysqli_free_result($result);
                             ?>
-						</select>
+                        </select>
                     </div>
                 </div>
 
@@ -132,28 +129,64 @@ elseif (isset($_GET['read'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
     $row = mysqli_fetch_assoc($result);
-	
-	// Find number of records.
-	$query2 = "SELECT * FROM contacts";
-	$result2 = mysqli_query($connection, $query2);
-	confirm_query($result2);
-	$limit = mysqli_num_rows($result2);
+    
+    // Find number of records.
+    $query2 = "SELECT * FROM contacts";
+    $result2 = mysqli_query($connection, $query2);
+    confirm_query($result2);
+    $limit = mysqli_num_rows($result2);
 
-	// Free result set.
-	mysqli_free_result($result2);
+    // Free result set.
+    mysqli_free_result($result2);
 
-	// Get the page number or set it to 1 if no page is set.
-	$read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
-	?>
+    // Get the page number or set it to 1 if no page is set.
+    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
+    ?>
 
-	<ul class="pager">
-	    <?php if ($read > 1): ?>
-	        <li class="previous"><a href="?read=<?= ($read - 1)?>">Previous</a></li>
-	    <?php endif ?>
-	    <?php if ($read < $limit): ?>
-	        <li class="previous"><a href="?read=<?= ($read + 1)?>">Next</a></li>
-	    <?php endif ?>
-	</ul>
+    <ul class="pager">
+        
+        <?php  $r = $limit - 1; $r = $r-1;
+        $sql ="SELECT count(contactID) FROM contacts where contactID<=".$_GET['read'];
+        $result = mysqli_query($connection,$sql);
+        $rs = mysqli_fetch_row($result);
+        //print $rs[0];exit;
+        $r = $rs[0];
+        if ($r > 1): 
+        $rr=$r-2;
+        $sql1 ="SELECT * FROM contacts ORDER BY contactID LIMIT $rr,1";
+        $result1 = mysqli_query($connection,$sql1);
+        $rs1 = mysqli_fetch_array($result1);
+        //print_r($rs1);exit;
+        ?>
+        
+            <li class="previous"><a href="?read=<?= $rs1['contactID'] ?>">Previous</a></li>
+        <?php endif ?>
+        <?php if ($r >= 1 ): ?>
+        <?php
+        $flag = 0;
+        $rr=$r;
+        
+        $sql5 ="SELECT count(contactID) FROM contacts ";
+        $result5 = mysqli_query($connection,$sql5);
+        $rs5 = mysqli_fetch_row($result5);
+        
+        if($rr>$rs5[0]){
+            $rr = $rr-2;
+            $flag = 1;
+        }
+        if($rr==$rs5[0]){
+            $rr = $rr-1;
+            $flag = 1;
+        }
+        $sql1 ="SELECT * FROM contacts ORDER BY contactID LIMIT $rr,1";
+        $result1 = mysqli_query($connection,$sql1);
+        $rs1 = mysqli_fetch_array($result1);
+        if($flag==0){
+        ?>
+            <li class="previous"><a href="?read=<?= $rs1['contactID'] ?>">Next</a></li>
+        <?php } 
+        endif ?>
+    </ul>
 
     <div class="container">
         <div class="panel panel-primary">
@@ -173,7 +206,14 @@ elseif (isset($_GET['read'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Client</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="clientid" value="<?php echo $row['client'] ?>" readonly>
+                    <?php
+                $query = "SELECT * FROM clients where clientID = ".intval($row['clientID']);
+                $client = mysqli_query($connection, $query);
+                confirm_query($client);
+                $client = mysqli_fetch_assoc($client);
+                    
+                    ?>
+                        <input type="text" class="form-control" name="clientid" value="<?php echo $client['client'] ?>" readonly>
                     </div>
                 </div>
 
@@ -217,9 +257,9 @@ elseif (isset($_GET['read'])) {
                 </div>
             </form>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
     <?php
 }
 
@@ -240,7 +280,7 @@ elseif (isset($_GET['update'])) {
             <div class="panel-body">
 
             <form class="form-horizontal" action="contacts.php" method="post">
-				<input type = "hidden" name = "update" value = "<?php echo $row['contactID'] ?>">
+                <input type = "hidden" name = "update" value = "<?php echo $row['contactID'] ?>">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Contact</label>
                     <div class="col-sm-10">
@@ -260,12 +300,12 @@ elseif (isset($_GET['update'])) {
                         <select class="form-control" name="clientID">
                             <option value=""></option>
                             <?php
-                            	while($c = mysqli_fetch_assoc($result)) {
-                            		echo '<option value = "'.$c["clientID"].'"'.($row['clientID'] == $c['clientID'] ? ' selected' : '').'>'.$c["client"].'</option>';
-                            	}
+                                while($c = mysqli_fetch_assoc($result)) {
+                                    echo '<option value = "'.$c["clientID"].'"'.($row['clientID'] == $c['clientID'] ? ' selected' : '').'>'.$c["client"].'</option>';
+                                }
 
-                            	// Release returned data.
-                            	mysqli_free_result($result);
+                                // Release returned data.
+                                mysqli_free_result($result);
                             ?>
                         </select> 
                     </div>
@@ -312,9 +352,9 @@ elseif (isset($_GET['update'])) {
                 </div>
             </form>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
     <?php
 }
 
@@ -349,10 +389,10 @@ else {
             while ($row = mysqli_fetch_assoc($result)) {
                 $time = strtotime($row['modified']);
                 $myDateFormat = date("m-d-y g:i A", $time);
-				$query = "SELECT * FROM clients where clientID = ".intval($row['clientID']);
-				$client = mysqli_query($connection, $query);
-				confirm_query($client);
-				$client = mysqli_fetch_assoc($client);
+                $query = "SELECT * FROM clients where clientID = ".intval($row['clientID']);
+                $client = mysqli_query($connection, $query);
+                confirm_query($client);
+                $client = mysqli_fetch_assoc($client);
 
                 echo '
                 <tr>

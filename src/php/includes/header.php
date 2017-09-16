@@ -25,61 +25,61 @@
 </head>
 
 <style>
-	body {
-		background-color: White;
-		margin-left: 40px;
-		margin-right: 40px;
-	}
+    body {
+        background-color: White;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
 
-	.navbar .navbar-nav {
-		display: inline-block;
-		float: none;
-		vertical-align: top;
-	}
+    .navbar .navbar-nav {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+    }
 
-	.navbar .navbar-collapse {
-		text-align: center;
-	}
+    .navbar .navbar-collapse {
+        text-align: center;
+    }
 
-	.navbar .navbar-right {
-		display: inline-block;
-		float: none;
-		text-align: right;		
-		vertical-align: top;
-	}
+    .navbar .navbar-right {
+        display: inline-block;
+        float: none;
+        text-align: right;
+        vertical-align: top;
+    }
 </style>
 
 <body id=<?php echo $bodyid ?>>
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="navbar-header">
-		<a class="navbar-brand">Assessment Manager</a>
-	</div>
+    <div class="navbar-header">
+        <a class="navbar-brand">Assessment Manager</a>
+    </div>
 
-	<div class="collapse navbar-collapse">
-		<div class="container">
-			<ul class="nav navbar-nav">
-				<li><a href="../public/home.php">Home</a></li>
-				<li><a href="../public/clients.php">Clients</a></li>
-				<li><a href="../public/contacts.php">Contacts</a></li>
-				<li><a href="../public/employees.php">Employees</a></li>
-				<li><a href="../public/findings.php">Findings</a></li>
-				<li><a href="../public/projects.php">Projects</a></li>
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Vulnerabilities<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="../public/hostvulns.php">Host</a></li>
-						<li><a href="../public/webvulns.php">Web</a></li>
-					</ul>
-				</li>
-			</ul>
+    <div class="collapse navbar-collapse">
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li><a href="../public/home.php">Home</a></li>
+                <li><a href="../public/clients.php">Clients</a></li>
+                <li><a href="../public/contacts.php">Contacts</a></li>
+                <li><a href="../public/employees.php">Employees</a></li>
+                <li><a href="../public/findings.php">Findings</a></li>
+                <li><a href="../public/projects.php">Projects</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Vulnerabilities<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../public/hostvulns.php">Host</a></li>
+                        <li><a href="../public/webvulns.php">Web</a></li>
+                    </ul>
+                </li>
+            </ul>
 
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<a href="../public/logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
-				</li>
-			</ul>
-		</div>
-	</div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="../public/logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <br><br>

@@ -9,7 +9,7 @@
     // This if statement checks to determine whether the login form has been submitted. If it has, then the
     // login code is run, otherwise the form is displayed.
     if(!empty($_POST)) {
-        $query = "SELECT userID, username, password, salt, email FROM users WHERE username = :username";
+        $query = "SELECT * FROM users WHERE username = :username";
 
         // The parameter values.
         $query_params = array(
@@ -32,7 +32,7 @@
         $login_ok = false;
 
         // Retrieve the user data from the database. If $row is false, then the username they entered is not
-		// registered.
+        // registered.
         $row = $stmt->fetch();
         if($row) {
             // Using the password submitted by the user and the salt stored in the database, we now check to
@@ -63,6 +63,7 @@
             // the private members-only page to determine whether or not the user is logged in. We can also
             // use it to retrieve the user's details.
             $_SESSION['user'] = $row;
+            $_SESSION['test']=1;
 
             header("Location: public/home.php");
             die("Redirecting to: public/home.php");
@@ -83,34 +84,34 @@
 </head>
 
 <style>	
-	body {
-  		background-color: #d6d6d6;
-		padding-top: 40px;
-		padding-bottom: 40px;
-	}
+    body {
+        background-color: #d6d6d6;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
 
-	.vertical-center {
-    	height: 80vh;
-    	display: flex;
-    	align-items: center;
-	}
+    .vertical-center {
+        height: 80vh;
+        display: flex;
+        align-items: center;
+    }
 
-	.container {
-		max-width: 300px;
-	}
+    .container {
+        max-width: 300px;
+    }
 </style>
 
 <body>
 
 <div class="vertical-center">
-	<div class="container">
-	    <form class="form-signin" action="index.php" method="post" autocomplete="off">
-	        <h3 class="form-signin-heading">Please sign in</h3>
-	        <input type="text" class="form-control" name="username" placeholder="Username">
-	        <input type="password" class="form-control" name="password" placeholder="Password">
-			<br>
-	        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-			Need an accout? <a href="includes/register.php">Register</a>
-	    </form>
-	</div>
+    <div class="container">
+        <form class="form-signin" action="index.php" method="post" autocomplete="off">
+            <h3 class="form-signin-heading">Please sign in</h3>
+            <input type="text" class="form-control" name="username" placeholder="Username">
+            <input type="password" class="form-control" name="password" placeholder="Password">
+            <br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            Need an accout? <a href="includes/register.php">Register</a>
+        </form>
+    </div>
 </div>

@@ -36,14 +36,12 @@ if (isset($_POST['create'])) {
     confirm_query($result);
 }
 
-
 if (isset($_POST['update'])) {
     // UPDATE RECORD.
     $query = "UPDATE findings SET modified=now(), type='$_POST[type]', finding='$_POST[finding]', observation='$_POST[observation]', severity='$_POST[severity]', remediation='$_POST[remediation]', see_also='$_POST[see_also]' WHERE findingID=".intval($_POST['update']);
-  	$result = mysqli_query($connection, $query);
+    $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
-
 
 if (isset($_GET['delete'])) {
     // DELETE RECORD.
@@ -51,7 +49,6 @@ if (isset($_GET['delete'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
-
 
 if (isset($_GET['create'])) {
     ?>
@@ -121,7 +118,7 @@ if (isset($_GET['create'])) {
                 <a class="btn btn-default" href="findings.php">Back</a>
             </div>
         </form>
-        
+
         </div>
         </div>
     </div>
@@ -136,27 +133,27 @@ elseif (isset($_GET['read'])) {
     confirm_query($result);
     $row = mysqli_fetch_assoc($result);
 
-	// Find number of records.
-	$query2 = "SELECT * FROM findings";
-	$result2 = mysqli_query($connection, $query2);
-	confirm_query($result2);
-	$limit = mysqli_num_rows($result2);
+    // Find number of records.
+    $query2 = "SELECT * FROM findings";
+    $result2 = mysqli_query($connection, $query2);
+    confirm_query($result2);
+    $limit = mysqli_num_rows($result2);
 
-	// Free result set.
-	mysqli_free_result($result2);
+    // Free result set.
+    mysqli_free_result($result2);
 
-	// Get the page number or set it to 1 if no page is set.
-	$read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
-	?>
+    // Get the page number or set it to 1 if no page is set.
+    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
+    ?>
 
-	<ul class="pager">
-	    <?php if ($read > 1): ?>
-	        <li class="previous"><a href="?read=<?= ($read - 1)?>">Previous</a></li>
-	    <?php endif ?>
-	    <?php if ($read < $limit): ?>
-	        <li class="previous"><a href="?read=<?= ($read + 1)?>">Next</a></li>
-	    <?php endif ?>
-	</ul>
+    <ul class="pager">
+        <?php if ($read > 1): ?>
+            <li class="previous"><a href="?read=<?= ($read - 1)?>">Previous</a></li>
+        <?php endif ?>
+        <?php if ($read < $limit): ?>
+            <li class="previous"><a href="?read=<?= ($read + 1)?>">Next</a></li>
+        <?php endif ?>
+    </ul>
 
     <div class="container">
         <div class="panel panel-primary">
@@ -213,9 +210,9 @@ elseif (isset($_GET['read'])) {
                 </div>
             </form>
             
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
     <?php
 }
 
@@ -232,11 +229,11 @@ elseif (isset($_GET['update'])) {
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Update Finding</h3>
-            </div>	
+            </div>  
             <div class="panel-body">
 
             <form class="form-horizontal" action="findings.php" method="post">
-				<input type = "hidden" name = "update" value = "<?php echo $row['findingID'] ?>">
+                <input type = "hidden" name = "update" value = "<?php echo $row['findingID'] ?>">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Type</label>
                     <div class="col-sm-10">
@@ -296,9 +293,9 @@ elseif (isset($_GET['update'])) {
                 </div>
             </form>
             
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
     <?php
 }
 
@@ -330,8 +327,8 @@ else {
 
         <?php 
             while($row = mysqli_fetch_assoc($result)) {
-				$time = strtotime($row['modified']);
-				$myDateFormat = date("m-d-y g:i A", $time);
+                $time = strtotime($row['modified']);
+                $myDateFormat = date("m-d-y g:i A", $time);
 
                 echo '
                 <tr>

@@ -1,8 +1,202 @@
 <?php
-	$bodyid = "home";
-	include "../includes/header.php";
-	require_once("../includes/common.php");
+    $bodyid = "home";
+    include "../includes/header.php";
+    require_once("../includes/common.php");
+    print $_SESSION['user']['role']; 
+    if($_SESSION['user']['role']==1){
 
+    if (isset($_GET['delete'])) {
+        // DELETE RECORD
+        $query = "DELETE FROM users WHERE userID=".intval($_GET['delete']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+    }
+    
+    if (isset($_POST['update'])) {
+        // UPDATE RECORD.
+        $query = "UPDATE users SET username='$_POST[username]', email='$_POST[email]', role='$_POST[role]', approved='$_POST[approved]' WHERE userID=".intval($_POST['update']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+    }
+?>
+
+<?php
+if (isset($_GET['read'])) {
+
+    // UPDATE RECORD.
+    $query = "SELECT * FROM users WHERE userID=".intval($_GET['read']);
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+    $row = mysqli_fetch_assoc($result);
+    ?>
+
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Create Contact</h3>
+            </div>
+
+        <div class="panel-body">
+            <form class="form-horizontal" action="members.php" method="post">
+            <input type = "hidden" name = "update" value = "<?php echo $row['userID'] ?>">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">User Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="username" placeholder="User Name" value="<?php echo $row['username'] ?>" readonly="readonly">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $row['email'] ?>" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Activate</label>
+                    <div class="col-sm-10">
+                        
+                        <?php
+                        if($row['role']==1){
+                        ?>
+                        <input type="text" class="form-control" name="email" placeholder="Email" value="Admin" readonly="readonly"> 
+                        <?php
+                        }
+                        
+                        if($row['role']==2){
+                        ?>
+                        <input type="text" class="form-control" name="email" placeholder="Email" value="User" readonly="readonly">  
+                        <?php
+                        }
+                        ?>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Activate</label>
+                    <div class="col-sm-10">
+                        <?php
+                        if($row['approved']==1){
+                        ?>
+                        <input type="text" class="form-control" name="email" placeholder="Email" value="Yes" readonly="readonly">
+                        <?php
+                        }
+                        
+                        if($row['approved']==0){
+                        ?>
+                        <input type="text" class="form-control" name="email" placeholder="Email" value="No" readonly="readonly">
+                        <?php
+                        }
+                        ?>
+
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-primary" type="submit">Update</button>
+                    <a class="btn btn-default" href="members.php">Back</a>
+                </div>
+            </form>
+
+        </div>
+        </div>
+    </div>
+    <?php
+}
+
+
+else if (isset($_GET['update'])) {
+    
+    // UPDATE RECORD.
+    $query = "SELECT * FROM users WHERE userID=".intval($_GET['update']);
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+    $row = mysqli_fetch_assoc($result);
+    ?>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Create Contact</h3>
+            </div>
+
+        <div class="panel-body">
+            <form class="form-horizontal" action="members.php" method="post">
+            <input type = "hidden" name = "update" value = "<?php echo $row['userID'] ?>">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">User Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="username" placeholder="User Name" value="<?php echo $row['username'] ?>">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $row['email'] ?>">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Activate</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" name="role">
+                        <?php   
+                        if($row['role']==1){
+                        ?>
+                            <option value="1">Admin</option>
+                        <?php
+                        }
+                        
+                        if($row['role']==2){
+                        ?>
+                            <option value="2">User</option>
+                        <?php
+                        }
+                        ?>
+                            <option value="1">Admin</option>
+                            <option value="2">User</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Activate</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" name="approved">
+                        <?php   
+                        if($row['approved']==1){
+                        ?>
+                            <option value="1">Yes</option>
+                        <?php
+                        }
+                        
+                        if($row['approved']==0){
+                        ?>
+                            <option value="0">No</option>
+                        <?php
+                        }
+                        ?>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-primary" type="submit">Update</button>
+                    <a class="btn btn-default" href="members.php">Back</a>
+                </div>
+            </form>
+
+        </div>
+        </div>
+    </div>
+    <?php
+}
+
+
+else {
+    print "<br><br><br>";
     $query = "SELECT userID, username, email FROM users";
 
     try {
@@ -20,16 +214,7 @@
         $query = "SELECT * FROM users ORDER BY username ASC";
         $result = mysqli_query($connection, $query);
         confirm_query($result);
-
-	if (isset($_GET['delete'])) {
-    	// DELETE RECORD
-    	$query = "DELETE FROM users WHERE userID=".intval($_GET['delete']);
-    	$result = mysqli_query($connection, $query);
-    	confirm_query($result);
-	}
 ?>
-
-<br><br><br>
 <table style="width: auto;" class="table table-bordered table-condensed table-hover">
     <tr>
         <th style="background-color:#E8E8E8;"></th>
@@ -46,10 +231,10 @@
         while($row = mysqli_fetch_assoc($result)) {
             $time = strtotime($row['modified']);
             $myDateFormat = date("m-d-y g:i A", $time);
-			$query = "SELECT * FROM users where userID = ".intval($row['userID']);
-			$finding = mysqli_query($connection, $query);
-			confirm_query($finding);
-			$finding = mysqli_fetch_assoc($finding);
+            $query = "SELECT * FROM users where userID = ".intval($row['userID']);
+            $finding = mysqli_query($connection, $query);
+            confirm_query($finding);
+            $finding = mysqli_fetch_assoc($finding);
 
             echo '
             <tr>
@@ -57,7 +242,19 @@
                 <td width="50">'.'<a class="btn btn-warning" href="members.php?update='.$row['userID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                 <td width="200">'.$row["username"].'</td>
                 <td width="300">'.$row["email"].'</td>
-                <td width="100">'.$row["role"].'</td>
+                ';
+            if($row["role"]==1){
+            echo'
+                
+                <td width="100">Admin</td>
+                ';}
+            else if($row["role"]==2){
+            echo'
+                
+                <td width="100">User</td>
+                ';
+            }
+            echo '
                 <td width="100">'.$row["approved"].'</td>
                 <td width="175">'.$myDateFormat.'</td>
                 <td width="50">'.'<a class="btn btn-danger" href="members.php?delete='.$row['userID'].'"
@@ -70,5 +267,10 @@
     ?>
 
 </table>
-
+<?php } ?>
 <?php include '../includes/footer.php'; ?>
+<?php } else {
+        header("Location: ../index.php");
+        die("Redirecting to ../index.php");
+}
+    ?>

@@ -1,32 +1,32 @@
 <?php
-	$bodyid = "home";
-	include "../includes/header.php";
-	require_once("../includes/common.php");
+    $bodyid = "home";
+    include "../includes/header.php";
+    require_once("../includes/common.php");
 
     if(!empty($_POST)) {
-		if(strlen($_POST['password']) < 12) {
-		    die("Your password is too short. The minimum length is 12 characters.");
-		}
+        if(strlen($_POST['password']) < 12) {
+            die("Your password is too short. The minimum length is 12 characters.");
+        }
 
-		if(($_POST['password']) != ($_POST['password2'])) {
-		    die("Your passwords do not match.");
-		}
+        if(($_POST['password']) != ($_POST['password2'])) {
+            die("Your passwords do not match.");
+        }
 
-		if(!preg_match("#[A-Z]+#", ($_POST['password']))) {
-			die("Your password must contain at least one uppercase letter.");
-		}
+        if(!preg_match("#[A-Z]+#", ($_POST['password']))) {
+            die("Your password must contain at least one uppercase letter.");
+        }
 
-		if(!preg_match("#[a-z]+#", ($_POST['password']))) {
-			die("Your password must contain at least one lowercase letter.");
-		}
+        if(!preg_match("#[a-z]+#", ($_POST['password']))) {
+            die("Your password must contain at least one lowercase letter.");
+        }
 
-		if(!preg_match("#[0-9]+#", ($_POST['password']))) {
-			die("Your password must contain at least one number.");
-		}
+        if(!preg_match("#[0-9]+#", ($_POST['password']))) {
+            die("Your password must contain at least one number.");
+        }
 
-		if(!preg_match("#[\W]+#", ($_POST['password']))) {
-			die("Your password must contain at least one special character.");
-		}
+        if(!preg_match("#[\W]+#", ($_POST['password']))) {
+            die("Your password must contain at least one special character.");
+        }
 
         if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             die("Invalid email address.");
@@ -70,25 +70,25 @@
         }
 
         // Initial query parameter values.
-        $query_params = array( 
-            ':email' => $_POST['email'], 
-            ':user_id' => $_SESSION['user']['userID'], 
+        $query_params = array(
+            ':email' => $_POST['email'],
+            ':user_id' => $_SESSION['user']['userID'],
         );
 
         // If the user is changing their password, then we need parameter values for the new password hash
-		// and salt.
+        // and salt.
         if($password !== null) {
-            $query_params[':password'] = $password; 
-            $query_params[':salt'] = $salt; 
+            $query_params[':password'] = $password;
+            $query_params[':salt'] = $salt;
         }
 
         // Note how this is only first half of the necessary update query. We will dynamically construct the
         // rest of it depending on whether or not the user is changing their password.
-        $query = "UPDATE users SET email = :email 
+        $query = "UPDATE users SET email = :email
         ";
 
         // If the user is changing their password, then we extend the SQL query to include the password, salt
-		// columns, and parameter tokens.
+        // columns, and parameter tokens.
         if($password !== null) {
             $query .= " 
                 , password = :password 
@@ -119,71 +119,71 @@
 ?>
 
 <style>
-	.vertical-center {
-    	height: 80vh;
-    	display: flex;
-    	align-items: center;
-    	justify-content: center;
-	}
+    .vertical-center {
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
 
 <div class="vertical-center">
-	<div class="container col-md-5 col-md-offset-3">
-	    <div class="panel panel-primary">
-	        <div class="panel-heading">
-	            <h3 class="panel-title">Edit Account</h3>
-	        </div>
-	        <div class="panel-body">
+    <div class="container col-md-5 col-md-offset-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Edit Account</h3>
+            </div>
+            <div class="panel-body">
 
-	        <form class="form-horizontal" action="edit_account.php" method="post" autocomplete="off">
-	            <div class="form-group">
-	                <label class="col-sm-4 control-label">Username</label>
-	                <div class="col-sm-7">
-	                    <input type="text" value="<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES); ?>" class="form-control" readonly>
-	                </div>
-	            </div>
+            <form class="form-horizontal" action="edit_account.php" method="post" autocomplete="off">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Username</label>
+                    <div class="col-sm-7">
+                        <input type="text" value="<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES); ?>" class="form-control" readonly>
+                    </div>
+                </div>
 
-	            <div class="form-group">
-	                <label class="col-sm-4 control-label">Email</label>
-	                <div class="col-sm-7">
-	                    <input type="text" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES); ?>" class="form-control">
-	                </div>
-	            </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-7">
+                        <input type="text" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES); ?>" class="form-control">
+                    </div>
+                </div>
 
-	            <div class="form-group">
-	                <label class="col-sm-4 control-label">New password</label>
-	                <div class="col-sm-7">
-	                    <input type="password" name="password" value="" class="form-control">
-	                </div>
-	            </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">New password</label>
+                    <div class="col-sm-7">
+                        <input type="password" name="password" value="" class="form-control">
+                    </div>
+                </div>
 
-	            <div class="form-group">
-	                <label class="col-sm-4 control-label">Re-enter password</label>
-	                <div class="col-sm-7">
-	                    <input type="password" name="password2" value="" class="form-control">
-	                </div>
-	            </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Re-enter password</label>
+                    <div class="col-sm-7">
+                        <input type="password" name="password2" value="" class="form-control">
+                    </div>
+                </div>
 
-	            <div class="form-group">
-	                <label class="col-sm-4 control-label">Requirements</label>
-	                <div class="col-sm-7">
-						Uppercase<br>
-						Lowercase<br>
-						Number<br>
-						Special character<br>
-						Minimum 12 characters in length.
-	                </div>
-	            </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Requirements</label>
+                    <div class="col-sm-7">
+                        Uppercase<br>
+                        Lowercase<br>
+                        Number<br>
+                        Special character<br>
+                        Minimum 12 characters in length.
+                    </div>
+                </div>
 
-	            <div class="form-actions">
-	                <button class="btn btn-warning" type="submit">Update</button>
-	                <a class="btn btn-default" href="../public/home.php">Back</a>
-	            </div>
-	        </form>
+                <div class="form-actions">
+                    <button class="btn btn-warning" type="submit">Update</button>
+                    <a class="btn btn-default" href="../public/home.php">Back</a>
+                </div>
+            </form>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php include '../includes/footer.php'; ?>
