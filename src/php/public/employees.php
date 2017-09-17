@@ -16,14 +16,14 @@ if (isset($_POST['create'])) {
         <?php exit;
     }
 
-    $query = "INSERT INTO employees (modified, employee, title, type, accountmgr, projectmgr, cell, email, notes) VALUES (now(), '$_POST[employee]', '$_POST[title]', '$_POST[type]', '$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[cell]', '$_POST[email]', '$_POST[notes]')";
+    $query = "INSERT INTO employees (modified, employee, title, accountmgr, projectmgr, cell, email, notes) VALUES (now(), '$_POST[employee]', '$_POST[title]', '$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[cell]', '$_POST[email]', '$_POST[notes]')";
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
 
 if (isset($_POST['update'])) {
     // UPDATE RECORD.
-    $query = "UPDATE employees SET modified=now(), employee='$_POST[employee]', title='$_POST[title]', type='$_POST[type]', accountmgr='$_POST[accountmgr]', projectmgr='$_POST[projectmgr]', cell='$_POST[cell]', email='$_POST[email]', notes='$_POST[notes]' WHERE employeeID=".intval($_POST['update']);
+    $query = "UPDATE employees SET modified=now(), employee='$_POST[employee]', title='$_POST[title]', accountmgr='$_POST[accountmgr]', projectmgr='$_POST[projectmgr]', cell='$_POST[cell]', email='$_POST[email]', notes='$_POST[notes]' WHERE employeeID=".intval($_POST['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
@@ -60,17 +60,6 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Type</label>
-                    <div class="col-sm-2">
-                        <select class="form-control" name="type">
-                            <option value=""></option>
-                            <option value="Full Time">Full Time</option>
-                            <option value="1099">1099</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
                     <div class="col-sm-2">
                         <select class="form-control" name="accountmgr">
@@ -92,7 +81,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Cell</label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control" name="cell" placeholder="Cell">
                     </div>
                 </div>
@@ -176,13 +165,6 @@ elseif (isset($_GET['read'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Type</label>
-                    <div class="col-sm-2">
-                        <input type="text" class="form-control" name="type" value="<?php echo $row['type'] ?>" readonly>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control" name="accountmgr" value="<?php echo $row['accountmgr'] ?>" readonly>
@@ -198,7 +180,7 @@ elseif (isset($_GET['read'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Cell</label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control" name="cell" value="<?php echo $row['cell'] ?>" readonly>
                     </div>
                 </div>
@@ -261,17 +243,6 @@ elseif (isset($_GET['update'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Type</label>
-                    <div class="col-sm-2">
-                        <select class="form-control" name="type">
-                            <option value=""></option>
-                            <option value="Full Time"<?php echo ($row['type'] == 'Full Time' ? " selected" : "")?>>Full Time</option>
-                            <option value="1099"<?php echo ($row['type'] == '1099' ? " selected" : "")?>>1099</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
                     <div class="col-sm-2">
                         <select class="form-control" name="accountmgr">
@@ -293,7 +264,7 @@ elseif (isset($_GET['update'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Cell</label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control" name="cell" value="<?php echo $row['cell'] ?>">
                     </div>
                 </div>

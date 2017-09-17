@@ -1,31 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-    $('#clientID').on('change',function(){
-        var countryID = $(this).val();
-        if(countryID){
-            $.ajax({
-                type:'POST',
-                url:'ajaxData.php',
-                data:'country_id='+countryID,
-                success:function(html){
-                    var res = html.split(" ");
-
-                    $('#contact').val(res[0]);
-                    $('#employee1').val(res[1]);
-                    $('#employee2').val(res[2]);
-                    $('#employee3').val(res[3]);
-                    $('#employee4').val(res[4]);
-
-                }
-            }); 
-        }else{
-            $('#city').html('Sorry'); 
-        }
-    });
-});
-</script>
-
 <?php
 $bodyid = "projects";
 include "../includes/header.php";
@@ -58,16 +30,14 @@ foreach($_POST['assessment'] as $selected){
 $ass .= $selected.",";
 }
 
-//$employee = $_POST['employee1']." ".$_POST['employee2']." ".$_POST['employee3']." ".$_POST['employee4'];
-
-   $query = "INSERT INTO projects (modified, project, client, accountmgr,projectmgr,employee1,employee2, employee3,employee4,address1, city, state, zip,  kickoff, start, finish, status,notes,assisment) VALUES (now(), '$_POST[project]', '$_POST[clientID]','$_POST[accountmgr]','$_POST[projectmgr]','$_POST[employee1]','$_POST[employee2]','$_POST[employee3]','$_POST[employee4]',  '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[current_status]', '$_POST[notes]','$ass')";
+   $query = "INSERT INTO projects (modified, project, assessment, client, address, city, state, zip, phone, web, accountmgr, projectmgr, employee1, employee2, employee3, employee4, kickoff, start, finish, status, due, notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]', '$_POST[web]', '$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[employee1]', '$_POST[employee2]', '$_POST[employee3]', '$_POST[employee4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[current_status]', '$_POST[due]','$_POST[notes]')";
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
 
 if (isset($_POST['update'])) {
     // UPDATE RECORD.
-    $query = "UPDATE projects SET modified=now(), project='$_POST[project]', , current_status='$_POST[current_status]', clientID='$_POST[clientID]', address='$_POST[address]', city='$_POST[city]', state='$_POST[state]', zip='$_POST[zip]', contact='$_POST[contact]', accountmgr='$_POST[accountmgr]', projectmgr='$_POST[projectmgr]', employee1='$_POST[employee1]', employee2='$_POST[employee2]', employee3='$_POST[employee3]', employee4='$_POST[employee4]', assessment='$_POST[assessment]', kickoff='$_POST[kickoff]', start_date='$_POST[start_date]', finish='$_POST[finish]', due='$_POST[due]', notes='$_POST[notes]' WHERE projectID=".intval($_POST['update']);
+    $query = "UPDATE projects SET modified=now(), project='$_POST[project]', assessment='$_POST[assessment]', clientID='$_POST[clientID]', address='$_POST[address]', city='$_POST[city]', state='$_POST[state]', zip='$_POST[zip]', phone='$_POST[phone]', web='$_POST[web]', accountmgr='$_POST[accountmgr]', projectmgr='$_POST[projectmgr]', employee1='$_POST[employee1]', employee2='$_POST[employee2]', employee3='$_POST[employee3]', employee4='$_POST[employee4]', kickoff='$_POST[kickoff]', start_date='$_POST[start_date]', finish='$_POST[finish]', status='$_POST[status]', due='$_POST[due]', notes='$_POST[notes]' WHERE projectID=".intval($_POST['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
@@ -86,7 +56,7 @@ if (isset($_GET['create'])) {
             <div class="panel-heading">
                 <h3 class="panel-title">Create Project</h3>
             </div>
-            <div class="panel-body">    
+            <div class="panel-body">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
                     <li role="presentation"><a href="#report" aria-controls="report" role="tab" data-toggle="tab">Report</a></li>
@@ -111,26 +81,41 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Status</label>
-                                <div class="col-sm-2">
-                                    <select class="form-control" name="current_status" id="current_status">
-                                        <option value=""></option>
-                                        <option value="Scoping">Scoping</option>
-                                        <option value="In Progress">In Progress</option>
-                                        <option value="Reporting">Reporting</option>
-                                        <option value="Review">Review</option>
-                                        <option value="Delivered">Delivered</option>
-                                        <option value="Complete">Complete</option>
-                                    </select>
-                                </div>
-                            </div>
-
                             <?php
                                 $query = "SELECT * FROM clients ORDER BY client ASC";
                                 $result = mysqli_query($connection, $query);
                                 confirm_query($result);
                             ?>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Assessment</label>
+                                <div class="col-sm-10">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="External">External
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="Internal">Internal
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="Mobile">Mobile
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="Physical">Physical
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="Social Eng">Social Eng
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="War Dialing">War Dialing
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="Web">Web
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="Wireless">Wireless
+                                    </label>
+                                </div>
+                            </div>
 
                             <div class="form-group"><div id="city"></div>
                                 <label class="col-sm-2 control-label">Client</label>
@@ -170,13 +155,18 @@ if (isset($_GET['create'])) {
                                     <input type="text" class="form-control" name="zip" placeholder="Zip">
                                 </div>
                             </div>
-
                             <br>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
+                                </div>
+                            </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Contact</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="contact" id="contact" placeholder="Contact">
+                                <label class="col-sm-2 control-label">Web</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="web" id="web" placeholder="Web">
                                 </div>
                             </div>
 
@@ -255,36 +245,6 @@ if (isset($_GET['create'])) {
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Assessment</label>
-                                <div class="col-sm-10">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="External">External
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="Internal">Internal
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="Mobile">Mobile
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="Physical">Physical
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="Social Eng">Social Eng
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="War Dialing">War Dialing
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="Web">Web
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="Wireless">Wireless
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Kickoff</label>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" id="kickoff" name="kickoff" placeholder="Kickoff">
@@ -308,7 +268,23 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
 
-                           <div class="form-group">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="current_status" id="current_status">
+                                        <option value=""></option>
+                                        <option value="Scoping">Scoping</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Reporting">Reporting</option>
+                                        <option value="Review">Review</option>
+                                        <option value="Delivered">Delivered</option>
+                                        <option value="Complete">Complete</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Due</label>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" id="due" name="due" placeholder="Due">
@@ -584,10 +560,34 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
 
+
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Status</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="current_status" value="<?php echo $row['current_status'] ?>" readonly>
+                                <label class="col-sm-2 control-label">Assessment</label>
+                                <div class="col-sm-10">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">External
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Internal
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Mobile
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Physical
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Social Eng
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">War Dialing
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Web
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Wireless
+                                    </label>
                                 </div>
                             </div>
 
@@ -619,13 +619,18 @@ elseif (isset($_GET['read'])) {
                                     <input type="text" class="form-control" name="zip" value="<?php echo $row['zip'] ?>" readonly>
                                 </div>
                             </div>
-
                             <br> 
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'] ?>" readonly>
+                                </div>
+                            </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Contact</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="contact" value="<?php echo $row['contact'] ?>" readonly>
+                                <label class="col-sm-2 control-label">Web</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>" readonly>
                                 </div>
                             </div>
 
@@ -672,36 +677,6 @@ elseif (isset($_GET['read'])) {
                            </div>
 
                            <div class="form-group">
-                               <label class="col-sm-2 control-label">Assessment</label>
-                               <div class="col-sm-10">
-                                   <label class="checkbox-inline">
-                                       <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">External
-                                   </label>
-                                   <label class="checkbox-inline">
-                                       <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Internal
-                                   </label>
-                                   <label class="checkbox-inline">
-                                       <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Mobile
-                                   </label>
-                                   <label class="checkbox-inline">
-                                       <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Physical
-                                   </label>
-                                   <label class="checkbox-inline">
-                                       <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Social Eng
-                                   </label>
-                                   <label class="checkbox-inline">
-                                       <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">War Dialing
-                                   </label>
-                                   <label class="checkbox-inline">
-                                       <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Web
-                                   </label>
-                                   <label class="checkbox-inline">
-                                       <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Wireless
-                                   </label>
-                               </div>
-                           </div>
-
-                           <div class="form-group">
                                <label class="col-sm-2 control-label">Kickoff</label>
                                <div class="col-sm-2">
                                    <input type="text" class="form-control" name="kickoff" value="<?php echo $row['kickoff'] ?>" readonly>
@@ -720,6 +695,14 @@ elseif (isset($_GET['read'])) {
                                <div class="col-sm-2">
                                    <input type="text" class="form-control" name="finish" value="<?php echo $row['finish'] ?>" readonly>
                                </div>
+                           </div>
+
+
+                           <div class="form-group">
+                                <label class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="current_status" value="<?php echo $row['current_status'] ?>" readonly>
+                                </div>
                            </div>
 
                            <div class="form-group">
@@ -972,25 +955,34 @@ elseif (isset($_GET['update'])) {
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Status</label>
-                                <div class="col-sm-2">
-                                    <select class="form-control" name="current_status"  id="current_status">
-                                        <option value=""></option>
-                                        <option value="Scoping"<?php echo ($row['current_status'] == 'Scoping' ? " selected" : "")?>>Scoping</option>
-                                        <option value="In Progress"<?php echo ($row['current_status'] == 'In Progress' ? " selected" : "")?>>In Progress</option>
-                                        <option value="Reporting"<?php echo ($row['current_status'] == 'Reporting' ? " selected" : "")?>>Reporting</option>
-                                        <option value="Review"<?php echo ($row['current_status'] == 'Review' ? " selected" : "")?>>Review</option>
-                                        <option value="Delivered"<?php echo ($row['current_status'] == 'Delivered' ? " selected" : "")?>>Delivered</option>
-                                        <option value="Complete"<?php echo ($row['current_status'] == 'Complete' ? " selected" : "")?>>Complete</option>
-                                    </select>
+                                <label class="col-sm-2 control-label">Assessment</label>
+                                <div class="col-sm-10">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">External
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">Internal
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">Mobile
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">Physical
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">Social Eng
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">War Dialing
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">Web
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">Wireless
+                                    </label>
                                 </div>
                             </div>
-
-                            <?php
-                                $query = "SELECT * FROM clients ORDER BY client ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Client</label>
@@ -1030,13 +1022,18 @@ elseif (isset($_GET['update'])) {
                                     <input type="text" class="form-control" name="zip" value="<?php echo $row['zip'] ?>">
                                 </div>
                             </div>
-
                             <br>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'] ?>">
+                                </div>
+                            </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Contact</label>
+                                <label class="col-sm-2 control-label">Web</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="contact" value="<?php echo $row['contact'] ?>">
+                                    <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>">
                                 </div>
                             </div>
 
@@ -1115,36 +1112,6 @@ elseif (isset($_GET['update'])) {
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Assessment</label>
-                                <div class="col-sm-10">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">External
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">Internal
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">Mobile
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">Physical
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">Social Eng
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">War Dialing
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">Web
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="<?php echo $row['id'] ?>">Wireless
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Kickoff</label>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" id="kickoff" name="kickoff" value="<?php echo $row['kickoff'] ?>">
@@ -1167,6 +1134,27 @@ elseif (isset($_GET['update'])) {
                                     <script> $( "#finish" ).datepicker(); </script>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="current_status"  id="current_status">
+                                        <option value=""></option>
+                                        <option value="Scoping"<?php echo ($row['current_status'] == 'Scoping' ? " selected" : "")?>>Scoping</option>
+                                        <option value="In Progress"<?php echo ($row['current_status'] == 'In Progress' ? " selected" : "")?>>In Progress</option>
+                                        <option value="Reporting"<?php echo ($row['current_status'] == 'Reporting' ? " selected" : "")?>>Reporting</option>
+                                        <option value="Review"<?php echo ($row['current_status'] == 'Review' ? " selected" : "")?>>Review</option>
+                                        <option value="Delivered"<?php echo ($row['current_status'] == 'Delivered' ? " selected" : "")?>>Delivered</option>
+                                        <option value="Complete"<?php echo ($row['current_status'] == 'Complete' ? " selected" : "")?>>Complete</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <?php
+                                $query = "SELECT * FROM clients ORDER BY client ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Due</label>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 16, 2017 at 08:01 PM
+-- Generation Time: Sep 17, 2017 at 06:40 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 use amdb;
@@ -48,24 +48,25 @@ CREATE TABLE `clients` (
   `clientID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
   `client` varchar(50) COLLATE utf8_bin NOT NULL,
-  `address1` varchar(25) COLLATE utf8_bin NOT NULL,
-  `address2` varchar(25) COLLATE utf8_bin NOT NULL,
+  `address` varchar(50) COLLATE utf8_bin NOT NULL,
   `city` varchar(25) COLLATE utf8_bin NOT NULL,
   `state` varchar(2) COLLATE utf8_bin NOT NULL,
   `zip` varchar(10) COLLATE utf8_bin NOT NULL,
-  `notes` text COLLATE utf8_bin NOT NULL,
-  `employeeID` int(4) NOT NULL
+  `phone` varchar(20) COLLATE utf8_bin NOT NULL,
+  `web` varchar(50) COLLATE utf8_bin NOT NULL,
+  `employeeID` int(4) NOT NULL,
+  `notes` text COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`clientID`, `modified`, `client`, `address1`, `address2`, `city`, `state`, `zip`, `notes`, `employeeID`) VALUES
-(1, '2017-09-15 23:27:22', 'Apple', '', '', '', '', '', '', 0),
-(2, '2017-09-16 00:01:30', 'Comcast', '', '', '', '', '', '', 0),
-(3, '2017-09-16 12:53:44', 'Palo Alto Networks', '', '', '', '', '', '', 0),
-(4, '2017-09-16 00:01:20', 'Verizon', '', '', '', '', '', '', 0);
+INSERT INTO `clients` (`clientID`, `modified`, `client`, `address`, `city`, `state`, `zip`, `phone`, `web`, `employeeID`, `notes`) VALUES
+(1, '2017-09-16 23:31:04', 'Apple', '1 Infinite Loop', 'Cupertino', 'CA', '95014', '408-996â€“1010', 'www.apple.com', 0, 'iPhone, iPad'),
+(2, '2017-09-16 23:18:18', 'Comcast', '', '', '', '', '', 'www.comcast.net', 0, ''),
+(3, '2017-09-16 23:22:45', 'Palo Alto Networks', '', 'Santa Clara', 'CA', '', '', 'www.paloaltonetworks.com', 0, ''),
+(4, '2017-09-16 00:01:20', 'Verizon', '', '', '', '', '', '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -91,7 +92,7 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`contactID`, `modified`, `contact`, `title`, `work`, `cell`, `email`, `notes`, `clientID`, `projectID`) VALUES
-(1, '2017-09-16 00:05:49', 'Tim Cook', 'CEO', '', '', '', '', 1, 0),
+(1, '2017-09-16 23:33:28', 'Tim Cook', 'CEO', '', '', '', 'He has some incredible shoes to fill.', 1, 0),
 (2, '2017-09-16 12:57:14', 'Brian L. Roberts', 'CEO', '', '', '', '', 2, 0),
 (3, '2017-09-16 12:57:36', 'Mark D. McLaughlin', 'CEO', '', '', '', '', 3, 0),
 (4, '2017-09-16 12:56:17', 'Lowell C. McAdam', 'CEO', '', '', '', '', 4, 0);
@@ -107,7 +108,6 @@ CREATE TABLE `employees` (
   `modified` datetime NOT NULL,
   `employee` varchar(50) COLLATE utf8_bin NOT NULL,
   `title` varchar(25) COLLATE utf8_bin NOT NULL,
-  `type` varchar(10) COLLATE utf8_bin NOT NULL,
   `accountmgr` varchar(3) COLLATE utf8_bin NOT NULL,
   `projectmgr` varchar(3) COLLATE utf8_bin NOT NULL,
   `cell` varchar(12) COLLATE utf8_bin NOT NULL,
@@ -120,8 +120,8 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`employeeID`, `modified`, `employee`, `title`, `type`, `accountmgr`, `projectmgr`, `cell`, `email`, `notes`, `projectID`) VALUES
-(1, '2017-09-16 12:51:29', 'root', 'Red Team Manager', 'Full Time', '', '', '', '', '', 0);
+INSERT INTO `employees` (`employeeID`, `modified`, `employee`, `title`, `accountmgr`, `projectmgr`, `cell`, `email`, `notes`, `projectID`) VALUES
+(1, '2017-09-16 23:34:28', 'root', 'Red Team Manager', '', '', '800-222-1212', 'root@acme.com', '', 0);
 
 -- --------------------------------------------------------
 
@@ -199,19 +199,18 @@ CREATE TABLE `projects` (
   `projectID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
   `project` varchar(50) COLLATE utf8_bin NOT NULL,
-  `client` varchar(50) COLLATE utf8_bin NOT NULL,
-  `accountmgr` varchar(50) COLLATE utf8_bin NOT NULL,
-  `projectmgr` varchar(50) COLLATE utf8_bin NOT NULL,
-  `employee` varchar(50) COLLATE utf8_bin NOT NULL,
   `type` varchar(50) COLLATE utf8_bin NOT NULL,
-  `objective` varchar(100) COLLATE utf8_bin NOT NULL,
-  `billing` varchar(25) COLLATE utf8_bin NOT NULL,
-  `rate` varchar(10) COLLATE utf8_bin NOT NULL,
-  `address1` varchar(25) COLLATE utf8_bin NOT NULL,
-  `address2` varchar(25) COLLATE utf8_bin NOT NULL,
+  `client` varchar(50) COLLATE utf8_bin NOT NULL,
+  `address` varchar(50) COLLATE utf8_bin NOT NULL,
   `city` varchar(25) COLLATE utf8_bin NOT NULL,
   `state` varchar(2) COLLATE utf8_bin NOT NULL,
   `zip` varchar(10) COLLATE utf8_bin NOT NULL,
+  `accountmgr` varchar(50) COLLATE utf8_bin NOT NULL,
+  `projectmgr` varchar(50) COLLATE utf8_bin NOT NULL,
+  `employee` varchar(50) COLLATE utf8_bin NOT NULL,
+  `objective` varchar(100) COLLATE utf8_bin NOT NULL,
+  `billing` varchar(25) COLLATE utf8_bin NOT NULL,
+  `rate` varchar(10) COLLATE utf8_bin NOT NULL,
   `kickoff` date NOT NULL,
   `start` date NOT NULL,
   `finish` date NOT NULL,

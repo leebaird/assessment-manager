@@ -84,14 +84,14 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Work</label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control" name="work" placeholder="Work">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Cell</label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control" name="cell" placeholder="Cell">
                     </div>
                 </div>
@@ -226,14 +226,14 @@ elseif (isset($_GET['read'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Work</label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control" name="work" value="<?php echo $row['work'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Cell</label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control" name="cell" value="<?php echo $row['cell'] ?>" readonly>
                     </div>
                 </div>
@@ -320,14 +320,14 @@ elseif (isset($_GET['update'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Work</label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control" name="work" value="<?php echo $row['work'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Cell</label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control" name="cell" value="<?php echo $row['cell'] ?>">
                     </div>
                 </div>

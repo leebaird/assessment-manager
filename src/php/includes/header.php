@@ -53,7 +53,7 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-header">
-        <a class="navbar-brand">Assessment Manager</a>
+        <a class="navbar-brand" href="https://www.github.com/leebaird/assessment-manager" target="_blank">Assessment Manager</a>
     </div>
 
     <div class="collapse navbar-collapse">

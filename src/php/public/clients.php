@@ -16,14 +16,14 @@ if (isset($_POST['create'])) {
         <?php exit;
     }
 
-    $query = "INSERT INTO clients (modified, client, employeeID, notes) VALUES (now(), '$_POST[client]', '$_POST[employeeID]', '$_POST[notes]')";
+    $query = "INSERT INTO clients (modified, client, address, city, state, zip, phone, web, employeeID, notes) VALUES (now(), '$_POST[client]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]', '$_POST[web]', '$_POST[employeeID]', '$_POST[notes]')";
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
 
 if (isset($_POST['update'])) {
     // UPDATE RECORD.
-    $query = "UPDATE clients SET modified=now(), client='$_POST[client]', employeeID='$_POST[employeeID]', notes='$_POST[notes]' WHERE clientID=".intval($_POST['update']);
+    $query = "UPDATE clients SET modified=now(), client='$_POST[client]', address='$_POST[address]', city='$_POST[city]', state='$_POST[state]', zip='$_POST[zip]', phone='$_POST[phone]', web='$_POST[web]', employeeID='$_POST[employeeID]', notes='$_POST[notes]' WHERE clientID=".intval($_POST['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
@@ -57,6 +57,42 @@ if (isset($_GET['create'])) {
                     $result = mysqli_query($connection, $query);
                     confirm_query($result);
                 ?>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Address</label>
+                    <div class="col-sm-5">
+                        <textarea class="form-control" name="address" placeholder="Address" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-2 control-label">City, State, Zip</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="city" placeholder="City">
+                    </div>
+
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control" name="state" placeholder="State">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="zip" placeholder="Zip">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Phone</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="phone" placeholder="Phone">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Web</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="web" placeholder="Web">
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
@@ -145,6 +181,43 @@ elseif (isset($_GET['read'])) {
                 </div>
 
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">Address</label>
+                    <div class="col-sm-5">
+                        <textarea class="form-control" name="address" rows="2" readonly><?php echo $row['address'] ?></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-2 control-label">City, State, Zip</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="city" value="<?php echo $row['city'] ?>" readonly>
+                    </div>
+
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control" name="state" value="<?php echo $row['state'] ?>" readonly>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="zip" value="<?php echo $row['zip'] ?>" readonly>
+                    </div>
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Phone</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'] ?>" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Web</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" name="employeeID" value="<?php echo $c['employee'] ?>" readonly>
@@ -199,6 +272,42 @@ elseif (isset($_GET['update'])) {
                     $result = mysqli_query($connection, $query);
                     confirm_query($result);
                 ?>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Address</label>
+                    <div class="col-sm-5">
+                        <textarea class="form-control" name="address" rows="2"><?php echo $row['address'] ?></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-2 control-label">City, State, Zip</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="city" value="<?php echo $row['city'] ?>">
+                    </div>
+
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control" name="state" value="<?php echo $row['state'] ?>">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="zip" value="<?php echo $row['zip'] ?>">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Phone</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'] ?>">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Web</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>">
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>

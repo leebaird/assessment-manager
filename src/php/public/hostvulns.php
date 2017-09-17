@@ -29,9 +29,7 @@ if (isset($_POST['create'])) {
     }
 
 $see = $_POST['see_also'];
-//$seealso = ST_PointFromText('POINT( addslashes($see) )');
 
-//mysqli_query($connection,"INSERT INTO hostvulns (modified, tool, vulnerability, findingID, cvss_base, internal, external, description, remediation, see_also, published, updated) VALUES (now(), 'Nessus', 'xxxx', '3', 'f', 'Critical', 'Critical', 'faf', 'af', ST_PointFromText('POINT( -45.62390335574153 -3.9551761173743847 )'), 'fsf', 'fa')");
     $query = "INSERT INTO hostvulns (modified, tool, vulnerability, findingID, cvss_base, internal, external, description, remediation, see_also, published, updated) VALUES (now(), '".addslashes($_POST['tool'])."', '".addslashes($_POST['vulnerability'])."', '".addslashes($_POST['findingID'])."', '".addslashes($_POST['cvss_base'])."', '".addslashes($_POST['internal'])."', '".addslashes($_POST['external'])."', '".addslashes($_POST['description'])."', '".addslashes($_POST['remediation'])."', ST_PointFromText('POINT( $see )'), '".addslashes($_POST['published'])."', '".addslashes($_POST['updated'])."')";
     $result = mysqli_query($connection, $query);
     confirm_query($result);
@@ -138,7 +136,6 @@ if (isset($_GET['create'])) {
                     </div>
                 </div>
                 <br>
-
                 <div class="row">
                     <label class="col-sm-2 control-label">Published</label>
                     <div class="col-sm-2">
@@ -151,7 +148,6 @@ if (isset($_GET['create'])) {
                     </div>
                 </div>
                 <br>
-
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
@@ -444,7 +440,6 @@ elseif (isset($_GET['update'])) {
                     </div>
                 </div>
                 <br>
-
                 <div class="row">
                     <label class="col-sm-2 control-label">Published</label>
                     <div class="col-sm-2">
@@ -457,7 +452,6 @@ elseif (isset($_GET['update'])) {
                     </div>
                 </div>
                 <br>
-
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
