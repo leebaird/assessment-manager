@@ -8,7 +8,9 @@
     $query = "SELECT * FROM contacts WHERE clientID=".$_POST['country_id'];
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_array($result);
+
     //confirm_query($result);
+
     $sn .=$row['contact']." ";
 
     $query1 = "SELECT * FROM employee_project WHERE projectID=".$row['projectID'];
@@ -22,4 +24,5 @@
         $sn .= $row2['employee']." ";
     }
     print $sn;
+
 ?>

@@ -1,5 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
+
 $(document).ready(function(){
     $('#clientID').on('change',function(){
 
@@ -10,6 +11,8 @@ $(document).ready(function(){
                 url:'ajaxData.php',
                 data:'country_id='+countryID,
                 success:function(html){
+                    //alert(html);
+
                     var res = html.split(" ");
 
                     $('#contact').val(res[0]);
@@ -17,10 +20,38 @@ $(document).ready(function(){
                     $('#employee2').val(res[2]);
                     $('#employee3').val(res[3]);
                     $('#employee4').val(res[4]);
+
                 }
             });
         }else{
-            $('#city').html('Sorry');
+            //$('#city').html('Sorry');
+        }
+    });
+});
+
+
+$(document).ready(function(){
+    $('#clientID').on('change',function(){
+        var countryID = $(this).val();
+
+        if(countryID){
+            $.ajax({
+                type:'POST',
+                url:'ajaxHost.php',
+                data:'country_id='+countryID,
+                success:function(html){
+                    var res = html.split(" ");
+
+                    $('#city').val(res[0]);
+                    $('#state').val(res[1]);
+                    $('#zip').val(res[2]);
+                    $('#phone').val(res[3]);
+                    $('#web').val(res[4]);
+
+                }
+            });
+        }else{
+            //$('#city').html('Sorry');
         }
     });
 });
@@ -145,7 +176,7 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
 
-                            <div class="form-group"><div id="city"></div>
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Client</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" name="clientID"  id="clientID">
@@ -165,22 +196,22 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
                                 <div class="col-sm-5">
-                                    <textarea class="form-control" name="address" placeholder="Address" rows="2"></textarea>
+                                    <textarea class="form-control" name="address" id="address" placeholder="Address" rows="2"></textarea>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <label class="col-sm-2 control-label">City, State, Zip</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="city" placeholder="City">
+                                    <input type="text" class="form-control" name="city" id="city" placeholder="City">
                                 </div>
 
                                 <div class="col-sm-1">
-                                    <input type="text" class="form-control" name="state" placeholder="State">
+                                    <input type="text" class="form-control" name="state" id="state" placeholder="State">
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="zip" placeholder="Zip">
+                                    <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip">
                                 </div>
                             </div>
                             <br>
@@ -645,7 +676,7 @@ elseif (isset($_GET['read'])) {
                                     <input type="text" class="form-control" name="zip" value="<?php echo $row['zip'] ?>" readonly>
                                 </div>
                             </div>
-                            <br> 
+                            <br>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Phone</label>
                                 <div class="col-sm-3">

@@ -481,7 +481,22 @@ else {
                 ';
             }
             echo '
-                <td width="100">'.$row["approved"].'</td>
+                <td width="100">'
+
+?>
+                <?php if($row["approved"]==1){
+
+                    print "Yes";
+
+                }
+                else if($row["approved"]==0){
+                    print "No";
+                }
+                     ?>
+
+<?php
+            echo
+                '</td>
                 <td width="175">'.$myDateFormat.'</td>
                 <td width="50">'.'<a class="btn btn-danger" href="users.php?delete='.$row['userID'].'"
                 onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>'

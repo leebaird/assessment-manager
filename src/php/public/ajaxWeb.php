@@ -12,6 +12,6 @@
     $sn .= $row['observation']." ";
     $sn .= $row['remediation']." ";
     $sn .= $row['see_also']." ";
-	
+
     print $sn;
 ?>

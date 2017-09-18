@@ -13,6 +13,6 @@
     $sn .= $row['zip']." ";
     $sn .= $row['phone']." ";
     $sn .= $row['web']." ";
-	
+
     print $sn;
 ?>

@@ -1,3 +1,59 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+/*
+$(document).ready(function(){
+    $('#clientID').on('change',function(){
+        alert("hi");
+        var countryID = $(this).val();
+        if(countryID){
+            $.ajax({
+                type:'POST',
+                url:'ajaxData.php',
+                data:'country_id='+countryID,
+                success:function(html){
+                    var res = html.split(" ");
+
+                    $('#contact').val(res[0]);
+                    $('#employee1').val(res[1]);
+                    $('#employee2').val(res[2]);
+                    $('#employee3').val(res[3]);
+                    $('#employee4').val(res[4]);
+                }
+            });
+        }else{
+            $('#city').html('Sorry');
+        }
+    });
+});
+
+*/
+$(document).ready(function(){
+    $('#findingID').on('change',function(){
+        var findingID = $(this).val();
+        
+        if(findingID){
+            $.ajax({
+                type:'POST',
+                url:'ajaxWeb.php',
+                data:'findingID='+findingID,
+                success:function(html){
+                    var res = html.split(" ");
+
+                    $('#severity').val(res[0]);
+                    $('#description').val(res[1]);
+                    $('#remediation').val(res[2]);
+                    $('#see_also').val(res[3]);
+
+                }
+            });
+        }else{
+            //$('#city').html('Sorry');
+        }
+    });
+});
+</script>
+
+
 <?php
 $bodyid = "webvulns";
 include "../includes/header.php";
@@ -82,7 +138,7 @@ if (isset($_GET['create'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Finding Category</label>
                     <div class="col-sm-5">
-                        <select class="form-control" name="findingID">
+                        <select class="form-control" name="findingID" id="findingID">
                             <option value=""></option>
                             <?php
                                 while($c = mysqli_fetch_assoc($result)) {
@@ -99,7 +155,7 @@ if (isset($_GET['create'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Severity</label>
                     <div class="col-sm-2">
-                        <select class="form-control" name="severity">
+                        <select class="form-control" name="severity" id="severity">
                             <option value=""></option>
                             <option value="Critical">Critical</option>
                             <option value="High">High</option>
@@ -113,21 +169,21 @@ if (isset($_GET['create'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="description" placeholder="Description" rows="25"></textarea>
+                        <textarea class="form-control" name="description" id="description" placeholder="Description" rows="25"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Remediation</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="remediation" placeholder="Remediation" rows="25"></textarea>
+                        <textarea class="form-control" name="remediation" id="remediation" placeholder="Remediation" rows="25"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">See Also</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="see_also" placeholder="See Also" rows="5"></textarea>
+                        <textarea class="form-control" name="see_also" id="see_also" placeholder="See Also" rows="5"></textarea>
                     </div>
                 </div>
 

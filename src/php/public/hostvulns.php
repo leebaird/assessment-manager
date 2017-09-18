@@ -28,9 +28,9 @@ if (isset($_POST['create'])) {
         <?php exit;
     }
 
-$see = $_POST['see_also'];
-
-    $query = "INSERT INTO hostvulns (modified, tool, vulnerability, findingID, cvss_base, internal, external, description, remediation, see_also, published, updated) VALUES (now(), '".addslashes($_POST['tool'])."', '".addslashes($_POST['vulnerability'])."', '".addslashes($_POST['findingID'])."', '".addslashes($_POST['cvss_base'])."', '".addslashes($_POST['internal'])."', '".addslashes($_POST['external'])."', '".addslashes($_POST['description'])."', '".addslashes($_POST['remediation'])."', ST_PointFromText('POINT( $see )'), '".addslashes($_POST['published'])."', '".addslashes($_POST['updated'])."')";
+//$see = $_POST['see_also'];
+//ST_PointFromText('POINT( $see )')
+    $query = "INSERT INTO hostvulns (modified, tool, vulnerability, findingID, cvss_base, internal, external, description, remediation, see_also, published, updated) VALUES (now(), '".addslashes($_POST['tool'])."', '".addslashes($_POST['vulnerability'])."', '".addslashes($_POST['findingID'])."', '".addslashes($_POST['cvss_base'])."', '".addslashes($_POST['internal'])."', '".addslashes($_POST['external'])."', '".addslashes($_POST['description'])."', '".addslashes($_POST['remediation'])."', '".addslashes($_POST['see_also'])."', '".addslashes($_POST['published'])."', '".addslashes($_POST['updated'])."')";
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
@@ -39,7 +39,8 @@ if (isset($_POST['update'])) {
 $see = $_POST['see_also'];
 
     // UPDATE RECORD.
-    $query = "UPDATE hostvulns SET modified=now(), tool='".addslashes($_POST['tool'])."', vulnerability='".addslashes($_POST['vulnerability'])."', findingID='".addslashes($_POST['findingID'])."', cvss_base=".addslashes($_POST['cvss_base']).", internal='".addslashes($_POST['internal'])."', external='".addslashes($_POST['external'])."', description='".addslashes($_POST['description'])."', remediation='".addslashes($_POST['remediation'])."', see_also=ST_PointFromText('POINT( $see )'), published='".addslashes($_POST['published'])."', updated='".addslashes($_POST['updated'])."' WHERE hostvulnID=".intval($_POST['update']);
+    $query = "UPDATE hostvulns SET modified=now(), tool='".addslashes($_POST['tool'])."', vulnerability='".addslashes($_POST['vulnerability'])."', findingID='".addslashes($_POST['findingID'])."', cvss_base=".addslashes($_POST['cvss_base']).", internal='".addslashes($_POST['internal'])."', external='".addslashes($_POST['external'])."', description='".addslashes($_POST['description'])."', remediation='".addslashes($_POST['remediation']).
+	"', see_also='".addslashes($_POST['see_also'])."', published='".addslashes($_POST['published'])."', updated='".addslashes($_POST['updated'])."' WHERE hostvulnID=".intval($_POST['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
