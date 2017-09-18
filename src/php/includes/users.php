@@ -128,7 +128,7 @@
         $role = $_POST['role'];
         $approval = $_POST['approval'];
 
-        $query = "INSERT INTO users (modified, username, email, password, salt, activated,role,approved) VALUES (now(), '$username', '$email', '$password', '$salt', 1, '$role',$approval)";
+        $query = "INSERT INTO users (modified, username, email, password, salt, activated, role, approved) VALUES (now(), '$username', '$email', '$password', '$salt', 1, '$role', $approval)";
 
         try {
             // Execute the query to create the user.

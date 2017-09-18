@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 17, 2017 at 06:40 AM
+-- Generation Time: Sep 18, 2017 at 04:42 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 use amdb;
@@ -121,7 +121,11 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`employeeID`, `modified`, `employee`, `title`, `accountmgr`, `projectmgr`, `cell`, `email`, `notes`, `projectID`) VALUES
-(1, '2017-09-16 23:34:28', 'root', 'Red Team Manager', '', '', '800-222-1212', 'root@acme.com', '', 0);
+(1, '2017-09-16 23:34:28', 'root', 'Red Team Manager', '', '', '800-222-1212', 'root@acme.com', '', 0),
+(2, '2017-09-17 21:54:42', 'Moe Howard', 'Red Team', '', '', '', '', 'Linux', 0),
+(3, '2017-09-17 21:55:08', 'Larry Fine', 'Red Team', '', '', '', '', 'Linux', 0),
+(4, '2017-09-17 21:55:39', 'Curly Howard', 'Red Team', '', '', '', '', 'Windows', 0),
+(5, '2017-09-17 21:56:31', 'Joe Besser', 'Red Team', '', '', '', '', 'Windows', 0);
 
 -- --------------------------------------------------------
 
@@ -262,15 +266,17 @@ CREATE TABLE `users` (
   `password` varchar(128) COLLATE utf8_bin NOT NULL,
   `salt` varchar(128) COLLATE utf8_bin NOT NULL,
   `role` varchar(25) COLLATE utf8_bin NOT NULL,
-  `approved` tinyint(1) NOT NULL
+  `approved` tinyint(1) NOT NULL,
+  `activated` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userID`, `modified`, `username`, `email`, `password`, `salt`, `role`, `approved`) VALUES
-(1, '2017-09-15 23:22:02', 'admin', 'admin@acme.com', 'c368df3e5185de6bf9228c15a5a3f5e803d7ebe68cb32516bd4769573c9b7886', '5a73d21957fe79da', '1', 1);
+INSERT INTO `users` (`userID`, `modified`, `username`, `email`, `password`, `salt`, `role`, `approved`, `activated`) VALUES
+(1, '2017-09-15 23:22:02', 'admin', 'admin@acme.com', 'c368df3e5185de6bf9228c15a5a3f5e803d7ebe68cb32516bd4769573c9b7886', '5a73d21957fe79da', '1', 1, 0),
+(2, '2017-09-17 21:39:07', 'test', 'test@acme.com', '9a5b7097ef3c66fd653df6d5a79d04766829061ac1037e3f7c9c8126738f4011', 'f5247e68946cb4', '2', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -419,7 +425,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employeeID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `employeeID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `findings`
