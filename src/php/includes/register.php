@@ -1,6 +1,6 @@
 <?php
     require_once("common.php");
-
+    $err="";
     if(!empty($_POST)) {
         if(empty($_POST['username'])) {
             die("Please enter a username.");
@@ -8,6 +8,7 @@
 
         if(empty($_POST['password'])) {
             die("Please enter a password.");
+            $err .="Please enter a password.";
         }
 
         if(strlen($_POST['password']) < 12) {
@@ -124,7 +125,6 @@
         $subject = "New user registration.";
         $message = "A new user has requested an account.";
         mail($to,$subject,$message);
-
         header("Location: ../index.php");
         die("Redirecting to ../index.php");
     }
@@ -168,13 +168,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Email</label>
-                    <div class="col-sm-7">
-                        <input type="text" name="email" value="" class="form-control">
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="col-sm-4 control-label">Password</label>
                     <div class="col-sm-7">
                         <input type="password" name="password" value="" class="form-control">
@@ -185,6 +178,13 @@
                     <label class="col-sm-4 control-label">Re-enter password</label>
                     <div class="col-sm-7">
                         <input type="password" name="password2" value="" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-7">
+                        <input type="text" name="email" value="" class="form-control">
                     </div>
                 </div>
 

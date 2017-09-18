@@ -16,7 +16,7 @@ if (isset($_POST['create'])) {
         <?php exit;
     }
 
-    $query = "INSERT INTO clients (modified, client, address, city, state, zip, phone, web, employeeID, notes) VALUES (now(), '$_POST[client]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]', '$_POST[web]', '$_POST[employeeID]', '$_POST[notes]')";
+    print $query = "INSERT INTO clients (modified, client, address, city, state, zip, phone, web, employeeID, notes) VALUES (now(), '$_POST[client]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]', '$_POST[web]', '$_POST[employeeID]', '$_POST[notes]')";exit;
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
@@ -123,7 +123,6 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="clients.php">Back</a>
                 </div>
             </form>
-
         </div>
         </div>
     </div>
@@ -235,7 +234,6 @@ elseif (isset($_GET['read'])) {
                     <a class="btn btn-default" href="clients.php">Back</a>
                 </div>
             </form>
-
             </div>
         </div>
     </div>

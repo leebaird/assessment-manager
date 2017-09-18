@@ -1,3 +1,31 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#clientID').on('change',function(){
+
+        var countryID = $(this).val();
+        if(countryID){
+            $.ajax({
+                type:'POST',
+                url:'ajaxData.php',
+                data:'country_id='+countryID,
+                success:function(html){
+                    var res = html.split(" ");
+
+                    $('#contact').val(res[0]);
+                    $('#employee1').val(res[1]);
+                    $('#employee2').val(res[2]);
+                    $('#employee3').val(res[3]);
+                    $('#employee4').val(res[4]);
+                }
+            });
+        }else{
+            $('#city').html('Sorry');
+        }
+    });
+});
+</script>
+
 <?php
 $bodyid = "projects";
 include "../includes/header.php";
@@ -30,7 +58,7 @@ foreach($_POST['assessment'] as $selected){
 $ass .= $selected.",";
 }
 
-   $query = "INSERT INTO projects (modified, project, assessment, client, address, city, state, zip, phone, web, accountmgr, projectmgr, employee1, employee2, employee3, employee4, kickoff, start, finish, status, due, notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]', '$_POST[web]', '$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[employee1]', '$_POST[employee2]', '$_POST[employee3]', '$_POST[employee4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[current_status]', '$_POST[due]','$_POST[notes]')";
+   $query = "INSERT INTO projects (modified, project, assisment, client, address1, city, state, zip,  accountmgr, projectmgr, employee1, employee2, employee3, employee4, kickoff, start, finish, status,  notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[employee1]', '$_POST[employee2]', '$_POST[employee3]', '$_POST[employee4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[current_status]', '$_POST[notes]')";
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
@@ -268,7 +296,6 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
 
-
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Status</label>
                                 <div class="col-sm-2">
@@ -503,7 +530,7 @@ elseif (isset($_GET['read'])) {
     confirm_query($result);
     $row = mysqli_fetch_assoc($result);
 
-    $query = "SELECT * FROM clients WHERE clientID=".intval($row['clientID']);
+    $query = "SELECT * FROM clients WHERE clientID=".intval(@$row['clientID']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
     $c = mysqli_fetch_assoc($result);
@@ -560,7 +587,6 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
 
-
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-10">
@@ -601,7 +627,7 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
                                 <div class="col-sm-5">
-                                    <textarea class="form-control" name="address" rows="2" readonly><?php echo $row['address'] ?></textarea>
+                                    <textarea class="form-control" name="address" rows="2" readonly><?php echo @$row['address'] ?></textarea>
                                 </div>
                             </div>
 
@@ -623,14 +649,14 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Phone</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'] ?>" readonly>
+                                    <input type="text" class="form-control" name="phone" value="<?php echo @$row['phone'] ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Web</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>" readonly>
+                                    <input type="text" class="form-control" name="web" value="<?php echo @$row['web'] ?>" readonly>
                                 </div>
                             </div>
 
@@ -679,36 +705,35 @@ elseif (isset($_GET['read'])) {
                            <div class="form-group">
                                <label class="col-sm-2 control-label">Kickoff</label>
                                <div class="col-sm-2">
-                                   <input type="text" class="form-control" name="kickoff" value="<?php echo $row['kickoff'] ?>" readonly>
+                                   <input type="text" class="form-control" name="kickoff" value="<?php echo @$row['kickoff'] ?>" readonly>
                                </div>
                            </div>
 
                            <div class="form-group">
                                <label class="col-sm-2 control-label">Start</label>
                                <div class="col-sm-2">
-                                   <input type="text" class="form-control" name="start_date" value="<?php echo $row['start_date'] ?>" readonly>
+                                   <input type="text" class="form-control" name="start_date" value="<?php echo @$row['start_date'] ?>" readonly>
                                </div>
                            </div>
 
                            <div class="form-group">
                                <label class="col-sm-2 control-label">Finish</label>
                                <div class="col-sm-2">
-                                   <input type="text" class="form-control" name="finish" value="<?php echo $row['finish'] ?>" readonly>
+                                   <input type="text" class="form-control" name="finish" value="<?php echo @$row['finish'] ?>" readonly>
                                </div>
                            </div>
-
 
                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Status</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="current_status" value="<?php echo $row['current_status'] ?>" readonly>
+                                    <input type="text" class="form-control" name="current_status" value="<?php echo @$row['current_status'] ?>" readonly>
                                 </div>
                            </div>
 
                            <div class="form-group">
                                <label class="col-sm-2 control-label">Due</label>
                                <div class="col-sm-2">
-                                   <input type="text" class="form-control" name="due" value="<?php echo $row['due'] ?>" readonly>
+                                   <input type="text" class="form-control" name="due" value="<?php echo @$row['due'] ?>" readonly>
                                </div>
                            </div>
 
@@ -1004,7 +1029,7 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
                                 <div class="col-sm-5">
-                                    <textarea class="form-control" name="address" rows="2"><?php echo $row['address'] ?></textarea>
+                                    <textarea class="form-control" name="address" rows="2"><?php echo @$row['address'] ?></textarea>
                                 </div>
                             </div>
 
@@ -1026,14 +1051,14 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Phone</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'] ?>">
+                                    <input type="text" class="form-control" name="phone" value="<?php echo @$row['phone'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Web</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>">
+                                    <input type="text" class="form-control" name="web" value="<?php echo @$row['web'] ?>">
                                 </div>
                             </div>
 
@@ -1114,7 +1139,7 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Kickoff</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="kickoff" name="kickoff" value="<?php echo $row['kickoff'] ?>">
+                                    <input type="text" class="form-control" id="kickoff" name="kickoff" value="<?php echo @$row['kickoff'] ?>">
                                     <script> $( "#kickoff" ).datepicker(); </script>
                                 </div>
                             </div>
@@ -1122,7 +1147,7 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Start</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="start_date" name="start_date" value="<?php echo $row['start_date'] ?>">
+                                    <input type="text" class="form-control" id="start_date" name="start_date" value="<?php echo @$row['start_date'] ?>">
                                     <script> $( "#start_date" ).datepicker(); </script>
                                 </div>
                             </div>
@@ -1130,7 +1155,7 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Finish</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="finish" name="finish" value="<?php echo $row['finish'] ?>">
+                                    <input type="text" class="form-control" id="finish" name="finish" value="<?php echo @$row['finish'] ?>">
                                     <script> $( "#finish" ).datepicker(); </script>
                                 </div>
                             </div>
@@ -1159,7 +1184,7 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Due</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="due" name="due" value="<?php echo $row['due'] ?>">
+                                    <input type="text" class="form-control" id="due" name="due" value="<?php echo @$row['due'] ?>">
                                     <script> $( "#due" ).datepicker(); </script>
                                 </div>
                             </div>

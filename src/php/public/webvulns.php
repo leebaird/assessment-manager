@@ -74,7 +74,7 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <?php
-                    $query = "SELECT * FROM findings WHERE type='Web App' ORDER BY finding ASC";
+                    $query = "SELECT * FROM findings WHERE type='Web' ORDER BY finding ASC";
                     $result = mysqli_query($connection, $query);
                     confirm_query($result);
                 ?>
@@ -136,7 +136,6 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="webvulns.php">Back</a>
                 </div>
             </form>
-        
         </div>
         </div>
     </div>
@@ -165,12 +164,47 @@ elseif (isset($_GET['read'])) {
     ?>
 
     <ul class="pager">
-        <?php if ($read > 1): ?>
-            <li class="previous"><a href="?read=<?= ($read - 1)?>">Previous</a></li>
+        <?php  $r = $limit - 1; $r = $r-1;
+        $sql ="SELECT count(webvulnID) FROM webvulns where webvulnID<=".$_GET['read'];
+        $result = mysqli_query($connection,$sql);
+        $rs = mysqli_fetch_row($result);
+        //print $rs[0];exit;
+        $r = $rs[0];
+        if ($r > 1):
+        $rr=$r-2;
+        $sql1 ="SELECT * FROM webvulns ORDER BY webvulnID LIMIT $rr,1";
+        $result1 = mysqli_query($connection,$sql1);
+        $rs1 = mysqli_fetch_array($result1);
+        //print_r($rs1);exit;
+        ?>
+
+            <li class="previous"><a href="?read=<?= $rs1['webvulnID'] ?>">Previous</a></li>
         <?php endif ?>
-        <?php if ($read < $limit): ?>
-            <li class="previous"><a href="?read=<?= ($read + 1)?>">Next</a></li>
-        <?php endif ?>
+        <?php if ($r >= 1 ): ?>
+        <?php
+        $flag = 0;
+        $rr=$r;
+
+        $sql5 ="SELECT count(webvulnID) FROM webvulns ";
+        $result5 = mysqli_query($connection,$sql5);
+        $rs5 = mysqli_fetch_row($result5);
+
+        if($rr>$rs5[0]){
+            $rr = $rr-2;
+            $flag = 1;
+        }
+        if($rr==$rs5[0]){
+            $rr = $rr-1;
+            $flag = 1;
+        }
+        $sql1 ="SELECT * FROM webvulns ORDER BY webvulnID LIMIT $rr,1";
+        $result1 = mysqli_query($connection,$sql1);
+        $rs1 = mysqli_fetch_array($result1);
+        if($flag==0){
+        ?>
+            <li class="previous"><a href="?read=<?= $rs1['webvulnID'] ?>">Next</a></li>
+        <?php }
+        endif ?>
     </ul>
 
     <div class="container">
@@ -239,7 +273,6 @@ elseif (isset($_GET['read'])) {
                     <a class="btn btn-default" href="webvulns.php">Back</a>
                 </div>
             </form>
-            
             </div>
         </div>
     </div>

@@ -43,7 +43,7 @@
                 $check_password = hash('sha256', $check_password . $row['salt']);
             }
 
-            if($check_password === $row['password']) {
+            if($check_password === $row['password'] && $row['approved']==1) {
                 // If they do, then we flip this to true.
                 $login_ok = true;
             }
