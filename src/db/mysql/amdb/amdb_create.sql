@@ -1,11 +1,12 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 18, 2017 at 10:53 AM
+-- Host: localhost
+-- Generation Time: Sep 19, 2017 at 05:57 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
+
 use amdb;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -63,12 +64,10 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`clientID`, `modified`, `client`, `address`, `city`, `state`, `zip`, `phone`, `web`, `employeeID`, `notes`) VALUES
-(1, '2017-09-16 23:31:04', 'Apple', '1 Infinite Loop', 'Cupertino', 'CA', '95014', '408-996â€“1010', 'www.apple.com', 0, 'iPhone, iPad'),
-(2, '2017-09-16 23:18:18', 'Comcast', '', '', '', '', '', 'www.comcast.net', 0, ''),
-(3, '2017-09-16 23:22:45', 'Palo Alto Networks', '', 'Santa Clara', 'CA', '', '', 'www.paloaltonetworks.com', 0, ''),
-(4, '2017-09-16 00:01:20', 'Verizon', '', '', '', '', '', '', 0, ''),
-(5, '2017-09-18 10:33:22', 'bbb', 'bbb', 'bbb', 'bb', '454', '087979', '8998', 4, '89'),
-(6, '2017-09-18 10:34:31', 'bbb', 'bbb', 'bbb', 'bb', '454', '087979', '8998', 4, '89');
+(1, '2017-09-18 20:41:02', 'Apple', '1 Infinite Loop', 'Cupertino', 'CA', '95014', '408-996-1010', 'www.apple.com', 0, 'iPhone, iPad'),
+(2, '2017-09-18 20:37:00', 'Comcast', '1701 JFK Blvd', 'Philadelphia', 'PA', '19103', '215-286-1700', 'www.comcast.net', 0, ''),
+(3, '2017-09-18 20:38:22', 'Palo Alto Networks', '3000 Tannery Way', 'Santa Clara', 'CA', '95054', '408-753-4000', 'www.paloaltonetworks.com', 0, ''),
+(4, '2017-09-18 20:40:05', 'Verizon', '140 W. St.', 'New York', 'NY', '10007', '212-395-1000', 'www.verizon.com', 0, '');
 
 -- --------------------------------------------------------
 
@@ -94,10 +93,10 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`contactID`, `modified`, `contact`, `title`, `work`, `cell`, `email`, `notes`, `clientID`, `projectID`) VALUES
-(1, '2017-09-14 14:42:48', '03434', 'aaa', 'aaa', 'aaa', 'aaa@df.gd', 'Itï¿½s MySQL spatial data week here, though I am spreading out the posts to, um, ease the pain (or boredom). Anyway, here are some commands/functions I donï¿½t want to forget about later:\r\n\r\nStart with an existing table called geometry, add a spatial column and index it:\r\n\r\n', 3, 1),
-(2, '2017-09-14 13:00:35', 'fgg', 'zzz', 'zzz', '07676', 'zzz@zzz.zzz', 'zzz', 3, 0),
-(5, '2017-09-15 00:00:00', '00778', 'rrr', 'rr', 'rrrr', 'rrr@gmail.com', 'rrr', 2, 2),
-(6, '2017-09-15 00:00:00', '06767', 'fdfd', 'dfdf', '07878', 'vbv@fdf.ghgh', 'ghg', 3, 3);
+(1, '2017-09-18 20:43:51', 'Brian Roberts', 'CEO', '', '', '', '', 2, 0),
+(2, '2017-09-18 20:43:12', 'Lowell McAdam', 'CEO', '', '', '', '', 4, 0),
+(3, '2017-09-18 20:50:59', 'Mark D. McLaughlin', 'CEO', '', '', '', '', 3, 0),
+(4, '2017-09-18 20:42:22', 'Tim Cook', 'CEO', '', '', '', '', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -124,10 +123,10 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`employeeID`, `modified`, `employee`, `title`, `type`, `accountmgr`, `projectmgr`, `cell`, `email`, `notes`, `projectID`) VALUES
-(2, '2017-09-14 14:43:22', 'www', 'www', 'Full Time', 'Yes', 'Yes', '05454', 'eee@fgd.gfhgjh', 'gjhgj', 1),
-(3, '2017-09-15 14:15:50', 'vvv', 'vvv', 'Full Time', 'Yes', 'Yes', '0787787', 'vvv@gmail.com', 'vvv', 1),
-(4, '2017-09-15 14:19:44', 'uuu', 'uuu', 'Full Time', 'Yes', 'Yes', '056', 'uuu@gmail.com', 'uuu', 0),
-(5, '2017-09-15 14:20:10', 'mmm', 'mmm', 'Full Time', 'Yes', 'Yes', '0454', 'mmm@gmail.com', 'mmm', 0);
+(1, '2017-09-18 20:53:41', 'Bugs Bunny', 'Manager', '', '', '', '', 'bugs.bunny@acme.com', '', 0),
+(2, '2017-09-18 20:54:40', 'Moe Howard', 'Red Team', '', '', '', '', '', 'Linux', 0),
+(3, '2017-09-18 20:55:02', 'Larry Fine', 'Red Team', '', '', '', '', '', 'Windows', 0),
+(4, '2017-09-18 20:55:27', 'Curly Howard', 'Red Team', '', '', '', '', '', 'Web', 0);
 
 -- --------------------------------------------------------
 
@@ -141,16 +140,6 @@ CREATE TABLE `employee_project` (
   `projectID` varchar(255) NOT NULL,
   `timestamp` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `employee_project`
---
-
-INSERT INTO `employee_project` (`id`, `employeeID`, `projectID`, `timestamp`) VALUES
-(1, '2', '1', 'dsf'),
-(2, '3', '1', 'sdf'),
-(3, '4', '1', 'dsdf'),
-(4, '5', '1', 'sdfs');
 
 -- --------------------------------------------------------
 
@@ -174,9 +163,10 @@ CREATE TABLE `findings` (
 --
 
 INSERT INTO `findings` (`findingID`, `modified`, `type`, `finding`, `observation`, `severity`, `remediation`, `see_also`) VALUES
-(3, '2017-09-15 00:00:00', 'Host', 'bbb', 'ccc', 'ddd', 'ggg', 'hhh'),
-(5, '2017-09-17 15:08:43', 'Web', 'xxx', 'yyy', 'zzz', 'aaa', '45'),
-(6, '2017-09-17 15:07:23', 'Web', 'shapla', 'shapla', 'shapla', 'shapla', 'shapla');
+(1, '2017-09-18 20:56:27', 'Host', 'Access to Administrative Interface', 'aaa', 'bbb', 'ccc', 'ddd'),
+(2, '2017-09-18 20:57:53', 'Host', 'Apple Patching Issues', '', '', '', ''),
+(3, '2017-09-18 20:57:20', 'Host', 'Apple Configuration Issues', '', '', '', ''),
+(4, '2017-09-18 20:58:18', 'Web', 'Reflected XSS', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -205,15 +195,8 @@ CREATE TABLE `hostvulns` (
 --
 
 INSERT INTO `hostvulns` (`hostvulnID`, `modified`, `tool`, `vulnerability`, `findingID`, `cvss_base`, `internal`, `external`, `description`, `remediation`, `see_also`, `published`, `updated`) VALUES
-(6, '2017-09-14 14:34:14', 'Nessus', 'dfsg', 3, 5, 'Critical', 'High', 'dfg', 'dfg', '', '0000-00-00', '0000-00-00'),
-(7, '2017-09-14 14:34:23', 'Nessus', 'dfsg', 3, 3, 'Critical', 'High', 'dfg', 'dfg', '', '0000-00-00', '0000-00-00'),
-(8, '2017-09-14 12:40:55', 'Nessus', 'dfsg', 3, 12, 'Critical', 'High', 'dfg', 'dfg', '\0\0\0\0\0\0\0\0\0\0\0\0\0$À\0\0\0\0\0\06À', '0000-00-00', '0000-00-00'),
-(9, '2017-09-14 12:41:52', 'Nessus', 'q', 5, 2, 'Critical', 'High', 'q', 'q', '\0\0\0\0\0\0\0\0\0\0\0\0\0ð¿\0\0\0\0\0\0\0À', '0000-00-00', '0000-00-00'),
-(10, '2017-09-14 13:52:35', 'Nexpose', 'g', 5, 5, 'Critical', 'Critical', 'g', 'g', '\0\0\0\0\0\0\0ËI(}!ÄQÀð¿•ìØ$E@', '0000-00-00', '0000-00-00'),
-(11, '2017-09-17 14:59:28', 'Nessus', 'asa', 3, 0, 'Critical', 'High', 'asda', 'sdad', '\0\0\0\0\0\0\0ž^)ËÇá¿NÒü1-é¿', '0000-00-00', '0000-00-00'),
-(12, '2017-09-17 15:03:22', 'Nexpose', 'ssad', 3, 0, 'Critical', 'High', 'asds', 'asdad', '\0\0\0\0\0\0\0\r¹§«;Ý¿\0\0\0\0¼Á', '0000-00-00', '0000-00-00'),
-(13, '2017-09-17 15:03:58', 'Nexpose', 'llll', 3, 0, 'High', 'Medium', 'lll', 'llll', '\0\0\0\0\0\0\0\r¹§«;Ý¿\0\0\0\0¼Á', '0000-00-00', '0000-00-00'),
-(14, '2017-09-18 11:46:02', 'Nessus', 'asad123', 3, 4545, 'High', 'Critical', 'dgd', 'dgd', 'asad', '0000-00-00', '0000-00-00');
+(1, '2017-09-18 21:03:42', 'Nessus', 'OS X <10.10', 2, 10, 'High', 'Critical', 'qqq', 'www', 'eee', '0000-00-00', '0000-00-00'),
+(2, '2017-09-18 23:43:09', 'Manual', 'Palo Alto admin console', 1, 0, 'Medium', 'High', '', '', '', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -279,12 +262,7 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`projectID`, `modified`, `project`, `client`, `accountmgr`, `projectmgr`, `employee1`, `employee2`, `employee3`, `employee4`, `type`, `objective`, `billing`, `rate`, `address1`, `address2`, `city`, `state`, `zip`, `kickoff`, `start`, `finish`, `hours`, `tech_qa`, `draft_delivery`, `client_comments`, `final_delivery`, `status`, `notes`, `hold`, `restart`, `percent_complete`, `complete`, `assisment`) VALUES
-(1, '2017-09-14 12:25:21', 'dgd', '3', '2', '2', 'ddd', 'fff', 'ggg', 'hhh', '', '', '', '', 'fff', '', 'fff', 'ff', '232', '09/14/2017', '0000-00-00', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Scoping', 'v', '0000-00-00', '0000-00-00', '', '', 'External,Mobile,'),
-(2, '2017-09-17 15:26:03', 'fafaf', '3', '5', '4', 'www', 'vvv', 'uuu', 'mmm', '', '', '', '', 'afaf', '', 'fdaf', 'af', 'aaf', '09/07/2017', '09/12/2017', '09/12/2017', '', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Reporting', 'faf', '0000-00-00', '0000-00-00', '', '', 'External,Internal,Mobile,'),
-(3, '2017-09-17 15:26:34', 'afaf', '3', '4', '4', 'www', 'vvv', 'uuu', 'mmm', '', '', '', '', 'faf', '', 'af', 'fa', '32', '09/20/2017', '09/04/2017', '09/08/2017', '', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'In Progres', 'qrqr', '0000-00-00', '0000-00-00', '', '', 'External,Internal,'),
-(4, '2017-09-17 15:43:54', 'asd', '3', '5', '4', 'www', 'vvv', 'uuu', 'mmm', '', '', '', '', 'adsa', '', 'asd', 'as', 'asd', '09/11/2017', '09/11/2017', '09/21/2017', '', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Reporting', 'asdad', '0000-00-00', '0000-00-00', '', '', 'External,Internal,Mobile,'),
-(5, '2017-09-17 15:46:14', 'qqq', '3', '4', '4', 'www', 'vvv', 'uuu', 'mmm', '', '', '', '', 'qqq', '', 'qqq', 'qq', 'qqq', '09/06/2017', '09/05/2017', '09/13/2017', '', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'In Progres', 'qqq', '0000-00-00', '0000-00-00', '', '', 'External,Internal,Mobile,'),
-(6, '2017-09-18 14:50:30', 'ggg', '3', '5', '5', 'www', 'vvv', 'uuu', 'mmm', '', '', '', '', 'ggg', '', 'ggg', 'gg', '66', '09/18/2017', '09/20/2017', '09/22/2017', '', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Reporting', 'ggg', '0000-00-00', '0000-00-00', '', '', 'External,Internal,');
+(1, '2017-09-18 23:51:22', 'Q3 Vulnerability Assessment', '1', '', '', 'Cook', '', '', '', '', '', '', '', '', '', '1', 'In', 'Loop', '', '', '', '', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '0000-00-00', '0000-00-00', '', '', 'External,Internal,');
 
 -- --------------------------------------------------------
 
@@ -330,11 +308,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `modified`, `username`, `email`, `password`, `salt`, `activated`, `role`, `approved`) VALUES
-(4, '0000-00-00 00:00:00', 'aaa', 'aaa@yahoo.com', '4625fd63b0e96fc0d656ae7381605e48d4a0f63a319fc743adf22688613883c7', 'bbb', 1, '1', 1),
-(5, '2017-09-14 11:13:26', 'bbb', 'bbb@gmail.com', 'c09269b620a596eb5d49f623eae1b641defc592820d0214aa63b8170162e4192', '54e89c9e4c5ab38c', 0, '1', 1),
-(10, '2017-09-17 13:10:15', 'hhhh', 'hhh@gmail.com', '0a659fe400ae8d1ca2020c7c3a8f5dca2e66c00c8c606cd4ba0ed48d37e8218c', 'ceda8de528211c1', 1, '2', 0),
-(11, '2017-09-17 13:11:58', 'kkk', 'kashem@gmail.com', '623bd33342e16f12428cadd04d23a19b3e9bc3ce336f47e77c52790e130df391', '656961f63933dd6', 1, '2', 1),
-(12, '2017-09-17 13:16:06', 'ddd', 'bisriman@shasha.massa', '397338348ae1a3f95c36bc66f07726f933497795c3a98592408b04c1acf61f53', '2ff860c2158fc68d', 1, '2', 0);
+(1, '2017-09-18 19:11:15', 'admin', 'admin@acme.com', 'f542eebb272ff24784ddc8f53f1a930532cdfbc1df30e5e6ffbd7e4c01925ee1', '2946e24c29c4368d', 1, '1', 1);
 
 -- --------------------------------------------------------
 
@@ -379,10 +353,7 @@ CREATE TABLE `webvulns` (
 --
 
 INSERT INTO `webvulns` (`webvulnID`, `modified`, `tool`, `vulnerability`, `findingID`, `severity`, `description`, `remediation`, `see_also`) VALUES
-(4, '2017-09-14 14:33:41', 'acunetix', 'ff', 5, 'High', 'ff', 'ff', 'kkkk'),
-(5, '2017-09-17 15:23:29', 'acunetix', 'dsf', 6, 'High', 'dfsd', 'sdfsf', 'sdf'),
-(6, '2017-09-17 15:23:42', 'WebInspect', 'df', 5, 'High', 'fafa', 'faf', 'fdfaf'),
-(7, '2017-09-17 15:23:54', 'WebInspect', 'afaf', 5, 'High', 'afaf', 'fdaf', 'afaf');
+(1, '2017-09-18 23:47:28', 'Burp', 'Homepage XSS', 4, 'Medium', '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -475,66 +446,79 @@ ALTER TABLE `webvulns`
 --
 ALTER TABLE `accountmgrs`
   MODIFY `accountmgrID` int(4) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `clientID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `clientID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `contactID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `contactID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employeeID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `employeeID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `employee_project`
 --
 ALTER TABLE `employee_project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `findings`
 --
 ALTER TABLE `findings`
-  MODIFY `findingID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `findingID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `hostvulns`
 --
 ALTER TABLE `hostvulns`
-  MODIFY `hostvulnID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `hostvulnID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `projectmgrs`
 --
 ALTER TABLE `projectmgrs`
   MODIFY `projectmgrID` int(4) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `projectID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `projectID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `scan`
 --
 ALTER TABLE `scan`
   MODIFY `scanID` int(4) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `userID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `vulnerabilities`
 --
 ALTER TABLE `vulnerabilities`
   MODIFY `vulnerabilityID` int(5) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `webvulns`
 --
 ALTER TABLE `webvulns`
-  MODIFY `webvulnID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;COMMIT;
+  MODIFY `webvulnID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

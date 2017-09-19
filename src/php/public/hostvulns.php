@@ -67,9 +67,13 @@ if (isset($_GET['create'])) {
                     <div class="col-sm-2">
                         <select class="form-control" name="tool">
                             <option value=""></option>
+                            <option value="Burp">Burp</option>
+                            <option value="Metasploit">Metasploit</option>
+                            <option value="Manual">Manual</option>
                             <option value="Nessus">Nessus</option>
                             <option value="Nexpose">Nexpose</option>
-                            <option value="Qualys">Qualys</option>
+                            <option value="Nikto">Nikto</option>
+                            <option value="Nmap">Nmap</option>
                         </select>
                     </div>
                 </div>
@@ -371,9 +375,13 @@ elseif (isset($_GET['update'])) {
                     <div class="col-sm-2">
                         <select class="form-control" name="tool">
                             <option value=""></option>
+                            <option value="Burp"<?php echo ($row['tool'] == 'Burp' ? " selected" : "")?>>Burp</option>
+                            <option value="Metasploit"<?php echo ($row['tool'] == 'Metaploit' ? " selected" : "")?>>Metasploit</option>
+                            <option value="Manual"<?php echo ($row['tool'] == 'Manual' ? " selected" : "")?>>Manual</option>
                             <option value="Nessus"<?php echo ($row['tool'] == 'Nessus' ? " selected" : "")?>>Nessus</option>
                             <option value="Nexpose"<?php echo ($row['tool'] == 'Nexpose' ? " selected" : "")?>>Nexpose</option>
-                            <option value="Qualys"<?php echo ($row['tool'] == 'Qualys' ? " selected" : "")?>>Qualys</option>
+                            <option value="Nikto"<?php echo ($row['tool'] == 'Nikto' ? " selected" : "")?>>Nikto</option>
+                            <option value="Nmap"<?php echo ($row['tool'] == 'Nmap' ? " selected" : "")?>>Nmap</option>
                         </select>
                     </div>
                 </div>

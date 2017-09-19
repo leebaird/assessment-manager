@@ -117,6 +117,8 @@ if (isset($_GET['create'])) {
                             <option value=""></option>
                             <option value="acunetix">acunetix</option>
                             <option value="Burp">Burp</option>
+                            <option value="Manual">Manual</option>
+                            <option value="Nikto">Nikto</option>
                             <option value="WebInspect">WebInspect</option>
                         </select>
                     </div>
@@ -360,6 +362,8 @@ elseif (isset($_GET['update'])) {
                             <option value=""></option>
                             <option value="acunetix"<?php echo ($row['tool'] == 'acunetix' ? " selected" : "")?>>acunetix</option>
                             <option value="Burp"<?php echo ($row['tool'] == 'Burp' ? " selected" : "")?>>Burp</option>
+                            <option value="Manual"<?php echo ($row['tool'] == 'Manual' ? " selected" : "")?>>Manual</option>
+                            <option value="Nikto"<?php echo ($row['tool'] == 'Nikto' ? " selected" : "")?>>Nikto</option>
                             <option value="WebInspect"<?php echo ($row['tool'] == 'WebInspect' ? " selected" : "")?>>WebInspect</option>
                         </select>
                     </div>
@@ -489,7 +493,6 @@ else {
             <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">Web Vulnerability</th>
             <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">Finding Category</th>
             <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">Severity</th>
-            <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">Modified</th>
             <th style="background-color:#E8E8E8; "></th>
         </tr>
 
@@ -510,7 +513,6 @@ else {
                     <td width="500">'.$row["vulnerability"].'</td>
                     <td width="425">'.$finding['finding'].'</td>
                     <td width="100">'.$row["severity"].'</td>
-                    <td width="175">'.$myDateFormat.'</td>
                     <td width="50">'.'<a class="btn btn-danger" href="webvulns.php?delete='.$row['webvulnID'].'"
                         onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
                 </tr>';

@@ -10,7 +10,6 @@
         die ("DB connection failed. " . mysql_error());
     }
     else {
-        print("\nDB is OK. ");
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -20,9 +19,6 @@
     // Test if the connection occurred.
     if (!$connection) {
         die ("DB connection failed. " . mysql_error());
-    }
-    else {
-        print("\nConnection is OK. ");
     }
 
     function confirm_query($result) {

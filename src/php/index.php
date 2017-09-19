@@ -91,7 +91,7 @@
     }
 
     .vertical-center {
-        height: 80vh;
+        height: 60vh;
         display: flex;
         align-items: center;
     }
