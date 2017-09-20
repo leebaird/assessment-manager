@@ -94,20 +94,17 @@ $ass .= $selected.",";
 }
 
 if (isset($_POST['update'])) {
-	
-	//if(isset($_POST['assessment'])){	
-	$ass="";
-	foreach($_POST['assessment'] as $selected){
-	$ass .= $selected.",";
-	//}
-	
 
-	
+     //if(isset($_POST['assessment'])){
+     $ass="";
+     foreach($_POST['assessment'] as $selected){
+     $ass .= $selected.",";
+     //}
+
 }
     // UPDATE RECORD.
     @$query = "UPDATE projects SET modified=now(), project='$_POST[project]', assisment='$ass', client='$_POST[clientID]', address1='$_POST[address]', city='$_POST[city]', state='$_POST[state]', zip='$_POST[zip]', accountmgr='$_POST[employeeID]', projectmgr='$_POST[projectmgr]', consultant1='$_POST[consultant1]', consultant2='$_POST[consultant2]', consultant3='$_POST[consultant3]', consultant4='$_POST[consultant4]', kickoff='$_POST[kickoff]', start='$_POST[start_date]', finish='$_POST[finish]', status='$_POST[current_status]', notes='$_POST[notes]' WHERE projectID=".intval($_POST['update']);
-	
-	
+
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
@@ -814,7 +811,7 @@ elseif (isset($_GET['read'])) {
 
                     <!-- External panel -->
                     <div role="tabpanel" class="tab-pane" id="external">
-                    
+
                         <!-- <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -848,7 +845,7 @@ elseif (isset($_GET['read'])) {
 
                     <!-- Internal panel -->
                     <div role="tabpanel" class="tab-pane" id="internal">
-                    <!-- 
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -945,7 +942,7 @@ elseif (isset($_GET['read'])) {
 
                     <!-- War Dailing panel -->
                     <div role="tabpanel" class="tab-pane" id="war-dail">
-                    <!-- 
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1019,7 +1016,7 @@ elseif (isset($_GET['update'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
     $row = mysqli_fetch_assoc($result);
-	
+
     ?>
 
     <div class="container">
@@ -1054,81 +1051,81 @@ elseif (isset($_GET['update'])) {
                             </div>
 
                             <div class="form-group">
-                            <?php 
-							//print $row['assisment'];  
-							
-							$assisment = explode(",",$row['assisment']);
-							?>
-                            
+                            <?php
+                                   //print $row['assisment'];
+
+                                   $assisment = explode(",",$row['assisment']);
+                                   ?>
+
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-10">
                                     <label class="checkbox-inline">
                                     <?php if(@$assisment[0]=="External"){ ?>
-                                        <input type="checkbox" name="assessment[]" 
+                                        <input type="checkbox" name="assessment[]"
                                         value="External" checked="checked">External
-                                    <?php } else {?>  
-                                         <input type="checkbox" name="assessment[]" 
-                                         value="External" >External                                   
-                                    <?php } ?>  
+                                    <?php } else {?> 
+                                         <input type="checkbox" name="assessment[]"
+                                         value="External" >External
+                                    <?php } ?>
                                     </label>
                                     <label class="checkbox-inline">
                                     <?php if(@$assisment[1]=="Internal"){ ?>
                                     
-                                        <input type="checkbox" name="assessment[]" 
+                                        <input type="checkbox" name="assessment[]"
                                         value="Internal" checked="checked">Internal
-                                    <?php } else {?>  
-                                        <input type="checkbox" name="assessment[]" 
-                                        value="Internal" >Internal                                    
+                                    <?php } else {?>
+                                        <input type="checkbox" name="assessment[]"
+                                        value="Internal" >Internal
                                     <?php } ?>
-                                    
+
                                     <?php if(@$assisment[2]=="Mobile"){ ?>
-                                        <input type="checkbox" name="assessment[]" 
-                                       value="Mobile" checked="checked">Mobile                                   <?php } else {?>  
-                                        <input type="checkbox" name="assessment[]" 
+                                        <input type="checkbox" name="assessment[]"
+                                       value="Mobile" checked="checked">Mobile                                   <?php } else {?>
+                                        <input type="checkbox" name="assessment[]"
                                        value="Mobile" >Mobile
-                                   <?php } ?>    
+                                   <?php } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
                                     <?php if(@$assisment[3]=="Physical"){ ?>
-                                        <input type="checkbox" name="assessment[]" 
+                                        <input type="checkbox" name="assessment[]"
                                         value="Physical" checked="checked">Physical
                                      <?php } else {?>
-                                        <input type="checkbox" name="assessment[]" 
-                                        value="Physical">Physical 
+                                        <input type="checkbox" name="assessment[]"
+                                        value="Physical">Physical
                                      <?php } ?>                                    </label>
                                     <label class="checkbox-inline">
                                     <?php if(@$assisment[4]=="Social Eng"){ ?>
-                                        <input type="checkbox" name="assessment[]" 
+                                        <input type="checkbox" name="assessment[]"
                                         value="Social Eng" checked="checked">Social Eng
                                     <?php } else {?>
-                                        <input type="checkbox" name="assessment[]" 
-                                        value="Social Eng">Social Eng                                    
-										<?php } ?>    
+                                        <input type="checkbox" name="assessment[]"
+                                        value="Social Eng">Social Eng
+                                                  <?php } ?>
                                     </label>
                                     <label class="checkbox-inline">
                                     <?php if(@$assisment[5]=="War Dialing"){ ?>
                                         <input type="checkbox" name="assessment[]" value="War Dialing" checked="checked">War Dialing
                                     <?php } else {?>
-										<input type="checkbox" name="assessment[]" value="War Dialing" >War Dialing  
+                                                  <input type="checkbox" name="assessment[]" value="War Dialing" >War Dialing
                                     <?php } ?>
-                                    <?php if(@$assisment[6]=="Web"){ ?>                                          
+                                    <?php if(@$assisment[6]=="Web"){ ?>
                                     </label>
                                     <label class="checkbox-inline">
                                         <input type="checkbox" name="assessment[]" value="Web" checked="checked">Web
-                                    <?php } else {?> 
-									<input type="checkbox" name="assessment[]" 
+                                    <?php } else {?>
+                                             <input type="checkbox" name="assessment[]"
                                     value="Web" >Web
-                                    <?php } ?>                                       
+                                    <?php } ?>
                                     </label>
                                     <?php if(@$assisment[7]=="Wireless"){ ?>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" 
+                                        <input type="checkbox" name="assessment[]"
                                         value="Wireless" checked="checked">Wireless
-                                    <?php } else {?> 
-                                    <input type="checkbox" name="assessment[]" 
-                                        value="Wireless" >Wireless  
-                                    <?php } ?>        
+                                    <?php } else {?>
+                                    <input type="checkbox" name="assessment[]"
+                                        value="Wireless" >Wireless
+                                    <?php } ?>
                                     </label>
                                 </div>
                             </div>
@@ -1146,7 +1143,7 @@ elseif (isset($_GET['update'])) {
                                 $query1 = "SELECT * FROM clients where clientID=".$row['client'];
                                 $result1 = mysqli_query($connection, $query1);
                                 $row1 = mysqli_fetch_array($result);
-                            ?>                                    
+                            ?>
                                         <option value="<?php echo $row['client'] ?>"><?php echo $row1['client'] ?></option>
                                         <?php
                                             while($c = mysqli_fetch_assoc($result)) {
@@ -1201,13 +1198,12 @@ elseif (isset($_GET['update'])) {
                                 $result = mysqli_query($connection, $query);
                                 confirm_query($result);
                             ?>
-                            
 
                             <?php
                                 $query11 = "SELECT * FROM employees where employeeID=".$row['accountmgr'];
                                 $result11 = mysqli_query($connection, $query11);
                                 $row11 = @mysqli_fetch_array($result11);
-                            ?>                            
+                            ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Account Mgr</label>
@@ -1354,7 +1350,7 @@ elseif (isset($_GET['update'])) {
                     <div role="tabpanel" class="tab-pane" id="report"><!-- Need to think about this layout. --></div>
 
                     <!-- External panel -->
-                    <div role="tabpanel" class="tab-pane" id="external"><!-- 
+                    <div role="tabpanel" class="tab-pane" id="external"><!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1420,7 +1416,7 @@ elseif (isset($_GET['update'])) {
                     </div>
 
                     <!-- Mobile panel -->
-                    <div role="tabpanel" class="tab-pane" id="mobile"><!-- 
+                    <div role="tabpanel" class="tab-pane" id="mobile"><!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1439,7 +1435,7 @@ elseif (isset($_GET['update'])) {
                     </div>
 
                     <!-- Physical panel -->
-                    <div role="tabpanel" class="tab-pane" id="physical"><!-- 
+                    <div role="tabpanel" class="tab-pane" id="physical"><!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1458,7 +1454,7 @@ elseif (isset($_GET['update'])) {
                     </div>
 
                     <!-- Social Eng panel -->
-                    <div role="tabpanel" class="tab-pane" id="social-eng"> <!-- 
+                    <div role="tabpanel" class="tab-pane" id="social-eng"> <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1477,7 +1473,7 @@ elseif (isset($_GET['update'])) {
                     </div>
 
                     <!-- War Dail panel -->
-                    <div role="tabpanel" class="tab-pane" id="war-dail"><!-- 
+                    <div role="tabpanel" class="tab-pane" id="war-dail"><!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1496,7 +1492,7 @@ elseif (isset($_GET['update'])) {
                     </div>
 
                     <!-- Web panel -->
-                    <div role="tabpanel" class="tab-pane" id="web"><!-- 
+                    <div role="tabpanel" class="tab-pane" id="web"><!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1514,7 +1510,7 @@ elseif (isset($_GET['update'])) {
                         </form> -->
                     </div>
 
-                    <!-- Wireless panel --><!-- 
+                    <!-- Wireless panel --><!--
                     <div role="tabpanel" class="tab-pane" id="wireless">
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">

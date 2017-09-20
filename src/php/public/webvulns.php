@@ -38,13 +38,13 @@ $(document).ready(function(){
                 data:'findingID='+findingID,
                 success:function(html){
                     var res = html.split(" ");
-					//alert(res[0]);
-                    //$('#severity').val(res[0]);
-					var o = new Option(res[0], res[0]);
-					/// jquerify the DOM object 'o' so we can use the html method
-					$(o).html(res[0]);
-					$("#severity").append(o);					
-$('#severity').val(res[0]);				
+                        //alert(res[0]);
+                        //$('#severity').val(res[0]);
+                        var o = new Option(res[0], res[0]);
+                        /// jquerify the DOM object 'o' so we can use the html method
+                        $(o).html(res[0]);
+                        $("#severity").append(o);
+$('#severity').val(res[0]);
                     $('#description').val(res[1]);
                     $('#remediation').val(res[2]);
                     $('#see_also').val(res[3]);
@@ -296,7 +296,7 @@ elseif (isset($_GET['read'])) {
                     <label class="col-sm-2 control-label">Finding Category</label>
                     <div class="col-sm-5">
                     <?php 
-                    $sql = "select * from findings where findingID=".$row['findingID']; 
+                    $sql = "select * from findings where findingID=".$row['findingID'];
                     $result = mysqli_query($connection,$sql);
                     $find = mysqli_fetch_array($result);
                     ?>
