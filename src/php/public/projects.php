@@ -16,10 +16,10 @@ $(document).ready(function(){
                     var res = html.split(" ");
 
                     $('#contact').val(res[0]);
-                    $('#employee1').val(res[1]);
-                    $('#employee2').val(res[2]);
-                    $('#employee3').val(res[3]);
-                    $('#employee4').val(res[4]);
+                    $('#consultant1').val(res[1]);
+                    $('#consultant2').val(res[2]);
+                    $('#consultant3').val(res[3]);
+                    $('#consultant4').val(res[4]);
 
                 }
             });
@@ -40,14 +40,14 @@ $(document).ready(function(){
                 url:'ajaxHost.php',
                 data:'country_id='+countryID,
                 success:function(html){
-                    var res = html.split(" ");
 
-                    $('#city').val(res[0]);
-                    $('#state').val(res[1]);
-                    $('#zip').val(res[2]);
-                    $('#phone').val(res[3]);
-                    $('#web').val(res[4]);
-
+                    var res = html.split(",");
+                    $('#address').val(res[0]);
+                    $('#city').val(res[1]);
+                    $('#state').val(res[2]);
+                    $('#zip').val(res[3]);
+                    $('#phone').val(res[4]);
+                    $('#web').val(res[5]);
                 }
             });
         }else{
@@ -89,14 +89,14 @@ foreach($_POST['assessment'] as $selected){
 $ass .= $selected.",";
 }
 
-   $query = "INSERT INTO projects (modified, project, assisment, client, address1, city, state, zip,  accountmgr, projectmgr, employee1, employee2, employee3, employee4, kickoff, start, finish, status,  notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[employee1]', '$_POST[employee2]', '$_POST[employee3]', '$_POST[employee4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[current_status]', '$_POST[notes]')";
+   $query = "INSERT INTO projects (modified, project, assisment, client, address1, city, state, zip,  accountmgr, projectmgr, consultant1, consultant2, consultant3, consultant4, kickoff, start, finish, status,  notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[consultant1]', '$_POST[consultant2]', '$_POST[consultant3]', '$_POST[consultant4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[current_status]', '$_POST[notes]')";
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
 
 if (isset($_POST['update'])) {
     // UPDATE RECORD.
-    $query = "UPDATE projects SET modified=now(), project='$_POST[project]', assessment='$_POST[assessment]', clientID='$_POST[clientID]', address='$_POST[address]', city='$_POST[city]', state='$_POST[state]', zip='$_POST[zip]', phone='$_POST[phone]', web='$_POST[web]', accountmgr='$_POST[accountmgr]', projectmgr='$_POST[projectmgr]', employee1='$_POST[employee1]', employee2='$_POST[employee2]', employee3='$_POST[employee3]', employee4='$_POST[employee4]', kickoff='$_POST[kickoff]', start_date='$_POST[start_date]', finish='$_POST[finish]', status='$_POST[status]', due='$_POST[due]', notes='$_POST[notes]' WHERE projectID=".intval($_POST['update']);
+    $query = "UPDATE projects SET modified=now(), project='$_POST[project]', assessment='$_POST[assessment]', clientID='$_POST[clientID]', address='$_POST[address]', city='$_POST[city]', state='$_POST[state]', zip='$_POST[zip]', phone='$_POST[phone]', web='$_POST[web]', accountmgr='$_POST[accountmgr]', projectmgr='$_POST[projectmgr]', consultant1='$_POST[consultant1]', consultant2='$_POST[consultant2]', consultant3='$_POST[consultant3]', consultant4='$_POST[consultant4]', kickoff='$_POST[kickoff]', start_date='$_POST[start_date]', finish='$_POST[finish]', status='$_POST[status]', due='$_POST[due]', notes='$_POST[notes]' WHERE projectID=".intval($_POST['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
@@ -276,30 +276,30 @@ if (isset($_GET['create'])) {
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Employee 1</label>
+                                <label class="col-sm-2 control-label">Consultant 1</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="employee1" placeholder="Employee 1" id="employee1" />
+                                    <input type="text" class="form-control" name="consultant1" placeholder="Consultant 1" id="consultant1" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Employee 2</label>
+                                <label class="col-sm-2 control-label">Consultant 2</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="employee2" placeholder="Employee 2" id="employee2" />
+                                    <input type="text" class="form-control" name="consultant2" placeholder="Consultant 2" id="consultant2" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Employee 3</label>
+                                <label class="col-sm-2 control-label">Consultant 3</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="employee3" placeholder="Employee 3" id="employee3" />
+                                    <input type="text" class="form-control" name="consultant3" placeholder="Consultant 3" id="consultant3" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Employee 4</label>
+                                <label class="col-sm-2 control-label">Consultant 4</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="employee4" placeholder="Employee 4" id="employee4" />
+                                    <input type="text" class="form-control" name="consultant4" placeholder="Consultant 4" id="consultant4" />
                                 </div>
                             </div>
 
@@ -365,10 +365,11 @@ if (isset($_GET['create'])) {
                     </div>
 
                     <!-- Report panel -->
-                    <div role="tabpanel" class="tab-pane" id="report">Need to think about this layout.</div>
+                    <div role="tabpanel" class="tab-pane" id="report"><!--Need to think about this layout.--></div>
 
                     <!-- External panel -->
                     <div role="tabpanel" class="tab-pane" id="external">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -398,10 +399,12 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
+                        -->
                     </div>
 
                     <!-- Internal panel -->
                     <div role="tabpanel" class="tab-pane" id="internal">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -431,10 +434,12 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
+                         -->
                     </div>
 
                     <!-- Mobile panel -->
                     <div role="tabpanel" class="tab-pane" id="mobile">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -450,10 +455,12 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
+                        -->
                     </div>
 
                     <!-- Physical panel -->
                     <div role="tabpanel" class="tab-pane" id="physical">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -469,10 +476,12 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
+                        -->
                     </div>
 
                     <!-- Social Eng panel -->
                     <div role="tabpanel" class="tab-pane" id="social-eng">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -488,10 +497,12 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
+                         -->
                     </div>
 
                     <!-- War Dail panel -->
                     <div role="tabpanel" class="tab-pane" id="war-dail">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -507,10 +518,12 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
+                         -->
                     </div>
 
                     <!-- Web panel -->
                     <div role="tabpanel" class="tab-pane" id="web">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -526,10 +539,12 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
+                         -->
                     </div>
 
                     <!-- Wireless panel -->
                     <div role="tabpanel" class="tab-pane" id="wireless">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -545,6 +560,7 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
+                         -->
                     </div>
                 </div>
             </div>
@@ -706,30 +722,30 @@ elseif (isset($_GET['read'])) {
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Employee 1</label>
+                                <label class="col-sm-2 control-label">Consultant 1</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="employee1" value="<?php echo $row['employee1'] ?>" readonly>
+                                    <input type="text" class="form-control" name="consultant1" value="<?php echo $row['consultant1'] ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Employee 2</label>
+                                <label class="col-sm-2 control-label">Consultant 2</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="employee2" value="<?php echo $row['employee2'] ?>" readonly>
+                                    <input type="text" class="form-control" name="consultant2" value="<?php echo $row['consultant2'] ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                               <label class="col-sm-2 control-label">Employee 3</label>
+                               <label class="col-sm-2 control-label">Consultant 3</label>
                                <div class="col-sm-3">
-                                   <input type="text" class="form-control" name="employee3" value="<?php echo $row['employee3'] ?>" readonly>
+                                   <input type="text" class="form-control" name="consultant3" value="<?php echo $row['consultant3'] ?>" readonly>
                                </div>
                            </div>
 
                            <div class="form-group">
-                               <label class="col-sm-2 control-label">Employee 4</label>
+                               <label class="col-sm-2 control-label">Consultant 4</label>
                                <div class="col-sm-3">
-                                   <input type="text" class="form-control" name="employee4" value="<?php echo $row['employee4'] ?>" readonly>
+                                   <input type="text" class="form-control" name="consultant4" value="<?php echo $row['consultant4'] ?>" readonly>
                                </div>
                            </div>
 
@@ -1140,30 +1156,30 @@ elseif (isset($_GET['update'])) {
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Employee 1</label>
+                                <label class="col-sm-2 control-label">Consultant 1</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="employee1" value="<?php echo $row['employee1'] ?>">
+                                    <input type="text" class="form-control" name="consultant1" value="<?php echo $row['consultant1'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Employee 2</label>
+                                <label class="col-sm-2 control-label">Consultant 2</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="employee2" value="<?php echo $row['employee2'] ?>">
+                                    <input type="text" class="form-control" name="consultant2" value="<?php echo $row['consultant2'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Employee 3</label>
+                                <label class="col-sm-2 control-label">Consultant 3</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="employee3" value="<?php echo $row['employee3'] ?>">
+                                    <input type="text" class="form-control" name="consultant3" value="<?php echo $row['consultant3'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Employee 4</label>
+                                <label class="col-sm-2 control-label">Consultant 4</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="employee4" value="<?php echo $row['employee4'] ?>">
+                                    <input type="text" class="form-control" name="consultant4" value="<?php echo $row['consultant4'] ?>">
                                 </div>
                             </div>
 
@@ -1445,7 +1461,6 @@ else {
             <th style="background-color:#E8E8E8;"></th>
             <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Project</th>
             <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Client</th>
-            <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Kickoff</th>
             <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Start</th>
             <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Status</th>
             <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">Modified</th>
@@ -1467,7 +1482,6 @@ else {
                     <td width="50">'.'<a class="btn btn-warning" href="projects.php?update='.$row['projectID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                     <td width="300">'.$row["project"].'</td>
                     <td width="300">'.$client['client'].'</td>
-                    <td width="125">'.$row["kickoff"].'</td>
                     <td width="125">'.$row["start"].'</td>
                     <td width="125">'.$row["status"].'</td>
                     <td width="175">'.$myDateFormat.'</td>
