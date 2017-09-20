@@ -38,8 +38,13 @@ $(document).ready(function(){
                 data:'findingID='+findingID,
                 success:function(html){
                     var res = html.split(" ");
-
-                    $('#severity').val(res[0]);
+					//alert(res[0]);
+                    //$('#severity').val(res[0]);
+					var o = new Option(res[0], res[0]);
+					/// jquerify the DOM object 'o' so we can use the html method
+					$(o).html(res[0]);
+					$("#severity").append(o);					
+$('#severity').val(res[0]);				
                     $('#description').val(res[1]);
                     $('#remediation').val(res[2]);
                     $('#see_also').val(res[3]);
