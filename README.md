@@ -5,7 +5,7 @@ Follow on Twitter [![Twitter Follow](https://img.shields.io/twitter/follow/disco
 * Manage information for a pentest including clients, contacts, employees, findings, projects, scoping, and vulnerabilities.
 
 ### Requirements
-* Install XAMPP (PHP 5.6.31): https://www.apachefriends.org/download.html
+* Install XAMPP (PHP 7.1.9): https://www.apachefriends.org/download.html
 
 ### OS X Setup
 * Use /Applications/XAMPP/manager-osx to start MySQL and Apache.
