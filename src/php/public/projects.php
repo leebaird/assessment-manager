@@ -67,7 +67,8 @@ if (isset($_POST['create'])) {
 
     // Check for blank field.
     $project = trim($_POST['project']);
-    if (empty($project)) { ?>
+    if (empty($project)) {
+        ?>
         <br>
         <button class="btn btn-danger" type="button"><strong>Warning!</strong> You must enter a project.</button>
         <br><br>
@@ -76,7 +77,8 @@ if (isset($_POST['create'])) {
     }
 
     $clientID = trim($_POST['clientID']);
-    if (empty($clientID)) { ?>
+    if (empty($clientID)) {
+        ?>
         <br>
         <button class="btn btn-danger" type="button"><strong>Warning!</strong> You must enter a client.</button>
         <br><br>
@@ -84,11 +86,11 @@ if (isset($_POST['create'])) {
         <?php exit;
     }
 
-$ass="";
-foreach($_POST['assessment'] as $selected){
-$ass .= $selected.",";
-}
-   $query = "INSERT INTO projects (modified, project, assisment, client, address1, city, state, zip,  accountmgr, projectmgr, consultant1, consultant2, consultant3, consultant4, kickoff, start, finish, status,  notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[consultant1]', '$_POST[consultant2]', '$_POST[consultant3]', '$_POST[consultant4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[current_status]', '$_POST[notes]')";
+    $ass="";
+    foreach ($_POST['assessment'] as $selected) {
+        $ass .= $selected.",";
+    }
+    $query = "INSERT INTO projects (modified, project, assisment, client, address1, city, state, zip,  accountmgr, projectmgr, consultant1, consultant2, consultant3, consultant4, kickoff, start, finish, status,  notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[consultant1]', '$_POST[consultant2]', '$_POST[consultant3]', '$_POST[consultant4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[current_status]', '$_POST[notes]')";
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
@@ -96,12 +98,11 @@ $ass .= $selected.",";
 if (isset($_POST['update'])) {
 
      //if(isset($_POST['assessment'])){
-     $ass="";
-     foreach($_POST['assessment'] as $selected){
-     $ass .= $selected.",";
-     //}
-
-}
+    $ass="";
+    foreach ($_POST['assessment'] as $selected) {
+        $ass .= $selected.",";
+        //}
+    }
     // UPDATE RECORD.
     @$query = "UPDATE projects SET modified=now(), project='$_POST[project]', assisment='$ass', client='$_POST[clientID]', address1='$_POST[address]', city='$_POST[city]', state='$_POST[state]', zip='$_POST[zip]', accountmgr='$_POST[employeeID]', projectmgr='$_POST[projectmgr]', consultant1='$_POST[consultant1]', consultant2='$_POST[consultant2]', consultant3='$_POST[consultant3]', consultant4='$_POST[consultant4]', kickoff='$_POST[kickoff]', start='$_POST[start_date]', finish='$_POST[finish]', status='$_POST[current_status]', notes='$_POST[notes]' WHERE projectID=".intval($_POST['update']);
 
@@ -150,9 +151,8 @@ if (isset($_GET['create'])) {
 
                             <?php
                                 $query = "SELECT * FROM clients ORDER BY client ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+    $result = mysqli_query($connection, $query);
+    confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Assessment</label>
@@ -190,13 +190,12 @@ if (isset($_GET['create'])) {
                                     <select class="form-control" name="clientID"  id="clientID">
                                         <option value=""></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c['clientID'].'">'.$c['client'].'</option>';
                                             }
 
-                                            // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -239,9 +238,8 @@ if (isset($_GET['create'])) {
 
                             <?php
                                 $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+    $result = mysqli_query($connection, $query);
+    confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Account Mgr</label>
@@ -249,22 +247,20 @@ if (isset($_GET['create'])) {
                                     <select class="form-control" name="accountmgr" id="accountmgr">
                                         <option value=""></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
                                             }
 
-                                            // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
 
                             <?php
                                 $query = "SELECT * FROM employees WHERE projectmgr='Yes' ORDER BY employee ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+    $result = mysqli_query($connection, $query);
+    confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Project Mgr</label>
@@ -272,13 +268,12 @@ if (isset($_GET['create'])) {
                                     <select class="form-control" name="projectmgr"  id="projectmgr">
                                         <option value=""></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
                                             }
 
-                                            // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -407,7 +402,7 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
+                    -->
                     </div>
 
                     <!-- Internal panel -->
@@ -442,7 +437,7 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                         -->
+                    -->
                     </div>
 
                     <!-- Mobile panel -->
@@ -463,7 +458,7 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
+                    -->
                     </div>
 
                     <!-- Physical panel -->
@@ -484,7 +479,7 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
+                    -->
                     </div>
 
                     <!-- Social Eng panel -->
@@ -505,7 +500,7 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                         -->
+                     -->
                     </div>
 
                     <!-- War Dail panel -->
@@ -526,7 +521,7 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                         -->
+                    -->
                     </div>
 
                     <!-- Web panel -->
@@ -547,7 +542,7 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                         -->
+                    -->
                     </div>
 
                     <!-- Wireless panel -->
@@ -568,17 +563,14 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                         -->
+                    -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <?php
-}
-
-
-elseif (isset($_GET['read'])) {
+} elseif (isset($_GET['read'])) {
     // READ RECORD
     $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['read']);
     $result = mysqli_query($connection, $query);
@@ -600,8 +592,7 @@ elseif (isset($_GET['read'])) {
     mysqli_free_result($result2);
 
     // Get the page number or set it to 1 if no page is set.
-    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
-    ?>
+    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
 
     <ul class="pager">
         <?php if ($read > 1): ?>
@@ -646,28 +637,44 @@ elseif (isset($_GET['read'])) {
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-10">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">External
+                                        <input type="checkbox" name="assessment" value="<?php foreach ($assessment as $item) {
+        echo '$item';
+    } ?>">External
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Internal
+                                        <input type="checkbox" name="assessment" value="<?php foreach ($assessment as $item) {
+        echo '$item';
+    } ?>">Internal
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Mobile
+                                        <input type="checkbox" name="assessment" value="<?php foreach ($assessment as $item) {
+        echo '$item';
+    } ?>">Mobile
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Physical
+                                        <input type="checkbox" name="assessment" value="<?php foreach ($assessment as $item) {
+        echo '$item';
+    } ?>">Physical
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Social Eng
+                                        <input type="checkbox" name="assessment" value="<?php foreach ($assessment as $item) {
+        echo '$item';
+    } ?>">Social Eng
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">War Dialing
+                                        <input type="checkbox" name="assessment" value="<?php foreach ($assessment as $item) {
+        echo '$item';
+    } ?>">War Dialing
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Web
+                                        <input type="checkbox" name="assessment" value="<?php foreach ($assessment as $item) {
+        echo '$item';
+    } ?>">Web
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment" value="<?php foreach($assessment as $item) echo '$item' ?>">Wireless
+                                        <input type="checkbox" name="assessment" value="<?php foreach ($assessment as $item) {
+        echo '$item';
+    } ?>">Wireless
                                     </label>
                                 </div>
                             </div>
@@ -811,36 +818,37 @@ elseif (isset($_GET['read'])) {
 
                     <!-- External panel -->
                     <div role="tabpanel" class="tab-pane" id="external">
-
-                        <!-- <form class="form-horizontal" action="projects.php" method="post">
+                    <!-- 
+                        <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="ext_objective" rows="2" readonly><?php// //echo $row['ext_objective'] ?></textarea>
+                                    <textarea class="form-control" name="ext_objective" rows="2" readonly><?php// //echo $row['ext_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="ext_targets" value="<?php// //echo $row['ext_targets'] ?>" readonly>
+                                    <input type="text" class="form-control" name="ext_targets" value="<?php// //echo $row['ext_targets']?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="ext_exclude" value="<?php// //echo $row['ext_exclude'] ?>" readonly>
+                                    <input type="text" class="form-control" name="ext_exclude" value="<?php// //echo $row['ext_exclude']?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="ext_notes" rows="6" readonly><?php// //echo $row['ext_notes'] ?></textarea>
+                                    <textarea class="form-control" name="ext_notes" rows="6" readonly><?php// //echo $row['ext_notes']?></textarea>
                                 </div>
                             </div>
-                        </form>-->
+                        </form>
+                    -->
                     </div>
 
                     <!-- Internal panel -->
@@ -850,32 +858,32 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="int_objective" rows="2" readonly><?php// echo $row['int_objective'] ?></textarea>
+                                    <textarea class="form-control" name="int_objective" rows="2" readonly><?php// echo $row['int_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="int_targets" value="<?php// echo $row['int_targets'] ?>" readonly>
+                                    <input type="text" class="form-control" name="int_targets" value="<?php// echo $row['int_targets']?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="int_exclude" value="<?php// echo $row['int_exclude'] ?>" readonly>
+                                    <input type="text" class="form-control" name="int_exclude" value="<?php// echo $row['int_exclude']?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="int_notes" rows="6" readonly><?php// echo $row['int_notes'] ?></textarea>
+                                    <textarea class="form-control" name="int_notes" rows="6" readonly><?php// echo $row['int_notes']?></textarea>
                                 </div>
                             </div>
                         </form>
-                         -->
+                    -->
                     </div>
 
                     <!-- Mobile panel -->
@@ -885,59 +893,60 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="mob_objective" rows="2" readonly><?php// echo $row['mob_objective'] ?></textarea>
+                                    <textarea class="form-control" name="mob_objective" rows="2" readonly><?php// echo $row['mob_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="mob_notes" rows="6" readonly><?php// //echo $row['mob_notes'] ?></textarea>
+                                    <textarea class="form-control" name="mob_notes" rows="6" readonly><?php// //echo $row['mob_notes']?></textarea>
                                 </div>
                             </div>
                         </form>
-                         -->
+                    -->
                     </div>
 
                     <!-- Physical panel -->
                     <div role="tabpanel" class="tab-pane" id="physical">
-                    <!-- 
-                            <form class="form-horizontal" action="projects.php" method="post">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Objective</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" name="phy_objective" rows="2" readonly><?php// echo $row['phy_objective'] ?></textarea>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Notes</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" name="phy_notes" rows="6" readonly><?php// echo $row['phy_notes'] ?></textarea>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- Social Eng panel -->
                     <!--
-                    <div role="tabpanel" class="tab-pane" id="social-eng">
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="se_objective" rows="2" readonly><?php// echo $row['se_objective'] ?></textarea>
+                                    <textarea class="form-control" name="phy_objective" rows="2" readonly><?php// echo $row['phy_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="se_notes" rows="6" readonly><?php// echo $row['se_notes'] ?></textarea>
+                                    <textarea class="form-control" name="phy_notes" rows="6" readonly><?php// echo $row['phy_notes']?></textarea>
                                 </div>
                             </div>
                         </form>
-                        -->
+                    -->
+                    </div>
+
+                    <!-- Social Eng panel -->
+                    <div role="tabpanel" class="tab-pane" id="social-eng">
+                    <!--
+                        <form class="form-horizontal" action="projects.php" method="post">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Objective</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="se_objective" rows="2" readonly><?php// echo $row['se_objective']?></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Notes</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="se_notes" rows="6" readonly><?php// echo $row['se_notes']?></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    -->
                     </div>
 
                     <!-- War Dailing panel -->
@@ -947,18 +956,18 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="war_objective" rows="2" readonly><?php// echo $row['war_objective'] ?></textarea>
+                                    <textarea class="form-control" name="war_objective" rows="2" readonly><?php// echo $row['war_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="war_notes" rows="6" readonly><?php// echo $row['war_notes'] ?></textarea>
+                                    <textarea class="form-control" name="war_notes" rows="6" readonly><?php// echo $row['war_notes']?></textarea>
                                 </div>
                             </div>
                         </form>
-                        -->
+                    -->
                     </div>
 
                     <!-- Web panel -->
@@ -968,18 +977,18 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="web_objective" rows="2" readonly><?php// echo $row['web_objective'] ?></textarea>
+                                    <textarea class="form-control" name="web_objective" rows="2" readonly><?php// echo $row['web_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="web_notes" rows="6" readonly><?php// echo $row['web_notes'] ?></textarea>
+                                    <textarea class="form-control" name="web_notes" rows="6" readonly><?php// echo $row['web_notes']?></textarea>
                                 </div>
                             </div>
                         </form>
-                        -->
+                    -->
                     </div>
 
                     <!-- Wireless panel -->
@@ -989,35 +998,30 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="wire_objective" rows="2" readonly><?php// echo $row['wire_objective'] ?></textarea>
+                                    <textarea class="form-control" name="wire_objective" rows="2" readonly><?php// echo $row['wire_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="wire_notes" rows="6" readonly><?php// echo $row['wire_notes'] ?></textarea>
+                                    <textarea class="form-control" name="wire_notes" rows="6" readonly><?php// echo $row['wire_notes']?></textarea>
                                 </div>
                             </div>
                         </form>
-                        -->
+                    -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <?php
-}
-
-
-elseif (isset($_GET['update'])) {
+} elseif (isset($_GET['update'])) {
     // UPDATE RECORD.
     $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
-    $row = mysqli_fetch_assoc($result);
-
-    ?>
+    $row = mysqli_fetch_assoc($result); ?>
 
     <div class="container">
         <div class="panel panel-primary">
@@ -1053,106 +1057,140 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                             <?php
                                    //print $row['assisment'];
-
-                                   $assisment = explode(",",$row['assisment']);
-                                   ?>
+                                   $assisment = explode(",", $row['assisment']); ?>
 
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-10">
                                     <label class="checkbox-inline">
-                                    <?php if(@$assisment[0]=="External"){ ?>
+                                    <?php if (@$assisment[0]=="External") {
+                                       ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="External" checked="checked">External
-                                    <?php } else {?> 
+                                    <?php
+                                   } else {
+                                       ?>
                                          <input type="checkbox" name="assessment[]"
                                          value="External" >External
-                                    <?php } ?>
+                                    <?php
+                                   } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
-                                    <?php if(@$assisment[1]=="Internal"){ ?>
+                                    <?php if (@$assisment[1]=="Internal") {
+                                       ?>
                                     
                                         <input type="checkbox" name="assessment[]"
                                         value="Internal" checked="checked">Internal
-                                    <?php } else {?>
+                                    <?php
+                                   } else {
+                                       ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Internal" >Internal
-                                    <?php } ?>
+                                    <?php
+                                   } ?>
 
-                                    <?php if(@$assisment[2]=="Mobile"){ ?>
+                                    <?php if (@$assisment[2]=="Mobile") {
+                                       ?>
                                         <input type="checkbox" name="assessment[]"
-                                       value="Mobile" checked="checked">Mobile                                   <?php } else {?>
+                                        value="Mobile" checked="checked">Mobile
+                                    <?php
+                                   } else {
+                                       ?>
                                         <input type="checkbox" name="assessment[]"
-                                       value="Mobile" >Mobile
-                                   <?php } ?>
+                                        value="Mobile" >Mobile
+                                    <?php
+                                   } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(@$assisment[3]=="Physical"){ ?>
+                                    <?php if (@$assisment[3]=="Physical") {
+                                       ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Physical" checked="checked">Physical
-                                     <?php } else {?>
+                                    <?php
+                                   } else {
+                                       ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Physical">Physical
-                                     <?php } ?>                                    </label>
+                                    <?php
+                                   } ?>
+                                    </label>
+
                                     <label class="checkbox-inline">
-                                    <?php if(@$assisment[4]=="Social Eng"){ ?>
+                                    <?php if (@$assisment[4]=="Social Eng") {
+                                       ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Social Eng" checked="checked">Social Eng
-                                    <?php } else {?>
+                                    <?php
+                                   } else {
+                                       ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Social Eng">Social Eng
-                                                  <?php } ?>
+                                    <?php
+                                   } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
-                                    <?php if(@$assisment[5]=="War Dialing"){ ?>
+                                    <?php if (@$assisment[5]=="War Dialing") {
+                                       ?>
                                         <input type="checkbox" name="assessment[]" value="War Dialing" checked="checked">War Dialing
-                                    <?php } else {?>
-                                                  <input type="checkbox" name="assessment[]" value="War Dialing" >War Dialing
-                                    <?php } ?>
-                                    <?php if(@$assisment[6]=="Web"){ ?>
+                                    <?php
+                                   } else {
+                                       ?>
+                                        <input type="checkbox" name="assessment[]" value="War Dialing" >War Dialing
+                                    <?php
+                                   } ?>
+                                    <?php if (@$assisment[6]=="Web") {
+                                       ?>
                                     </label>
+
                                     <label class="checkbox-inline">
                                         <input type="checkbox" name="assessment[]" value="Web" checked="checked">Web
-                                    <?php } else {?>
-                                             <input type="checkbox" name="assessment[]"
+                                    <?php
+                                   } else {
+                                       ?>
+                                        <input type="checkbox" name="assessment[]"
                                     value="Web" >Web
-                                    <?php } ?>
+                                    <?php
+                                   } ?>
                                     </label>
-                                    <?php if(@$assisment[7]=="Wireless"){ ?>
+
+                                    <?php if (@$assisment[7]=="Wireless") {
+                                       ?>
                                     <label class="checkbox-inline">
                                         <input type="checkbox" name="assessment[]"
                                         value="Wireless" checked="checked">Wireless
-                                    <?php } else {?>
+                                    <?php
+                                   } else {
+                                       ?>
                                     <input type="checkbox" name="assessment[]"
                                         value="Wireless" >Wireless
-                                    <?php } ?>
+                                    <?php
+                                   } ?>
                                     </label>
                                 </div>
                             </div>
 
                             <?php
                                 $query = "SELECT * FROM clients ORDER BY client ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+    $result = mysqli_query($connection, $query);
+    confirm_query($result); ?>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Client</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" name="clientID" id="clientID">
                             <?php
                                 $query1 = "SELECT * FROM clients where clientID=".$row['client'];
-                                $result1 = mysqli_query($connection, $query1);
-                                $row1 = mysqli_fetch_array($result);
-                            ?>
-                                        <option value="<?php echo $row['client'] ?>"><?php echo $row1['client'] ?></option>
+    $result1 = mysqli_query($connection, $query1);
+    $row1 = mysqli_fetch_array($result); ?>
+                                    <option value="<?php echo $row['client'] ?>"><?php echo $row1['client'] ?></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c["clientID"].'"'.($row['client'] == $c['client'] ? ' selected' : '').'>'.$c["client"].'</option>';
                                             }
 
-                                            // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -1195,15 +1233,13 @@ elseif (isset($_GET['update'])) {
 
                             <?php
                                 $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+    $result = mysqli_query($connection, $query);
+    confirm_query($result); ?>
 
                             <?php
                                 $query11 = "SELECT * FROM employees where employeeID=".$row['accountmgr'];
-                                $result11 = mysqli_query($connection, $query11);
-                                $row11 = @mysqli_fetch_array($result11);
-                            ?>
+    $result11 = mysqli_query($connection, $query11);
+    $row11 = @mysqli_fetch_array($result11); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Account Mgr</label>
@@ -1211,42 +1247,38 @@ elseif (isset($_GET['update'])) {
                                     <select class="form-control" name="employeeID"  id="employeeID">
                                         <option value="<?php echo @$row11['employeeID'] ?>"><?php echo @$row11['employee'] ?></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c["employeeID"].'"'.($row['employeeID'] == $c['employeeID'] ? ' selected' : '').'>'.$c["employee"].'</option>';
                                             }
 
-                                            // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
 
                             <?php
                                 $query = "SELECT * FROM employees WHERE projectmgr='Yes' ORDER BY employee ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+    $result = mysqli_query($connection, $query);
+    confirm_query($result); ?>
 
                             <?php
                                 $query12 = "SELECT * FROM employees where employeeID=".$row['projectmgr'];
-                                $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12);
-                            ?>
-                            
+    $result12 = mysqli_query($connection, $query12);
+    $row12 = @mysqli_fetch_array($result12); ?>
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Project Mgr</label>
                                 <div class="col-sm-3">
                                     <select class="form-control" name="projectmgr" id="projectmgr">
                                         <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c["employeeID"].'"'.($row['employeeID'] == $c['employeeID'] ? ' selected' : '').'>'.$c["employee"].'</option>';
                                             }
 
-                                            // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -1308,21 +1340,20 @@ elseif (isset($_GET['update'])) {
                                 <div class="col-sm-2">
                                     <select class="form-control" name="current_status"  id="current_status">
                                         <option value="<?php echo $row['status']; ?>"><?php echo $row['status']; ?></option>
-                                        <option value="Scoping"<?php echo ($row['status'] == 'Scoping' ? " selected" : "")?>>Scoping</option>
-                                        <option value="In Progress"<?php echo ($row['status'] == 'In Progress' ? " selected" : "")?>>In Progress</option>
-                                        <option value="Reporting"<?php echo ($row['status'] == 'Reporting' ? " selected" : "")?>>Reporting</option>
-                                        <option value="Review"<?php echo ($row['status'] == 'Review' ? " selected" : "")?>>Review</option>
-                                        <option value="Delivered"<?php echo ($row['status'] == 'Delivered' ? " selected" : "")?>>Delivered</option>
-                                        <option value="Complete"<?php echo ($row['status'] == 'Complete' ? " selected" : "")?>>Complete</option>
+                                        <option value="Scoping"<?php echo($row['status'] == 'Scoping' ? " selected" : "")?>>Scoping</option>
+                                        <option value="In Progress"<?php echo($row['status'] == 'In Progress' ? " selected" : "")?>>In Progress</option>
+                                        <option value="Reporting"<?php echo($row['status'] == 'Reporting' ? " selected" : "")?>>Reporting</option>
+                                        <option value="Review"<?php echo($row['status'] == 'Review' ? " selected" : "")?>>Review</option>
+                                        <option value="Delivered"<?php echo($row['status'] == 'Delivered' ? " selected" : "")?>>Delivered</option>
+                                        <option value="Complete"<?php echo($row['status'] == 'Complete' ? " selected" : "")?>>Complete</option>
                                     </select>
                                 </div>
                             </div>
 
                             <?php
                                 $query = "SELECT * FROM clients ORDER BY client ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+    $result = mysqli_query($connection, $query);
+    confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Due</label>
@@ -1350,193 +1381,206 @@ elseif (isset($_GET['update'])) {
                     <div role="tabpanel" class="tab-pane" id="report"><!-- Need to think about this layout. --></div>
 
                     <!-- External panel -->
-                    <div role="tabpanel" class="tab-pane" id="external"><!--
+                    <div role="tabpanel" class="tab-pane" id="external">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="ext_objective" rows="2"><?php// echo $row['ext_objective'] ?></textarea>
+                                    <textarea class="form-control" name="ext_objective" rows="2"><?php// echo $row['ext_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="ext_targets" value="<?php// echo $row['ext_targets'] ?>">
+                                    <input type="text" class="form-control" name="ext_targets" value="<?php// echo $row['ext_targets']?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="ext_exclude" value="<?php// echo $row['ext_exclude'] ?>">
+                                    <input type="text" class="form-control" name="ext_exclude" value="<?php// echo $row['ext_exclude']?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="ext_notes" rows="6"><?php// echo $row['ext_notes'] ?></textarea>
+                                    <textarea class="form-control" name="ext_notes" rows="6"><?php// echo $row['ext_notes']?></textarea>
                                 </div>
                             </div>
-                        </form> -->
+                        </form>
+                    -->
                     </div>
 
                     <!-- Internal panel -->
-                    <!-- <div role="tabpanel" class="tab-pane" id="internal">
+                    <div role="tabpanel" class="tab-pane" id="internal">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="int_objective" rows="2"><?php// echo $row['int_objective'] ?></textarea>
+                                    <textarea class="form-control" name="int_objective" rows="2"><?php// echo $row['int_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="int_targets" value="<?php// echo $row['int_targets'] ?>">
+                                    <input type="text" class="form-control" name="int_targets" value="<?php// echo $row['int_targets']?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="int_exclude" value="<?php// echo $row['int_exclude'] ?>">
+                                    <input type="text" class="form-control" name="int_exclude" value="<?php// echo $row['int_exclude']?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="int_notes" rows="6"><?php// echo $row['int_notes'] ?></textarea>
+                                    <textarea class="form-control" name="int_notes" rows="6"><?php// echo $row['int_notes']?></textarea>
                                 </div>
                             </div>
-                        </form> -->
+                        </form>
+                    -->
                     </div>
 
                     <!-- Mobile panel -->
-                    <div role="tabpanel" class="tab-pane" id="mobile"><!--
+                    <div role="tabpanel" class="tab-pane" id="mobile">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="mob_objective" rows="2"><?php// echo $row['mob_objective'] ?></textarea>
+                                    <textarea class="form-control" name="mob_objective" rows="2"><?php// echo $row['mob_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="mob_notes" rows="6"><?php// echo $row['mob_notes'] ?></textarea>
+                                    <textarea class="form-control" name="mob_notes" rows="6"><?php// echo $row['mob_notes']?></textarea>
                                 </div>
                             </div>
-                        </form> -->
+                        </form>
+                    -->
                     </div>
 
                     <!-- Physical panel -->
-                    <div role="tabpanel" class="tab-pane" id="physical"><!--
+                    <div role="tabpanel" class="tab-pane" id="physical">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="phy_objective" rows="2"><?php// echo $row['phy_objective'] ?></textarea>
+                                    <textarea class="form-control" name="phy_objective" rows="2"><?php// echo $row['phy_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="phy_notes" rows="6"><?php// echo $row['phy_notes'] ?></textarea>
+                                    <textarea class="form-control" name="phy_notes" rows="6"><?php// echo $row['phy_notes']?></textarea>
                                 </div>
                             </div>
-                        </form> -->
+                        </form>
+                    -->
                     </div>
 
                     <!-- Social Eng panel -->
-                    <div role="tabpanel" class="tab-pane" id="social-eng"> <!--
+                    <div role="tabpanel" class="tab-pane" id="social-eng">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="se_objective" rows="2"><?php// echo $row['se_objective'] ?></textarea>
+                                    <textarea class="form-control" name="se_objective" rows="2"><?php// echo $row['se_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="se_notes" rows="6"><?php// echo $row['se_notes'] ?></textarea>
+                                    <textarea class="form-control" name="se_notes" rows="6"><?php// echo $row['se_notes']?></textarea>
                                 </div>
                             </div>
-                        </form> -->
+                        </form>
+                    -->
                     </div>
 
                     <!-- War Dail panel -->
-                    <div role="tabpanel" class="tab-pane" id="war-dail"><!--
+                    <div role="tabpanel" class="tab-pane" id="war-dail">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="war_objective" rows="2"><?php// echo $row['war_objective'] ?></textarea>
+                                    <textarea class="form-control" name="war_objective" rows="2"><?php// echo $row['war_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="war_notes" rows="6"><?php// echo $row['war_notes'] ?></textarea>
+                                    <textarea class="form-control" name="war_notes" rows="6"><?php// echo $row['war_notes']?></textarea>
                                 </div>
                             </div>
-                        </form> -->
+                        </form>
+                    -->
                     </div>
 
                     <!-- Web panel -->
-                    <div role="tabpanel" class="tab-pane" id="web"><!--
+                    <div role="tabpanel" class="tab-pane" id="web">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="web_objective" rows="2"><?php// echo $row['web_objective'] ?></textarea>
+                                    <textarea class="form-control" name="web_objective" rows="2"><?php// echo $row['web_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="web_notes" rows="6"><?php// echo $row['web_notes'] ?></textarea>
+                                    <textarea class="form-control" name="web_notes" rows="6"><?php// echo $row['web_notes']?></textarea>
                                 </div>
                             </div>
-                        </form> -->
+                        </form>
+                    -->
                     </div>
 
-                    <!-- Wireless panel --><!--
+                    <!-- Wireless panel -->
                     <div role="tabpanel" class="tab-pane" id="wireless">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="wire_objective" rows="2"><?php// echo $row['wire_objective'] ?></textarea>
+                                    <textarea class="form-control" name="wire_objective" rows="2"><?php// echo $row['wire_objective']?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="wire_notes" rows="6"><?php// echo $row['wire_notes'] ?></textarea>
+                                    <textarea class="form-control" name="wire_notes" rows="6"><?php// echo $row['wire_notes']?></textarea>
                                 </div>
                             </div>
-                        </form> -->
+                        </form>
+                    -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <?php
-}
-
-
-else {
+} else {
     // DISPLAY LIST OF RECORDS.
     ?>
     <br>
@@ -1548,8 +1592,7 @@ else {
         // Perform db query.
         $query = "SELECT * FROM projects ORDER BY project ASC";
         $result = mysqli_query($connection, $query);
-        confirm_query($result);
-    ?>
+        confirm_query($result); ?>
 
     <table style="width: auto;" class="table table-bordered table-condensed table-hover">
         <tr>
@@ -1564,7 +1607,7 @@ else {
         </tr>
 
         <?php
-            while($row = mysqli_fetch_assoc($result)) {
+            while ($row = mysqli_fetch_assoc($result)) {
                 $time = strtotime($row['modified']);
                 $myDateFormat = date("m-d-y g:i A", $time);
                 $query = "SELECT * FROM clients where clientID = ".intval($row['client']);
@@ -1586,9 +1629,8 @@ else {
                 </tr>';
             }
 
-            // Release returned data.
-            mysqli_free_result($result);
-        ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
     </table>
     <?php
 }

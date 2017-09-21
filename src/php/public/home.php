@@ -12,11 +12,15 @@
         <h4>Settings</h4>
         <ul>
             <li><a href="../includes/edit_account.php">Edit Account</a></li>
-            <?php if($_SESSION['user']['role']==1){ ?>
+            <?php if ($_SESSION['user']['role']==1) {
+    ?>
             <li><a href="../includes/users.php">Users</a></li>
-            <?php } else {?>
+            <?php
+} else {
+        ?>
             <li><a href="#">Users</a></li>
-            <?php } ?>
+            <?php
+    } ?>
         </ul>
 
         <h4>Tools</h4>

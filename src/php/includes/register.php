@@ -1,41 +1,41 @@
 <?php
     require_once("common.php");
     $err="";
-    if(!empty($_POST)) {
-        if(empty($_POST['username'])) {
+    if (!empty($_POST)) {
+        if (empty($_POST['username'])) {
             die("Please enter a username.");
         }
 
-        if(empty($_POST['password'])) {
+        if (empty($_POST['password'])) {
             die("Please enter a password.");
             $err .="Please enter a password.";
         }
 
-        if(strlen($_POST['password']) < 12) {
+        if (strlen($_POST['password']) < 12) {
             die("Your password is too short. The minimum length is 12 characters.");
         }
 
-        if(($_POST['password']) != ($_POST['password2'])) {
+        if (($_POST['password']) != ($_POST['password2'])) {
             die("Your passwords do not match.");
         }
 
-        if(!preg_match("#[A-Z]+#", ($_POST['password']))) {
+        if (!preg_match("#[A-Z]+#", ($_POST['password']))) {
             die("Your password must contain at least one uppercase letter.");
         }
 
-        if(!preg_match("#[a-z]+#", ($_POST['password']))) {
+        if (!preg_match("#[a-z]+#", ($_POST['password']))) {
             die("Your password must contain at least one lowercase letter.");
         }
 
-        if(!preg_match("#[0-9]+#", ($_POST['password']))) {
+        if (!preg_match("#[0-9]+#", ($_POST['password']))) {
             die("Your password must contain at least one number.");
         }
 
-        if(!preg_match("#[\W]+#", ($_POST['password']))) {
+        if (!preg_match("#[\W]+#", ($_POST['password']))) {
             die("Your password must contain at least one special character.");
         }
 
-        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             die("Invalid email address.");
         }
 
@@ -50,9 +50,7 @@
         try {
             $stmt = $db->prepare($query);
             $result = $stmt->execute($query_params);
-        }
-
-        catch(PDOException $ex) {
+        } catch (PDOException $ex) {
             // On a production website, you should not output $ex->getMessage().
             die("Failed to run query: " . $ex->getMessage());
         }
@@ -63,7 +61,7 @@
 
         // If a row was returned, then we know a matching username was found in the database already and we
         // should not allow the user to continue.
-        if($row) {
+        if ($row) {
             die("This username is already in use.");
         }
 
@@ -77,15 +75,13 @@
         try {
             $stmt = $db->prepare($query);
             $result = $stmt->execute($query_params);
-        }
-
-        catch(PDOException $ex) {
+        } catch (PDOException $ex) {
             die("Failed to run query: " . $ex->getMessage());
         }
 
         $row = $stmt->fetch();
 
-        if($row) {
+        if ($row) {
             die("This email address is already in use.");
         }
 
@@ -98,7 +94,7 @@
         $password = hash('sha256', $_POST['password'] . $salt);
 
         // Hash the hash value 65,536 more times to protect against brute force attacks.
-        for($round = 0; $round < 65536; $round++) {
+        for ($round = 0; $round < 65536; $round++) {
             $password = hash('sha256', $password . $salt);
         }
 
@@ -113,9 +109,7 @@
             // Execute the query to create the user.
             $stmt = $db->prepare($query);
             $result = $stmt->execute($query_params);
-        }
-
-        catch(PDOException $ex) {
+        } catch (PDOException $ex) {
             // On a production website, you should not output $ex->getMessage().
             die("Failed to run query: " . $ex->getMessage());
         }
@@ -124,7 +118,7 @@
         $to = "leebaird@gmail.com";
         $subject = "New user registration.";
         $message = "A new user has requested an account.";
-        mail($to,$subject,$message);
+        mail($to, $subject, $message);
         header("Location: ../index.php");
         die("Redirecting to ../index.php");
     }

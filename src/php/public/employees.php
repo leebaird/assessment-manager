@@ -8,7 +8,8 @@ if (isset($_POST['create'])) {
 
     // Check for blank field.
     $employee = trim($_POST['employee']);
-    if (empty($employee)) { ?>
+    if (empty($employee)) {
+        ?>
         <br>
         <button class="btn btn-danger" type="button"><strong>Warning!</strong> You must enter an employee.</button>
         <br><br>
@@ -110,10 +111,7 @@ if (isset($_GET['create'])) {
         </div>
     </div>
     <?php
-}
-
-
-elseif (isset($_GET['read'])) {
+} elseif (isset($_GET['read'])) {
     // READ RECORD.
     $query = "SELECT * FROM employees WHERE employeeID=".intval($_GET['read']);
     $result = mysqli_query($connection, $query);
@@ -130,8 +128,7 @@ elseif (isset($_GET['read'])) {
     mysqli_free_result($result2);
 
     // Get the page number or set it to 1 if no page is set.
-    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
-    ?>
+    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
 
     <ul class="pager">
         <?php if ($read > 1): ?>
@@ -208,16 +205,12 @@ elseif (isset($_GET['read'])) {
         </div>
     </div>
     <?php
-}
-
-
-elseif (isset($_GET['update'])) {
+} elseif (isset($_GET['update'])) {
     // UPDATE RECORD.
     $query = "SELECT * FROM employees WHERE employeeID=".intval($_GET['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
-    $row = mysqli_fetch_assoc($result);
-    ?>
+    $row = mysqli_fetch_assoc($result); ?>
 
     <div class="container">
         <div class="panel panel-primary">
@@ -247,7 +240,7 @@ elseif (isset($_GET['update'])) {
                     <div class="col-sm-2">
                         <select class="form-control" name="accountmgr">
                             <option value=""></option>
-                            <option value="Yes"<?php echo ($row['accountmgr'] == 'Yes' ? " selected" : "")?>>Yes</option>
+                            <option value="Yes"<?php echo($row['accountmgr'] == 'Yes' ? " selected" : "")?>>Yes</option>
                         </select>
                     </div>
                 </div>
@@ -257,7 +250,7 @@ elseif (isset($_GET['update'])) {
                     <div class="col-sm-2">
                         <select class="form-control" name="projectmgr">
                             <option value=""></option>
-                            <option value="Yes"<?php echo ($row['projectmgr'] == 'Yes' ? " selected" : "")?>>Yes</option>
+                            <option value="Yes"<?php echo($row['projectmgr'] == 'Yes' ? " selected" : "")?>>Yes</option>
                         </select>
                     </div>
                 </div>
@@ -293,10 +286,7 @@ elseif (isset($_GET['update'])) {
         </div>
     </div>
     <?php
-}
-
-
-else {
+} else {
     // DISPLAY LIST OF RECORDS.
     ?>
     <br>
@@ -307,9 +297,8 @@ else {
     <?php
         // Perform db query.
         $query = "SELECT * FROM employees ORDER BY employee ASC";
-        $result = mysqli_query($connection, $query);
-        confirm_query($result);
-    ?>
+    $result = mysqli_query($connection, $query);
+    confirm_query($result); ?>
 
     <table style="width: auto;" class="table table-bordered table-condensed table-hover">
         <tr>
@@ -322,7 +311,7 @@ else {
         </tr>
 
         <?php
-            while($row = mysqli_fetch_assoc($result)) {
+            while ($row = mysqli_fetch_assoc($result)) {
                 $time = strtotime($row['modified']);
                 $myDateFormat = date("m-d-y g:i A", $time);
                 echo '
@@ -337,9 +326,8 @@ else {
                 </tr>';
             }
 
-            // Release returned data.
-            mysqli_free_result($result);
-        ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
     </table>
     <?php
 }

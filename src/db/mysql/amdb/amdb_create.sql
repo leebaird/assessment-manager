@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 20, 2017 at 05:16 AM
+-- Generation Time: Sep 21, 2017 at 07:08 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -23,21 +23,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `amdb`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accountmgrs`
---
-
-CREATE TABLE `accountmgrs` (
-  `accountmgrID` int(4) NOT NULL,
-  `modified` datetime NOT NULL,
-  `accountmgr` varchar(50) COLLATE utf8_bin NOT NULL,
-  `cell` varchar(12) COLLATE utf8_bin NOT NULL,
-  `email` varchar(50) COLLATE utf8_bin NOT NULL,
-  `notes` text COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -186,8 +171,8 @@ CREATE TABLE `hostvulns` (
   `description` text COLLATE utf8_bin NOT NULL,
   `remediation` text COLLATE utf8_bin NOT NULL,
   `see_also` text COLLATE utf8_bin NOT NULL,
-  `published` date NOT NULL,
-  `updated` date NOT NULL
+  `published` varchar(12) COLLATE utf8_bin NOT NULL,
+  `updated` varchar(12) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -201,22 +186,6 @@ INSERT INTO `hostvulns` (`hostvulnID`, `modified`, `tool`, `vulnerability`, `fin
 -- --------------------------------------------------------
 
 --
--- Table structure for table `projectmgrs`
---
-
-CREATE TABLE `projectmgrs` (
-  `projectmgrID` int(4) NOT NULL,
-  `modified` datetime NOT NULL,
-  `projectmgr` varchar(50) COLLATE utf8_bin NOT NULL,
-  `cell` varchar(12) COLLATE utf8_bin NOT NULL,
-  `email` varchar(50) COLLATE utf8_bin NOT NULL,
-  `notes` text COLLATE utf8_bin NOT NULL,
-  `projectID` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `projects`
 --
 
@@ -224,45 +193,37 @@ CREATE TABLE `projects` (
   `projectID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
   `project` varchar(50) COLLATE utf8_bin NOT NULL,
+  `assessment` varchar(255) COLLATE utf8_bin NOT NULL,
   `client` varchar(50) COLLATE utf8_bin NOT NULL,
+  `address` varchar(25) COLLATE utf8_bin NOT NULL,
+  `city` varchar(25) COLLATE utf8_bin NOT NULL,
+  `state` varchar(2) COLLATE utf8_bin NOT NULL,
+  `zip` varchar(10) COLLATE utf8_bin NOT NULL,
+  `phone` varchar(20) COLLATE utf8_bin NOT NULL,
+  `web` varchar(50) COLLATE utf8_bin NOT NULL,
   `accountmgr` varchar(50) COLLATE utf8_bin NOT NULL,
   `projectmgr` varchar(50) COLLATE utf8_bin NOT NULL,
   `consultant1` varchar(50) COLLATE utf8_bin NOT NULL,
   `consultant2` varchar(50) COLLATE utf8_bin NOT NULL,
   `consultant3` varchar(50) COLLATE utf8_bin NOT NULL,
   `consultant4` varchar(50) COLLATE utf8_bin NOT NULL,
-  `type` varchar(50) COLLATE utf8_bin NOT NULL,
-  `objective` varchar(100) COLLATE utf8_bin NOT NULL,
-  `billing` varchar(25) COLLATE utf8_bin NOT NULL,
-  `rate` varchar(10) COLLATE utf8_bin NOT NULL,
-  `address1` varchar(25) COLLATE utf8_bin NOT NULL,
-  `address2` varchar(25) COLLATE utf8_bin NOT NULL,
-  `city` varchar(25) COLLATE utf8_bin NOT NULL,
-  `state` varchar(2) COLLATE utf8_bin NOT NULL,
-  `zip` varchar(10) COLLATE utf8_bin NOT NULL,
-  `kickoff` varchar(250) COLLATE utf8_bin NOT NULL,
-  `start` varchar(255) COLLATE utf8_bin NOT NULL,
-  `finish` varchar(255) COLLATE utf8_bin NOT NULL,
-  `hours` varchar(25) COLLATE utf8_bin NOT NULL,
-  `tech_qa` date NOT NULL,
-  `draft_delivery` date NOT NULL,
-  `client_comments` date NOT NULL,
-  `final_delivery` date NOT NULL,
+  `kickoff` varchar(12) COLLATE utf8_bin NOT NULL,
+  `start` varchar(12) COLLATE utf8_bin NOT NULL,
+  `tech_qa` varchar(12) COLLATE utf8_bin NOT NULL,
+  `draft_delivery` varchar(12) COLLATE utf8_bin NOT NULL,
+  `final_delivery` varchar(12) COLLATE utf8_bin NOT NULL,
+  `finish` varchar(12) COLLATE utf8_bin NOT NULL,
   `status` varchar(10) COLLATE utf8_bin NOT NULL,
   `notes` text COLLATE utf8_bin NOT NULL,
-  `hold` date NOT NULL,
-  `restart` date NOT NULL,
-  `percent_complete` varchar(3) COLLATE utf8_bin NOT NULL,
-  `complete` varchar(5) COLLATE utf8_bin NOT NULL,
-  `assisment` varchar(255) COLLATE utf8_bin NOT NULL
+  `objective` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dumping data for table `projects`
 --
 
-INSERT INTO `projects` (`projectID`, `modified`, `project`, `client`, `accountmgr`, `projectmgr`, `consultant1`, `consultant2`, `consultant3`, `consultant4`, `type`, `objective`, `billing`, `rate`, `address1`, `address2`, `city`, `state`, `zip`, `kickoff`, `start`, `finish`, `hours`, `tech_qa`, `draft_delivery`, `client_comments`, `final_delivery`, `status`, `notes`, `hold`, `restart`, `percent_complete`, `complete`, `assisment`) VALUES
-(1, '2017-09-18 23:51:22', 'Q3 Vulnerability Assessment', '1', '', '', 'Cook', '', '', '', '', '', '', '', '', '', '1', 'In', 'Loop', '', '', '', '', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '0000-00-00', '0000-00-00', '', '', 'External,Internal,');
+INSERT INTO `projects` (`projectID`, `modified`, `project`, `assessment`, `client`, `address`, `city`, `state`, `zip`, `phone`, `web`, `accountmgr`, `projectmgr`, `consultant1`, `consultant2`, `consultant3`, `consultant4`, `kickoff`, `start`, `tech_qa`, `draft_delivery`, `final_delivery`, `finish`, `status`, `notes`, `objective`) VALUES
+(1, '2017-09-18 23:51:22', 'Q3 Vulnerability Assessment', 'External,Internal,', '1', '', '1', 'In', 'Loop', '', '', '', '', 'Cook', '', '', '', '', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -360,12 +321,6 @@ INSERT INTO `webvulns` (`webvulnID`, `modified`, `tool`, `vulnerability`, `findi
 --
 
 --
--- Indexes for table `accountmgrs`
---
-ALTER TABLE `accountmgrs`
-  ADD PRIMARY KEY (`accountmgrID`);
-
---
 -- Indexes for table `clients`
 --
 ALTER TABLE `clients`
@@ -402,12 +357,6 @@ ALTER TABLE `hostvulns`
   ADD PRIMARY KEY (`hostvulnID`);
 
 --
--- Indexes for table `projectmgrs`
---
-ALTER TABLE `projectmgrs`
-  ADD PRIMARY KEY (`projectmgrID`);
-
---
 -- Indexes for table `projects`
 --
 ALTER TABLE `projects`
@@ -440,12 +389,6 @@ ALTER TABLE `webvulns`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `accountmgrs`
---
-ALTER TABLE `accountmgrs`
-  MODIFY `accountmgrID` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `clients`
@@ -482,12 +425,6 @@ ALTER TABLE `findings`
 --
 ALTER TABLE `hostvulns`
   MODIFY `hostvulnID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `projectmgrs`
---
-ALTER TABLE `projectmgrs`
-  MODIFY `projectmgrID` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `projects`

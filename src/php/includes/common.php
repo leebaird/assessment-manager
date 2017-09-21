@@ -7,9 +7,8 @@
     // For login and register only.
     $db = new PDO("mysql:host={$host};dbname={$dbname}", $username, $password);
     if (!$db) {
-        die ("DB connection failed. " . mysql_error());
-    }
-    else {
+        die("DB connection failed. " . mysql_error());
+    } else {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -18,12 +17,13 @@
 
     // Test if the connection occurred.
     if (!$connection) {
-        die ("DB connection failed. " . mysql_error());
+        die("DB connection failed. " . mysql_error());
     }
 
-    function confirm_query($result) {
+    function confirm_query($result)
+    {
         if (!$result) {
-            die ("DB query failed. " . mysql_error());
+            die("DB query failed. " . mysql_error());
         }
     }
 

@@ -8,7 +8,8 @@ if (isset($_POST['create'])) {
 
     // Check for blank fields.
     $type = trim($_POST['type']);
-    if (empty($type)) { ?>
+    if (empty($type)) {
+        ?>
         <br>
         <button class="btn btn-danger" type="button"><strong>Warning!</strong> You must enter a type.</button>
         <br><br>
@@ -17,7 +18,8 @@ if (isset($_POST['create'])) {
     }
 
     $finding = trim($_POST['finding']);
-    if (empty($finding)) { ?>
+    if (empty($finding)) {
+        ?>
         <br>
         <button class="btn btn-danger" type="button"><strong>Warning!</strong> You must enter a finding.</button>
         <br><br>
@@ -118,15 +120,11 @@ if (isset($_GET['create'])) {
                 <a class="btn btn-default" href="findings.php">Back</a>
             </div>
         </form>
-
         </div>
         </div>
     </div>
     <?php
-}
-
-
-elseif (isset($_GET['read'])) {
+} elseif (isset($_GET['read'])) {
     // READ RECORD.
     $query = "SELECT * FROM findings WHERE findingID=".intval($_GET['read']);
     $result = mysqli_query($connection, $query);
@@ -143,8 +141,7 @@ elseif (isset($_GET['read'])) {
     mysqli_free_result($result2);
 
     // Get the page number or set it to 1 if no page is set.
-    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
-    ?>
+    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
 
     <ul class="pager">
         <?php if ($read > 1): ?>
@@ -209,27 +206,22 @@ elseif (isset($_GET['read'])) {
                     <a class="btn btn-default" href="findings.php">Back</a>
                 </div>
             </form>
-            
             </div>
         </div>
     </div>
     <?php
-}
-
-
-elseif (isset($_GET['update'])) {
+} elseif (isset($_GET['update'])) {
     // UPDATE RECORD.
     $query = "SELECT * FROM findings WHERE findingID=".intval($_GET['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
-    $row = mysqli_fetch_assoc($result);
-    ?>
+    $row = mysqli_fetch_assoc($result); ?>
 
     <div class="container">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Update Finding</h3>
-            </div>  
+            </div>
             <div class="panel-body">
 
             <form class="form-horizontal" action="findings.php" method="post">
@@ -239,15 +231,15 @@ elseif (isset($_GET['update'])) {
                     <div class="col-sm-10">
                         <select class="form-control" name="type">
                             <option value=""></option>
-                            <option value="Host"<?php echo ($row['type'] == 'Host' ? " selected" : "")?>>Host</option>
-                            <option value="Mobile"<?php echo ($row['type'] == 'Mobile' ? " selected" : "")?>>Mobile</option>
-                            <option value="Networking"<?php echo ($row['type'] == 'Networking' ? " selected" : "")?>>Networking</option>
-                            <option value="Physical"<?php echo ($row['type'] == 'Physical' ? " selected" : "")?>>Physical</option>
-                            <option value="Social Engineering"<?php echo ($row['type'] == 'Social Engineering' ? " selected" : "")?>>Social Engineering</option>
-                            <option value="Strategic"<?php echo ($row['type'] == 'Strategic' ? " selected" : "")?>>Strategic</option>
-                            <option value="War Dialing"<?php echo ($row['type'] == 'War Dialing' ? " selected" : "")?>>War Dialing</option>
-                            <option value="Web"<?php echo ($row['type'] == 'Web' ? " selected" : "")?>>Web</option>
-                            <option value="Wireless"<?php echo ($row['type'] == 'Wireless' ? " selected" : "")?>>Wireless</option>
+                            <option value="Host"<?php echo($row['type'] == 'Host' ? " selected" : "")?>>Host</option>
+                            <option value="Mobile"<?php echo($row['type'] == 'Mobile' ? " selected" : "")?>>Mobile</option>
+                            <option value="Networking"<?php echo($row['type'] == 'Networking' ? " selected" : "")?>>Networking</option>
+                            <option value="Physical"<?php echo($row['type'] == 'Physical' ? " selected" : "")?>>Physical</option>
+                            <option value="Social Engineering"<?php echo($row['type'] == 'Social Engineering' ? " selected" : "")?>>Social Engineering</option>
+                            <option value="Strategic"<?php echo($row['type'] == 'Strategic' ? " selected" : "")?>>Strategic</option>
+                            <option value="War Dialing"<?php echo($row['type'] == 'War Dialing' ? " selected" : "")?>>War Dialing</option>
+                            <option value="Web"<?php echo($row['type'] == 'Web' ? " selected" : "")?>>Web</option>
+                            <option value="Wireless"<?php echo($row['type'] == 'Wireless' ? " selected" : "")?>>Wireless</option>
                         </select>
                     </div>
                 </div>
@@ -292,15 +284,12 @@ elseif (isset($_GET['update'])) {
                     <a class="btn btn-default" href="findings.php">Back</a>
                 </div>
             </form>
-            
+
             </div>
         </div>
     </div>
     <?php
-}
-
-
-else {
+} else {
     // DISPLAY LIST OF RECORDS.
     ?>
     <br>
@@ -312,8 +301,7 @@ else {
         // Perform db query.
         $query = "SELECT * FROM findings ORDER BY type, finding ASC";
         $result = mysqli_query($connection, $query);
-        confirm_query($result);
-    ?>
+        confirm_query($result); ?>
 
     <table style="width: auto;" class="table table-bordered table-condensed table-hover">
         <tr>
@@ -325,8 +313,8 @@ else {
             <th style="background-color:#E8E8E8; "></th>
         </tr>
 
-        <?php 
-            while($row = mysqli_fetch_assoc($result)) {
+        <?php
+            while ($row = mysqli_fetch_assoc($result)) {
                 $time = strtotime($row['modified']);
                 $myDateFormat = date("m-d-y g:i A", $time);
 
@@ -342,9 +330,8 @@ else {
                 </tr>';
             }
 
-            // Release returned data.
-            mysqli_free_result($result);
-        ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
     </table>
     <?php
 }

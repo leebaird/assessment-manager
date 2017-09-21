@@ -3,38 +3,38 @@
     include "../includes/header.php";
     require_once("../includes/common.php");
 
-    if(!empty($_POST)) {
-        if(strlen($_POST['password']) < 12) {
+    if (!empty($_POST)) {
+        if (strlen($_POST['password']) < 12) {
             die("Your password is too short. The minimum length is 12 characters.");
         }
 
-        if(($_POST['password']) != ($_POST['password2'])) {
+        if (($_POST['password']) != ($_POST['password2'])) {
             die("Your passwords do not match.");
         }
 
-        if(!preg_match("#[A-Z]+#", ($_POST['password']))) {
+        if (!preg_match("#[A-Z]+#", ($_POST['password']))) {
             die("Your password must contain at least one uppercase letter.");
         }
 
-        if(!preg_match("#[a-z]+#", ($_POST['password']))) {
+        if (!preg_match("#[a-z]+#", ($_POST['password']))) {
             die("Your password must contain at least one lowercase letter.");
         }
 
-        if(!preg_match("#[0-9]+#", ($_POST['password']))) {
+        if (!preg_match("#[0-9]+#", ($_POST['password']))) {
             die("Your password must contain at least one number.");
         }
 
-        if(!preg_match("#[\W]+#", ($_POST['password']))) {
+        if (!preg_match("#[\W]+#", ($_POST['password']))) {
             die("Your password must contain at least one special character.");
         }
 
-        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             die("Invalid email address.");
         }
 
         // If the user is changing their email address, we need to make sure that the new value does not
         // conflict with a value that is already in the database.
-        if($_POST['email'] != $_SESSION['user']['email']) {
+        if ($_POST['email'] != $_SESSION['user']['email']) {
             $query = "SELECT 1 FROM users WHERE email = :email";
             $query_params = array(
                 ':email' => $_POST['email']
@@ -43,24 +43,22 @@
             try {
                 $stmt = $db->prepare($query);
                 $result = $stmt->execute($query_params);
-            }
-
-            catch(PDOException $ex) {
+            } catch (PDOException $ex) {
                 // On a production website, you should not output $ex->getMessage().
                 die("Failed to run query: " . $ex->getMessage());
             }
 
             $row = $stmt->fetch();
-            if($row) {
+            if ($row) {
                 die("This email address is already in use.");
             }
         }
 
         // If the user entered a new password, we need to hash it and generate a fresh salt.
-        if(!empty($_POST['password'])) {
+        if (!empty($_POST['password'])) {
             $salt = dechex(mt_rand(0, 2147483647)) . dechex(mt_rand(0, 2147483647));
             $password = hash('sha256', $_POST['password'] . $salt);
-            for($round = 0; $round < 65536; $round++) {
+            for ($round = 0; $round < 65536; $round++) {
                 $password = hash('sha256', $password . $salt);
             }
         } else {
@@ -77,7 +75,7 @@
 
         // If the user is changing their password, then we need parameter values for the new password hash
         // and salt.
-        if($password !== null) {
+        if ($password !== null) {
             $query_params[':password'] = $password;
             $query_params[':salt'] = $salt;
         }
@@ -89,11 +87,11 @@
 
         // If the user is changing their password, then we extend the SQL query to include the password, salt
         // columns, and parameter tokens.
-        if($password !== null) {
+        if ($password !== null) {
             $query .= " 
                 , password = :password 
                 , salt = :salt 
-            "; 
+            ";
         }
 
         // Update the record for the current user.
@@ -102,9 +100,7 @@
         try {
             $stmt = $db->prepare($query);
             $result = $stmt->execute($query_params);
-        }
-
-        catch(PDOException $ex) {
+        } catch (PDOException $ex) {
             // On a production website, you should not output $ex->getMessage().
             die("Failed to run query: " . $ex->getMessage());
         }
