@@ -1,9 +1,9 @@
 <?php
-$bodyid = "projects";
+$bodyid = "webvulns";
 include "../includes/header.php";
 require_once("../includes/common.php");
-
 ?>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -128,8 +128,8 @@ if (isset($_GET['create'])) {
                                     echo '<option value = "'.$c['findingID'].'">'.$c['finding'].'</option>';
                                 }
 
-    // Release returned data.
-    mysqli_free_result($result); ?>
+                        // Release returned data.
+                        mysqli_free_result($result); ?>
                         </select>
                     </div>
                 </div>
@@ -367,8 +367,8 @@ if (isset($_GET['create'])) {
                                     echo '<option value = "'.$c["findingID"].'"'.($row['findingID'] == $c['findingID'] ? ' selected' : '').'>'.$c["finding"].'</option>';
                                 }
 
-    // Release returned data.
-    mysqli_free_result($result); ?>
+                        // Release returned data.
+                        mysqli_free_result($result); ?>
                         </select>
                     </div>
                 </div>
@@ -418,7 +418,7 @@ if (isset($_GET['create'])) {
         </div>
     </div>
     <?php
-} else {
+    } else {
     // DISPLAY LIST OF RECORDS.
     ?>
     <br>
@@ -430,31 +430,31 @@ if (isset($_GET['create'])) {
         // Number of rows per page.
         $rec_limit = 25;
 
-    if (isset($_SESSION['rec_limit'])) {
-        $rec_limit = $_SESSION['rec_limit'];
-    }
+        if (isset($_SESSION['rec_limit'])) {
+            $rec_limit = $_SESSION['rec_limit'];
+        }
 
-    // Get the total number of records.
-    $query = "SELECT COUNT(vulnerability) FROM webvulns";
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
+        // Get the total number of records.
+        $query = "SELECT COUNT(vulnerability) FROM webvulns";
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
 
-    $row = mysqli_fetch_array($result, MYSQLI_NUM);
-    $rec_count = $row[0];
-    $page = 0;
-    $offset = 0;
+        $row = mysqli_fetch_array($result, MYSQLI_NUM);
+        $rec_count = $row[0];
+        $page = 0;
+        $offset = 0;
 
-    if (isset($_GET['page'])) {
-        $page = $_GET['page'];
-        $offset = $rec_limit * $page ;
-    }
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+            $offset = $rec_limit * $page ;
+        }
 
-    $left_rec = $rec_count - ($page * $rec_limit);
+        $left_rec = $rec_count - ($page * $rec_limit);
 
-    // Perform db query.
-    $query = "SELECT * FROM webvulns ORDER BY tool, vulnerability ASC LIMIT $offset, $rec_limit";
-    $hostset = mysqli_query($connection, $query);
-    confirm_query($result); ?>
+        // Perform db query.
+        $query = "SELECT * FROM webvulns ORDER BY tool, vulnerability ASC LIMIT $offset, $rec_limit";
+        $hostset = mysqli_query($connection, $query);
+        confirm_query($result); ?>
 
     <table style="width: auto;" class="table table-bordered table-condensed table-hover">
         <tr>

@@ -1256,9 +1256,9 @@ elseif (isset($_GET['update'])) {
                             ?>
 
                             <?php
-                                $query11 = "SELECT * FROM employees where employeeID=".$row['accountmgr'];
-                                $result11 = mysqli_query($connection, $query11);
-                                $row11 = @mysqli_fetch_array($result11);
+                            //    $query11 = "SELECT * FROM employees where employeeID=".$row['accountmgr'];
+                            //    $result11 = mysqli_query($connection, $query11);
+                            //    $row11 = @mysqli_fetch_array($result11);
                             ?>
 
                             <div class="form-group">
@@ -1281,7 +1281,7 @@ elseif (isset($_GET['update'])) {
                             <?php
                                 $query = "SELECT * FROM employees WHERE projectmgr='Yes' ORDER BY employee ASC";
                                 $result = mysqli_query($connection, $query);
-                                confirm_query($result);
+                                //confirm_query($result);
                             ?>
 
                             <?php

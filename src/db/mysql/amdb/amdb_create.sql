@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 21, 2017 at 07:08 AM
+-- Generation Time: Sep 23, 2017 at 05:05 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -49,10 +49,10 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`clientID`, `modified`, `client`, `address`, `city`, `state`, `zip`, `phone`, `web`, `employeeID`, `notes`) VALUES
-(1, '2017-09-18 20:41:02', 'Apple', '1 Infinite Loop', 'Cupertino', 'CA', '95014', '408-996-1010', 'www.apple.com', 0, 'iPhone, iPad'),
-(2, '2017-09-18 20:37:00', 'Comcast', '1701 JFK Blvd', 'Philadelphia', 'PA', '19103', '215-286-1700', 'www.comcast.net', 0, ''),
-(3, '2017-09-18 20:38:22', 'Palo Alto Networks', '3000 Tannery Way', 'Santa Clara', 'CA', '95054', '408-753-4000', 'www.paloaltonetworks.com', 0, ''),
-(4, '2017-09-18 20:40:05', 'Verizon', '140 W. St.', 'New York', 'NY', '10007', '212-395-1000', 'www.verizon.com', 0, '');
+(1, '2017-09-22 21:56:14', 'Apple', '1 Infinite Loop', 'Cupertino', 'CA', '95014', '408-996-1010', 'www.apple.com', 5, 'iPhone, iPad'),
+(2, '2017-09-22 22:10:04', 'Comcast', '1701 JFK Blvd', 'Philadelphia', 'PA', '19103', '215-286-1700', 'www.comcast.net', 5, ''),
+(3, '2017-09-22 22:09:59', 'Palo Alto Networks', '3000 Tannery Way', 'Santa Clara', 'CA', '95054', '408-753-4000', 'www.paloaltonetworks.com', 5, ''),
+(4, '2017-09-22 22:10:09', 'Verizon', '140 W. St.', 'New York', 'NY', '10007', '212-395-1000', 'www.verizon.com', 5, '');
 
 -- --------------------------------------------------------
 
@@ -96,7 +96,6 @@ CREATE TABLE `employees` (
   `title` varchar(25) COLLATE utf8_bin NOT NULL,
   `type` varchar(10) COLLATE utf8_bin NOT NULL,
   `accountmgr` varchar(3) COLLATE utf8_bin NOT NULL,
-  `projectmgr` varchar(3) COLLATE utf8_bin NOT NULL,
   `cell` varchar(12) COLLATE utf8_bin NOT NULL,
   `email` varchar(50) COLLATE utf8_bin NOT NULL,
   `notes` text COLLATE utf8_bin NOT NULL,
@@ -107,11 +106,12 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`employeeID`, `modified`, `employee`, `title`, `type`, `accountmgr`, `projectmgr`, `cell`, `email`, `notes`, `projectID`) VALUES
-(1, '2017-09-18 20:53:41', 'Bugs Bunny', 'Manager', '', '', '', '', 'bugs.bunny@acme.com', '', 0),
-(2, '2017-09-18 20:54:40', 'Moe Howard', 'Red Team', '', '', '', '', '', 'Linux', 0),
-(3, '2017-09-18 20:55:02', 'Larry Fine', 'Red Team', '', '', '', '', '', 'Windows', 0),
-(4, '2017-09-18 20:55:27', 'Curly Howard', 'Red Team', '', '', '', '', '', 'Web', 0);
+INSERT INTO `employees` (`employeeID`, `modified`, `employee`, `title`, `type`, `accountmgr`, `cell`, `email`, `notes`, `projectID`) VALUES
+(1, '2017-09-18 20:53:41', 'Bugs Bunny', 'Manager', '', '', '', 'bugs.bunny@acme.com', '', 0),
+(2, '2017-09-18 20:54:40', 'Moe Howard', 'Red Team', '', '', '', '', 'Linux', 0),
+(3, '2017-09-18 20:55:02', 'Larry Fine', 'Red Team', '', '', '', '', 'Windows', 0),
+(4, '2017-09-18 20:55:27', 'Curly Howard', 'Red Team', '', '', '', '', 'Web', 0),
+(5, '2017-09-22 22:11:25', 'Wile E Coyote', 'Pure Genius', '', 'Yes', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -180,8 +180,8 @@ CREATE TABLE `hostvulns` (
 --
 
 INSERT INTO `hostvulns` (`hostvulnID`, `modified`, `tool`, `vulnerability`, `findingID`, `cvss_base`, `internal`, `external`, `description`, `remediation`, `see_also`, `published`, `updated`) VALUES
-(1, '2017-09-18 21:03:42', 'Nessus', 'OS X <10.10', 2, 10, 'High', 'Critical', 'qqq', 'www', 'eee', '0000-00-00', '0000-00-00'),
-(2, '2017-09-18 23:43:09', 'Manual', 'Palo Alto admin console', 1, 0, 'Medium', 'High', '', '', '', '0000-00-00', '0000-00-00');
+(1, '2017-09-22 20:45:52', 'Nessus', 'OS X <10.10', 2, 10, 'High', 'Critical', 'qqq', 'www', 'eee', '', ''),
+(2, '2017-09-22 22:12:49', 'Manual', 'Palo Alto admin console', 1, 0, 'Medium', 'High', '', '', '', '09/01/2017', '09/08/2017');
 
 -- --------------------------------------------------------
 
@@ -201,7 +201,7 @@ CREATE TABLE `projects` (
   `zip` varchar(10) COLLATE utf8_bin NOT NULL,
   `phone` varchar(20) COLLATE utf8_bin NOT NULL,
   `web` varchar(50) COLLATE utf8_bin NOT NULL,
-  `accountmgr` varchar(50) COLLATE utf8_bin NOT NULL,
+  `employeeID` varchar(4) COLLATE utf8_bin NOT NULL,
   `projectmgr` varchar(50) COLLATE utf8_bin NOT NULL,
   `consultant1` varchar(50) COLLATE utf8_bin NOT NULL,
   `consultant2` varchar(50) COLLATE utf8_bin NOT NULL,
@@ -222,8 +222,9 @@ CREATE TABLE `projects` (
 -- Dumping data for table `projects`
 --
 
-INSERT INTO `projects` (`projectID`, `modified`, `project`, `assessment`, `client`, `address`, `city`, `state`, `zip`, `phone`, `web`, `accountmgr`, `projectmgr`, `consultant1`, `consultant2`, `consultant3`, `consultant4`, `kickoff`, `start`, `tech_qa`, `draft_delivery`, `final_delivery`, `finish`, `status`, `notes`, `objective`) VALUES
-(1, '2017-09-18 23:51:22', 'Q3 Vulnerability Assessment', 'External,Internal,', '1', '', '1', 'In', 'Loop', '', '', '', '', 'Cook', '', '', '', '', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '');
+INSERT INTO `projects` (`projectID`, `modified`, `project`, `assessment`, `client`, `address`, `city`, `state`, `zip`, `phone`, `web`, `employeeID`, `projectmgr`, `consultant1`, `consultant2`, `consultant3`, `consultant4`, `kickoff`, `start`, `tech_qa`, `draft_delivery`, `final_delivery`, `finish`, `status`, `notes`, `objective`) VALUES
+(1, '2017-09-22 21:21:23', 'Q3 Vulnerability Assessment', 'External,', '1', '', '1', 'In', 'Loop', '', '', '', '', 'Cook', '', '', '', '09/01/2017', '09/03/2017', '0000-00-00', '0000-00-00', '0000-00-00', '09/08/2017', '', '', ''),
+(2, '2017-09-22 21:21:55', 'test', 'Wireless,', '4', '<br />\r\n<b>Notice</b>:  U', ' boolean given in <b>/App', ' b', ' boolean g', ' boolean given in <b', ' boolean given in <b>/Applications/XAMPP/xamppfile', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -406,7 +407,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employeeID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `employeeID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `employee_project`
@@ -430,7 +431,7 @@ ALTER TABLE `hostvulns`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `projectID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `projectID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `scan`
@@ -448,13 +449,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vulnerabilities`
 --
 ALTER TABLE `vulnerabilities`
-  MODIFY `vulnerabilityID` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `vulnerabilityID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `webvulns`
 --
 ALTER TABLE `webvulns`
-  MODIFY `webvulnID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `webvulnID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

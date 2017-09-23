@@ -16,14 +16,14 @@ if (isset($_POST['create'])) {
         <?php exit;
     }
 
-    $query = "INSERT INTO clients (modified, client, address, city, state, zip, phone, web, employeeID, projectmgr, consultant1, consultant2, consultant3, consultant4, notes) VALUES (now(), '$_POST[client]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]', '$_POST[web]', '$_POST[employeeID]', '$_POST[projectmgr]', '$_POST[consultant1]', '$_POST[consultant2]', '$_POST[consultant3]', '$_POST[consultant4]', '$_POST[notes]')";
+    $query = "INSERT INTO clients (modified, client, address, city, state, zip, phone, web, employeeID, notes) VALUES (now(), '$_POST[client]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]', '$_POST[web]', '$_POST[employeeID]', '$_POST[notes]')";
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
 
 if (isset($_POST['update'])) {
     // UPDATE RECORD.
-    $query = "UPDATE clients SET modified=now(), client='$_POST[client]', address='$_POST[address]', city='$_POST[city]', state='$_POST[state]', zip='$_POST[zip]', phone='$_POST[phone]', web='$_POST[web]', employeeID='$_POST[employeeID]',projectmgr='$_POST[projectmgr]',consultant1='$_POST[consultant1]',consultant2='$_POST[consultant2]',consultant3='$_POST[consultant3]',consultant4='$_POST[consultant4]', notes='$_POST[notes]' WHERE clientID=".intval($_POST['update']);
+    $query = "UPDATE clients SET modified=now(), client='$_POST[client]', address='$_POST[address]', city='$_POST[city]', state='$_POST[state]', zip='$_POST[zip]', phone='$_POST[phone]', web='$_POST[web]', employeeID='$_POST[employeeID]', notes='$_POST[notes]' WHERE clientID=".intval($_POST['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
@@ -111,112 +111,6 @@ if (isset($_GET['create'])) {
                     </div>
                 </div>
 
-<!-- work based on assumption -->
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Project Mgr</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="projectmgr">
-                            <option value=""></option>
-                            <?php
-                    $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                    $result = mysqli_query($connection, $query);
-                    confirm_query($result);
-                                while($c = mysqli_fetch_assoc($result)) {
-                                    echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                }
-
-                                // Release returned data.
-                                mysqli_free_result($result);
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Consultant 1</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="consultant1">
-                            <option value=""></option>
-                            <?php
-
-                    $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                    $result = mysqli_query($connection, $query);
-                    confirm_query($result);
-                                while($c = mysqli_fetch_assoc($result)) {
-                                    echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                }
-
-                                // Release returned data.
-                                mysqli_free_result($result);
-                            ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Consultant 2</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="consultant2">
-                            <option value=""></option>
-                            <?php
-
-                    $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                    $result = mysqli_query($connection, $query);
-                    confirm_query($result);
-                                while($c = mysqli_fetch_assoc($result)) {
-                                    echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                }
-
-                                // Release returned data.
-                                mysqli_free_result($result);
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Consultant 3</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="consultant3">
-                            <option value=""></option>
-
-                            <?php
-
-                    $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                    $result = mysqli_query($connection, $query);
-                    confirm_query($result);
-                                while($c = mysqli_fetch_assoc($result)) {
-                                    echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                }
-
-                                // Release returned data.
-                                mysqli_free_result($result);
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Consultant 4</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="consultant4">
-                            <option value=""></option>
-                            <?php
-
-                    $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                    $result = mysqli_query($connection, $query);
-                    confirm_query($result);
-                                while($c = mysqli_fetch_assoc($result)) {
-                                    echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                }
-
-                                // Release returned data.
-                                mysqli_free_result($result);
-                            ?>
-                        </select>
-                    </div>
-                </div>
-<!-- work based on assumption -->
-
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Notes</label>
                     <div class="col-sm-5">
@@ -246,31 +140,6 @@ elseif (isset($_GET['read'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
     $c = mysqli_fetch_assoc($result);
-
-    $query = "SELECT * FROM employees WHERE employeeID=".intval($row['projectmgr']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $p = mysqli_fetch_assoc($result);
-
-    $query = "SELECT * FROM employees WHERE employeeID=".intval($row['consultant1']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $c1 = mysqli_fetch_assoc($result);
-
-    $query = "SELECT * FROM employees WHERE employeeID=".intval($row['consultant2']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $c2 = mysqli_fetch_assoc($result);
-
-    $query = "SELECT * FROM employees WHERE employeeID=".intval($row['consultant3']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $c3 = mysqli_fetch_assoc($result);
-
-    $query = "SELECT * FROM employees WHERE employeeID=".intval($row['consultant4']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $c4 = mysqli_fetch_assoc($result);
 
     // Find number of records.
     $query2 = "SELECT * FROM clients";
@@ -350,42 +219,6 @@ elseif (isset($_GET['read'])) {
                     <label class="col-sm-2 control-label">Account Mgr</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" name="employeeID" value="<?php echo $c['employee'] ?>" readonly>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Project Mgr</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="employeeID" value="<?php echo $p['employee'] ?>" readonly>
-                    </div>
-                </div> 
-                
-                
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Consultant 1</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="employeeID" value="<?php echo $c1['employee'] ?>" readonly>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Consultant 2</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="employeeID" value="<?php echo $c2['employee'] ?>" readonly>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Consultant 3</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="employeeID" value="<?php echo $c3['employee'] ?>" readonly>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Consultant 4</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="employeeID" value="<?php echo $c4['employee'] ?>" readonly>
                     </div>
                 </div>
 
@@ -480,111 +313,6 @@ elseif (isset($_GET['update'])) {
                             <?php
                                 while($c = mysqli_fetch_assoc($result)) {
                                     echo '<option value = "'.$c["employeeID"].'"'.($row['employeeID'] == $c['employeeID'] ? ' selected' : '').'>'.$c["employee"].'</option>';
-                                }
-
-                                // Release returned data.
-                                mysqli_free_result($result);
-                            ?>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Project Mgr</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="projectmgr">
-                            <option value=""></option>
-                            <?php
-
-                    $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                    $result = mysqli_query($connection, $query);
-                    confirm_query($result);
-                    while($p = mysqli_fetch_assoc($result)) {
-                             echo '<option value = "'.$p["employeeID"].'"'.($row['projectmgr'] == $p['employeeID'] ? ' selected' : '').'>'.$p["employee"].'</option>';
-                                }
-
-                                // Release returned data.
-                                mysqli_free_result($result);
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Consultant 1</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="consultant1">
-                            <option value=""></option>
-                            <?php
-
-                    $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                    $result = mysqli_query($connection, $query);
-                    confirm_query($result);
-                    while($p = mysqli_fetch_assoc($result)) {
-                             echo '<option value = "'.$p["employeeID"].'"'.($row['consultant1'] == $p['employeeID'] ? ' selected' : '').'>'.$p["employee"].'</option>';
-                                }
-
-                                // Release returned data.
-                                mysqli_free_result($result);
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Consultant 2</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="consultant2">
-                            <option value=""></option>
-                            <?php
-
-                    $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                    $result = mysqli_query($connection, $query);
-                    confirm_query($result);
-                    while($p = mysqli_fetch_assoc($result)) {
-                             echo '<option value = "'.$p["employeeID"].'"'.($row['consultant2'] == $p['employeeID'] ? ' selected' : '').'>'.$p["employee"].'</option>';
-                                }
-
-                                // Release returned data.
-                                mysqli_free_result($result);
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Consultant 3</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="consultant3">
-                            <option value=""></option>
-                            <?php
-
-                    $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                    $result = mysqli_query($connection, $query);
-                    confirm_query($result);
-                    while($p = mysqli_fetch_assoc($result)) {
-                             echo '<option value = "'.$p["employeeID"].'"'.($row['consultant3'] == $p['employeeID'] ? ' selected' : '').'>'.$p["employee"].'</option>';
-                                }
-
-                                // Release returned data.
-                                mysqli_free_result($result);
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Consultant 4</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="consultant4">
-                            <option value=""></option>
-                            <?php
-
-                    $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                    $result = mysqli_query($connection, $query);
-                    confirm_query($result);
-                    while($p = mysqli_fetch_assoc($result)) {
-                             echo '<option value = "'.$p["employeeID"].'"'.($row['consultant4'] == $p['employeeID'] ? ' selected' : '').'>'.$p["employee"].'</option>';
                                 }
 
                                 // Release returned data.

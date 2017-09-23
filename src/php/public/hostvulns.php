@@ -143,12 +143,14 @@ if (isset($_GET['create'])) {
                 <div class="row">
                     <label class="col-sm-2 control-label">Published</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="published" placeholder="Published">
+                        <input type="text" class="form-control" id="published" name="published" placeholder="Published">
+                        <script> $( "#published" ).datepicker(); </script>
                     </div>
 
                     <label class="col-sm-1 control-label">Updated</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="updated" placeholder="Updated">
+                        <input type="text" class="form-control" id="updated"  name="updated" placeholder="Updated">
+                        <script> $( "#updated" ).datepicker(); </script>
                     </div>
                 </div>
                 <br>
@@ -305,12 +307,12 @@ if (isset($_GET['create'])) {
                 <div class="row">
                     <label class="col-sm-2 control-label">Published</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="published" value="<?php echo $row['published'] ?>" readonly>
+                        <input type="text" class="form-control" id="published" name="published" value="<?php echo $row['published'] ?>" readonly>
                     </div>
 
                     <label class="col-sm-1 control-label">Updated</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="updated" value="<?php echo $row['updated'] ?>" readonly>
+                        <input type="text" class="form-control" id="updated" name="updated" value="<?php echo $row['updated'] ?>" readonly>
                     </div>
                 </div>
                 <br>
@@ -441,12 +443,14 @@ if (isset($_GET['create'])) {
                 <div class="row">
                     <label class="col-sm-2 control-label">Published</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="published" value="<?php echo $row['published'] ?>">
+                        <input type="text" class="form-control" id="published" name="published" value="<?php echo $row['published'] ?>">
+                        <script> $( "#published" ).datepicker(); </script>
                     </div>
 
                     <label class="col-sm-1 control-label">Updated</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="updated" value="<?php echo $row['updated'] ?>">
+                        <input type="text" class="form-control" id="updated" name="updated" value="<?php echo $row['updated'] ?>">
+                        <script> $( "#updated" ).datepicker(); </script>
                     </div>
                 </div>
                 <br>
@@ -482,7 +486,7 @@ if (isset($_GET['create'])) {
     </div>
     <?php
     } else {
-        // DISPLAY LIST OF RECORDS.
+    // DISPLAY LIST OF RECORDS.
     ?>
     <br>
     <a class="btn btn-primary" href="hostvulns.php?create" input type="button">New</a>
