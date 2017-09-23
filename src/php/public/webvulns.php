@@ -35,10 +35,6 @@ $(document).ready(function(){
 </script>
 
 <?php
-$bodyid = "webvulns";
-include "../includes/header.php";
-require_once("../includes/common.php");
-
 if (isset($_POST['create'])) {
     // CREATE RECORD.
 
@@ -271,7 +267,7 @@ if (isset($_GET['create'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Finding Category</label>
                     <div class="col-sm-5">
-                    <?php 
+                    <?php
                     $sql = "select * from findings where findingID=".$row['findingID'];
                     $result = mysqli_query($connection, $sql);
                     $find = mysqli_fetch_array($result); ?>

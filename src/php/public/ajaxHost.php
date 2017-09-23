@@ -4,7 +4,7 @@
     $password = "";
     $host = "localhost";
     $dbname = "amdb";
-    $connection = new mysqli($host,$username,$password,$dbname);
+    $connection = new mysqli($host, $username, $password, $dbname);
     $query = "SELECT * FROM clients WHERE clientID=".$_POST['country_id'];
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_array($result);

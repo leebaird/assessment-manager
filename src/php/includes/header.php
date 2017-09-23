@@ -67,7 +67,26 @@
                 <li><a href="../public/projects.php">Projects</a></li>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Vulnerabilities<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../public/hostvulns.php">Host</a></li>
+                    <style>
+                     .disabled {
+                        pointer-events: none;
+                        cursor: default;
+                        opacity: 0.6;
+                    }
+
+                    </style>
+                     <?php $str = $_SERVER['REQUEST_URI'];
+
+                     $people = explode("/",$str);
+                     if (in_array("webvulns.php", $people)){
+                       ?>
+                        <li><a href="../public/hostvulns.php" class="disabled">Host</a></li>
+
+                    <?php } else {?>
+                        <li><a href="../public/hostvulns.php" >Host</a></li>
+
+                    <?php } ?>
+
                         <li><a href="../public/webvulns.php">Web</a></li>
                     </ul>
                 </li>
