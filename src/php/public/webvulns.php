@@ -1,10 +1,16 @@
+<?php
+$bodyid = "projects";
+include "../includes/header.php";
+require_once("../includes/common.php");
+
+?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){
     $('#findingID').on('change',function(){
         var findingID = $(this).val();
-        
+
         if(findingID){
             $.ajax({
                 type:'POST',
@@ -12,10 +18,7 @@ $(document).ready(function(){
                 data:'findingID='+findingID,
                 success:function(html){
                     var res = html.split(" ");
-                        //alert(res[0]);
-                        //$('#severity').val(res[0]);
                     var o = new Option(res[0], res[0]);
-                        /// jquerify the DOM object 'o' so we can use the html method
                     $(o).html(res[0]);
                     $("#severity").append(o);
                     $('#severity').val(res[0]);
@@ -112,8 +115,8 @@ if (isset($_GET['create'])) {
 
                 <?php
                     $query = "SELECT * FROM findings WHERE type='Web' ORDER BY finding ASC";
-    $result = mysqli_query($connection, $query);
-    confirm_query($result); ?>
+                    $result = mysqli_query($connection, $query);
+                    confirm_query($result); ?>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Finding Category</label>
@@ -200,7 +203,6 @@ if (isset($_GET['create'])) {
     $sql ="SELECT count(webvulnID) FROM webvulns where webvulnID<=".$_GET['read'];
     $result = mysqli_query($connection, $sql);
     $rs = mysqli_fetch_row($result);
-    //print $rs[0];exit;
     $r = $rs[0];
 
     if ($r > 1):
@@ -238,7 +240,6 @@ if (isset($_GET['create'])) {
 
     if ($flag==0) {
         ?>
-
             <li class="previous"><a href="?read=<?= $rs1['webvulnID'] ?>">Next</a></li>
         <?php
     }
@@ -270,10 +271,10 @@ if (isset($_GET['create'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Finding Category</label>
                     <div class="col-sm-5">
-                    <?php
+                    <?php 
                     $sql = "select * from findings where findingID=".$row['findingID'];
-    $result = mysqli_query($connection, $sql);
-    $find = mysqli_fetch_array($result); ?>
+                    $result = mysqli_query($connection, $sql);
+                    $find = mysqli_fetch_array($result); ?>
                         <input type="text" class="form-control" name="findingID" value="<?php echo $find['type'] ?>" readonly>
                     </div>
                 </div>
@@ -352,14 +353,14 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <?php
-                    $query = "SELECT * FROM findings WHERE type='Web App' ORDER BY finding ASC";
-    $result = mysqli_query($connection, $query);
-    confirm_query($result); ?>
+                    $query = "SELECT * FROM findings WHERE type='Web' ORDER BY finding ASC";
+                    $result = mysqli_query($connection, $query);
+                    confirm_query($result); ?>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Finding Category</label>
                     <div class="col-sm-5">
-                        <select class="form-control" name="findingID">
+                        <select class="form-control" name="findingID"  id="findingID">
                             <option value=""></option>
                             <?php
                                 while ($c = mysqli_fetch_assoc($result)) {
@@ -375,7 +376,7 @@ if (isset($_GET['create'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Severity</label>
                     <div class="col-sm-2">
-                        <select class="form-control" name="severity">
+                        <select class="form-control" name="severity" id="severity">
                             <option value=""></option>
                             <option value="Critical"<?php echo($row['severity'] == 'Critical' ? " selected" : "")?>>Critical</option>
                             <option value="High"<?php echo($row['severity'] == 'High' ? " selected" : "")?>>High</option>
@@ -389,21 +390,21 @@ if (isset($_GET['create'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="description" rows="25"><?php echo $row['description'] ?></textarea>
+                        <textarea class="form-control" name="description" id="description" rows="25"><?php echo $row['description'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Remediation</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="remediation" rows="25"><?php echo $row['remediation'] ?></textarea>
+                        <textarea class="form-control" name="remediation" id="remediation" rows="25"><?php echo $row['remediation'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">See Also</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="see_also" rows="5"><?php echo $row['see_also'] ?></textarea>
+                        <textarea class="form-control" name="see_also" id="see_also" rows="5"><?php echo $row['see_also'] ?></textarea>
                     </div>
                 </div>
 
@@ -412,6 +413,7 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="webvulns.php">Back</a>
                 </div>
             </form>
+
             </div>
         </div>
     </div>

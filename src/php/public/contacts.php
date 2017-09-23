@@ -55,8 +55,8 @@ if (isset($_GET['create'])) {
 
                 <?php
                     $query = "SELECT * FROM clients ORDER BY client ASC";
-                     $result = mysqli_query($connection, $query);
-                     confirm_query($result); ?>
+                    $result = mysqli_query($connection, $query);
+                    confirm_query($result); ?>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Client</label>
@@ -68,8 +68,8 @@ if (isset($_GET['create'])) {
                                     echo '<option value = "'.$c["clientID"].'">'.$c["client"].'</option>';
                                 }
 
-                // Release returned data.
-                mysqli_free_result($result); ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
                         </select>
                     </div>
                 </div>
@@ -119,72 +119,71 @@ if (isset($_GET['create'])) {
     </div>
     <?php
 } elseif (isset($_GET['read'])) {
-    // READ RECORD.
-    $query = "SELECT * FROM contacts WHERE contactID=".intval($_GET['read']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $row = mysqli_fetch_assoc($result);
+        // READ RECORD.
+        $query = "SELECT * FROM contacts WHERE contactID=".intval($_GET['read']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+        $row = mysqli_fetch_assoc($result);
 
-    // Find number of records.
-    $query2 = "SELECT * FROM contacts";
-    $result2 = mysqli_query($connection, $query2);
-    confirm_query($result2);
-    $limit = mysqli_num_rows($result2);
+        // Find number of records.
+        $query2 = "SELECT * FROM contacts";
+        $result2 = mysqli_query($connection, $query2);
+        confirm_query($result2);
+        $limit = mysqli_num_rows($result2);
 
-    // Free result set.
-    mysqli_free_result($result2);
+        // Free result set.
+        mysqli_free_result($result2);
 
-    // Get the page number or set it to 1 if no page is set.
-    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
+        // Get the page number or set it to 1 if no page is set.
+        $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
 
     <ul class="pager">
 
         <?php  $r = $limit - 1;
-    $r = $r-1;
-    $sql ="SELECT count(contactID) FROM contacts where contactID<=".$_GET['read'];
-    $result = mysqli_query($connection, $sql);
-    $rs = mysqli_fetch_row($result);
-    $r = $rs[0];
+        $r = $r-1;
+        $sql ="SELECT count(contactID) FROM contacts where contactID<=".$_GET['read'];
+        $result = mysqli_query($connection, $sql);
+        $rs = mysqli_fetch_row($result);
+        $r = $rs[0];
 
-    if ($r > 1):
-        $rr=$r-2;
+        if ($r > 1):
+            $rr=$r-2;
 
-    $sql1 ="SELECT * FROM contacts ORDER BY contactID LIMIT $rr,1";
-    $result1 = mysqli_query($connection, $sql1);
-    $rs1 = mysqli_fetch_array($result1);
-    //print_r($rs1);exit; ?>
+        $sql1 ="SELECT * FROM contacts ORDER BY contactID LIMIT $rr,1";
+        $result1 = mysqli_query($connection, $sql1);
+        $rs1 = mysqli_fetch_array($result1);
+        //print_r($rs1);exit;?>
 
             <li class="previous"><a href="?read=<?= $rs1['contactID'] ?>">Previous</a></li>
         <?php endif ?>
         <?php if ($r >= 1): ?>
         <?php
         $flag = 0;
-    $rr=$r;
+        $rr=$r;
+        $sql5 ="SELECT count(contactID) FROM contacts ";
+        $result5 = mysqli_query($connection, $sql5);
+        $rs5 = mysqli_fetch_row($result5);
 
-    $sql5 ="SELECT count(contactID) FROM contacts ";
-    $result5 = mysqli_query($connection, $sql5);
-    $rs5 = mysqli_fetch_row($result5);
+        if ($rr>$rs5[0]) {
+            $rr = $rr-2;
+            $flag = 1;
+        }
 
-    if ($rr>$rs5[0]) {
-        $rr = $rr-2;
-        $flag = 1;
-    }
+        if ($rr==$rs5[0]) {
+            $rr = $rr-1;
+            $flag = 1;
+        }
 
-    if ($rr==$rs5[0]) {
-        $rr = $rr-1;
-        $flag = 1;
-    }
+        $sql1 ="SELECT * FROM contacts ORDER BY contactID LIMIT $rr,1";
+        $result1 = mysqli_query($connection, $sql1);
+        $rs1 = mysqli_fetch_array($result1);
 
-    $sql1 ="SELECT * FROM contacts ORDER BY contactID LIMIT $rr,1";
-    $result1 = mysqli_query($connection, $sql1);
-    $rs1 = mysqli_fetch_array($result1);
-
-    if ($flag==0) {
-        ?>
+        if ($flag==0) {
+            ?>
             <li class="previous"><a href="?read=<?= $rs1['contactID'] ?>">Next</a></li>
         <?php
-    }
-    endif ?>
+        }
+        endif ?>
     </ul>
 
     <div class="container">
@@ -207,9 +206,9 @@ if (isset($_GET['create'])) {
                     <div class="col-sm-5">
                     <?php
                 $query = "SELECT * FROM clients where clientID = ".intval($row['clientID']);
-    $client = mysqli_query($connection, $query);
-    confirm_query($client);
-    $client = mysqli_fetch_assoc($client); ?>
+                $client = mysqli_query($connection, $query);
+                confirm_query($client);
+                $client = mysqli_fetch_assoc($client); ?>
                         <input type="text" class="form-control" name="clientid" value="<?php echo $client['client'] ?>" readonly>
                     </div>
                 </div>
@@ -258,12 +257,12 @@ if (isset($_GET['create'])) {
         </div>
     </div>
     <?php
-} elseif (isset($_GET['update'])) {
-    // UPDATE RECORD.
-    $query = "SELECT * FROM contacts WHERE contactID=".intval($_GET['update']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $row = mysqli_fetch_assoc($result); ?>
+    } elseif (isset($_GET['update'])) {
+        // UPDATE RECORD.
+        $query = "SELECT * FROM contacts WHERE contactID=".intval($_GET['update']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+        $row = mysqli_fetch_assoc($result); ?>
 
     <div class="container">
         <div class="panel panel-primary">
@@ -296,8 +295,8 @@ if (isset($_GET['create'])) {
                                     echo '<option value = "'.$c["clientID"].'"'.($row['clientID'] == $c['clientID'] ? ' selected' : '').'>'.$c["client"].'</option>';
                                 }
 
-    // Release returned data.
-    mysqli_free_result($result); ?>
+        // Release returned data.
+        mysqli_free_result($result); ?>
                         </select>
                     </div>
                 </div>
@@ -346,8 +345,8 @@ if (isset($_GET['create'])) {
         </div>
     </div>
     <?php
-} else {
-    // DISPLAY LIST OF RECORDS.
+    } else {
+        // DISPLAY LIST OF RECORDS.
     ?>
     <br>
     <a class="btn btn-primary" href="contacts.php?create" input type="button">New</a>
@@ -393,11 +392,11 @@ if (isset($_GET['create'])) {
                 </tr>';
             }
 
-    // Release returned data.
-    mysqli_free_result($result); ?>
+        // Release returned data.
+        mysqli_free_result($result); ?>
     </table>
     <?php
-}
+    }
 ?>
 
 <?php include '../includes/footer.php'; ?>

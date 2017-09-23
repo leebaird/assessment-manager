@@ -88,8 +88,8 @@ if (isset($_GET['create'])) {
 
                 <?php
                     $query = "SELECT * FROM findings WHERE type='Host' ORDER BY finding ASC";
-    $result = mysqli_query($connection, $query);
-    confirm_query($result); ?>
+                    $result = mysqli_query($connection, $query);
+                    confirm_query($result); ?>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Finding Category</label>
@@ -183,70 +183,69 @@ if (isset($_GET['create'])) {
     </div>
     <?php
 } elseif (isset($_GET['read'])) {
-    // READ RECORD.
-    $query = "SELECT * FROM hostvulns WHERE hostvulnID=".intval($_GET['read']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $row = mysqli_fetch_assoc($result);
+        // READ RECORD.
+        $query = "SELECT * FROM hostvulns WHERE hostvulnID=".intval($_GET['read']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+        $row = mysqli_fetch_assoc($result);
 
-    // Find number of records.
-    $query2 = "SELECT * FROM hostvulns";
-    $result2 = mysqli_query($connection, $query2);
-    confirm_query($result2);
-    $limit = mysqli_num_rows($result2);
+        // Find number of records.
+        $query2 = "SELECT * FROM hostvulns";
+        $result2 = mysqli_query($connection, $query2);
+        confirm_query($result2);
+        $limit = mysqli_num_rows($result2);
 
-    // Free result set.
-    mysqli_free_result($result2);
+        // Free result set.
+        mysqli_free_result($result2);
 
-    // Get the page number or set it to 1 if no page is set.
-    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
+        // Get the page number or set it to 1 if no page is set.
+        $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
 
     <ul class="pager">
         <?php  $r = $limit - 1;
-    $r = $r-1;
-    $sql ="SELECT count(hostvulnID) FROM hostvulns where hostvulnID<=".$_GET['read'];
-    $result = mysqli_query($connection, $sql);
-    $rs = mysqli_fetch_row($result);
-    $r = $rs[0];
+        $r = $r-1;
+        $sql ="SELECT count(hostvulnID) FROM hostvulns where hostvulnID<=".$_GET['read'];
+        $result = mysqli_query($connection, $sql);
+        $rs = mysqli_fetch_row($result);
+        $r = $rs[0];
 
-    if ($r > 1):
+        if ($r > 1):
         $rr=$r-2;
-    $sql1 ="SELECT * FROM hostvulns ORDER BY hostvulnID LIMIT $rr,1";
-    $result1 = mysqli_query($connection, $sql1);
-    $rs1 = mysqli_fetch_array($result1);
-    //print_r($rs1);exit; ?>
+        $sql1 ="SELECT * FROM hostvulns ORDER BY hostvulnID LIMIT $rr,1";
+        $result1 = mysqli_query($connection, $sql1);
+        $rs1 = mysqli_fetch_array($result1);
+        //print_r($rs1);exit;?>
 
             <li class="previous"><a href="?read=<?= $rs1['hostvulnID'] ?>">Previous</a></li>
         <?php endif ?>
         <?php if ($r >= 1): ?>
         <?php
         $flag = 0;
-    $rr=$r;
+        $rr=$r;
+        $sql5 ="SELECT count(hostvulnID) FROM hostvulns ";
+        $result5 = mysqli_query($connection, $sql5);
+        $rs5 = mysqli_fetch_row($result5);
 
-    $sql5 ="SELECT count(hostvulnID) FROM hostvulns ";
-    $result5 = mysqli_query($connection, $sql5);
-    $rs5 = mysqli_fetch_row($result5);
+        if ($rr>$rs5[0]) {
+            $rr = $rr-2;
+            $flag = 1;
+        }
 
-    if ($rr>$rs5[0]) {
-        $rr = $rr-2;
-        $flag = 1;
-    }
+        if ($rr==$rs5[0]) {
+            $rr = $rr-1;
+            $flag = 1;
+        }
 
-    if ($rr==$rs5[0]) {
-        $rr = $rr-1;
-        $flag = 1;
-    }
+        $sql1 ="SELECT * FROM hostvulns ORDER BY hostvulnID LIMIT $rr,1";
+        $result1 = mysqli_query($connection, $sql1);
+        $rs1 = mysqli_fetch_array($result1);
 
-    $sql1 ="SELECT * FROM hostvulns ORDER BY hostvulnID LIMIT $rr,1";
-    $result1 = mysqli_query($connection, $sql1);
-    $rs1 = mysqli_fetch_array($result1);
-
-    if ($flag==0) {
-        ?>
+        if ($flag==0) {
+            ?>
             <li class="previous"><a href="?read=<?= $rs1['hostvulnID'] ?>">Next</a></li>
         <?php
-    }
-    endif ?>
+        }
+        endif ?>
     </ul>
 
     <div class="container">
@@ -275,10 +274,10 @@ if (isset($_GET['create'])) {
                     <label class="col-sm-2 control-label">Finding Category</label>
                     <div class="col-sm-5">
                     <?php
-    $query = "SELECT * FROM findings WHERE findingID=".$row['findingID'];
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $row1 = mysqli_fetch_assoc($result); ?>
+        $query = "SELECT * FROM findings WHERE findingID=".$row['findingID'];
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+        $row1 = mysqli_fetch_assoc($result); ?>
                         <input type="text" class="form-control" name="findingID" value="<?php echo $row1['finding'] ?>" readonly>
                     </div>
                 </div>
@@ -346,12 +345,12 @@ if (isset($_GET['create'])) {
         </div>
     </div>
     <?php
-} elseif (isset($_GET['update'])) {
-    // UPDATE RECORD.
-    $query = "SELECT * FROM hostvulns WHERE hostvulnID=".intval($_GET['update']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $row = mysqli_fetch_assoc($result); ?>
+    } elseif (isset($_GET['update'])) {
+        // UPDATE RECORD.
+        $query = "SELECT * FROM hostvulns WHERE hostvulnID=".intval($_GET['update']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+        $row = mysqli_fetch_assoc($result); ?>
 
     <div class="container">
         <div class="panel panel-primary">
@@ -387,8 +386,8 @@ if (isset($_GET['create'])) {
 
                 <?php
                     $query = "SELECT * FROM findings WHERE type='Host' ORDER BY finding ASC";
-    $result = mysqli_query($connection, $query);
-    confirm_query($result); ?>
+                    $result = mysqli_query($connection, $query);
+                    confirm_query($result); ?>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Finding Category</label>
@@ -400,8 +399,8 @@ if (isset($_GET['create'])) {
                                     echo '<option value = "'.$c["findingID"].'"'.($row['findingID'] == $c['findingID'] ? ' selected' : '').'>'.$c["finding"].'</option>';
                                 }
 
-    // Release returned data.
-    mysqli_free_result($result); ?>
+        // Release returned data.
+        mysqli_free_result($result); ?>
                         </select>
                     </div>
                 </div>
@@ -482,8 +481,8 @@ if (isset($_GET['create'])) {
         </div>
     </div>
     <?php
-} else {
-    // DISPLAY LIST OF RECORDS.
+    } else {
+        // DISPLAY LIST OF RECORDS.
     ?>
     <br>
     <a class="btn btn-primary" href="hostvulns.php?create" input type="button">New</a>
@@ -494,31 +493,31 @@ if (isset($_GET['create'])) {
         // Number of rows per page.
         $rec_limit = 25;
 
-    if (isset($_SESSION['rec_limit'])) {
-        $rec_limit = $_SESSION['rec_limit'];
-    }
+        if (isset($_SESSION['rec_limit'])) {
+            $rec_limit = $_SESSION['rec_limit'];
+        }
 
-    // Get the total number of records.
-    $query = "SELECT COUNT(vulnerability) FROM hostvulns";
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
+        // Get the total number of records.
+        $query = "SELECT COUNT(vulnerability) FROM hostvulns";
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
 
-    $row = mysqli_fetch_array($result, MYSQLI_NUM);
-    $rec_count = $row[0];
-    $page = 0;
-    $offset = 0;
+        $row = mysqli_fetch_array($result, MYSQLI_NUM);
+        $rec_count = $row[0];
+        $page = 0;
+        $offset = 0;
 
-    if (isset($_GET['page'])) {
-        $page = $_GET['page'];
-        $offset = $rec_limit * $page ;
-    }
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+            $offset = $rec_limit * $page ;
+        }
 
-    $left_rec = $rec_count - ($page * $rec_limit);
+        $left_rec = $rec_count - ($page * $rec_limit);
 
-    // Perform db query.
-    $query = "SELECT * FROM hostvulns ORDER BY tool, vulnerability ASC LIMIT $offset, $rec_limit";
-    $hostset = mysqli_query($connection, $query);
-    confirm_query($result); ?>
+        // Perform db query.
+        $query = "SELECT * FROM hostvulns ORDER BY tool, vulnerability ASC LIMIT $offset, $rec_limit";
+        $hostset = mysqli_query($connection, $query);
+        confirm_query($result); ?>
 
     <table style="width: auto;" class="table table-bordered table-condensed table-hover">
         <tr>
@@ -557,8 +556,8 @@ if (isset($_GET['create'])) {
                 </tr>';
             }
 
-    // Release returned data.
-    mysqli_free_result($result); ?>
+        // Release returned data.
+        mysqli_free_result($result); ?>
     </table>
 
     <form method="post" action="">
@@ -576,7 +575,7 @@ if (isset($_GET['create'])) {
                 echo '<a href="?page='.$page.'">Next</a>';
             }
 
-    echo '
+        echo '
             <select name="set_rec_limit" onchange="this.form.submit()">
                 <option value="25"'.($rec_limit == 25 ? ' selected' : '').'>25</option>
                 <option value="50"'.($rec_limit == 50 ? ' selected' : '').'>50</option>
@@ -587,6 +586,6 @@ if (isset($_GET['create'])) {
     </form>
 
     <?php
-}
+    }
 
 include '../includes/footer.php'; ?>

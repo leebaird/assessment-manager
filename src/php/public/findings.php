@@ -125,23 +125,23 @@ if (isset($_GET['create'])) {
     </div>
     <?php
 } elseif (isset($_GET['read'])) {
-    // READ RECORD.
-    $query = "SELECT * FROM findings WHERE findingID=".intval($_GET['read']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $row = mysqli_fetch_assoc($result);
+        // READ RECORD.
+        $query = "SELECT * FROM findings WHERE findingID=".intval($_GET['read']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+        $row = mysqli_fetch_assoc($result);
 
-    // Find number of records.
-    $query2 = "SELECT * FROM findings";
-    $result2 = mysqli_query($connection, $query2);
-    confirm_query($result2);
-    $limit = mysqli_num_rows($result2);
+        // Find number of records.
+        $query2 = "SELECT * FROM findings";
+        $result2 = mysqli_query($connection, $query2);
+        confirm_query($result2);
+        $limit = mysqli_num_rows($result2);
 
-    // Free result set.
-    mysqli_free_result($result2);
+        // Free result set.
+        mysqli_free_result($result2);
 
-    // Get the page number or set it to 1 if no page is set.
-    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
+        // Get the page number or set it to 1 if no page is set.
+        $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
 
     <ul class="pager">
         <?php if ($read > 1): ?>
@@ -210,12 +210,12 @@ if (isset($_GET['create'])) {
         </div>
     </div>
     <?php
-} elseif (isset($_GET['update'])) {
-    // UPDATE RECORD.
-    $query = "SELECT * FROM findings WHERE findingID=".intval($_GET['update']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $row = mysqli_fetch_assoc($result); ?>
+    } elseif (isset($_GET['update'])) {
+        // UPDATE RECORD.
+        $query = "SELECT * FROM findings WHERE findingID=".intval($_GET['update']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+        $row = mysqli_fetch_assoc($result); ?>
 
     <div class="container">
         <div class="panel panel-primary">
@@ -289,8 +289,8 @@ if (isset($_GET['create'])) {
         </div>
     </div>
     <?php
-} else {
-    // DISPLAY LIST OF RECORDS.
+    } else {
+        // DISPLAY LIST OF RECORDS.
     ?>
     <br>
     <a class="btn btn-primary" href="findings.php?create" input type="button">New</a>
@@ -330,11 +330,11 @@ if (isset($_GET['create'])) {
                 </tr>';
             }
 
-    // Release returned data.
-    mysqli_free_result($result); ?>
+        // Release returned data.
+        mysqli_free_result($result); ?>
     </table>
     <?php
-}
+    }
 ?>
 
 <?php include '../includes/footer.php'; ?>
