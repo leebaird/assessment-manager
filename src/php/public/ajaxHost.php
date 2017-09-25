@@ -20,6 +20,7 @@
     $result1 = mysqli_query($connection, $query1);
     $row1 = mysqli_fetch_array($result1);
 
+/*
     $query2 = "SELECT * FROM employees WHERE employeeID=".$row['projectmgr'];
     $result2 = mysqli_query($connection, $query2);
     $row2 = mysqli_fetch_array($result2);
@@ -52,6 +53,6 @@
     $sn .= $row4['employee'].",";
     $sn .= $row5['employee'].",";
     $sn .= $row6['employee'].",";
-
+*/
     print $sn;
 ?>
