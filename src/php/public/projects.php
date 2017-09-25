@@ -24,12 +24,6 @@ $(document).ready(function(){
                     $('#phone').val(res[4]);
                     $('#web').val(res[5]);
                     $('#accountmgr').val(res[6]);
-                    //$('#projectmgr').val(res[7]);
-                    //$('#consultant1').val(res[14]);
-                    //$('#consultant2').val(res[15]);
-                   // $('#consultant3').val(res[16]);
-                   // $('#consultant4').val(res[17]);
-
                 }
             });
         }else{
@@ -78,7 +72,6 @@ if (isset($_POST['update'])) {
     $ass="";
     foreach($_POST['assessment'] as $selected){
     $ass .= $selected.",";
-    //}
 }
 
     // UPDATE RECORD.
@@ -270,7 +263,6 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 1</label>
                                 <div class="col-sm-3">
-                                    <!--<input type="text" class="form-control" name="consultant1" placeholder="Consultant 1" id="consultant1" />-->
                                      <select class="form-control" name="consultant1"  id="consultant1">
                                         <option value=""></option>
                                         <?php
@@ -294,10 +286,6 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 2</label>
                                 <div class="col-sm-3">
-                                    <!--
-                                    <input type="text" class="form-control" name="consultant2" placeholder="Consultant 2" id="consultant2" />
-                                    -->
-
                                      <select class="form-control" name="consultant2"  id="consultant2">
                                         <option value=""></option>
                                         <?php
@@ -322,10 +310,6 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 3</label>
                                 <div class="col-sm-3">
-                                    <!--
-                                    <input type="text" class="form-control" name="consultant3" placeholder="Consultant 3" id="consultant3" />
-                                    -->
-
                                      <select class="form-control" name="consultant3"  id="consultant3">
                                         <option value=""></option>
                                         <?php
@@ -349,9 +333,6 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 4</label>
                                 <div class="col-sm-3">
-                                    <!--
-                                    <input type="text" class="form-control" name="consultant4" placeholder="Consultant 4" id="consultant4" />
-                                    -->
                                      <select class="form-control" name="consultant4"  id="consultant4">
                                         <option value=""></option>
                                         <?php
@@ -428,7 +409,9 @@ if (isset($_GET['create'])) {
                     </div>
 
                     <!-- Report panel -->
-                    <div role="tabpanel" class="tab-pane" id="report"><!--Need to think about this layout.--></div>
+                    <div role="tabpanel" class="tab-pane" id="report">
+                    <!--Need to think about this layout.-->
+                    </div>
 
                     <!-- External panel -->
                     <div role="tabpanel" class="tab-pane" id="external">
@@ -698,9 +681,7 @@ elseif (isset($_GET['read'])) {
 
                             <div class="form-group">
                             <?php
-                            //print $row['assisment'];
-
-                            $assisment = @explode(",",$row['assessment']);
+                                $assisment = @explode(",",$row['assessment']);
                             ?>
 
                                 <label class="col-sm-2 control-label">Assessment</label>
@@ -714,6 +695,7 @@ elseif (isset($_GET['read'])) {
                                          value="External" disabled="disabled">External
                                     <?php } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
                                     <?php if(in_array("Internal", @$assisment)){ ?>
 
@@ -739,10 +721,12 @@ elseif (isset($_GET['read'])) {
                                     <?php if(in_array("Physical", @$assisment)){ ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Physical" checked="checked" disabled="disabled">Physical
-                                     <?php } else {?>
+                                        <?php } else {?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Physical" disabled="disabled">Physical
-                                     <?php } ?>                                label>
+                                    <?php } ?>
+                                    </label>
+
                                     <label class="checkbox-inline">
                                     <?php if(in_array("Social Eng", @$assisment)){ ?>
                                         <input type="checkbox" name="assessment[]" 
@@ -752,6 +736,7 @@ elseif (isset($_GET['read'])) {
                                         value="Social Eng" disabled="disabled">Social Eng
                                         <?php } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
                                     <?php if(in_array("War Dialing", @$assisment)){ ?>
                                         <input type="checkbox" name="assessment[]"
@@ -761,6 +746,7 @@ elseif (isset($_GET['read'])) {
                                         value="War Dialing" disabled="disabled">War Dialing
                                     <?php } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
                                     <?php if(in_array("Web", @$assisment)){ ?>
                                         <input type="checkbox" name="assessment[]"
@@ -770,6 +756,7 @@ elseif (isset($_GET['read'])) {
                                     value="Web" disabled="disabled">Web
                                     <?php } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
                                     <?php if(in_array("Wireless", @$assisment)){ ?>
                                         <input type="checkbox" name="assessment[]"
@@ -783,9 +770,9 @@ elseif (isset($_GET['read'])) {
                             </div>
 
                         <?php
-                       $query1 = "SELECT * FROM clients where clientID=".$row['client'];
-                                $result1 = mysqli_query($connection, $query1);
-                        $row1 = mysqli_fetch_array($result1);
+                            $query1 = "SELECT * FROM clients where clientID=".$row['client'];
+                            $result1 = mysqli_query($connection, $query1);
+                            $row1 = mysqli_fetch_array($result1);
                         ?>
 
                             <div class="form-group">
@@ -964,7 +951,6 @@ elseif (isset($_GET['read'])) {
 
                     <!-- External panel -->
                     <div role="tabpanel" class="tab-pane" id="external">
-
                         <!-- <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -993,7 +979,8 @@ elseif (isset($_GET['read'])) {
                                     <textarea class="form-control" name="ext_notes" rows="6" readonly><?php// //echo $row['ext_notes'] ?></textarea>
                                 </div>
                             </div>
-                        </form>-->
+                        </form>
+                    -->
                     </div>
 
                     <!-- Internal panel -->
@@ -1028,12 +1015,12 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                         -->
+                    -->
                     </div>
 
                     <!-- Mobile panel -->
-                    <!--
                     <div role="tabpanel" class="tab-pane" id="mobile">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1049,13 +1036,13 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                         -->
+                    -->
                     </div>
 
                     <!-- Physical panel -->
                     <div role="tabpanel" class="tab-pane" id="physical">
                     <!--
-                            <form class="form-horizontal" action="projects.php" method="post">
+                        <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
@@ -1070,11 +1057,12 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
+                    -->
                     </div>
 
                     <!-- Social Eng panel -->
-                    <!--
                     <div role="tabpanel" class="tab-pane" id="social-eng">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1090,12 +1078,12 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
+                    -->
                     </div>
 
                     <!-- War Dailing panel -->
                     <div role="tabpanel" class="tab-pane" id="war-dail">
-                    <!-- 
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1111,7 +1099,7 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
+                    -->
                     </div>
 
                     <!-- Web panel -->
@@ -1132,7 +1120,7 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
+                    -->
                     </div>
 
                     <!-- Wireless panel -->
@@ -1153,7 +1141,7 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
+                    -->
                     </div>
                 </div>
             </div>
@@ -1168,7 +1156,6 @@ elseif (isset($_GET['update'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
     $row = mysqli_fetch_assoc($result);
-
     ?>
 
     <div class="container">
@@ -1220,6 +1207,7 @@ elseif (isset($_GET['update'])) {
                                         value="External" >External
                                     <?php } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
                                     <?php if(in_array("Internal", @$assisment)
                                     ){ ?>
@@ -1230,6 +1218,7 @@ elseif (isset($_GET['update'])) {
                                         value="Internal" >Internal
                                     <?php } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
                                     <?php if(in_array("Mobile", @$assisment)
                                     ){ ?>
@@ -1240,6 +1229,7 @@ elseif (isset($_GET['update'])) {
                                         value="Mobile" >Mobile
                                     <?php } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
                                     <?php if(in_array("Physical", @$assisment)
                                     ){ ?>
@@ -1250,6 +1240,7 @@ elseif (isset($_GET['update'])) {
                                         value="Physical">Physical
                                     <?php } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
                                     <?php if(in_array("Social Eng", @$assisment)
                                     ){ ?>
@@ -1260,6 +1251,7 @@ elseif (isset($_GET['update'])) {
                                         value="Social Eng">Social Eng
                                     <?php } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
                                     <?php if(in_array("War Dialing", @$assisment)){ ?>
                                         <input type="checkbox" name="assessment[]"
@@ -1269,6 +1261,7 @@ elseif (isset($_GET['update'])) {
                                         value="War Dialing" >War Dialing
                                     <?php } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
                                     <?php if(in_array("Web", @$assisment)
                                     ){ ?>
@@ -1278,6 +1271,7 @@ elseif (isset($_GET['update'])) {
                                     value="Web" >Web
                                     <?php } ?>
                                     </label>
+
                                     <label class="checkbox-inline">
                                     <?php if(in_array("Wireless", @$assisment)
                                     ){ ?>
@@ -1292,11 +1286,9 @@ elseif (isset($_GET['update'])) {
                             </div>
 
                             <?php
-                            /*
-                                $query = "SELECT * FROM clients ORDER BY client ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                                */
+                            //    $query = "SELECT * FROM clients ORDER BY client ASC";
+                            //    $result = mysqli_query($connection, $query);
+                            //    confirm_query($result);
                             ?>
 
                             <div class="form-group">
@@ -1314,8 +1306,8 @@ elseif (isset($_GET['update'])) {
                                         <?php
                                             while($c = mysqli_fetch_assoc($result11)) {
                                         ?>
-                                         <option value = '<?php print $c["clientID"]; ?>' ><?php print $c["client"]; ?></option>
-                                         <?php
+                                        <option value = '<?php print $c["clientID"]; ?>' ><?php print $c["client"]; ?></option>
+                                        <?php
                                             }
 
                                             // Release returned data.
@@ -1393,7 +1385,6 @@ elseif (isset($_GET['update'])) {
                             <?php
                                 $query = "SELECT * FROM employees WHERE projectmgr='Yes' ORDER BY employee ASC";
                                 $result = mysqli_query($connection, $query);
-                                //confirm_query($result);
                             ?>
 
                             <?php
@@ -1402,10 +1393,8 @@ elseif (isset($_GET['update'])) {
                                 $row12 = @mysqli_fetch_array($result12);
                                 $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes'";
                                 $resulty = mysqli_query($connection, $queryy);
-
-                                //print_r($rowy);exit;
                             ?>
-                            
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Project Mgr</label>
                                 <div class="col-sm-3">
@@ -1414,7 +1403,7 @@ elseif (isset($_GET['update'])) {
                                         <?php
                                             while($c1 = @mysqli_fetch_array($resulty)) {
                                         ?>
-                                                <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
+                                            <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
                                         <?php
                                             }
 
@@ -1436,9 +1425,6 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 1</label>
                                 <div class="col-sm-3">
-                                    <!--<input type="text" class="form-control" name="consultant1"
-                                    id="consultant1"  value="<?php //echo $row['consultant1'] ?>">-->
-
                                     <select class="form-control" name="consultant1" id="consultant1">
                                         <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
                                         <?php
@@ -1447,7 +1433,6 @@ elseif (isset($_GET['update'])) {
                                                 <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
                                         <?php
                                             }
-
                                             // Release returned data.
                                             mysqli_free_result($result);
                                         ?>
@@ -1466,18 +1451,14 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 2</label>
                                 <div class="col-sm-3">
-                                    <!--<input type="text" class="form-control" name="consultant2"
-                                    id="consultant2" value="<?php //echo $row['consultant2'] ?>">-->
-
                                     <select class="form-control" name="consultant2" id="consultant2">
                                         <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
                                         <?php
                                             while($c1 = @mysqli_fetch_array($resulty)) {
                                         ?>
-                                                <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
+                                            <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
                                         <?php
                                             }
-
                                             // Release returned data.
                                             mysqli_free_result($result);
                                         ?>
@@ -1504,10 +1485,9 @@ elseif (isset($_GET['update'])) {
                                         <?php
                                             while($c1 = @mysqli_fetch_array($resulty)) {
                                         ?>
-                                                <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
+                                            <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
                                         <?php 
                                             }
-
                                             // Release returned data.
                                             mysqli_free_result($result);
                                         ?>
@@ -1534,10 +1514,9 @@ elseif (isset($_GET['update'])) {
                                         <?php
                                             while($c1 = @mysqli_fetch_array($resulty)) {
                                         ?>
-                                                <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
+                                            <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
                                         <?php
                                             }
-
                                             // Release returned data.
                                             mysqli_free_result($result);
                                         ?>
@@ -1613,11 +1592,13 @@ elseif (isset($_GET['update'])) {
                     </div>
 
                     <!-- Report panel -->
-                    <div role="tabpanel" class="tab-pane" id="report"><!-- Need to think about this layout. --></div>
+                    <div role="tabpanel" class="tab-pane" id="report">
+                        <!-- Need to think about this layout. -->
+                    </div>
 
                     <!-- External panel -->
                     <div role="tabpanel" class="tab-pane" id="external">
-                    <!-- 
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1651,7 +1632,8 @@ elseif (isset($_GET['update'])) {
                     </div>
 
                     <!-- Internal panel -->
-                    <!-- <div role="tabpanel" class="tab-pane" id="internal">
+                    <div role="tabpanel" class="tab-pane" id="internal">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1707,7 +1689,7 @@ elseif (isset($_GET['update'])) {
 
                     <!-- Physical panel -->
                     <div role="tabpanel" class="tab-pane" id="physical">
-                    <!-- 
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1790,8 +1772,8 @@ elseif (isset($_GET['update'])) {
                     </div>
 
                     <!-- Wireless panel -->
-                    <!--
                     <div role="tabpanel" class="tab-pane" id="wireless">
+                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1816,7 +1798,6 @@ elseif (isset($_GET['update'])) {
     <?php
 }
 
-
 else {
     // DISPLAY LIST OF RECORDS.
     ?>
@@ -1826,7 +1807,6 @@ else {
     <br>
 
     <?php
-        // Perform db query.
         $query = "SELECT * FROM projects ORDER BY project ASC";
         $result = mysqli_query($connection, $query);
         confirm_query($result);
