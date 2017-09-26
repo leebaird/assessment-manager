@@ -73,20 +73,9 @@
                         cursor: default;
                         opacity: 0.6;
                     }
-
                     </style>
-                     <?php $str = $_SERVER['REQUEST_URI'];
 
-                     $people = explode("/",$str);
-                     if (in_array("webvulns.php", $people)){
-                       ?>
-                        <li><a href="../public/hostvulns.php" class="disabled">Host</a></li>
-
-                    <?php } else {?>
                         <li><a href="../public/hostvulns.php" >Host</a></li>
-
-                    <?php } ?>
-
                         <li><a href="../public/webvulns.php">Web</a></li>
                     </ul>
                 </li>
