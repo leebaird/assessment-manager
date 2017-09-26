@@ -65,7 +65,7 @@ $ass="";
 foreach($_POST['assessment'] as $selected){
 $ass .= $selected.",";
 }
-   $query = "INSERT INTO projects (modified, project, assessment, client, address, city, state, zip,  phone, web,  employeeID, projectmgr, consultant1, consultant2, consultant3, consultant4, kickoff, start, finish, status,  notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]','$_POST[web]','$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[consultant1]', '$_POST[consultant2]', '$_POST[consultant3]', '$_POST[consultant4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[current_status]', '$_POST[notes]')";
+   $query = "INSERT INTO projects (modified, project, assessment, client, address, city, state, zip,  phone, web,  employeeID, projectmgr, consultant1, consultant2, consultant3, consultant4, kickoff, start, finish, tech_qa, draft_delivery, final_delivery, status,  notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]','$_POST[web]','$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[consultant1]', '$_POST[consultant2]', '$_POST[consultant3]', '$_POST[consultant4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[tech_qa]', '$_POST[draft_delivery]', '$_POST[final_delivery]', '$_POST[current_status]', '$_POST[notes]')";
 
    //print $query; exit;
     $result = mysqli_query($connection, $query);
@@ -79,7 +79,7 @@ if (isset($_POST['update'])) {
 }
 
     // UPDATE RECORD.
-    @$query = "UPDATE projects SET modified=now(), project='$_POST[project]', assessment='$ass', client='$_POST[clientID]', address='$_POST[address]', city='$_POST[city]', state='$_POST[state]', zip='$_POST[zip]',phone='$_POST[phone]',web='$_POST[web]', employeeID='$_POST[employeeID]', projectmgr='$_POST[projectmgr]', consultant1='$_POST[consultant1]', consultant2='$_POST[consultant2]', consultant3='$_POST[consultant3]', consultant4='$_POST[consultant4]', kickoff='$_POST[kickoff]', start='$_POST[start_date]', finish='$_POST[finish]', status='$_POST[current_status]', notes='$_POST[notes]' WHERE projectID=".intval($_POST['update']);
+    @$query = "UPDATE projects SET modified=now(), project='$_POST[project]', assessment='$ass', client='$_POST[clientID]', address='$_POST[address]', city='$_POST[city]', state='$_POST[state]', zip='$_POST[zip]',phone='$_POST[phone]',web='$_POST[web]', employeeID='$_POST[employeeID]', projectmgr='$_POST[projectmgr]', consultant1='$_POST[consultant1]', consultant2='$_POST[consultant2]', consultant3='$_POST[consultant3]', consultant4='$_POST[consultant4]', kickoff='$_POST[kickoff]', start='$_POST[start_date]', finish='$_POST[finish]', tech_qa='$_POST[tech_qa]', draft_delivery='$_POST[draft_delivery]', final_delivery='$_POST[final_delivery]', status='$_POST[current_status]', notes='$_POST[notes]' WHERE projectID=".intval($_POST['update']);
 
     $result = mysqli_query($connection, $query);
     confirm_query($result);
@@ -376,10 +376,35 @@ if (isset($_GET['create'])) {
                             </div>
 
                             <div class="form-group">
+                                <label class="col-sm-2 control-label">Tech QA</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="tech_qa" name="tech_qa" placeholder="Tech QA">
+                                    <script> $( "#tech_qa" ).datepicker(); </script>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Draft Delivery</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="draft_delivery" name="draft_delivery" placeholder="Draft Delivery">
+                                    <script> $( "#draft_delivery" ).datepicker(); </script>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Final Delivery</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="final_delivery" name="final_delivery" placeholder="Final Delivery">
+                                    <script> $( "#final_delivery" ).datepicker(); </script>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Status</label>
                                 <div class="col-sm-2">
                                     <select class="form-control" name="current_status" id="current_status">
                                         <option value=""></option>
+                                        <option value="Contract">Contract</option>
                                         <option value="Scoping">Scoping</option>
                                         <option value="In Progress">In Progress</option>
                                         <option value="Reporting">Reporting</option>
@@ -387,14 +412,6 @@ if (isset($_GET['create'])) {
                                         <option value="Delivered">Delivered</option>
                                         <option value="Complete">Complete</option>
                                     </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Due</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="due" name="due" placeholder="Due">
-                                    <script> $( "#due" ).datepicker(); </script>
                                 </div>
                             </div>
 
@@ -908,16 +925,30 @@ elseif (isset($_GET['read'])) {
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Status</label>
+                                <label class="col-sm-2 control-label">Tech QA</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="current_status" value="<?php echo @$row['status'] ?>" readonly>
+                                    <input type="text" class="form-control" name="tech_qa" value="<?php echo @$row['tech_qa'] ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Due</label>
+                                <label class="col-sm-2 control-label">Draft Delivery</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="due" value="<?php echo @$row['due'] ?>" readonly>
+                                    <input type="text" class="form-control" name="draft_delivery" value="<?php echo @$row['draft_delivery'] ?>" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Final Delivery</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="final_delivery" value="<?php echo @$row['final_delivery'] ?>" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="current_status" value="<?php echo @$row['status'] ?>" readonly>
                                 </div>
                             </div>
 
@@ -1512,10 +1543,35 @@ elseif (isset($_GET['update'])) {
                             </div>
 
                             <div class="form-group">
+                                <label class="col-sm-2 control-label">Tech QA</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="tech_qa" name="tech_qa" value="<?php echo @$row['tech_qa'] ?>">
+                                    <script> $( "#tech_qa" ).datepicker(); </script>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Draft Delivery</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="draft_delivery" name="draft_delivery" value="<?php echo @$row['draft_delivery'] ?>">
+                                    <script> $( "#draft_delivery" ).datepicker(); </script>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Final Delivery</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="final_delivery" name="final_delivery" value="<?php echo @$row['final_delivery'] ?>">
+                                    <script> $( "#final_delivery" ).datepicker(); </script>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Status</label>
                                 <div class="col-sm-2">
                                     <select class="form-control" name="current_status"  id="current_status">
                                         <option value="<?php echo $row['status']; ?>"><?php echo $row['status']; ?></option>
+                                        <option value="Contract"<?php echo ($row['status'] == 'Contract' ? " selected" : "")?>>Contract</option>
                                         <option value="Scoping"<?php echo ($row['status'] == 'Scoping' ? " selected" : "")?>>Scoping</option>
                                         <option value="In Progress"<?php echo ($row['status'] == 'In Progress' ? " selected" : "")?>>In Progress</option>
                                         <option value="Reporting"<?php echo ($row['status'] == 'Reporting' ? " selected" : "")?>>Reporting</option>
@@ -1531,14 +1587,6 @@ elseif (isset($_GET['update'])) {
                                 $result = mysqli_query($connection, $query);
                                 confirm_query($result);
                             ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Due</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="due" name="due" value="<?php echo @$row['due'] ?>">
-                                    <script> $( "#due" ).datepicker(); </script>
-                                </div>
-                            </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
@@ -1785,10 +1833,10 @@ else {
                     <td width="50">'.'<a class="btn btn-primary" href="projects.php?read='.$row['projectID'].'"><span class="glyphicon glyphicon-play"></span></a>'.'</td>
                     <td width="50">'.'<a class="btn btn-warning" href="projects.php?update='.$row['projectID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                     <td width="350">'.$row["project"].'</td>
-                    <td width="100">'.$client['client'].'</td>
-                    <td width="125">'.$row["start"].'</td>
+                    <td width="300">'.$client['client'].'</td>
+                    <td width="100">'.$row["start"].'</td>
                     <td width="100">'.$row["status"].'</td>
-                    <td width="250">'.$myDateFormat.'</td>
+                    <td width="150">'.$myDateFormat.'</td>
                     <td width="50">'.'<a class="btn btn-danger" href="projects.php?delete='.$row['projectID'].'"
                         onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
                 </tr>';
