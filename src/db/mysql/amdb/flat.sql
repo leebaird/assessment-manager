@@ -40,7 +40,7 @@ CREATE TABLE `clients` (
   `zip` varchar(10) COLLATE utf8_bin,
   `phone` varchar(20) COLLATE utf8_bin,
   `web` varchar(50) COLLATE utf8_bin,
-  `employeeID` int(4),
+  `employeeID` int(4) NOT NULL,
   `notes` text COLLATE utf8_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -136,8 +136,8 @@ CREATE TABLE `findings` (
   `modified` datetime NOT NULL,
   `type` varchar(25) COLLATE utf8_bin NOT NULL,
   `finding` varchar(50) COLLATE utf8_bin NOT NULL,
-  `observation` text COLLATE utf8_bin,
   `severity` text COLLATE utf8_bin NOT NULL,
+  `observation` text COLLATE utf8_bin,
   `remediation` text COLLATE utf8_bin,
   `see_also` text COLLATE utf8_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -208,10 +208,10 @@ CREATE TABLE `projects` (
   `consultant4` varchar(50) COLLATE utf8_bin,
   `kickoff` varchar(12) COLLATE utf8_bin,
   `start` varchar(12) COLLATE utf8_bin,
+  `finish` varchar(12) COLLATE utf8_bin,
   `tech_qa` varchar(12) COLLATE utf8_bin,
   `draft_delivery` varchar(12) COLLATE utf8_bin,
   `final_delivery` varchar(12) COLLATE utf8_bin,
-  `finish` varchar(12) COLLATE utf8_bin,
   `status` varchar(10) COLLATE utf8_bin,
   `notes` text COLLATE utf8_bin,
   `objective` varchar(100) COLLATE utf8_bin
@@ -235,14 +235,14 @@ CREATE TABLE `scan` (
   `scanID` int(4) NOT NULL,
   `modified` datetime NOT NULL,
   `scan` varchar(50) COLLATE utf8_bin NOT NULL,
-  `location` varchar(10) COLLATE utf8_bin NOT NULL,
+  `location` varchar(10) COLLATE utf8_bin,
   `severity` varchar(10) COLLATE utf8_bin NOT NULL,
-  `ip_address` varchar(15) COLLATE utf8_bin NOT NULL,
-  `fqdn` varchar(25) COLLATE utf8_bin NOT NULL,
-  `os` varchar(50) COLLATE utf8_bin NOT NULL,
-  `port` int(5) NOT NULL,
-  `proof` text COLLATE utf8_bin NOT NULL,
-  `date` date NOT NULL,
+  `ip_address` varchar(15) COLLATE utf8_bin,
+  `fqdn` varchar(25) COLLATE utf8_bin,
+  `os` varchar(50) COLLATE utf8_bin,
+  `port` int(5),
+  `proof` text COLLATE utf8_bin,
+  `date` date,
   `projectID` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
