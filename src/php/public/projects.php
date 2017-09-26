@@ -789,9 +789,8 @@ elseif (isset($_GET['read'])) {
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
-                                <div class="col-sm-4">
-                                    <textarea class="form-control" name="address" rows="2" readonly>
-                                    <?php echo @$row['address'] ?></textarea>
+                                    <div class="col-sm-4">
+                                    <textarea class="form-control" name="address" rows="2" readonly><?php echo $row['address'] ?></textarea>
                                 </div>
                             </div>
 
