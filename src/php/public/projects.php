@@ -17,13 +17,18 @@ $(document).ready(function(){
                 data:'country_id='+countryID,
                 success:function(html){
                     var res = html.split(",");
+
                     $('#address').val(res[0]);
                     $('#city').val(res[1]);
                     $('#state').val(res[2]);
                     $('#zip').val(res[3]);
                     $('#phone').val(res[4]);
                     $('#web').val(res[5]);
+                         if(res[6]==""){
+                              $('#accountmgr').val("");
+                         }else{
                     $('#accountmgr').val(res[6]);
+                         }
                 }
             });
         }else{
@@ -34,7 +39,6 @@ $(document).ready(function(){
 </script>
 
 <?php
-
 if (isset($_POST['create'])) {
     // CREATE RECORD.
 
@@ -786,7 +790,8 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
                                 <div class="col-sm-5">
-                                    <textarea class="form-control" name="address" rows="2" readonly><?php echo @$row['address'] ?></textarea>
+                                    <textarea class="form-control" name="address" rows="2" readonly>
+                                             <?php echo @$row['address'] ?></textarea>
                                 </div>
                             </div>
 
@@ -1299,7 +1304,7 @@ elseif (isset($_GET['update'])) {
                                 $query1 = "SELECT * FROM clients where clientID=".$row['client'];
                                 $result1 = mysqli_query($connection, $query1);
                                 $row1 = mysqli_fetch_array($result1);
-                                $query11 = "SELECT * FROM clients";
+                                $query11 = "SELECT * FROM clients ORDER BY client ASC";
                                 $result11 = mysqli_query($connection, $query11);
                             ?>
                                         <option value="<?php echo $row1['clientID'] ?>"><?php echo $row1['client'] ?></option>
@@ -1391,7 +1396,7 @@ elseif (isset($_GET['update'])) {
                                 $query12 = "SELECT * FROM employees where employeeID=".$row['projectmgr'];
                                 $result12 = mysqli_query($connection, $query12);
                                 $row12 = @mysqli_fetch_array($result12);
-                                $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes'";
+                                $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
                                 $resulty = mysqli_query($connection, $queryy);
                             ?>
 
@@ -1418,7 +1423,7 @@ elseif (isset($_GET['update'])) {
                                 $query12 = "SELECT * FROM employees where employeeID=".$row['consultant1'];
                                 $result12 = mysqli_query($connection, $query12);
                                 $row12 = @mysqli_fetch_array($result12);
-                                $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes'";
+                                $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
                                 $resulty = mysqli_query($connection, $queryy);
                             ?>
 
@@ -1444,7 +1449,7 @@ elseif (isset($_GET['update'])) {
                                 $query12 = "SELECT * FROM employees where employeeID=".$row['consultant2'];
                                 $result12 = mysqli_query($connection, $query12);
                                 $row12 = @mysqli_fetch_array($result12);
-                                $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes'";
+                                $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
                                 $resulty = mysqli_query($connection, $queryy);
                             ?>
 
@@ -1470,7 +1475,7 @@ elseif (isset($_GET['update'])) {
                                 $query12 = "SELECT * FROM employees where employeeID=".$row['consultant3'];
                                 $result12 = mysqli_query($connection, $query12);
                                 $row12 = @mysqli_fetch_array($result12);
-                                $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes'";
+                                $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
                                 $resulty = mysqli_query($connection, $queryy);
                             ?>
 
@@ -1499,7 +1504,7 @@ elseif (isset($_GET['update'])) {
                                 $query12 = "SELECT * FROM employees where employeeID=".$row['consultant4'];
                                 $result12 = mysqli_query($connection, $query12);
                                 $row12 = @mysqli_fetch_array($result12);
-                                $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes'";
+                                $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
                                 $resulty = mysqli_query($connection, $queryy);
                             ?>
 
