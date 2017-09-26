@@ -419,7 +419,6 @@ if (isset($_GET['create'])) {
 
                     <!-- External panel -->
                     <div role="tabpanel" class="tab-pane" id="external">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -449,12 +448,10 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
                     </div>
 
                     <!-- Internal panel -->
                     <div role="tabpanel" class="tab-pane" id="internal">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -484,12 +481,10 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                         -->
                     </div>
 
                     <!-- Mobile panel -->
                     <div role="tabpanel" class="tab-pane" id="mobile">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -505,12 +500,10 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
                     </div>
 
                     <!-- Physical panel -->
                     <div role="tabpanel" class="tab-pane" id="physical">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -526,12 +519,10 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
                     </div>
 
                     <!-- Social Eng panel -->
                     <div role="tabpanel" class="tab-pane" id="social-eng">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -547,12 +538,10 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
                     </div>
 
                     <!-- War Dail panel -->
                     <div role="tabpanel" class="tab-pane" id="war-dail">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -568,12 +557,10 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
                     </div>
 
                     <!-- Web panel -->
                     <div role="tabpanel" class="tab-pane" id="web">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -589,12 +576,10 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
                     </div>
 
                     <!-- Wireless panel -->
                     <div role="tabpanel" class="tab-pane" id="wireless">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -610,7 +595,6 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
                         </form>
-                        -->
                     </div>
                 </div>
             </div>
@@ -951,11 +935,13 @@ elseif (isset($_GET['read'])) {
                     </div>
 
                     <!-- Report panel -->
-                    <div role="tabpanel" class="tab-pane" id="report"><!-- Need to think about this layout. --></div>
+                    <div role="tabpanel" class="tab-pane" id="report">
+                        <!-- Need to think about this layout. -->
+                    </div>
 
                     <!-- External panel -->
                     <div role="tabpanel" class="tab-pane" id="external">
-                        <!-- <form class="form-horizontal" action="projects.php" method="post">
+                        <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
@@ -984,12 +970,10 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- Internal panel -->
                     <div role="tabpanel" class="tab-pane" id="internal">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1019,12 +1003,10 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- Mobile panel -->
                     <div role="tabpanel" class="tab-pane" id="mobile">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1040,12 +1022,10 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- Physical panel -->
                     <div role="tabpanel" class="tab-pane" id="physical">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1061,12 +1041,10 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- Social Eng panel -->
                     <div role="tabpanel" class="tab-pane" id="social-eng">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1082,12 +1060,10 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- War Dailing panel -->
                     <div role="tabpanel" class="tab-pane" id="war-dail">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1103,12 +1079,10 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- Web panel -->
                     <div role="tabpanel" class="tab-pane" id="web">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1124,12 +1098,10 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- Wireless panel -->
                     <div role="tabpanel" class="tab-pane" id="wireless">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1145,7 +1117,6 @@ elseif (isset($_GET['read'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
                 </div>
             </div>
@@ -1590,7 +1561,6 @@ elseif (isset($_GET['update'])) {
 
                     <!-- External panel -->
                     <div role="tabpanel" class="tab-pane" id="external">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1620,12 +1590,10 @@ elseif (isset($_GET['update'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- Internal panel -->
                     <div role="tabpanel" class="tab-pane" id="internal">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1655,12 +1623,10 @@ elseif (isset($_GET['update'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- Mobile panel -->
                     <div role="tabpanel" class="tab-pane" id="mobile">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1676,12 +1642,10 @@ elseif (isset($_GET['update'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- Physical panel -->
                     <div role="tabpanel" class="tab-pane" id="physical">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1697,12 +1661,10 @@ elseif (isset($_GET['update'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- Social Eng panel -->
                     <div role="tabpanel" class="tab-pane" id="social-eng">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1718,12 +1680,10 @@ elseif (isset($_GET['update'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- War Dail panel -->
                     <div role="tabpanel" class="tab-pane" id="war-dail">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1739,12 +1699,10 @@ elseif (isset($_GET['update'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- Web panel -->
                     <div role="tabpanel" class="tab-pane" id="web">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1760,12 +1718,10 @@ elseif (isset($_GET['update'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
 
                     <!-- Wireless panel -->
                     <div role="tabpanel" class="tab-pane" id="wireless">
-                    <!--
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
@@ -1781,7 +1737,6 @@ elseif (isset($_GET['update'])) {
                                 </div>
                             </div>
                         </form>
-                    -->
                     </div>
                 </div>
             </div>
