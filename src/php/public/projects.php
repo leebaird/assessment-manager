@@ -65,6 +65,7 @@ $ass="";
 foreach($_POST['assessment'] as $selected){
 $ass .= $selected.",";
 }
+
    $query = "INSERT INTO projects (modified, project, assessment, client, address, city, state, zip,  phone, web,  employeeID, projectmgr, consultant1, consultant2, consultant3, consultant4, kickoff, start, finish, tech_qa, draft_delivery, final_delivery, status,  notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]','$_POST[web]','$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[consultant1]', '$_POST[consultant2]', '$_POST[consultant3]', '$_POST[consultant4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[tech_qa]', '$_POST[draft_delivery]', '$_POST[final_delivery]', '$_POST[current_status]', '$_POST[notes]')";
 
    //print $query; exit;
@@ -264,6 +265,7 @@ if (isset($_GET['create'])) {
                                 $result = mysqli_query($connection, $query);
                                 confirm_query($result);
                             ?>
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 1</label>
                                 <div class="col-sm-3">
@@ -431,7 +433,7 @@ if (isset($_GET['create'])) {
 
                     <!-- Report panel -->
                     <div role="tabpanel" class="tab-pane" id="report">
-                    <!--Need to think about this layout.-->
+                    Need to think about this layout.
                     </div>
 
                     <!-- External panel -->
@@ -967,7 +969,7 @@ elseif (isset($_GET['read'])) {
 
                     <!-- Report panel -->
                     <div role="tabpanel" class="tab-pane" id="report">
-                        <!-- Need to think about this layout. -->
+                         Need to think about this layout.
                     </div>
 
                     <!-- External panel -->
@@ -976,28 +978,28 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="ext_objective" rows="2" readonly><?php// //echo $row['ext_objective'] ?></textarea>
+                                    <textarea class="form-control" name="ext_objective" rows="2" readonly></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="ext_targets" value="<?php// //echo $row['ext_targets'] ?>" readonly>
+                                    <input type="text" class="form-control" name="ext_targets" value="" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="ext_exclude" value="<?php// //echo $row['ext_exclude'] ?>" readonly>
+                                    <input type="text" class="form-control" name="ext_exclude" value="" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="ext_notes" rows="6" readonly><?php// //echo $row['ext_notes'] ?></textarea>
+                                    <textarea class="form-control" name="ext_notes" rows="6" readonly></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1009,28 +1011,28 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="int_objective" rows="2" readonly><?php// echo $row['int_objective'] ?></textarea>
+                                    <textarea class="form-control" name="int_objective" rows="2" readonly></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="int_targets" value="<?php// echo $row['int_targets'] ?>" readonly>
+                                    <input type="text" class="form-control" name="int_targets" value="" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="int_exclude" value="<?php// echo $row['int_exclude'] ?>" readonly>
+                                    <input type="text" class="form-control" name="int_exclude" value="" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="int_notes" rows="6" readonly><?php// echo $row['int_notes'] ?></textarea>
+                                    <textarea class="form-control" name="int_notes" rows="6" readonly></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1042,14 +1044,14 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="mob_objective" rows="2" readonly><?php// echo $row['mob_objective'] ?></textarea>
+                                    <textarea class="form-control" name="mob_objective" rows="2" readonly></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="mob_notes" rows="6" readonly><?php// //echo $row['mob_notes'] ?></textarea>
+                                    <textarea class="form-control" name="mob_notes" rows="6" readonly></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1061,14 +1063,14 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="phy_objective" rows="2" readonly><?php// echo $row['phy_objective'] ?></textarea>
+                                    <textarea class="form-control" name="phy_objective" rows="2" readonly></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="phy_notes" rows="6" readonly><?php// echo $row['phy_notes'] ?></textarea>
+                                    <textarea class="form-control" name="phy_notes" rows="6" readonly></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1080,14 +1082,14 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="se_objective" rows="2" readonly><?php// echo $row['se_objective'] ?></textarea>
+                                    <textarea class="form-control" name="se_objective" rows="2" readonly></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="se_notes" rows="6" readonly><?php// echo $row['se_notes'] ?></textarea>
+                                    <textarea class="form-control" name="se_notes" rows="6" readonly></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1099,14 +1101,14 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="war_objective" rows="2" readonly><?php// echo $row['war_objective'] ?></textarea>
+                                    <textarea class="form-control" name="war_objective" rows="2" readonly></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="war_notes" rows="6" readonly><?php// echo $row['war_notes'] ?></textarea>
+                                    <textarea class="form-control" name="war_notes" rows="6" readonly></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1118,14 +1120,14 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="web_objective" rows="2" readonly><?php// echo $row['web_objective'] ?></textarea>
+                                    <textarea class="form-control" name="web_objective" rows="2" readonly></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="web_notes" rows="6" readonly><?php// echo $row['web_notes'] ?></textarea>
+                                    <textarea class="form-control" name="web_notes" rows="6" readonly></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1137,14 +1139,14 @@ elseif (isset($_GET['read'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="wire_objective" rows="2" readonly><?php// echo $row['wire_objective'] ?></textarea>
+                                    <textarea class="form-control" name="wire_objective" rows="2" readonly></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="wire_notes" rows="6" readonly><?php// echo $row['wire_notes'] ?></textarea>
+                                    <textarea class="form-control" name="wire_notes" rows="6" readonly></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1604,7 +1606,7 @@ elseif (isset($_GET['update'])) {
 
                     <!-- Report panel -->
                     <div role="tabpanel" class="tab-pane" id="report">
-                        <!-- Need to think about this layout. -->
+                        Need to think about this layout.
                     </div>
 
                     <!-- External panel -->
@@ -1613,28 +1615,28 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="ext_objective" rows="2"><?php// echo $row['ext_objective'] ?></textarea>
+                                    <textarea class="form-control" name="ext_objective" rows="2"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="ext_targets" value="<?php// echo $row['ext_targets'] ?>">
+                                    <input type="text" class="form-control" name="ext_targets" value="">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="ext_exclude" value="<?php// echo $row['ext_exclude'] ?>">
+                                    <input type="text" class="form-control" name="ext_exclude" value="">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="ext_notes" rows="6"><?php// echo $row['ext_notes'] ?></textarea>
+                                    <textarea class="form-control" name="ext_notes" rows="6"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1646,28 +1648,28 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="int_objective" rows="2"><?php// echo $row['int_objective'] ?></textarea>
+                                    <textarea class="form-control" name="int_objective" rows="2"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="int_targets" value="<?php// echo $row['int_targets'] ?>">
+                                    <input type="text" class="form-control" name="int_targets" value="">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="int_exclude" value="<?php// echo $row['int_exclude'] ?>">
+                                    <input type="text" class="form-control" name="int_exclude" value="">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="int_notes" rows="6"><?php// echo $row['int_notes'] ?></textarea>
+                                    <textarea class="form-control" name="int_notes" rows="6"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1679,14 +1681,14 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="mob_objective" rows="2"><?php// echo $row['mob_objective'] ?></textarea>
+                                    <textarea class="form-control" name="mob_objective" rows="2"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="mob_notes" rows="6"><?php// echo $row['mob_notes'] ?></textarea>
+                                    <textarea class="form-control" name="mob_notes" rows="6"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1698,14 +1700,14 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="phy_objective" rows="2"><?php// echo $row['phy_objective'] ?></textarea>
+                                    <textarea class="form-control" name="phy_objective" rows="2"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="phy_notes" rows="6"><?php// echo $row['phy_notes'] ?></textarea>
+                                    <textarea class="form-control" name="phy_notes" rows="6"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1717,14 +1719,14 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="se_objective" rows="2"><?php// echo $row['se_objective'] ?></textarea>
+                                    <textarea class="form-control" name="se_objective" rows="2"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="se_notes" rows="6"><?php// echo $row['se_notes'] ?></textarea>
+                                    <textarea class="form-control" name="se_notes" rows="6"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1736,14 +1738,14 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="war_objective" rows="2"><?php// echo $row['war_objective'] ?></textarea>
+                                    <textarea class="form-control" name="war_objective" rows="2"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="war_notes" rows="6"><?php// echo $row['war_notes'] ?></textarea>
+                                    <textarea class="form-control" name="war_notes" rows="6"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1755,14 +1757,14 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="web_objective" rows="2"><?php// echo $row['web_objective'] ?></textarea>
+                                    <textarea class="form-control" name="web_objective" rows="2"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="web_notes" rows="6"><?php// echo $row['web_notes'] ?></textarea>
+                                    <textarea class="form-control" name="web_notes" rows="6"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -1774,14 +1776,14 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="wire_objective" rows="2"><?php// echo $row['wire_objective'] ?></textarea>
+                                    <textarea class="form-control" name="wire_objective" rows="2"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="wire_notes" rows="6"><?php// echo $row['wire_notes'] ?></textarea>
+                                    <textarea class="form-control" name="wire_notes" rows="6"></textarea>
                                 </div>
                             </div>
                         </form>
