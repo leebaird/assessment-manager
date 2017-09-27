@@ -18,42 +18,47 @@ else
 fi
 
 case $1 in
-    setup)
-    $mysql -uroot < amdb-sys_create.sql
-    $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_create.sql
-    $web
-    ;;
-
     clear)
-    $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_drop.sql
-    $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_create.sql
-    ;;
-
-    load)
-    $mysql --local-infile -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_load.sql
-    ;;
-
-    reload)
-    $0 clear
-    $0 load
-    ;;
+        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_drop.sql
+        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_create.sql
+        echo; echo;;
 
     connect)
-    $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME
-    ;;
+        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME
+        echo; echo;;
 
     connect.admin)
-    $mysql -uroot
-    ;;
+        $mysql -uroot
+        echo; echo;;
 
     drop)
-    $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_drop.sql
-    $mysql -uroot < amdb-sys_drop.sql
-    ;;
+        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_drop.sql
+        $mysql -uroot < amdb-sys_drop.sql
+        echo; echo;;
+
+    load)
+        $mysql --local-infile -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_load.sql
+        echo; echo;;
+
+    reload)
+        $0 clear
+        $0 load
+        echo; echo;;
+
+    setup)
+        $mysql -uroot < amdb-sys_create.sql
+        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_create.sql
+        $web
+        echo; echo;;
+
+    setup2)
+        $mysql -uroot < amdb-sys_create.sql
+        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < flat.sql
+        $web
+        echo; echo;;
 
     *)
-    echo
-    echo "Usage: $0 {setup | clear | load | reload | connect | drop}"
-    echo
-    echo
+        echo
+        echo "Usage: $0 (clear | connect | drop | load | reload | setup)"
+        echo; echo
 esac
