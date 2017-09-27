@@ -54,7 +54,7 @@ CREATE TABLE employees (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 CREATE TABLE employee_project (
-  employee_projectID int(6) NOT NULL AUTO_INCREMENT,
+  employee_projectID int(6) NOT NULL,
   employeeID varchar(255) COLLATE utf8_bin NOT NULL,
   projectID varchar(255) COLLATE utf8_bin NOT NULL,
   timestamp varchar(255) COLLATE utf8_bin NOT NULL
