@@ -175,7 +175,7 @@
 if (isset($_GET['create'])) {
     ?>
 <div class="vertical-center">
-    <div class="container col-md-6 col-md-offset-3">
+    <div class="container col-md-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Create User</h3>
@@ -213,7 +213,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Role</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <select class="form-control" name="role">
                             <option value="2">User</option>
                             <option value="1">Admin</option>
@@ -223,7 +223,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Approval</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <select class="form-control" name="approval">
                             <option value="0">No</option>
                             <option value="1">Yes</option>
@@ -236,21 +236,23 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="users.php">Back</a>
                 </div>
             </form>
-        </div>
-        </div>
+
+            </div>
         </div>
     </div>
-    <?php
-        } elseif (isset($_GET['read'])) {
+</div>
 
-    // READ RECORD.
-    $query = "SELECT * FROM users WHERE userID=".intval($_GET['read']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $row = mysqli_fetch_assoc($result); ?>
+<?php
+    } elseif (isset($_GET['read'])) {
+
+// READ RECORD.
+$query = "SELECT * FROM users WHERE userID=".intval($_GET['read']);
+$result = mysqli_query($connection, $query);
+confirm_query($result);
+$row = mysqli_fetch_assoc($result); ?>
 
 <div class="vertical-center">
-    <div class="container col-md-6 col-md-offset-3">
+    <div class="container col-md-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
                     <h3 class="panel-title">Read User</h3>
@@ -275,7 +277,7 @@ if (isset($_GET['create'])) {
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Role</label>
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
 
                                 <?php
                                 if ($row['role']==1) {
@@ -295,7 +297,7 @@ if (isset($_GET['create'])) {
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Approved</label>
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <?php
                                 if ($row['approved']==1) {
                                     ?>
@@ -329,7 +331,7 @@ if (isset($_GET['create'])) {
             $row = mysqli_fetch_assoc($result); ?>
 
 <div class="vertical-center">
-    <div class="container col-md-6 col-md-offset-3">
+    <div class="container col-md-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Update User</h3>
@@ -354,7 +356,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Role</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <select class="form-control" name="role">
                         <?php
                         if ($row['role']==1) {
@@ -376,7 +378,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Approved</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <select class="form-control" name="approved">
                         <?php
                         if ($row['approved']==1) {
@@ -403,13 +405,14 @@ if (isset($_GET['create'])) {
             </form>
             </div>
         </div>
-        </div>
     </div>
-    <?php
-        } else {
-            ?>
-    <br>
-    <a class="btn btn-primary" href="users.php?create" input type="button">New</a>
+</div>
+
+<?php
+    } else {
+        ?>
+<br>
+<a class="btn btn-primary" href="users.php?create" input type="button">New</a>
 
 <?php
     print "<br><br>";

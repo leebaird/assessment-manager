@@ -56,7 +56,7 @@ CREATE TABLE employees (
   modified datetime NOT NULL,
   employee varchar(50) NOT NULL,
   title varchar(25),
-  accountmgr ENUM('', 'Yes'),
+  accountmgr varchar(3),
   cell varchar(12),
   email varchar(50),
   notes text,

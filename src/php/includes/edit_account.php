@@ -124,13 +124,13 @@
 </style>
 
 <div class="vertical-center">
-    <div class="container col-md-6 col-md-offset-3">
+    <div class="container col-md-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Edit Account</h3>
             </div>
-            <div class="panel-body">
 
+        <div class="panel-body">
             <form class="form-horizontal" action="edit_account.php" method="post" autocomplete="off">
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Username</label>
@@ -162,7 +162,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Requirements</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-4">
                         Uppercase<br>
                         Lowercase<br>
                         Number<br>

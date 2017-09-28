@@ -62,7 +62,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         <input type="text" class="form-control" name="accountmgr" placeholder="Account Mgr">
                     </div>
                 </div>
@@ -150,7 +150,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         <input type="text" class="form-control" name="accountmgr" value="<?php echo $row['accountmgr'] ?>" readonly>
                     </div>
                 </div>
@@ -217,7 +217,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         <select class="form-control" name="accountmgr">
                             <option value=""></option>
                             <option value="Yes"<?php echo($row['accountmgr'] == 'Yes' ? " selected" : "")?>>Yes</option>
