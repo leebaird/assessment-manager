@@ -19,8 +19,8 @@ fi
 
 case $1 in
     clear)
-        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_drop.sql
-        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_create.sql
+        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < drop.sql
+        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < create.sql
         echo; echo;;
 
     connect)
@@ -32,12 +32,12 @@ case $1 in
         echo; echo;;
 
     drop)
-        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_drop.sql
-        $mysql -uroot < amdb-sys_drop.sql
+        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < drop.sql
+        $mysql -uroot < sys_drop.sql
         echo; echo;;
 
     load)
-        $mysql --local-infile -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_load.sql
+        $mysql --local-infile -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < sample_data.sql
         echo; echo;;
 
     reload)
@@ -46,13 +46,13 @@ case $1 in
         echo; echo;;
 
     setup)
-        $mysql -uroot < amdb-sys_create.sql
-        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < amdb_create.sql
+        $mysql -uroot < sys_create.sql
+        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < create.sql
         $web
         echo; echo;;
 
     setup2)
-        $mysql -uroot < amdb-sys_create.sql
+        $mysql -uroot < sys_create.sql
         $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < flat.sql
         $web
         echo; echo;;
@@ -62,3 +62,4 @@ case $1 in
         echo "Usage: $0 (clear | connect | drop | load | reload | setup)"
         echo; echo
 esac
+
