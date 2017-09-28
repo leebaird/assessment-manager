@@ -1,9 +1,9 @@
 
-INSERT INTO `clients` (`clientID`, `modified`, `client`, `web`, `employeeID`) VALUES
-(1, '2017-09-22 21:56:14', 'Apple', 'www.apple.com', 5),
-(2, '2017-09-22 22:10:04', 'Comcast', 'www.comcast.net', 5),
-(3, '2017-09-22 22:09:59', 'Palo Alto Networks', 'www.paloaltonetworks.com', 5),
-(4, '2017-09-22 22:10:09', 'Verizon', 'www.verizon.com', 5);
+INSERT INTO `clients` (`clientID`, `modified`, `client`, `web`) VALUES
+(1, '2017-09-22 21:56:14', 'Apple', 'www.apple.com'),
+(2, '2017-09-22 22:10:04', 'Comcast', 'www.comcast.net'),
+(3, '2017-09-22 22:09:59', 'Palo Alto Networks', 'www.paloaltonetworks.com'),
+(4, '2017-09-22 22:10:09', 'Verizon', 'www.verizon.com');
 
 INSERT INTO `contacts` (`contactID`, `modified`, `contact`, `title`, `work`, `cell`, `email`, `notes`, `clientID`, `projectID`) VALUES
 (1, '2017-09-18 20:43:51', 'Brian Roberts', 'CEO', '', '', '', '', 2, 0),
