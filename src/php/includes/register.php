@@ -146,7 +146,7 @@
 <body>
 
 <div class="vertical-center">
-    <div class="container col-md-5 col-md-offset-3">
+    <div class="container col-md-6 col-md-offset-3">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Register Account</h3>

@@ -31,6 +31,18 @@ case $1 in
         $mysql -uroot
         echo; echo;;
 
+    create)
+        $mysql -uroot < sys_create.sql
+        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < create.sql
+        $web
+        echo; echo;;
+
+    create2)
+        $mysql -uroot < sys_create.sql
+        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < flat.sql
+        $web
+        echo; echo;;
+
     drop)
         $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < drop.sql
         $mysql -uroot < sys_drop.sql
@@ -45,21 +57,9 @@ case $1 in
         $0 load
         echo; echo;;
 
-    setup)
-        $mysql -uroot < sys_create.sql
-        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < create.sql
-        $web
-        echo; echo;;
-
-    setup2)
-        $mysql -uroot < sys_create.sql
-        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < flat.sql
-        $web
-        echo; echo;;
-
     *)
         echo
-        echo "Usage: $0 (clear | connect | drop | load | reload | setup)"
+        echo "Usage: $0 (clear | connect | create | drop | load | reload)"
         echo; echo
 esac
 

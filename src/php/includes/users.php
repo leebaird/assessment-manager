@@ -1,3 +1,12 @@
+<style>
+    .vertical-center {
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
 <?php
     $bodyid = "home";
     $err="";
@@ -57,8 +66,8 @@
 
                 // This contains the definitions for any special tokens that we place in the SQL query.
                 $query_params = array(
-            ':username' => $_POST['username']
-        );
+                    ':username' => $_POST['username']
+                );
 
                 try {
                     $stmt = $db->prepare($query);
@@ -82,8 +91,8 @@
                 $query = "SELECT 1 FROM users WHERE email = :email";
 
                 $query_params = array(
-            ':email' => $_POST['email']
-        );
+                    ':email' => $_POST['email']
+                );
 
                 try {
                     $stmt = $db->prepare($query);
@@ -110,11 +119,11 @@
                 }
 
                 $query_params = array(
-            ':username' => $_POST['username'],
-            ':password' => $password,
-            ':salt' => $salt,
-            ':email' => $_POST['email']
-        );
+                    ':username' => $_POST['username'],
+                    ':password' => $password,
+                    ':salt' => $salt,
+                    ':email' => $_POST['email']
+                );
 
                 $username = $_POST['username'];
                 $email = $_POST['email'];
@@ -164,46 +173,47 @@
 
 <?php
 if (isset($_GET['create'])) {
-            ?>
-    <div class="container">
+    ?>
+<div class="vertical-center">
+    <div class="container col-md-6 col-md-offset-3">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Create Users</h3>
+                <h3 class="panel-title">Create User</h3>
             </div>
 
         <div class="panel-body">
             <form class="form-horizontal" action="users.php" method="post">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">User Name</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">User Name</label>
+                    <div class="col-sm-7">
                         <input type="text" class="form-control" name="username" placeholder="User Name">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-3">
+                    <label class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-7">
                         <input type="text" class="form-control" name="email" placeholder="email">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-3">
+                    <label class="col-sm-4 control-label">Password</label>
+                    <div class="col-sm-7">
                         <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Retype Password</label>
-                    <div class="col-sm-3">
+                    <label class="col-sm-4 control-label">Retype Password</label>
+                    <div class="col-sm-7">
                         <input type="password" class="form-control" name="password2" placeholder="Retype Password">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Role</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Role</label>
+                    <div class="col-sm-4">
                         <select class="form-control" name="role">
                             <option value="2">User</option>
                             <option value="1">Admin</option>
@@ -212,8 +222,8 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Approval</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Approval</label>
+                    <div class="col-sm-4">
                         <select class="form-control" name="approval">
                             <option value="0">No</option>
                             <option value="1">Yes</option>
@@ -226,86 +236,87 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="users.php">Back</a>
                 </div>
             </form>
-
+        </div>
         </div>
         </div>
     </div>
     <?php
         } elseif (isset($_GET['read'])) {
 
-    // UPDATE RECORD.
-            $query = "SELECT * FROM users WHERE userID=".intval($_GET['read']);
-            $result = mysqli_query($connection, $query);
-            confirm_query($result);
-            $row = mysqli_fetch_assoc($result); ?>
+    // READ RECORD.
+    $query = "SELECT * FROM users WHERE userID=".intval($_GET['read']);
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+    $row = mysqli_fetch_assoc($result); ?>
 
-    <div class="container">
+<div class="vertical-center">
+    <div class="container col-md-6 col-md-offset-3">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Create Contact</h3>
+                    <h3 class="panel-title">Read User</h3>
+                </div>
+
+                <div class="panel-body">
+                    <form class="form-horizontal" action="users.php" method="post">
+                        <input type = "hidden" name = "update" value = "<?php echo $row['userID'] ?>">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Username</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo $row['username'] ?>" readonly="readonly">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Email</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $row['email'] ?>" readonly="readonly">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Role</label>
+                            <div class="col-sm-4">
+
+                                <?php
+                                if ($row['role']==1) {
+                                    ?>
+                                    <input type="text" class="form-control" name="email" placeholder="Email" value="Admin" readonly="readonly">
+                                    <?php
+                                }
+
+                                if ($row['role']==2) {
+                                    ?>
+                                    <input type="text" class="form-control" name="email" placeholder="Email" value="User" readonly="readonly">
+                                    <?php
+                                } ?>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Approved</label>
+                            <div class="col-sm-4">
+                                <?php
+                                if ($row['approved']==1) {
+                                    ?>
+                                    <input type="text" class="form-control" name="email" placeholder="Email" value="Yes" readonly="readonly">
+                                    <?php
+                                }
+
+                                if ($row['approved']==0) {
+                                    ?>
+                                    <input type="text" class="form-control" name="email" placeholder="Email" value="No" readonly="readonly">
+                                    <?php
+                                } ?>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <a class="btn btn-default" href="users.php">Back</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-        <div class="panel-body">
-            <form class="form-horizontal" action="users.php" method="post">
-            <input type = "hidden" name = "update" value = "<?php echo $row['userID'] ?>">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Username</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo $row['username'] ?>" readonly="readonly">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $row['email'] ?>" readonly="readonly">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Role</label>
-                    <div class="col-sm-5">
-
-                        <?php
-                        if ($row['role']==1) {
-                            ?>
-                        <input type="text" class="form-control" name="email" placeholder="Email" value="Admin" readonly="readonly">
-                        <?php
-                        }
-
-            if ($row['role']==2) {
-                ?>
-                        <input type="text" class="form-control" name="email" placeholder="Email" value="User" readonly="readonly">
-                        <?php
-            } ?>
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Approved</label>
-                    <div class="col-sm-5">
-                        <?php
-                        if ($row['approved']==1) {
-                            ?>
-                        <input type="text" class="form-control" name="email" placeholder="Email" value="Yes" readonly="readonly">
-                        <?php
-                        }
-
-            if ($row['approved']==0) {
-                ?>
-                        <input type="text" class="form-control" name="email" placeholder="Email" value="No" readonly="readonly">
-                        <?php
-            } ?>
-                    </div>
-                </div>
-
-                <div class="form-actions">
-                    <!--<button class="btn btn-primary" type="submit">Update</button>-->
-                    <a class="btn btn-default" href="users.php">Back</a>
-                </div>
-            </form>
-        </div>
         </div>
     </div>
     <?php
@@ -316,32 +327,34 @@ if (isset($_GET['create'])) {
             $result = mysqli_query($connection, $query);
             confirm_query($result);
             $row = mysqli_fetch_assoc($result); ?>
-    <div class="container">
+
+<div class="vertical-center">
+    <div class="container col-md-6 col-md-offset-3">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Create Contact</h3>
+                <h3 class="panel-title">Update User</h3>
             </div>
 
         <div class="panel-body">
             <form class="form-horizontal" action="users.php" method="post">
             <input type = "hidden" name = "update" value = "<?php echo $row['userID'] ?>">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Username</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Username</label>
+                    <div class="col-sm-7">
                         <input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo $row['username'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-7">
                         <input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $row['email'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Role</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Role</label>
+                    <div class="col-sm-4">
                         <select class="form-control" name="role">
                         <?php
                         if ($row['role']==1) {
@@ -350,11 +363,11 @@ if (isset($_GET['create'])) {
                         <?php
                         }
 
-            if ($row['role']==2) {
-                ?>
+                        if ($row['role']==2) {
+                            ?>
                             <option value="2">User</option>
                         <?php
-            } ?>
+                        } ?>
                             <option value="1">Admin</option>
                             <option value="2">User</option>
                         </select>
@@ -362,8 +375,8 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Approved</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Approved</label>
+                    <div class="col-sm-4">
                         <select class="form-control" name="approved">
                         <?php
                         if ($row['approved']==1) {
@@ -372,11 +385,11 @@ if (isset($_GET['create'])) {
                         <?php
                         }
 
-            if ($row['approved']==0) {
-                ?>
+                        if ($row['approved']==0) {
+                            ?>
                             <option value="0">No</option>
                         <?php
-            } ?>
+                        } ?>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
@@ -388,7 +401,7 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="users.php">Back</a>
                 </div>
             </form>
-
+            </div>
         </div>
         </div>
     </div>
@@ -400,21 +413,21 @@ if (isset($_GET['create'])) {
 
 <?php
     print "<br><br>";
-            $query = "SELECT userID, username, email FROM users";
+    $query = "SELECT userID, username, email FROM users";
 
-            try {
-                $stmt = $db->prepare($query);
-                $stmt->execute();
-            } catch (PDOException $ex) {
-                // On a production website, you should not output $ex->getMessage().
-                die("Failed to run query: " . $ex->getMessage());
-            }
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+    } catch (PDOException $ex) {
+        // On a production website, you should not output $ex->getMessage().
+        die("Failed to run query: " . $ex->getMessage());
+    }
 
-            $rows = $stmt->fetchAll();
+    $rows = $stmt->fetchAll();
 
-            $query = "SELECT * FROM users ORDER BY username ASC";
-            $result = mysqli_query($connection, $query);
-            confirm_query($result); ?>
+    $query = "SELECT * FROM users ORDER BY username ASC";
+    $result = mysqli_query($connection, $query);
+    confirm_query($result); ?>
 
 <table style="width: auto;" class="table table-bordered table-condensed table-hover">
     <tr>
@@ -465,22 +478,21 @@ if (isset($_GET['create'])) {
 } ?>
 
 <?php
-            echo
-                '</td>
-                <td width="175">'.$myDateFormat.'</td>
-                <td width="50">'.'<a class="btn btn-danger" href="users.php?delete='.$row['userID'].'"
-                onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>'
-                ?>
-                <td><?php if ($row["approved"]==0) {
-                    ?> <a href="users.php?approval=<?php print $row["userID"]; ?>">Approval</a> <?php
-                } ?></td>
-            </tr>
-     <?php
+        echo
+            '</td>
+            <td width="175">'.$myDateFormat.'</td>
+            <td width="50">'.'<a class="btn btn-danger" href="users.php?delete='.$row['userID'].'"
+            onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>'
+            ?>
+            <td><?php if ($row["approved"]==0) {
+                ?> <a href="users.php?approval=<?php print $row["userID"]; ?>">Approval</a> <?php
+            } ?></td>
+        </tr>
+         <?php
         }
 
-            // Release returned data.
-            mysqli_free_result($result); ?>
-
+        // Release returned data.
+        mysqli_free_result($result); ?>
 </table>
 
 <?php
@@ -489,7 +501,7 @@ if (isset($_GET['create'])) {
         $result = mysqli_query($connection, $sql);
         confirm_query($result);
     }
-        } ?>
+    } ?>
 <?php include '../includes/footer.php'; ?>
 <?php
     } else {

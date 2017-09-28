@@ -38,8 +38,5 @@ INSERT INTO `projects` (`projectID`, `modified`, `project`, `assessment`, `clien
 (1, '2017-09-22 21:21:23', 'Q3 Vulnerability Assessment', 'External,', '1', '', '1', 'In', 'Loop', '', '', '', '', 'Cook', '', '', '', '09/01/2017', '09/03/2017', '0000-00-00', '0000-00-00', '0000-00-00', '09/08/2017', '', '', ''),
 (2, '2017-09-22 21:21:55', 'test', 'Wireless,', '4', '<br />\r\n<b>Notice</b>:  U', ' boolean given in <b>/App', ' b', ' boolean g', ' boolean given in <b', ' boolean given in <b>/Applications/XAMPP/xamppfile', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
-INSERT INTO `users` (`userID`, `modified`, `username`, `email`, `password`, `salt`, `activated`, `role`, `approved`) VALUES
-(1, '2017-09-18 19:11:15', 'admin', 'admin@acme.com', 'f542eebb272ff24784ddc8f53f1a930532cdfbc1df30e5e6ffbd7e4c01925ee1', '2946e24c29c4368d', 1, '1', 1);
-
 INSERT INTO `webvulns` (`webvulnID`, `modified`, `tool`, `vulnerability`, `findingID`, `severity`, `description`, `remediation`, `see_also`) VALUES
 (1, '2017-09-18 23:47:28', 'Burp', 'Homepage XSS', 4, 'Medium', '', '', '');
