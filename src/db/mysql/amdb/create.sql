@@ -122,6 +122,39 @@ ALTER TABLE projects
 ALTER TABLE projects
   ADD (CONSTRAINT fk_assessment01 FOREIGN KEY (assessmentID) REFERENCES assessments(assessmentID));
 
+CREATE TABLE project_employee (
+  projectID int(6) NOT NULL,
+  employeeID int(6) NOT NULL,
+  roleID int(6) NOT NULL AUTO_INCREMENT,
+  status ENUM('active', 'inactive'),
+  PRIMARY KEY (projectID, employeeID)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE project_employee ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
+
+CREATE TABLE project_location (
+  locationID int(6) NOT NULL,
+  projectID int(6) NOT NULL,
+  address varchar(50),
+  city varchar(25),
+  state varchar(2),
+  zip varchar(10),
+  phone varchar(16),
+  PRIMARY KEY (locationID)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE project_location ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
+
+CREATE TABLE project_status (
+  projectID int(6) NOT NULL,
+  statusID int(6) NOT NULL,
+  created (date),
+  PRIMARY KEY (projectID, statusID)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE project_status ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
+ALTER TABLE project_status ADD (CONSTRAINT fk_status01 FOREIGN KEY (statusID) REFERENCES status(statusID));
+
 CREATE TABLE scans (
   scanID int(6) NOT NULL AUTO_INCREMENT,
   modified datetime NOT NULL,
