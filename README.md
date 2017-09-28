@@ -21,7 +21,7 @@ Follow on Twitter [![Twitter Follow](https://img.shields.io/twitter/follow/disco
 * cd assessment-manager/bin/
 * ./setenv.sh
 * cd ../src/db/mysql/amdb/
-* ./amdb.sh setup
+* ./access.sh setup
 * Default account: admin
 * Default password: 1234!@#$qwerQWER
 
