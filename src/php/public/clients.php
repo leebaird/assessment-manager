@@ -37,7 +37,20 @@ if (isset($_GET['delete'])) {
 
 if (isset($_GET['create'])) {
     ?>
-    <div class="container">
+
+<style>
+    .vertical-center {
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<br><br><br>
+
+<div class="vertical-center">
+    <div class="container col-md-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Create Client</h3>
@@ -46,8 +59,8 @@ if (isset($_GET['create'])) {
 
             <form class="form-horizontal" action="clients.php" method="post">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Client</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Client</label>
+                    <div class="col-sm-7">
                         <input type="text" class="form-control" name="client" placeholder="Client">
                     </div>
                 </div>
@@ -59,15 +72,15 @@ if (isset($_GET['create'])) {
                 ?>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Address</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Address</label>
+                    <div class="col-sm-7">
                         <textarea class="form-control" name="address" placeholder="Address" rows="2"></textarea>
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-2 control-label">City, State, Zip</label>
-                    <div class="col-sm-2">
+                    <label class="col-sm-4 control-label">City, State, Zip</label>
+                    <div class="col-sm-4">
                         <input type="text" class="form-control" name="city" placeholder="City">
                     </div>
 
@@ -81,22 +94,22 @@ if (isset($_GET['create'])) {
                 </div>
                 <br>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Phone</label>
-                    <div class="col-sm-3">
+                    <label class="col-sm-4 control-label">Phone</label>
+                    <div class="col-sm-4">
                         <input type="text" class="form-control" name="phone" placeholder="Phone">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Web</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Web</label>
+                    <div class="col-sm-7">
                         <input type="text" class="form-control" name="web" placeholder="Web">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Account Mgr</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Account Mgr</label>
+                    <div class="col-sm-4">
                         <select class="form-control" name="employeeID">
                             <option value=""></option>
                             <?php
@@ -112,8 +125,8 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Notes</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Notes</label>
+                    <div class="col-sm-7">
                         <textarea class="form-control" name="notes" placeholder="Notes" rows="6"></textarea>
                     </div>
                 </div>
@@ -126,6 +139,7 @@ if (isset($_GET['create'])) {
         </div>
         </div>
     </div>
+</div>
     <?php
 }
 
@@ -163,7 +177,17 @@ elseif (isset($_GET['read'])) {
         <?php endif ?>
     </ul>
 
-    <div class="container">
+<style>
+    .vertical-center {
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<div class="vertical-center">
+    <div class="container col-md-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Read Client</h3>
@@ -172,22 +196,22 @@ elseif (isset($_GET['read'])) {
 
             <form class="form-horizontal" action="clients.php" method="post">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Client</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Client</label>
+                    <div class="col-sm-7">
                         <input type="text" class="form-control" name="client" value="<?php echo $row['client'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Address</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Address</label>
+                    <div class="col-sm-7">
                         <textarea class="form-control" name="address" rows="2" readonly><?php echo $row['address'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-2 control-label">City, State, Zip</label>
-                    <div class="col-sm-2">
+                    <label class="col-sm-4 control-label">City, State, Zip</label>
+                    <div class="col-sm-4">
                         <input type="text" class="form-control" name="city" value="<?php echo $row['city'] ?>" readonly>
                     </div>
 
@@ -202,29 +226,29 @@ elseif (isset($_GET['read'])) {
                 <br>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Phone</label>
-                    <div class="col-sm-3">
+                    <label class="col-sm-4 control-label">Phone</label>
+                    <div class="col-sm-4">
                         <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Web</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Web</label>
+                    <div class="col-sm-7">
                         <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Account Mgr</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Account Mgr</label>
+                    <div class="col-sm-4">
                         <input type="text" class="form-control" name="employeeID" value="<?php echo $c['employee'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Notes</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Notes</label>
+                    <div class="col-sm-7">
                         <textarea class="form-control" name="notes" rows="6" readonly><?php echo $row['notes'] ?></textarea>
                     </div>
                 </div>
@@ -236,6 +260,7 @@ elseif (isset($_GET['read'])) {
             </div>
         </div>
     </div>
+</div>
     <?php
 }
 
@@ -247,7 +272,19 @@ elseif (isset($_GET['update'])) {
     $row = mysqli_fetch_assoc($result);
     ?>
 
-    <div class="container">
+<br><br><br>
+
+<style>
+    .vertical-center {
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<div class="vertical-center">
+    <div class="container col-md-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Update Client</h3>
@@ -257,8 +294,8 @@ elseif (isset($_GET['update'])) {
             <form class="form-horizontal" action="clients.php" method="post">
                 <input type="hidden" name="update" value="<?php echo $row['clientID'] ?>">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Client</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Client</label>
+                    <div class="col-sm-7">
                         <input type="text" class="form-control" name="client" value="<?php echo $row['client'] ?>">
                     </div>
                 </div>
@@ -270,15 +307,15 @@ elseif (isset($_GET['update'])) {
                 ?>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Address</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Address</label>
+                    <div class="col-sm-7">
                         <textarea class="form-control" name="address" rows="2"><?php echo $row['address'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-2 control-label">City, State, Zip</label>
-                    <div class="col-sm-2">
+                    <label class="col-sm-4 control-label">City, State, Zip</label>
+                    <div class="col-sm-4">
                         <input type="text" class="form-control" name="city" value="<?php echo $row['city'] ?>">
                     </div>
 
@@ -292,22 +329,22 @@ elseif (isset($_GET['update'])) {
                 </div>
                 <br>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Phone</label>
-                    <div class="col-sm-3">
+                    <label class="col-sm-4 control-label">Phone</label>
+                    <div class="col-sm-4">
                         <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Web</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Web</label>
+                    <div class="col-sm-7">
                         <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Account Mgr</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Account Mgr</label>
+                    <div class="col-sm-4">
                         <select class="form-control" name="employeeID">
                             <option value=""></option>
                             <?php
@@ -323,8 +360,8 @@ elseif (isset($_GET['update'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Notes</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-4 control-label">Notes</label>
+                    <div class="col-sm-7">
                         <textarea class="form-control" name="notes" rows="6"><?php echo $row['notes'] ?></textarea>
                     </div>
                 </div>
@@ -334,10 +371,10 @@ elseif (isset($_GET['update'])) {
                     <a class="btn btn-default" href="clients.php">Back</a>
                 </div>
             </form>
-
             </div>
         </div>
     </div>
+</div>
     <?php
 }
 
