@@ -63,10 +63,7 @@ if (isset($_GET['create'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account Mgr</label>
                     <div class="col-sm-2">
-                        <select class="form-control" name="accountmgr">
-                            <option value=""></option>
-                            <option value="Yes">Yes</option>
-                        </select>
+                        <input type="text" class="form-control" name="accountmgr" placeholder="Account Mgr">
                     </div>
                 </div>
 

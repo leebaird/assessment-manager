@@ -1,26 +1,19 @@
 
-use amdb;
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
 CREATE TABLE assessments (
   assessmentID int(6) NOT NULL AUTO_INCREMENT,
   modified datetime NOT NULL,
   assessment ENUM('External', 'Internal', 'Mobile', 'Physical', 'Social Eng', 'War Dail', 'Web', 'Wireless'),
   projectID int(6) NOT NULL,
   PRIMARY KEY (assessmentID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE status (
   statusID int(6) NOT NULL AUTO_INCREMENT,
   modified datetime NOT NULL,
-  status ENUM('Contract', 'Scoping', 'In Progress', 'Reporting', 'Review', 'Delivered', 'Complete'),
+  status ENUM('', 'Contract', 'Scoping', 'In Progress', 'Reporting', 'Review', 'Delivered', 'Complete'),
   projectID int(6) NOT NULL,
   PRIMARY KEY (statusID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE clients (
   clientID int(6) NOT NULL AUTO_INCREMENT,
@@ -29,7 +22,7 @@ CREATE TABLE clients (
   web varchar(50),
   employeeID int(6) NOT NULL,
   PRIMARY KEY (clientID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE client_address (
   client_addressID int(6) NOT NULL AUTO_INCREMENT,
@@ -42,7 +35,7 @@ CREATE TABLE client_address (
   notes text,
   clientID int(6) NOT NULL,
   PRIMARY KEY (client_addressID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE contacts (
   contactID int(6) NOT NULL AUTO_INCREMENT,
@@ -56,25 +49,26 @@ CREATE TABLE contacts (
   clientID int(6) NOT NULL,
   projectID int(6) NOT NULL,
   PRIMARY KEY (contactID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE employees (
   employeeID int(6) NOT NULL AUTO_INCREMENT,
   modified datetime NOT NULL,
   employee varchar(50) NOT NULL,
   title varchar(25),
+  accountmgr ENUM('', 'Yes'),
   cell varchar(12),
   email varchar(50),
   notes text,
   PRIMARY KEY (employeeID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE employee_project (
   employee_projectID int(6) NOT NULL,
   employeeID varchar(255) NOT NULL,
   projectID varchar(255) NOT NULL,
   timestamp varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE findings (
   findingID int(6) NOT NULL AUTO_INCREMENT,
@@ -86,7 +80,7 @@ CREATE TABLE findings (
   remediation text,
   see_also text,
   PRIMARY KEY (findingID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE hostvulns (
   hostvulnID int(6) NOT NULL AUTO_INCREMENT,
@@ -103,7 +97,7 @@ CREATE TABLE hostvulns (
   published varchar(12),
   updated varchar(12),
   PRIMARY KEY (hostvulnID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE projects (
   projectID int(6) NOT NULL AUTO_INCREMENT,
@@ -120,13 +114,13 @@ CREATE TABLE projects (
   notes text,
   objective varchar(100),
   PRIMARY KEY (projectID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE projects
-  ADD (constraint fk_client01 foreign key (clientID) references clients(clientID));
+  ADD (CONSTRAINT fk_client01 FOREIGN KEY (clientID) REFERENCES clients(clientID));
 
 ALTER TABLE projects
-  ADD (constraint fk_assessment01 foreign key (assessmentID) references assessments(assessmentID));
+  ADD (CONSTRAINT fk_assessment01 FOREIGN KEY (assessmentID) REFERENCES assessments(assessmentID));
 
 CREATE TABLE scans (
   scanID int(6) NOT NULL AUTO_INCREMENT,
@@ -142,7 +136,7 @@ CREATE TABLE scans (
   date date,
   projectID int(6) NOT NULL,
   PRIMARY KEY (scanID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE users (
   userID int(6) NOT NULL AUTO_INCREMENT,
@@ -155,7 +149,7 @@ CREATE TABLE users (
   role varchar(25) NOT NULL,
   approved tinyint(1) NOT NULL,
   PRIMARY KEY (userID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE vulnerabilities (
   vulnerabilityID int(6) NOT NULL AUTO_INCREMENT,
@@ -170,7 +164,7 @@ CREATE TABLE vulnerabilities (
   external varchar(10),
   scanID int(6) NOT NULL,
   PRIMARY KEY (vulnerabilityID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE webvulns (
   webvulnID int(6) NOT NULL AUTO_INCREMENT,
@@ -183,7 +177,7 @@ CREATE TABLE webvulns (
   remediation text,
   see_also text,
   PRIMARY KEY (webvulnID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `users` (`userID`, `modified`, `username`, `email`, `password`, `salt`, `activated`, `role`, `approved`) VALUES
 (1, '2017-09-18 19:11:15', 'admin', 'admin@acme.com', 'f542eebb272ff24784ddc8f53f1a930532cdfbc1df30e5e6ffbd7e4c01925ee1', '2946e24c29c4368d', 1, '1', 1);
