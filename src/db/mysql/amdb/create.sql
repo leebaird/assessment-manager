@@ -20,7 +20,6 @@ CREATE TABLE clients (
   modified datetime NOT NULL,
   client varchar(50) NOT NULL,
   web varchar(50),
-  employeeID int(6) NOT NULL,
   PRIMARY KEY (clientID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -64,9 +63,8 @@ CREATE TABLE employees (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE employee_project (
-  employee_projectID int(6) NOT NULL,
-  employeeID varchar(255) NOT NULL,
-  projectID varchar(255) NOT NULL,
+  employeeID int(6) NOT NULL,
+  projectID int(6) NOT NULL,
   timestamp varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -125,7 +123,7 @@ ALTER TABLE projects
 CREATE TABLE project_employee (
   projectID int(6) NOT NULL,
   employeeID int(6) NOT NULL,
-  roleID int(6) NOT NULL AUTO_INCREMENT,
+  roleID int(6) NOT NULL,
   status ENUM('active', 'inactive'),
   PRIMARY KEY (projectID, employeeID)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -143,16 +141,16 @@ CREATE TABLE project_location (
   PRIMARY KEY (locationID)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE project_location ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
+-- ALTER TABLE project_location ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
 
 CREATE TABLE project_status (
   projectID int(6) NOT NULL,
   statusID int(6) NOT NULL,
-  created (date),
+  created timestamp,
   PRIMARY KEY (projectID, statusID)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE project_status ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
+-- ALTER TABLE project_status ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
 ALTER TABLE project_status ADD (CONSTRAINT fk_status01 FOREIGN KEY (statusID) REFERENCES status(statusID));
 
 CREATE TABLE scans (
