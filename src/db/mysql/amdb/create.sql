@@ -1,4 +1,22 @@
 
+DROP TABLE assessments;
+DROP TABLE status;
+DROP TABLE clients;
+DROP TABLE client_address;
+DROP TABLE contacts;
+DROP TABLE employees;
+DROP TABLE employee_project;
+DROP TABLE findings;
+DROP TABLE hostvulns;
+DROP TABLE projects;
+DROP TABLE project_employee;
+DROP TABLE project_location;
+DROP TABLE project_status;
+DROP TABLE scans;
+DROP TABLE users;
+DROP TABLE vulnerabilities;
+DROP TABLE webvulns;
+
 CREATE TABLE assessments (
   assessmentID int(6) NOT NULL AUTO_INCREMENT,
   modified datetime NOT NULL,
@@ -114,11 +132,9 @@ CREATE TABLE projects (
   PRIMARY KEY (projectID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE projects
-  ADD (CONSTRAINT fk_client01 FOREIGN KEY (clientID) REFERENCES clients(clientID));
+ALTER TABLE projects ADD (CONSTRAINT fk_client01 FOREIGN KEY (clientID) REFERENCES clients(clientID));
 
-ALTER TABLE projects
-  ADD (CONSTRAINT fk_assessment01 FOREIGN KEY (assessmentID) REFERENCES assessments(assessmentID));
+ALTER TABLE projects ADD (CONSTRAINT fk_assessment01 FOREIGN KEY (assessmentID) REFERENCES assessments(assessmentID));
 
 CREATE TABLE project_employee (
   projectID int(6) NOT NULL,
