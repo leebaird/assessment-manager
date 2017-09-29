@@ -80,6 +80,9 @@ if (isset($_GET['delete'])) {
 
 if (isset($_GET['create'])) {
     ?>
+
+<br><br><br>
+
     <div class="container">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -242,6 +245,8 @@ if (isset($_GET['create'])) {
     endif ?>
     </ul>
 
+<br>
+
     <div class="container">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -317,6 +322,8 @@ if (isset($_GET['create'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
     $row = mysqli_fetch_assoc($result); ?>
+
+<br><br><br>
 
     <div class="container">
         <div class="panel panel-primary">

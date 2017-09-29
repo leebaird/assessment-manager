@@ -95,6 +95,9 @@ if (isset($_GET['delete'])) {
 
 if (isset($_GET['create'])) {
     ?>
+
+<br><br><br>
+
     <div class="container">
         <div class="panel panel-primary">
             <div class="panel-heading">

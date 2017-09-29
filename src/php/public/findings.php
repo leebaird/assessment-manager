@@ -217,6 +217,8 @@ if (isset($_GET['create'])) {
         confirm_query($result);
         $row = mysqli_fetch_assoc($result); ?>
 
+<br><br><br>
+
     <div class="container">
         <div class="panel panel-primary">
             <div class="panel-heading">
