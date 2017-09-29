@@ -38,7 +38,8 @@ if (isset($_GET['delete'])) {
 
 if (isset($_GET['create'])) {
     ?>
-    <div class="container">
+<div class="vertical-center">
+    <div class="container col-md-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Create Employee</h3>
@@ -93,10 +94,11 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="employees.php">Back</a>
                 </div>
             </form>
-
-        </div>
+            </div>
         </div>
     </div>
+</div>
+
     <?php
 } elseif (isset($_GET['read'])) {
     // READ RECORD.
@@ -126,7 +128,8 @@ if (isset($_GET['create'])) {
         <?php endif ?>
     </ul>
 
-    <div class="container">
+<div class="vertical-center">
+    <div class="container col-md-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Read Employee</h3>
@@ -180,10 +183,11 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="employees.php">Back</a>
                 </div>
             </form>
-
             </div>
         </div>
     </div>
+</div>
+
     <?php
 } elseif (isset($_GET['update'])) {
     // UPDATE RECORD.
@@ -192,7 +196,8 @@ if (isset($_GET['create'])) {
     confirm_query($result);
     $row = mysqli_fetch_assoc($result); ?>
 
-    <div class="container">
+<div class="vertical-center">
+    <div class="container col-md-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Update Employee</h3>
@@ -251,10 +256,11 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="employees.php">Back</a>
                 </div>
             </form>
-
             </div>
         </div>
     </div>
+</div>
+
     <?php
 } else {
     // DISPLAY LIST OF RECORDS.

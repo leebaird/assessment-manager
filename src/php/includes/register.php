@@ -1,6 +1,7 @@
 <?php
     require_once("common.php");
     $err="";
+
     if (!empty($_POST)) {
         if (empty($_POST['username'])) {
             die("Please enter a username.");
@@ -198,7 +199,6 @@
                     <a class="btn btn-default" href="../index.php">Back</a>
                 </div>
             </form>
-
             </div>
         </div>
     </div>
