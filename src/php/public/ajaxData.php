@@ -4,12 +4,11 @@
     $password = "";
     $host = "localhost";
     $dbname = "amdb";
+
     $connection = new mysqli($host, $username, $password, $dbname);
     $query = "SELECT * FROM contacts WHERE clientID=".$_POST['country_id'];
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_array($result);
-
-    //confirm_query($result);
 
     $sn .=$row['contact']." ";
 
@@ -22,4 +21,5 @@
         $row2 = mysqli_fetch_array($result2);
         $sn .= $row2['employee']." ";
     }
+
     print $sn;

@@ -12,6 +12,7 @@
     $err="";
     include "../includes/header.php";
     require_once("../includes/common.php");
+
     if ($_SESSION['user']['role']==1) {
         if (isset($_POST['create'])) {
             // CREATE RECORD
@@ -173,7 +174,7 @@
 
 <?php
 if (isset($_GET['create'])) {
-    ?>
+            ?>
 <div class="vertical-center">
     <div class="container col-md-8">
         <div class="panel panel-primary">
@@ -236,20 +237,19 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="users.php">Back</a>
                 </div>
             </form>
-
             </div>
         </div>
     </div>
 </div>
 
 <?php
-    } elseif (isset($_GET['read'])) {
+        } elseif (isset($_GET['read'])) {
 
-// READ RECORD.
-$query = "SELECT * FROM users WHERE userID=".intval($_GET['read']);
-$result = mysqli_query($connection, $query);
-confirm_query($result);
-$row = mysqli_fetch_assoc($result); ?>
+            // READ RECORD.
+            $query = "SELECT * FROM users WHERE userID=".intval($_GET['read']);
+            $result = mysqli_query($connection, $query);
+            confirm_query($result);
+            $row = mysqli_fetch_assoc($result); ?>
 
 <div class="vertical-center">
     <div class="container col-md-8">
@@ -286,11 +286,11 @@ $row = mysqli_fetch_assoc($result); ?>
                                     <?php
                                 }
 
-                                if ($row['role']==2) {
-                                    ?>
+            if ($row['role']==2) {
+                ?>
                                     <input type="text" class="form-control" name="email" placeholder="Email" value="User" readonly="readonly">
                                     <?php
-                                } ?>
+            } ?>
 
                             </div>
                         </div>
@@ -305,11 +305,11 @@ $row = mysqli_fetch_assoc($result); ?>
                                     <?php
                                 }
 
-                                if ($row['approved']==0) {
-                                    ?>
+            if ($row['approved']==0) {
+                ?>
                                     <input type="text" class="form-control" name="email" placeholder="Email" value="No" readonly="readonly">
                                     <?php
-                                } ?>
+            } ?>
                             </div>
                         </div>
 
@@ -324,7 +324,7 @@ $row = mysqli_fetch_assoc($result); ?>
     <?php
         } elseif (isset($_GET['update'])) {
 
-    // UPDATE RECORD.
+            // UPDATE RECORD.
             $query = "SELECT * FROM users WHERE userID=".intval($_GET['update']);
             $result = mysqli_query($connection, $query);
             confirm_query($result);
@@ -365,11 +365,11 @@ $row = mysqli_fetch_assoc($result); ?>
                         <?php
                         }
 
-                        if ($row['role']==2) {
-                            ?>
+            if ($row['role']==2) {
+                ?>
                             <option value="2">User</option>
                         <?php
-                        } ?>
+            } ?>
                             <option value="1">Admin</option>
                             <option value="2">User</option>
                         </select>
@@ -387,11 +387,11 @@ $row = mysqli_fetch_assoc($result); ?>
                         <?php
                         }
 
-                        if ($row['approved']==0) {
-                            ?>
+            if ($row['approved']==0) {
+                ?>
                             <option value="0">No</option>
                         <?php
-                        } ?>
+            } ?>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
@@ -409,28 +409,28 @@ $row = mysqli_fetch_assoc($result); ?>
 </div>
 
 <?php
-    } else {
-        ?>
+        } else {
+            ?>
 <br>
 <a class="btn btn-primary" href="users.php?create" input type="button">New</a>
 
 <?php
     print "<br><br>";
-    $query = "SELECT userID, username, email FROM users";
+            $query = "SELECT userID, username, email FROM users";
 
-    try {
-        $stmt = $db->prepare($query);
-        $stmt->execute();
-    } catch (PDOException $ex) {
-        // On a production website, you should not output $ex->getMessage().
-        die("Failed to run query: " . $ex->getMessage());
-    }
+            try {
+                $stmt = $db->prepare($query);
+                $stmt->execute();
+            } catch (PDOException $ex) {
+                // On a production website, you should not output $ex->getMessage().
+                die("Failed to run query: " . $ex->getMessage());
+            }
 
-    $rows = $stmt->fetchAll();
+            $rows = $stmt->fetchAll();
 
-    $query = "SELECT * FROM users ORDER BY username ASC";
-    $result = mysqli_query($connection, $query);
-    confirm_query($result); ?>
+            $query = "SELECT * FROM users ORDER BY username ASC";
+            $result = mysqli_query($connection, $query);
+            confirm_query($result); ?>
 
 <table style="width: auto;" class="table table-bordered table-condensed table-hover">
     <tr>
@@ -494,8 +494,8 @@ $row = mysqli_fetch_assoc($result); ?>
          <?php
         }
 
-        // Release returned data.
-        mysqli_free_result($result); ?>
+            // Release returned data.
+            mysqli_free_result($result); ?>
 </table>
 
 <?php
@@ -504,7 +504,7 @@ $row = mysqli_fetch_assoc($result); ?>
         $result = mysqli_query($connection, $sql);
         confirm_query($result);
     }
-    } ?>
+        } ?>
 <?php include '../includes/footer.php'; ?>
 <?php
     } else {

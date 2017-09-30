@@ -5,33 +5,33 @@ require_once("../includes/common.php");
 ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script type="text/javascript">
+    $(document).ready(function(){
+        $('#findingID').on('change',function(){
+            var findingID = $(this).val();
 
-$(document).ready(function(){
-    $('#findingID').on('change',function(){
-        var findingID = $(this).val();
-
-        if(findingID){
-            $.ajax({
-                type:'POST',
-                url:'ajaxWeb.php',
-                data:'findingID='+findingID,
-                success:function(html){
-                    var res = html.split(" ");
-                    var o = new Option(res[0], res[0]);
-                    $(o).html(res[0]);
-                    $("#severity").append(o);
-                    $('#severity').val(res[0]);
-                    $('#description').val(res[1]);
-                    $('#remediation').val(res[2]);
-                    $('#see_also').val(res[3]);
-                }
-            });
-        }else{
-            //$('#city').html('Sorry');
-        }
+            if(findingID){
+                $.ajax({
+                    type:'POST',
+                    url:'ajaxWeb.php',
+                    data:'findingID='+findingID,
+                    success:function(html){
+                        var res = html.split(" ");
+                        var o = new Option(res[0], res[0]);
+                        $(o).html(res[0]);
+                        $("#severity").append(o);
+                        $('#severity').val(res[0]);
+                        $('#description').val(res[1]);
+                        $('#remediation').val(res[2]);
+                        $('#see_also').val(res[3]);
+                    }
+                });
+            }else{
+                //$('#city').html('Sorry');
+            }
+        });
     });
-});
 </script>
 
 <?php
@@ -40,6 +40,7 @@ if (isset($_POST['create'])) {
 
     // Check for blank fields.
     $tool = trim($_POST['tool']);
+
     if (empty($tool)) {
         ?>
         <br>
@@ -50,6 +51,7 @@ if (isset($_POST['create'])) {
     }
 
     $vulnerability = trim($_POST['vulnerability']);
+
     if (empty($vulnerability)) {
         ?>
         <br>
@@ -127,8 +129,8 @@ if (isset($_GET['create'])) {
                                     echo '<option value = "'.$c['findingID'].'">'.$c['finding'].'</option>';
                                 }
 
-                        // Release returned data.
-                        mysqli_free_result($result); ?>
+                                // Release returned data.
+                                mysqli_free_result($result); ?>
                         </select>
                     </div>
                 </div>
@@ -174,8 +176,9 @@ if (isset($_GET['create'])) {
                 </div>
             </form>
         </div>
-        </div>
     </div>
+</div>
+
     <?php
 } elseif (isset($_GET['read'])) {
     // READ RECORD
@@ -197,7 +200,7 @@ if (isset($_GET['create'])) {
     $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
 
     <ul class="pager">
-        <?php  $r = $limit - 1;
+    <?php  $r = $limit - 1;
     $r = $r-1;
     $sql ="SELECT count(webvulnID) FROM webvulns where webvulnID<=".$_GET['read'];
     $result = mysqli_query($connection, $sql);
@@ -205,18 +208,18 @@ if (isset($_GET['create'])) {
     $r = $rs[0];
 
     if ($r > 1):
-        $rr=$r-2;
 
+    $rr=$r-2;
     $sql1 ="SELECT * FROM webvulns ORDER BY webvulnID LIMIT $rr,1";
     $result1 = mysqli_query($connection, $sql1);
     $rs1 = mysqli_fetch_array($result1);
-    //print_r($rs1);exit; ?>
+    ?>
 
-            <li class="previous"><a href="?read=<?= $rs1['webvulnID'] ?>">Previous</a></li>
-        <?php endif ?>
-        <?php if ($r >= 1): ?>
-        <?php
-        $flag = 0;
+    <li class="previous"><a href="?read=<?= $rs1['webvulnID'] ?>">Previous</a></li>
+    <?php endif ?>
+    <?php if ($r >= 1): ?>
+    <?php
+    $flag = 0;
     $rr=$r;
 
     $sql5 ="SELECT count(webvulnID) FROM webvulns ";
@@ -239,8 +242,8 @@ if (isset($_GET['create'])) {
 
     if ($flag==0) {
         ?>
-            <li class="previous"><a href="?read=<?= $rs1['webvulnID'] ?>">Next</a></li>
-        <?php
+        <li class="previous"><a href="?read=<?= $rs1['webvulnID'] ?>">Next</a></li>
+    <?php
     }
     endif ?>
     </ul>
@@ -312,16 +315,17 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="webvulns.php">Back</a>
                 </div>
             </form>
-            </div>
         </div>
     </div>
+</div>
+
     <?php
-} elseif (isset($_GET['update'])) {
-    // UPDATE RECORD
-    $query = "SELECT * FROM webvulns WHERE webvulnID=".intval($_GET['update']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $row = mysqli_fetch_assoc($result); ?>
+    } elseif (isset($_GET['update'])) {
+        // UPDATE RECORD
+        $query = "SELECT * FROM webvulns WHERE webvulnID=".intval($_GET['update']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+        $row = mysqli_fetch_assoc($result); ?>
 
 <br><br><br>
 
@@ -370,8 +374,8 @@ if (isset($_GET['create'])) {
                                     echo '<option value = "'.$c["findingID"].'"'.($row['findingID'] == $c['findingID'] ? ' selected' : '').'>'.$c["finding"].'</option>';
                                 }
 
-                        // Release returned data.
-                        mysqli_free_result($result); ?>
+                                // Release returned data.
+                                mysqli_free_result($result); ?>
                         </select>
                     </div>
                 </div>
@@ -416,13 +420,13 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="webvulns.php">Back</a>
                 </div>
             </form>
-
-            </div>
         </div>
     </div>
+</div>
+
     <?php
     } else {
-    // DISPLAY LIST OF RECORDS.
+        // DISPLAY LIST OF RECORDS.
     ?>
     <br>
     <a class="btn btn-primary" href="webvulns.php?create" input type="button">New</a>
@@ -492,8 +496,8 @@ if (isset($_GET['create'])) {
                 </tr>';
             }
 
-    // Release returned data.
-    mysqli_free_result($result); ?>
+            // Release returned data.
+            mysqli_free_result($result); ?>
     </table>
 
     <form method="post" action="">
@@ -511,7 +515,7 @@ if (isset($_GET['create'])) {
                 echo '<a href="?page='.$page.'">Next</a>';
             }
 
-    echo '
+        echo '
             <select name="set_rec_limit" onchange="this.form.submit()">
                 <option value="25"'.($rec_limit == 25 ? ' selected' : '').'>25</option>
                 <option value="50"'.($rec_limit == 50 ? ' selected' : '').'>50</option>
@@ -522,6 +526,6 @@ if (isset($_GET['create'])) {
     </form>
 
     <?php
-}
+    }
 
 include '../includes/footer.php'; ?>

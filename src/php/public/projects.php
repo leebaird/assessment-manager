@@ -5,37 +5,36 @@ require_once("../includes/common.php");
 
 ?>
 <script type="text/javascript">
+    $(document).ready(function(){
+        $('#clientID').on('change',function(){
+            var countryID = $(this).val();
 
-$(document).ready(function(){
-    $('#clientID').on('change',function(){
-        var countryID = $(this).val();
+            if(countryID){
+                $.ajax({
+                    type:'POST',
+                    url:'ajaxHost.php',
+                    data:'country_id='+countryID,
+                    success:function(html){
+                        var res = html.split(",");
 
-        if(countryID){
-            $.ajax({
-                type:'POST',
-                url:'ajaxHost.php',
-                data:'country_id='+countryID,
-                success:function(html){
-                    var res = html.split(",");
-
-                    $('#address').val(res[0]);
-                    $('#city').val(res[1]);
-                    $('#state').val(res[2]);
-                    $('#zip').val(res[3]);
-                    $('#phone').val(res[4]);
-                    $('#web').val(res[5]);
-                         if(res[6]==""){
-                              $('#accountmgr').val("");
-                         }else{
-                    $('#accountmgr').val(res[6]);
-                         }
+                        $('#address').val(res[0]);
+                        $('#city').val(res[1]);
+                        $('#state').val(res[2]);
+                        $('#zip').val(res[3]);
+                        $('#phone').val(res[4]);
+                        $('#web').val(res[5]);
+                            if(res[6]==""){
+                                $('#accountmgr').val("");
+                            }else{
+                                $('#accountmgr').val(res[6]);
+                            }
+                        }
+                    });
+                }else{
+                    //$('#city').html('Sorry');
                 }
             });
-        }else{
-            //$('#city').html('Sorry');
-        }
-    });
-});
+        });
 </script>
 
 <?php
@@ -44,7 +43,8 @@ if (isset($_POST['create'])) {
 
     // Check for blank field.
     $project = trim($_POST['project']);
-    if (empty($project)) { ?>
+    if (empty($project)) {
+        ?>
         <br>
         <button class="btn btn-danger" type="button"><strong>Warning!</strong> You must enter a project.</button>
         <br><br>
@@ -53,7 +53,8 @@ if (isset($_POST['create'])) {
     }
 
     $clientID = trim($_POST['clientID']);
-    if (empty($clientID)) { ?>
+    if (empty($clientID)) {
+        ?>
         <br>
         <button class="btn btn-danger" type="button"><strong>Warning!</strong> You must enter a client.</button>
         <br><br>
@@ -61,23 +62,23 @@ if (isset($_POST['create'])) {
         <?php exit;
     }
 
-$ass="";
-foreach($_POST['assessment'] as $selected){
-$ass .= $selected.",";
-}
+    $ass="";
 
-   $query = "INSERT INTO projects (modified, project, assessment, client, address, city, state, zip,  phone, web,  employeeID, projectmgr, consultant1, consultant2, consultant3, consultant4, kickoff, start, finish, tech_qa, draft_delivery, final_delivery, status,  notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]','$_POST[web]','$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[consultant1]', '$_POST[consultant2]', '$_POST[consultant3]', '$_POST[consultant4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[tech_qa]', '$_POST[draft_delivery]', '$_POST[final_delivery]', '$_POST[current_status]', '$_POST[notes]')";
+    foreach ($_POST['assessment'] as $selected) {
+        $ass .= $selected.",";
+    }
 
-   //print $query; exit;
+    $query = "INSERT INTO projects (modified, project, assessment, client, address, city, state, zip,  phone, web,  employeeID, projectmgr, consultant1, consultant2, consultant3, consultant4, kickoff, start, finish, tech_qa, draft_delivery, final_delivery, status,  notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]','$_POST[web]','$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[consultant1]', '$_POST[consultant2]', '$_POST[consultant3]', '$_POST[consultant4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[tech_qa]', '$_POST[draft_delivery]', '$_POST[final_delivery]', '$_POST[current_status]', '$_POST[notes]')";
+
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }
 
 if (isset($_POST['update'])) {
     $ass="";
-    foreach($_POST['assessment'] as $selected){
-    $ass .= $selected.",";
-}
+    foreach ($_POST['assessment'] as $selected) {
+        $ass .= $selected.",";
+    }
 
     // UPDATE RECORD.
     @$query = "UPDATE projects SET modified=now(), project='$_POST[project]', assessment='$ass', client='$_POST[clientID]', address='$_POST[address]', city='$_POST[city]', state='$_POST[state]', zip='$_POST[zip]',phone='$_POST[phone]',web='$_POST[web]', employeeID='$_POST[employeeID]', projectmgr='$_POST[projectmgr]', consultant1='$_POST[consultant1]', consultant2='$_POST[consultant2]', consultant3='$_POST[consultant3]', consultant4='$_POST[consultant4]', kickoff='$_POST[kickoff]', start='$_POST[start_date]', finish='$_POST[finish]', tech_qa='$_POST[tech_qa]', draft_delivery='$_POST[draft_delivery]', final_delivery='$_POST[final_delivery]', status='$_POST[current_status]', notes='$_POST[notes]' WHERE projectID=".intval($_POST['update']);
@@ -131,8 +132,7 @@ if (isset($_GET['create'])) {
                             <?php
                                 $query = "SELECT * FROM clients ORDER BY client ASC";
                                 $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+                                confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Assessment</label>
@@ -170,13 +170,12 @@ if (isset($_GET['create'])) {
                                     <select class="form-control" name="clientID"  id="clientID">
                                         <option value=""></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c['clientID'].'">'.$c['client'].'</option>';
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -220,8 +219,7 @@ if (isset($_GET['create'])) {
                             <?php
                                 $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
                                 $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+                                confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Account Mgr</label>
@@ -229,13 +227,12 @@ if (isset($_GET['create'])) {
                                     <select class="form-control" name="accountmgr" id="accountmgr">
                                         <option value=""></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -243,8 +240,7 @@ if (isset($_GET['create'])) {
                             <?php
                                 $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
                                 $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+                                confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Project Mgr</label>
@@ -252,22 +248,20 @@ if (isset($_GET['create'])) {
                                     <select class="form-control" name="projectmgr"  id="projectmgr">
                                         <option value=""></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
 
                             <?php
-                                $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
+                                $query = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
                                 $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+                                confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 1</label>
@@ -275,22 +269,20 @@ if (isset($_GET['create'])) {
                                      <select class="form-control" name="consultant1"  id="consultant1">
                                         <option value=""></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
 
                             <?php
-                                $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
+                                $query = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
                                 $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+                                confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 2</label>
@@ -298,23 +290,20 @@ if (isset($_GET['create'])) {
                                      <select class="form-control" name="consultant2"  id="consultant2">
                                         <option value=""></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
 
-
                             <?php
                                 $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
                                 $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+                                confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 3</label>
@@ -322,13 +311,12 @@ if (isset($_GET['create'])) {
                                      <select class="form-control" name="consultant3"  id="consultant3">
                                         <option value=""></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -336,8 +324,7 @@ if (isset($_GET['create'])) {
                             <?php
                                 $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
                                 $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+                                confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 4</label>
@@ -345,13 +332,12 @@ if (isset($_GET['create'])) {
                                      <select class="form-control" name="consultant4"  id="consultant4">
                                         <option value=""></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -622,10 +608,9 @@ if (isset($_GET['create'])) {
             </div>
         </div>
     </div>
-    <?php
-}
 
-elseif (isset($_GET['read'])) {
+    <?php
+} elseif (isset($_GET['read'])) {
     // READ RECORD
     $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['read']);
     $result = mysqli_query($connection, $query);
@@ -647,8 +632,7 @@ elseif (isset($_GET['read'])) {
     mysqli_free_result($result2);
 
     // Get the page number or set it to 1 if no page is set.
-    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
-    ?>
+    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
 
     <ul class="pager">
         <?php if ($read > 1): ?>
@@ -691,90 +675,121 @@ elseif (isset($_GET['read'])) {
 
                             <div class="form-group">
                             <?php
-                                $assisment = @explode(",",$row['assessment']);
-                            ?>
+                                $assisment = @explode(",", $row['assessment']); ?>
 
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-10">
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("External", @$assisment)){ ?>
+                                    <?php if (in_array("External", @$assisment)) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="External" checked="checked" disabled="disabled">External
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                          <input type="checkbox" name="assessment[]"
                                          value="External" disabled="disabled">External
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("Internal", @$assisment)){ ?>
+                                    <?php if (in_array("Internal", @$assisment)) {
+                                    ?>
 
                                         <input type="checkbox" name="assessment[]"
                                         value="Internal" checked="checked" disabled="disabled">Internal
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Internal" disabled="disabled">Internal
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("Mobile", @$assisment)){ ?>
+                                    <?php if (in_array("Mobile", @$assisment)) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Mobile" checked="checked" disabled="disabled">Mobile
-                                        <?php } else {?>
+                                        <?php
+                                } else {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Mobile" disabled="disabled">Mobile
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("Physical", @$assisment)){ ?>
+                                    <?php if (in_array("Physical", @$assisment)) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Physical" checked="checked" disabled="disabled">Physical
-                                        <?php } else {?>
+                                        <?php
+                                } else {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Physical" disabled="disabled">Physical
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("Social Eng", @$assisment)){ ?>
-                                        <input type="checkbox" name="assessment[]" 
+                                    <?php if (in_array("Social Eng", @$assisment)) {
+                                    ?>
+                                        <input type="checkbox" name="assessment[]"
                                         value="Social Eng" checked="checked" disabled="disabled">Social Eng
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Social Eng" disabled="disabled">Social Eng
-                                        <?php } ?>
+                                        <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("War Dialing", @$assisment)){ ?>
+                                    <?php if (in_array("War Dialing", @$assisment)) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="War Dialing" checked="checked" disabled="disabled">War Dialing
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="War Dialing" disabled="disabled">War Dialing
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("Web", @$assisment)){ ?>
+                                    <?php if (in_array("Web", @$assisment)) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Web" checked="checked" disabled="disabled">Web
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                     <input type="checkbox" name="assessment[]"
                                     value="Web" disabled="disabled">Web
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("Wireless", @$assisment)){ ?>
+                                    <?php if (in_array("Wireless", @$assisment)) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Wireless" checked="checked" disabled="disabled">Wireless
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                     <input type="checkbox" name="assessment[]"
                                         value="Wireless" disabled="disabled">Wireless
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
                                 </div>
                             </div>
@@ -782,8 +797,7 @@ elseif (isset($_GET['read'])) {
                         <?php
                             $query1 = "SELECT * FROM clients where clientID=".$row['client'];
                             $result1 = mysqli_query($connection, $query1);
-                            $row1 = mysqli_fetch_array($result1);
-                        ?>
+                            $row1 = mysqli_fetch_array($result1); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Client</label>
@@ -832,8 +846,7 @@ elseif (isset($_GET['read'])) {
                             <?php
                                 $query11 = "SELECT * FROM employees where employeeID=".$row['employeeID'];
                                 $result11 = mysqli_query($connection, $query11);
-                                $row11 = @mysqli_fetch_array($result11);
-                            ?>
+                                $row11 = @mysqli_fetch_array($result11); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Account Mgr</label>
@@ -845,9 +858,7 @@ elseif (isset($_GET['read'])) {
                             <?php
                                 $query11 = "SELECT * FROM employees where employeeID=".$row['projectmgr'];
                                 $result11 = mysqli_query($connection, $query11);
-                                $row11 = @mysqli_fetch_array($result11);
-
-                            ?>
+                                $row11 = @mysqli_fetch_array($result11); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Project Mgr</label>
@@ -859,8 +870,7 @@ elseif (isset($_GET['read'])) {
                             <?php
                                 $query12 = "SELECT * FROM employees where employeeID=".$row['consultant1'];
                                 $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12);
-                            ?>
+                                $row12 = @mysqli_fetch_array($result12); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 1</label>
@@ -872,8 +882,7 @@ elseif (isset($_GET['read'])) {
                             <?php
                                 $query12 = "SELECT * FROM employees where employeeID=".$row['consultant2'];
                                 $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12);
-                             ?>
+                                $row12 = @mysqli_fetch_array($result12); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 2</label>
@@ -885,8 +894,7 @@ elseif (isset($_GET['read'])) {
                             <?php
                                 $query12 = "SELECT * FROM employees where employeeID=".$row['consultant3'];
                                 $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12);
-                            ?>
+                                $row12 = @mysqli_fetch_array($result12); ?>
 
                             <div class="form-group">
                                <label class="col-sm-2 control-label">Consultant 3</label>
@@ -898,8 +906,7 @@ elseif (isset($_GET['read'])) {
                             <?php
                                 $query12 = "SELECT * FROM employees where employeeID=".$row['consultant4'];
                                 $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12);
-                            ?>
+                                $row12 = @mysqli_fetch_array($result12); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 4</label>
@@ -1158,16 +1165,14 @@ elseif (isset($_GET['read'])) {
             </div>
         </div>
     </div>
-    <?php
-}
 
-elseif (isset($_GET['update'])) {
+    <?php
+} elseif (isset($_GET['update'])) {
     // UPDATE RECORD.
     $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
-    $row = mysqli_fetch_assoc($result);
-    ?>
+    $row = mysqli_fetch_assoc($result); ?>
 
     <div class="container">
         <div class="panel panel-primary">
@@ -1203,95 +1208,126 @@ elseif (isset($_GET['update'])) {
                             <div class="form-group">
 
                             <?php
-                                $assisment = @explode(",",$row['assessment']);
-                            ?>
+                                $assisment = @explode(",", $row['assessment']); ?>
 
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-10">
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("External", @$assisment)
-                                    ){ ?>
+                                    <?php if (in_array("External", @$assisment)
+                                    ) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="External" checked="checked">External
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="External" >External
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("Internal", @$assisment)
-                                    ){ ?>
+                                    <?php if (in_array("Internal", @$assisment)
+                                    ) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Internal" checked="checked">Internal
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Internal" >Internal
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("Mobile", @$assisment)
-                                    ){ ?>
+                                    <?php if (in_array("Mobile", @$assisment)
+                                    ) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Mobile" checked="checked">Mobile
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Mobile" >Mobile
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("Physical", @$assisment)
-                                    ){ ?>
+                                    <?php if (in_array("Physical", @$assisment)
+                                    ) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Physical" checked="checked">Physical
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Physical">Physical
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("Social Eng", @$assisment)
-                                    ){ ?>
+                                    <?php if (in_array("Social Eng", @$assisment)
+                                    ) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Social Eng" checked="checked">Social Eng
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Social Eng">Social Eng
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("War Dialing", @$assisment)){ ?>
+                                    <?php if (in_array("War Dialing", @$assisment)) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="War Dialing" checked="checked">War Dialing
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="War Dialing" >War Dialing
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("Web", @$assisment)
-                                    ){ ?>
+                                    <?php if (in_array("Web", @$assisment)
+                                    ) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]" value="Web" checked="checked">Web
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                     <input type="checkbox" name="assessment[]"
                                     value="Web" >Web
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if(in_array("Wireless", @$assisment)
-                                    ){ ?>
+                                    <?php if (in_array("Wireless", @$assisment)
+                                    ) {
+                                    ?>
                                         <input type="checkbox" name="assessment[]"
                                         value="Wireless" checked="checked">Wireless
-                                    <?php } else {?>
+                                    <?php
+                                } else {
+                                    ?>
                                     <input type="checkbox" name="assessment[]"
                                         value="Wireless" >Wireless
-                                    <?php } ?>
+                                    <?php
+                                } ?>
                                     </label>
                                 </div>
                             </div>
@@ -1305,19 +1341,17 @@ elseif (isset($_GET['update'])) {
                                 $result1 = mysqli_query($connection, $query1);
                                 $row1 = mysqli_fetch_array($result1);
                                 $query11 = "SELECT * FROM clients ORDER BY client ASC";
-                                $result11 = mysqli_query($connection, $query11);
-                            ?>
+                                $result11 = mysqli_query($connection, $query11); ?>
                                         <option value="<?php echo $row1['clientID'] ?>"><?php echo $row1['client'] ?></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result11)) {
-                                        ?>
+                                            while ($c = mysqli_fetch_assoc($result11)) {
+                                                ?>
                                         <option value = '<?php print $c["clientID"]; ?>' ><?php print $c["client"]; ?></option>
                                         <?php
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -1361,8 +1395,7 @@ elseif (isset($_GET['update'])) {
                             <?php
                                 $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
                                 $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+                                confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Account Mgr</label>
@@ -1370,29 +1403,26 @@ elseif (isset($_GET['update'])) {
                                     <select class="form-control" name="employeeID"  id="employeeID">
                                         <option value="<?php echo @$row11['employeeID'] ?>"><?php echo @$row11['employee'] ?></option>
                                         <?php
-                                            while($c = mysqli_fetch_assoc($result)) {
+                                            while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c["employeeID"].'"'.($row['employeeID'] == $c['employeeID'] ? ' selected' : '').'>'.$c["employee"].'</option>';
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
 
                             <?php
                                 $query = "SELECT * FROM employees WHERE projectmgr='Yes' ORDER BY employee ASC";
-                                $result = mysqli_query($connection, $query);
-                            ?>
+                                $result = mysqli_query($connection, $query); ?>
 
                             <?php
                                 $query12 = "SELECT * FROM employees where employeeID=".$row['projectmgr'];
                                 $result12 = mysqli_query($connection, $query12);
                                 $row12 = @mysqli_fetch_array($result12);
                                 $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
-                                $resulty = mysqli_query($connection, $queryy);
-                            ?>
+                                $resulty = mysqli_query($connection, $queryy); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Project Mgr</label>
@@ -1400,15 +1430,14 @@ elseif (isset($_GET['update'])) {
                                     <select class="form-control" name="projectmgr" id="projectmgr">
                                         <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
                                         <?php
-                                            while($c1 = @mysqli_fetch_array($resulty)) {
-                                        ?>
+                                            while ($c1 = @mysqli_fetch_array($resulty)) {
+                                                ?>
                                             <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
                                         <?php
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -1418,8 +1447,7 @@ elseif (isset($_GET['update'])) {
                                 $result12 = mysqli_query($connection, $query12);
                                 $row12 = @mysqli_fetch_array($result12);
                                 $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
-                                $resulty = mysqli_query($connection, $queryy);
-                            ?>
+                                $resulty = mysqli_query($connection, $queryy); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 1</label>
@@ -1427,14 +1455,13 @@ elseif (isset($_GET['update'])) {
                                     <select class="form-control" name="consultant1" id="consultant1">
                                         <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
                                         <?php
-                                            while($c1 = @mysqli_fetch_array($resulty)) {
-                                        ?>
+                                            while ($c1 = @mysqli_fetch_array($resulty)) {
+                                                ?>
                                                 <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
                                         <?php
                                             }
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -1444,8 +1471,7 @@ elseif (isset($_GET['update'])) {
                                 $result12 = mysqli_query($connection, $query12);
                                 $row12 = @mysqli_fetch_array($result12);
                                 $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
-                                $resulty = mysqli_query($connection, $queryy);
-                            ?>
+                                $resulty = mysqli_query($connection, $queryy); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 2</label>
@@ -1453,14 +1479,13 @@ elseif (isset($_GET['update'])) {
                                     <select class="form-control" name="consultant2" id="consultant2">
                                         <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
                                         <?php
-                                            while($c1 = @mysqli_fetch_array($resulty)) {
-                                        ?>
+                                            while ($c1 = @mysqli_fetch_array($resulty)) {
+                                                ?>
                                             <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
                                         <?php
                                             }
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -1470,26 +1495,27 @@ elseif (isset($_GET['update'])) {
                                 $result12 = mysqli_query($connection, $query12);
                                 $row12 = @mysqli_fetch_array($result12);
                                 $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
-                                $resulty = mysqli_query($connection, $queryy);
-                            ?>
+                                $resulty = mysqli_query($connection, $queryy); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 3</label>
                                 <div class="col-sm-3">
-                                    <!--<input type="text" class="form-control" name="consultant3"
-                                    id="consultant3" value="<?php //echo $row['consultant3'] ?>" value="<?php echo $row['consultant3'] ?>">-->
+                                    <!--
+                                    <input type="text" class="form-control" name="consultant3"
+                                    id="consultant3" value="<?php //echo $row['consultant3']?>"
+                                    value="<?php echo $row['consultant3'] ?>">
+                                    -->
 
                                     <select class="form-control" name="consultant3" id="consultant3">
                                         <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
                                         <?php
-                                            while($c1 = @mysqli_fetch_array($resulty)) {
-                                        ?>
+                                            while ($c1 = @mysqli_fetch_array($resulty)) {
+                                                ?>
                                             <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
-                                        <?php 
+                                        <?php
                                             }
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -1499,26 +1525,27 @@ elseif (isset($_GET['update'])) {
                                 $result12 = mysqli_query($connection, $query12);
                                 $row12 = @mysqli_fetch_array($result12);
                                 $queryy = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
-                                $resulty = mysqli_query($connection, $queryy);
-                            ?>
+                                $resulty = mysqli_query($connection, $queryy); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 4</label>
                                 <div class="col-sm-3">
-                                    <!--<input type="text" class="form-control" name="consultant4"
-                                    id="consultant4" value="<?php //echo $row['consultant4'] ?>" value="<?php echo $row['consultant4'] ?>">-->
+                                    <!--
+                                    <input type="text" class="form-control" name="consultant4"
+                                    id="consultant4" value="<?php //echo $row['consultant4']?>"
+                                    value="<?php echo $row['consultant4'] ?>">
+                                    -->
 
                                     <select class="form-control" name="consultant4" id="consultant4">
                                         <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
                                         <?php
-                                            while($c1 = @mysqli_fetch_array($resulty)) {
-                                        ?>
+                                            while ($c1 = @mysqli_fetch_array($resulty)) {
+                                                ?>
                                             <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
                                         <?php
                                             }
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
                             </div>
@@ -1576,13 +1603,13 @@ elseif (isset($_GET['update'])) {
                                 <div class="col-sm-2">
                                     <select class="form-control" name="current_status"  id="current_status">
                                         <option value="<?php echo $row['status']; ?>"><?php echo $row['status']; ?></option>
-                                        <option value="Contract"<?php echo ($row['status'] == 'Contract' ? " selected" : "")?>>Contract</option>
-                                        <option value="Scoping"<?php echo ($row['status'] == 'Scoping' ? " selected" : "")?>>Scoping</option>
-                                        <option value="In Progress"<?php echo ($row['status'] == 'In Progress' ? " selected" : "")?>>In Progress</option>
-                                        <option value="Reporting"<?php echo ($row['status'] == 'Reporting' ? " selected" : "")?>>Reporting</option>
-                                        <option value="Review"<?php echo ($row['status'] == 'Review' ? " selected" : "")?>>Review</option>
-                                        <option value="Delivered"<?php echo ($row['status'] == 'Delivered' ? " selected" : "")?>>Delivered</option>
-                                        <option value="Complete"<?php echo ($row['status'] == 'Complete' ? " selected" : "")?>>Complete</option>
+                                        <option value="Contract"<?php echo($row['status'] == 'Contract' ? " selected" : "")?>>Contract</option>
+                                        <option value="Scoping"<?php echo($row['status'] == 'Scoping' ? " selected" : "")?>>Scoping</option>
+                                        <option value="In Progress"<?php echo($row['status'] == 'In Progress' ? " selected" : "")?>>In Progress</option>
+                                        <option value="Reporting"<?php echo($row['status'] == 'Reporting' ? " selected" : "")?>>Reporting</option>
+                                        <option value="Review"<?php echo($row['status'] == 'Review' ? " selected" : "")?>>Review</option>
+                                        <option value="Delivered"<?php echo($row['status'] == 'Delivered' ? " selected" : "")?>>Delivered</option>
+                                        <option value="Complete"<?php echo($row['status'] == 'Complete' ? " selected" : "")?>>Complete</option>
                                     </select>
                                 </div>
                             </div>
@@ -1590,8 +1617,7 @@ elseif (isset($_GET['update'])) {
                             <?php
                                 $query = "SELECT * FROM clients ORDER BY client ASC";
                                 $result = mysqli_query($connection, $query);
-                                confirm_query($result);
-                            ?>
+                                confirm_query($result); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
@@ -1795,12 +1821,10 @@ elseif (isset($_GET['update'])) {
             </div>
         </div>
     </div>
-    <?php
-}
 
-else {
-    // DISPLAY LIST OF RECORDS.
-    ?>
+    <?php
+} else {
+    // DISPLAY LIST OF RECORDS. ?>
     <br>
     <a class="btn btn-primary" href="projects.php?create" input type="button">New</a>
     <br>
@@ -1809,8 +1833,7 @@ else {
     <?php
         $query = "SELECT * FROM projects ORDER BY project ASC";
         $result = mysqli_query($connection, $query);
-        confirm_query($result);
-    ?>
+        confirm_query($result); ?>
 
     <table style="width: auto;" class="table table-bordered table-condensed table-hover">
         <tr>
@@ -1825,7 +1848,7 @@ else {
         </tr>
 
         <?php
-            while($row = mysqli_fetch_assoc($result)) {
+            while ($row = mysqli_fetch_assoc($result)) {
                 $time = strtotime($row['modified']);
                 $myDateFormat = date("m-d-y g:i A", $time);
                 $query = "SELECT * FROM clients where clientID = ".intval($row['client']);
@@ -1847,9 +1870,8 @@ else {
                 </tr>';
             }
 
-            // Release returned data.
-            mysqli_free_result($result);
-        ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
     </table>
     <?php
 }

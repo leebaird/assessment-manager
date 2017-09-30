@@ -8,6 +8,7 @@ if (isset($_POST['create'])) {
 
     // Check for blank field.
     $employee = trim($_POST['employee']);
+
     if (empty($employee)) {
         ?>
         <br>
@@ -113,23 +114,23 @@ if (isset($_GET['create'])) {
 
     <?php
 } elseif (isset($_GET['read'])) {
-    // READ RECORD.
-    $query = "SELECT * FROM employees WHERE employeeID=".intval($_GET['read']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $row = mysqli_fetch_assoc($result);
+        // READ RECORD.
+        $query = "SELECT * FROM employees WHERE employeeID=".intval($_GET['read']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+        $row = mysqli_fetch_assoc($result);
 
-    // Find number of records.
-    $query2 = "SELECT * FROM employees";
-    $result2 = mysqli_query($connection, $query2);
-    confirm_query($result2);
-    $limit = mysqli_num_rows($result2);
+        // Find number of records.
+        $query2 = "SELECT * FROM employees";
+        $result2 = mysqli_query($connection, $query2);
+        confirm_query($result2);
+        $limit = mysqli_num_rows($result2);
 
-    // Free result set.
-    mysqli_free_result($result2);
+        // Free result set.
+        mysqli_free_result($result2);
 
-    // Get the page number or set it to 1 if no page is set.
-    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
+        // Get the page number or set it to 1 if no page is set.
+        $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
 
     <ul class="pager">
         <?php if ($read > 1): ?>
@@ -210,12 +211,12 @@ if (isset($_GET['create'])) {
 </div>
 
     <?php
-} elseif (isset($_GET['update'])) {
-    // UPDATE RECORD.
-    $query = "SELECT * FROM employees WHERE employeeID=".intval($_GET['update']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-    $row = mysqli_fetch_assoc($result); ?>
+    } elseif (isset($_GET['update'])) {
+        // UPDATE RECORD.
+        $query = "SELECT * FROM employees WHERE employeeID=".intval($_GET['update']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+        $row = mysqli_fetch_assoc($result); ?>
 
 <style>
     .vertical-center {
@@ -294,8 +295,8 @@ if (isset($_GET['create'])) {
 </div>
 
     <?php
-} else {
-    // DISPLAY LIST OF RECORDS.
+    } else {
+        // DISPLAY LIST OF RECORDS.
     ?>
     <br>
     <a class="btn btn-primary" href="employees.php?create" input type="button">New</a>
@@ -305,8 +306,8 @@ if (isset($_GET['create'])) {
     <?php
         // Perform db query.
         $query = "SELECT * FROM employees ORDER BY employee ASC";
-    $result = mysqli_query($connection, $query);
-    confirm_query($result); ?>
+        $result = mysqli_query($connection, $query);
+        confirm_query($result); ?>
 
     <table style="width: auto;" class="table table-bordered table-condensed table-hover">
         <tr>
@@ -334,11 +335,11 @@ if (isset($_GET['create'])) {
                 </tr>';
             }
 
-    // Release returned data.
-    mysqli_free_result($result); ?>
+        // Release returned data.
+        mysqli_free_result($result); ?>
     </table>
     <?php
-}
+    }
 ?>
 
 <?php include '../includes/footer.php'; ?>

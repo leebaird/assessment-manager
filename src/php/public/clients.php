@@ -8,7 +8,8 @@ if (isset($_POST['create'])) {
 
     // Check for blank field.
     $client = trim($_POST['client']);
-    if (empty($client)) { ?>
+    if (empty($client)) {
+        ?>
         <br>
         <button class="btn btn-danger" type="button"><strong>Warning!</strong> You must enter a client.</button>
         <br><br>
@@ -68,8 +69,7 @@ if (isset($_GET['create'])) {
                 <?php
                     $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
                     $result = mysqli_query($connection, $query);
-                    confirm_query($result);
-                ?>
+                    confirm_query($result); ?>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Address</label>
@@ -113,13 +113,12 @@ if (isset($_GET['create'])) {
                         <select class="form-control" name="employeeID">
                             <option value=""></option>
                             <?php
-                                while($c = mysqli_fetch_assoc($result)) {
+                                while ($c = mysqli_fetch_assoc($result)) {
                                     echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
                                 }
 
-                                // Release returned data.
-                                mysqli_free_result($result);
-                            ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
                         </select>
                     </div>
                 </div>
@@ -140,10 +139,9 @@ if (isset($_GET['create'])) {
         </div>
     </div>
 </div>
-    <?php
-}
 
-elseif (isset($_GET['read'])) {
+    <?php
+} elseif (isset($_GET['read'])) {
     // READ RECORD.
     $query = "SELECT * FROM clients WHERE clientID=".intval($_GET['read']);
     $result = mysqli_query($connection, $query);
@@ -165,8 +163,7 @@ elseif (isset($_GET['read'])) {
     mysqli_free_result($result2);
 
     // Get the page number or set it to 1 if no page is set.
-    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1;
-    ?>
+    $read = isset($_GET['read']) ? (int)$_GET['read'] : 1; ?>
 
     <ul class="pager">
         <?php if ($read > 1): ?>
@@ -224,7 +221,6 @@ elseif (isset($_GET['read'])) {
                     </div>
                 </div>
                 <br>
-
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Phone</label>
                     <div class="col-sm-4">
@@ -261,16 +257,14 @@ elseif (isset($_GET['read'])) {
         </div>
     </div>
 </div>
-    <?php
-}
 
-elseif (isset($_GET['update'])) {
+    <?php
+} elseif (isset($_GET['update'])) {
     // UPDATE RECORD.
     $query = "SELECT * FROM clients WHERE clientID=".intval($_GET['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
-    $row = mysqli_fetch_assoc($result);
-    ?>
+    $row = mysqli_fetch_assoc($result); ?>
 
 <br><br><br>
 
@@ -303,8 +297,7 @@ elseif (isset($_GET['update'])) {
                 <?php
                     $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
                     $result = mysqli_query($connection, $query);
-                    confirm_query($result);
-                ?>
+                    confirm_query($result); ?>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Address</label>
@@ -348,13 +341,12 @@ elseif (isset($_GET['update'])) {
                         <select class="form-control" name="employeeID">
                             <option value=""></option>
                             <?php
-                                while($c = mysqli_fetch_assoc($result)) {
+                                while ($c = mysqli_fetch_assoc($result)) {
                                     echo '<option value = "'.$c["employeeID"].'"'.($row['employeeID'] == $c['employeeID'] ? ' selected' : '').'>'.$c["employee"].'</option>';
                                 }
 
-                                // Release returned data.
-                                mysqli_free_result($result);
-                            ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
                         </select>
                     </div>
                 </div>
@@ -375,10 +367,9 @@ elseif (isset($_GET['update'])) {
         </div>
     </div>
 </div>
-    <?php
-}
 
-else {
+    <?php
+} else {
     // DISPLAY LIST OF RECORDS.
     ?>
     <br>
@@ -390,8 +381,7 @@ else {
         // Perform db query.
         $query = "SELECT * FROM clients ORDER BY client ASC";
         $result = mysqli_query($connection, $query);
-        confirm_query($result);
-    ?>
+        confirm_query($result); ?>
 
     <table style="width: auto;" class="table table-bordered table-condensed table-hover">
         <tr>
@@ -404,7 +394,7 @@ else {
         </tr>
 
         <?php
-            while($row = mysqli_fetch_assoc($result)) {
+            while ($row = mysqli_fetch_assoc($result)) {
                 $time = strtotime($row['modified']);
                 $myDateFormat = date("m-d-y g:i A", $time);
                 $query = "SELECT * FROM employees where employeeID = ".intval($row['employeeID']);
@@ -424,9 +414,8 @@ else {
                 </tr>';
             }
 
-            // Release returned data.
-            mysqli_free_result($result);
-        ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
 
     </table>
     <?php
