@@ -42,7 +42,6 @@ CREATE TABLE contacts (
   clientID int(6) NOT NULL,
   projectID int(6) NOT NULL,
   PRIMARY KEY (contactID)
---  FOREIGN KEY (clientID) REFERENCES clients (clientID) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE employees (

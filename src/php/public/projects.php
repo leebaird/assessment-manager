@@ -188,7 +188,7 @@ if (isset($_GET['create'])) {
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-2 control-label">City, State, Zip</label>
+                                <label class="col-sm-2 control-label">City, State</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" name="city" id="city" placeholder="City">
                                 </div>
@@ -196,12 +196,15 @@ if (isset($_GET['create'])) {
                                 <div class="col-sm-1">
                                     <input type="text" class="form-control" name="state" id="state" placeholder="State">
                                 </div>
-
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Zip</label>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip">
                                 </div>
                             </div>
-                            <br>
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Phone</label>
                                 <div class="col-sm-3">
