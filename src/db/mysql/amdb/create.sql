@@ -104,7 +104,6 @@ CREATE TABLE projects (
   draft_delivery varchar(12),
   final_delivery varchar(12),
   notes text,
-  objective varchar(100),
   PRIMARY KEY (projectID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
