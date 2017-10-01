@@ -19,21 +19,15 @@ CREATE TABLE clients (
   clientID int(6) NOT NULL AUTO_INCREMENT,
   modified datetime NOT NULL,
   client varchar(50) NOT NULL,
-  web varchar(50),
-  PRIMARY KEY (clientID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE client_address (
-  client_addressID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
   address varchar(50),
   city varchar(25),
   state varchar(2),
   zip varchar(10),
   phone varchar(20),
   notes text,
-  clientID int(6) NOT NULL,
-  PRIMARY KEY (client_addressID)
+  web varchar(50),
+  employeeID int(6),
+  PRIMARY KEY (clientID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE contacts (
@@ -48,6 +42,7 @@ CREATE TABLE contacts (
   clientID int(6) NOT NULL,
   projectID int(6) NOT NULL,
   PRIMARY KEY (contactID)
+--  FOREIGN KEY (clientID) REFERENCES clients (clientID) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE employees (

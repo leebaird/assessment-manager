@@ -221,6 +221,7 @@ if (isset($_GET['create'])) {
         $sql1 ="SELECT * FROM hostvulns ORDER BY hostvulnID LIMIT $rr,1";
         $result1 = mysqli_query($connection, $sql1);
         $rs1 = mysqli_fetch_array($result1);
+        ?>
 
         <li class="previous"><a href="?read=<?= $rs1['hostvulnID'] ?>">Previous</a></li>
         <?php endif ?>
