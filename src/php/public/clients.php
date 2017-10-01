@@ -77,20 +77,23 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-3 control-label">City, State, Zip</label>
+                    <label class="col-sm-3 control-label">City, State</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="city" placeholder="City">
                     </div>
 
-                    <div class="col-sm-1">
-                        <input type="text" class="form-control" name="state" placeholder="State">
-                    </div>
-
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="zip" placeholder="Zip">
+                        <input type="text" class="form-control" name="state" placeholder="State">
                     </div>
                 </div>
                 <br>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Zip</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="zip" placeholder="Zip">
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Phone</label>
                     <div class="col-sm-4">
@@ -205,20 +208,23 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-3 control-label">City, State, Zip</label>
+                    <label class="col-sm-3 control-label">City, State</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="city" value="<?php echo $row['city'] ?>" readonly>
                     </div>
 
-                    <div class="col-sm-1">
-                        <input type="text" class="form-control" name="state" value="<?php echo $row['state'] ?>" readonly>
-                    </div>
-
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="zip" value="<?php echo $row['zip'] ?>" readonly>
+                        <input type="text" class="form-control" name="state" value="<?php echo $row['state'] ?>" readonly>
                     </div>
                 </div>
                 <br>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Zip</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="zip" value="<?php echo $row['zip'] ?>" readonly>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Phone</label>
                     <div class="col-sm-4">
@@ -305,20 +311,23 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-3 control-label">City, State, Zip</label>
+                    <label class="col-sm-3 control-label">City, State</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="city" value="<?php echo $row['city'] ?>">
                     </div>
 
-                    <div class="col-sm-1">
-                        <input type="text" class="form-control" name="state" value="<?php echo $row['state'] ?>">
-                    </div>
-
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="zip" value="<?php echo $row['zip'] ?>">
+                        <input type="text" class="form-control" name="state" value="<?php echo $row['state'] ?>">
                     </div>
                 </div>
                 <br>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Zip</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="zip" value="<?php echo $row['zip'] ?>">
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Phone</label>
                     <div class="col-sm-4">

@@ -1,9 +1,9 @@
 
-INSERT INTO `clients` (`clientID`, `modified`, `client`, `web`) VALUES
-(1, '2017-09-22 21:56:14', 'Apple', 'www.apple.com'),
-(2, '2017-09-22 22:10:04', 'Comcast', 'www.comcast.net'),
-(3, '2017-09-22 22:09:59', 'Palo Alto Networks', 'www.paloaltonetworks.com'),
-(4, '2017-09-22 22:10:09', 'Verizon', 'www.verizon.com');
+INSERT INTO `clients` (`clientID`, `modified`, `client`, `address`, `city`, `state`, `zip`, `phone`, `notes`, `web`, `employeeID`) VALUES
+(1, '2017-10-01 14:59:48', 'Apple', '1 Infinite Loop', 'Cupertino', 'CA', '95014', '408-996â€“1010', '', 'www.apple.com', '5'),
+(2, '2017-10-01 15:17:35', 'Comcast', '1701 JFK Boulevard', 'Philadelphia', 'PA', '19103', '800-934-6489', '', 'www.comcast.net', '5'),
+(3, '2017-10-01 15:20:50', 'Palo Alto Networks', '3000 Tannery Way', 'Santa Clara', 'CA', '95054', '408-753-4000', '', 'www.paloaltonetworks.com', '5'),
+(4, '2017-10-01 15:22:19', 'Verizon', '140 W. St.', 'New York', 'NY', '10007', '212-395-1000', '', 'www.verizon.com', '5');
 
 INSERT INTO `contacts` (`contactID`, `modified`, `contact`, `title`, `work`, `cell`, `email`, `notes`, `clientID`, `projectID`) VALUES
 (1, '2017-09-18 20:43:51', 'Brian Roberts', 'CEO', '', '', '', '', 2, 0),
@@ -13,10 +13,10 @@ INSERT INTO `contacts` (`contactID`, `modified`, `contact`, `title`, `work`, `ce
 
 INSERT INTO `employees` (`employeeID`, `modified`, `employee`, `title`, `accountmgr`, `cell`, `email`, `notes`) VALUES
 (1, '2017-09-18 20:53:41', 'Bugs Bunny', 'Manager', '', '', 'bugs.bunny@acme.com', ''),
-(2, '2017-09-18 20:54:40', 'Moe Howard', 'Red Team', '', '', '', 'Linux'),
-(3, '2017-09-18 20:55:02', 'Larry Fine', 'Red Team', '', '', '', 'Windows'),
-(4, '2017-09-18 20:55:27', 'Curly Howard', 'Red Team', '', '', '', 'Web'),
-(5, '2017-09-22 22:11:25', 'Wile E Coyote', 'Pure Genius', 'Yes', '', '', '');
+(2, '2017-09-18 20:54:40', 'Moe Howard', 'Red Team', '', '', 'moe.howard@acme.com', 'Linux'),
+(3, '2017-09-18 20:55:02', 'Larry Fine', 'Red Team', '', '', 'larry.fine@acme.com', 'Windows'),
+(4, '2017-09-18 20:55:27', 'Curly Howard', 'Red Team', '', '', 'curly.howard@acme.com', 'Web'),
+(5, '2017-09-22 22:11:25', 'Wile E Coyote', 'Pure Genius', 'Yes', '', 'wile.e.coyote@acme.com', '');
 
 INSERT INTO `findings` (`findingID`, `modified`, `type`, `finding`, `observation`, `severity`, `remediation`, `see_also`) VALUES
 (1, '2017-09-18 20:56:27', 'Host', 'Access to Administrative Interface', '', '', '', ''),
