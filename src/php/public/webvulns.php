@@ -109,7 +109,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Vulnerability</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <input type="text" class="form-control" name="vulnerability" placeholder="Vulnerability">
                     </div>
                 </div>
@@ -151,21 +151,21 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="description" id="description" placeholder="Description" rows="25"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Remediation</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="remediation" id="remediation" placeholder="Remediation" rows="25"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">See Also</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="see_also" id="see_also" placeholder="See Also" rows="5"></textarea>
                     </div>
                 </div>
@@ -267,7 +267,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Vulnerability</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <input type="text" class="form-control" name="vulnerability" value="<?php echo $row['vulnerability'] ?>" readonly>
                     </div>
                 </div>
@@ -292,21 +292,21 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="description" rows="25" readonly><?php echo $row['description'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Remediation</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="remediation" rows="25" readonly><?php echo $row['remediation'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">See Also</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="see_also" rows="5" readonly><?php echo $row['see_also'] ?></textarea>
                     </div>
                 </div>
@@ -354,7 +354,7 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Vulnerability</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <input type="text" class="form-control" name="vulnerability" value="<?php echo $row['vulnerability'] ?>">
                     </div>
                 </div>
@@ -396,21 +396,21 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="description" id="description" rows="25"><?php echo $row['description'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Remediation</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="remediation" id="remediation" rows="25"><?php echo $row['remediation'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">See Also</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="see_also" id="see_also" rows="5"><?php echo $row['see_also'] ?></textarea>
                     </div>
                 </div>

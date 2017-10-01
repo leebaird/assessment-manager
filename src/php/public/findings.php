@@ -54,17 +54,20 @@ if (isset($_GET['delete'])) {
 
 if (isset($_GET['create'])) {
     ?>
-    <div class="container">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Create Finding</h3>
-            </div>
-        <div class="panel-body">
+
+<br><br>
+
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Create Finding</h3>
+        </div>
+    <div class="panel-body">
 
         <form class="form-horizontal" action="findings.php" method="post">
             <div class="form-group">
                 <label class="col-sm-2 control-label">Type</label>
-                <div class="col-sm-10">
+                <div class="col-sm-9">
                     <select class="form-control" name="type">
                         <option value=""></option>
                         <option value="Host">Host</option>
@@ -82,35 +85,35 @@ if (isset($_GET['create'])) {
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Finding</label>
-                <div class="col-sm-10">
+                <div class="col-sm-9">
                     <input type="text" class="form-control" name="finding" placeholder="Finding">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Observation</label>
-                <div class="col-sm-10">
+                <div class="col-sm-9">
                     <textarea class="form-control" name="observation" placeholder="Observation" rows="20"></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Severity</label>
-                <div class="col-sm-10">
+                <div class="col-sm-9">
                     <textarea class="form-control" name="severity" placeholder="Severity" rows="20"></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Remediation</label>
-                <div class="col-sm-10">
+                <div class="col-sm-9">
                     <textarea class="form-control" name="remediation" placeholder="Remediation" rows="25"></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">See Also</label>
-                <div class="col-sm-10">
+                <div class="col-sm-9">
                     <textarea class="form-control" name="see_also" placeholder="See Also" rows="5"></textarea>
                 </div>
             </div>
@@ -120,7 +123,6 @@ if (isset($_GET['create'])) {
                 <a class="btn btn-default" href="findings.php">Back</a>
             </div>
         </form>
-        </div>
     </div>
 </div>
 
@@ -163,42 +165,42 @@ if (isset($_GET['create'])) {
             <form class="form-horizontal" action="findings.php" method="post">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Type</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <input type="text" class="form-control" name="type" value="<?php echo $row['type'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Finding</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <input type="text" class="form-control" name="finding" value="<?php echo $row['finding'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Observation</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="observation" rows="20" readonly><?php echo $row['observation'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Severity</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="severity" rows="20" readonly><?php echo $row['severity'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Remediation</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="remediation" rows="25" readonly><?php echo $row['remediation'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">See Also</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="see_also" rows="5" readonly><?php echo $row['see_also'] ?></textarea>
                     </div>
                 </div>
@@ -232,7 +234,7 @@ if (isset($_GET['create'])) {
                 <input type = "hidden" name = "update" value = "<?php echo $row['findingID'] ?>">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Type</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <select class="form-control" name="type">
                             <option value=""></option>
                             <option value="Host"<?php echo($row['type'] == 'Host' ? " selected" : "")?>>Host</option>
@@ -250,35 +252,35 @@ if (isset($_GET['create'])) {
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Finding</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <input type="text" class="form-control" name="finding" value="<?php echo $row['finding'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Observation</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="observation" rows="20"><?php echo $row['observation'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Severity</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="severity" rows="20"><?php echo $row['severity'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Remediation</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="remediation" rows="25"><?php echo $row['remediation'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">See Also</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control" name="see_also" rows="5"><?php echo $row['see_also'] ?></textarea>
                     </div>
                 </div>
