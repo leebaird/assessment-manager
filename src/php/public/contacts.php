@@ -41,14 +41,12 @@ if (isset($_GET['create'])) {
 
 <style>
     .vertical-center {
-        height: 80vh;
+        height: 85vh;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 </style>
-
-<br><br><br>
 
 <div class="vertical-center">
     <div class="container col-md-8">
@@ -60,7 +58,7 @@ if (isset($_GET['create'])) {
         <div class="panel-body">
             <form class="form-horizontal" action="contacts.php" method="post">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Contact</label>
+                    <label class="col-sm-3 control-label">Contact</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="contact" placeholder="Contact">
                     </div>
@@ -72,7 +70,7 @@ if (isset($_GET['create'])) {
                     confirm_query($result); ?>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Client</label>
+                    <label class="col-sm-3 control-label">Client</label>
                     <div class="col-sm-7">
                         <select class="form-control" name="clientID">
                             <option value=""></option>
@@ -88,35 +86,35 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Title</label>
+                    <label class="col-sm-3 control-label">Title</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="title" placeholder="Title">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Work</label>
+                    <label class="col-sm-3 control-label">Work</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="work" placeholder="Work">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Cell</label>
+                    <label class="col-sm-3 control-label">Cell</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="cell" placeholder="Cell">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Email</label>
+                    <label class="col-sm-3 control-label">Email</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="email" placeholder="Email">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Notes</label>
+                    <label class="col-sm-3 control-label">Notes</label>
                     <div class="col-sm-7">
                         <textarea class="form-control" name="notes" placeholder="Notes" rows="6"></textarea>
                     </div>
@@ -202,7 +200,7 @@ if (isset($_GET['create'])) {
 
 <style>
     .vertical-center {
-        height: 80vh;
+        height: 67vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -219,14 +217,14 @@ if (isset($_GET['create'])) {
 
             <form class="form-horizontal" action="contacts.php" method="post">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Contact</label>
+                    <label class="col-sm-3 control-label">Contact</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="contact" value="<?php echo $row['contact'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Client</label>
+                    <label class="col-sm-3 control-label">Client</label>
                     <div class="col-sm-7">
                     <?php
                 $query = "SELECT * FROM clients where clientID = ".intval($row['clientID']);
@@ -238,35 +236,35 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Title</label>
+                    <label class="col-sm-3 control-label">Title</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="title" value="<?php echo $row['title'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Work</label>
+                    <label class="col-sm-3 control-label">Work</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="work" value="<?php echo $row['work'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Cell</label>
+                    <label class="col-sm-3 control-label">Cell</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="cell" value="<?php echo $row['cell'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Email</label>
+                    <label class="col-sm-3 control-label">Email</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="email" value="<?php echo $row['email'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Notes</label>
+                    <label class="col-sm-3 control-label">Notes</label>
                     <div class="col-sm-7">
                         <textarea class="form-control" name="notes" rows="6" readonly><?php echo $row['notes'] ?></textarea>
                     </div>
@@ -291,7 +289,7 @@ if (isset($_GET['create'])) {
 
 <style>
     .vertical-center {
-        height: 80vh;
+        height: 70vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -311,7 +309,7 @@ if (isset($_GET['create'])) {
             <form class="form-horizontal" action="contacts.php" method="post">
                 <input type = "hidden" name = "update" value = "<?php echo $row['contactID'] ?>">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Contact</label>
+                    <label class="col-sm-3 control-label">Contact</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="contact" value="<?php echo $row['contact'] ?>">
                     </div>
@@ -323,7 +321,7 @@ if (isset($_GET['create'])) {
                     confirm_query($result); ?>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Client</label>
+                    <label class="col-sm-3 control-label">Client</label>
                     <div class="col-sm-7">
                         <select class="form-control" name="clientID">
                             <option value=""></option>
@@ -339,35 +337,35 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Title</label>
+                    <label class="col-sm-3 control-label">Title</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="title" value="<?php echo $row['title'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Work</label>
+                    <label class="col-sm-3 control-label">Work</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="work" value="<?php echo $row['work'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Cell</label>
+                    <label class="col-sm-3 control-label">Cell</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="cell" value="<?php echo $row['cell'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Email</label>
+                    <label class="col-sm-3 control-label">Email</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="email" value="<?php echo $row['email'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Notes</label>
+                    <label class="col-sm-3 control-label">Notes</label>
                     <div class="col-sm-7">
                         <textarea class="form-control" name="notes" rows="6"><?php echo $row['notes'] ?></textarea>
                     </div>

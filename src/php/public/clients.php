@@ -41,14 +41,12 @@ if (isset($_GET['create'])) {
 
 <style>
     .vertical-center {
-        height: 80vh;
+        height: 88vh;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 </style>
-
-<br>
 
 <div class="vertical-center">
     <div class="container col-md-8">
@@ -176,7 +174,7 @@ if (isset($_GET['create'])) {
 
 <style>
     .vertical-center {
-        height: 80vh;
+        height: 70vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -270,7 +268,7 @@ if (isset($_GET['create'])) {
 
 <style>
     .vertical-center {
-        height: 80vh;
+        height: 83vh;
         display: flex;
         align-items: center;
         justify-content: center;
