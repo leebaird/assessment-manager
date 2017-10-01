@@ -1,22 +1,4 @@
 
-DROP TABLE assessments;
-DROP TABLE status;
-DROP TABLE clients;
-DROP TABLE client_address;
-DROP TABLE contacts;
-DROP TABLE employees;
-DROP TABLE employee_project;
-DROP TABLE findings;
-DROP TABLE hostvulns;
-DROP TABLE projects;
-DROP TABLE project_employee;
-DROP TABLE project_location;
-DROP TABLE project_status;
-DROP TABLE scans;
-DROP TABLE users;
-DROP TABLE vulnerabilities;
-DROP TABLE webvulns;
-
 CREATE TABLE assessments (
   assessmentID int(6) NOT NULL AUTO_INCREMENT,
   modified datetime NOT NULL,
@@ -167,6 +149,7 @@ CREATE TABLE project_status (
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ALTER TABLE project_status ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
+
 ALTER TABLE project_status ADD (CONSTRAINT fk_status01 FOREIGN KEY (statusID) REFERENCES status(statusID));
 
 CREATE TABLE scans (
