@@ -60,11 +60,7 @@ if (isset($_POST['create'])) {
 
     $ass="";
 
-    foreach ($_POST['assessment'] as $selected) {
-        $ass .= $selected.",";
-    }
-
-    $query = "INSERT INTO projects (modified, project, assessment, client, address, city, state, zip,  phone, web,  employeeID, projectmgr, consultant1, consultant2, consultant3, consultant4, kickoff, start, finish, tech_qa, draft_delivery, final_delivery, status,  notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]','$_POST[web]','$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[consultant1]', '$_POST[consultant2]', '$_POST[consultant3]', '$_POST[consultant4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[tech_qa]', '$_POST[draft_delivery]', '$_POST[final_delivery]', '$_POST[current_status]', '$_POST[notes]')";
+    $query = "INSERT INTO projects (modified, project, assessment, client, address, city, state, zip,  phone, web, employeeID, projectmgr, consultant1, consultant2, consultant3, consultant4, kickoff, start, finish, tech_qa, draft_delivery, final_delivery, status,  notes) VALUES (now(), '$_POST[project]', '$ass', '$_POST[clientID]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]','$_POST[web]','$_POST[accountmgr]', '$_POST[projectmgr]', '$_POST[consultant1]', '$_POST[consultant2]', '$_POST[consultant3]', '$_POST[consultant4]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[tech_qa]', '$_POST[draft_delivery]', '$_POST[final_delivery]', '$_POST[current_status]', '$_POST[notes]')";
 
     $result = mysqli_query($connection, $query);
     confirm_query($result);
@@ -120,8 +116,22 @@ if (isset($_GET['create'])) {
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Project</label>
-                                <div class="col-sm-7">
+                                <div class="col-sm-6">
                                     <input type="text" class="form-control" name="project" placeholder="Project">
+                                </div>
+
+                                <label class="col-sm-1 control-label">Status</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="current_status" id="current_status">
+                                        <option value=""></option>
+                                        <option value="Contract">Contract</option>
+                                        <option value="Scoping">Scoping</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Reporting">Reporting</option>
+                                        <option value="Review">Review</option>
+                                        <option value="Delivered">Delivered</option>
+                                        <option value="Complete">Complete</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -373,22 +383,6 @@ if (isset($_GET['create'])) {
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" id="final_delivery" name="final_delivery" placeholder="Final Delivery">
                                     <script> $( "#final_delivery" ).datepicker(); </script>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Status</label>
-                                <div class="col-sm-2">
-                                    <select class="form-control" name="current_status" id="current_status">
-                                        <option value=""></option>
-                                        <option value="Contract">Contract</option>
-                                        <option value="Scoping">Scoping</option>
-                                        <option value="In Progress">In Progress</option>
-                                        <option value="Reporting">Reporting</option>
-                                        <option value="Review">Review</option>
-                                        <option value="Delivered">Delivered</option>
-                                        <option value="Complete">Complete</option>
-                                    </select>
                                 </div>
                             </div>
 
@@ -654,8 +648,13 @@ if (isset($_GET['create'])) {
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Project</label>
-                                <div class="col-sm-7">
+                                <div class="col-sm-6">
                                     <input type="text" class="form-control" name="project" value="<?php echo $row['project'] ?>" readonly>
+                                </div>
+
+                                <label class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="current_status" value="<?php echo @$row['status'] ?>" readonly>
                                 </div>
                             </div>
 
@@ -948,13 +947,6 @@ if (isset($_GET['create'])) {
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Status</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="current_status" value="<?php echo @$row['status'] ?>" readonly>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-8">
                                     <textarea class="form-control" name="notes" rows="6" readonly><?php echo $row['notes'] ?></textarea>
@@ -1190,8 +1182,22 @@ if (isset($_GET['create'])) {
                             <input type = "hidden" name = "update" value = "<?php echo $row['projectID'] ?>">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Project</label>
-                                <div class="col-sm-7">
+                                <div class="col-sm-6">
                                     <input type="text" class="form-control" name="project" value="<?php echo $row['project'] ?>">
+                                </div>
+
+                                <label class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="current_status"  id="current_status">
+                                        <option value="<?php echo $row['status']; ?>"><?php echo $row['status']; ?></option>
+                                        <option value="Contract"<?php echo($row['status'] == 'Contract' ? " selected" : "")?>>Contract</option>
+                                        <option value="Scoping"<?php echo($row['status'] == 'Scoping' ? " selected" : "")?>>Scoping</option>
+                                        <option value="In Progress"<?php echo($row['status'] == 'In Progress' ? " selected" : "")?>>In Progress</option>
+                                        <option value="Reporting"<?php echo($row['status'] == 'Reporting' ? " selected" : "")?>>Reporting</option>
+                                        <option value="Review"<?php echo($row['status'] == 'Review' ? " selected" : "")?>>Review</option>
+                                        <option value="Delivered"<?php echo($row['status'] == 'Delivered' ? " selected" : "")?>>Delivered</option>
+                                        <option value="Complete"<?php echo($row['status'] == 'Complete' ? " selected" : "")?>>Complete</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -1589,22 +1595,6 @@ if (isset($_GET['create'])) {
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" id="final_delivery" name="final_delivery" value="<?php echo @$row['final_delivery'] ?>">
                                     <script> $( "#final_delivery" ).datepicker(); </script>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Status</label>
-                                <div class="col-sm-2">
-                                    <select class="form-control" name="current_status"  id="current_status">
-                                        <option value="<?php echo $row['status']; ?>"><?php echo $row['status']; ?></option>
-                                        <option value="Contract"<?php echo($row['status'] == 'Contract' ? " selected" : "")?>>Contract</option>
-                                        <option value="Scoping"<?php echo($row['status'] == 'Scoping' ? " selected" : "")?>>Scoping</option>
-                                        <option value="In Progress"<?php echo($row['status'] == 'In Progress' ? " selected" : "")?>>In Progress</option>
-                                        <option value="Reporting"<?php echo($row['status'] == 'Reporting' ? " selected" : "")?>>Reporting</option>
-                                        <option value="Review"<?php echo($row['status'] == 'Review' ? " selected" : "")?>>Review</option>
-                                        <option value="Delivered"<?php echo($row['status'] == 'Delivered' ? " selected" : "")?>>Delivered</option>
-                                        <option value="Complete"<?php echo($row['status'] == 'Complete' ? " selected" : "")?>>Complete</option>
-                                    </select>
                                 </div>
                             </div>
 
