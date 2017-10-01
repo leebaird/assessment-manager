@@ -77,11 +77,12 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-3 control-label">City, State</label>
+                    <label class="col-sm-3 control-label">City</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="city" placeholder="City">
                     </div>
 
+                    <label class="col-sm-1 control-label">State</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control" name="state" placeholder="State">
                     </div>
@@ -208,11 +209,12 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-3 control-label">City, State</label>
+                    <label class="col-sm-3 control-label">City</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="city" value="<?php echo $row['city'] ?>" readonly>
                     </div>
 
+                    <label class="col-sm-1 control-label">State</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control" name="state" value="<?php echo $row['state'] ?>" readonly>
                     </div>
@@ -311,11 +313,12 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-3 control-label">City, State</label>
+                    <label class="col-sm-3 control-label">City</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="city" value="<?php echo $row['city'] ?>">
                     </div>
 
+                    <label class="col-sm-1 control-label">State</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control" name="state" value="<?php echo $row['state'] ?>">
                     </div>
