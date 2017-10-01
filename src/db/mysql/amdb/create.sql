@@ -26,7 +26,7 @@ CREATE TABLE clients (
   phone varchar(20),
   notes text,
   web varchar(50),
-  employeeID int(6),
+  employeeID varchar(6),
   PRIMARY KEY (clientID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -166,7 +166,7 @@ if (isset($_GET['create'])) {
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Client</label>
-                                <div class="col-sm-4">
+                                <div class="col-sm-5">
                                     <select class="form-control" name="clientID"  id="clientID">
                                         <option value=""></option>
                                         <?php
@@ -182,14 +182,14 @@ if (isset($_GET['create'])) {
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
-                                <div class="col-sm-4">
+                                <div class="col-sm-5">
                                     <textarea class="form-control" name="address" id="address" placeholder="Address" rows="2"></textarea>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <label class="col-sm-2 control-label">City, State, Zip</label>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <input type="text" class="form-control" name="city" id="city" placeholder="City">
                                 </div>
 
@@ -204,36 +204,22 @@ if (isset($_GET['create'])) {
                             <br>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Phone</label>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Web</label>
-                                <div class="col-sm-3">
+                                <div class="col-sm-5">
                                     <input type="text" class="form-control" name="web" id="web" placeholder="Web">
                                 </div>
                             </div>
 
-                            <?php
-                                $query = "SELECT * FROM employees WHERE accountmgr='Yes' ORDER BY employee ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result); ?>
-
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Account Mgr</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control" name="accountmgr" id="accountmgr">
-                                        <option value=""></option>
-                                        <?php
-                                            while ($c = mysqli_fetch_assoc($result)) {
-                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                            }
-
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
+                                    <input type="text" class="form-control" name="accountmgr" id="accountmgr" placeholder="Account Mgr">
                                 </div>
                             </div>
 

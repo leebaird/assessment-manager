@@ -48,7 +48,7 @@ if (isset($_GET['create'])) {
     }
 </style>
 
-<br><br><br>
+<br>
 
 <div class="vertical-center">
     <div class="container col-md-8">
@@ -60,7 +60,7 @@ if (isset($_GET['create'])) {
 
             <form class="form-horizontal" action="clients.php" method="post">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Client</label>
+                    <label class="col-sm-3 control-label">Client</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="client" placeholder="Client">
                     </div>
@@ -72,14 +72,14 @@ if (isset($_GET['create'])) {
                     confirm_query($result); ?>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Address</label>
+                    <label class="col-sm-3 control-label">Address</label>
                     <div class="col-sm-7">
                         <textarea class="form-control" name="address" placeholder="Address" rows="2"></textarea>
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-4 control-label">City, State, Zip</label>
+                    <label class="col-sm-3 control-label">City, State, Zip</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="city" placeholder="City">
                     </div>
@@ -94,21 +94,21 @@ if (isset($_GET['create'])) {
                 </div>
                 <br>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Phone</label>
+                    <label class="col-sm-3 control-label">Phone</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="phone" placeholder="Phone">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Web</label>
+                    <label class="col-sm-3 control-label">Web</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="web" placeholder="Web">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Account Mgr</label>
+                    <label class="col-sm-3 control-label">Account Mgr</label>
                     <div class="col-sm-4">
                         <select class="form-control" name="employeeID">
                             <option value=""></option>
@@ -124,7 +124,7 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Notes</label>
+                    <label class="col-sm-3 control-label">Notes</label>
                     <div class="col-sm-7">
                         <textarea class="form-control" name="notes" placeholder="Notes" rows="6"></textarea>
                     </div>
@@ -193,21 +193,21 @@ if (isset($_GET['create'])) {
 
             <form class="form-horizontal" action="clients.php" method="post">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Client</label>
+                    <label class="col-sm-3 control-label">Client</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="client" value="<?php echo $row['client'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Address</label>
+                    <label class="col-sm-3 control-label">Address</label>
                     <div class="col-sm-7">
                         <textarea class="form-control" name="address" rows="2" readonly><?php echo $row['address'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-4 control-label">City, State, Zip</label>
+                    <label class="col-sm-3 control-label">City, State, Zip</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="city" value="<?php echo $row['city'] ?>" readonly>
                     </div>
@@ -222,28 +222,28 @@ if (isset($_GET['create'])) {
                 </div>
                 <br>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Phone</label>
+                    <label class="col-sm-3 control-label">Phone</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Web</label>
+                    <label class="col-sm-3 control-label">Web</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Account Mgr</label>
+                    <label class="col-sm-3 control-label">Account Mgr</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="employeeID" value="<?php echo $c['employee'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Notes</label>
+                    <label class="col-sm-3 control-label">Notes</label>
                     <div class="col-sm-7">
                         <textarea class="form-control" name="notes" rows="6" readonly><?php echo $row['notes'] ?></textarea>
                     </div>
@@ -266,7 +266,7 @@ if (isset($_GET['create'])) {
     confirm_query($result);
     $row = mysqli_fetch_assoc($result); ?>
 
-<br><br><br>
+<br>
 
 <style>
     .vertical-center {
@@ -288,7 +288,7 @@ if (isset($_GET['create'])) {
             <form class="form-horizontal" action="clients.php" method="post">
                 <input type="hidden" name="update" value="<?php echo $row['clientID'] ?>">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Client</label>
+                    <label class="col-sm-3 control-label">Client</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="client" value="<?php echo $row['client'] ?>">
                     </div>
@@ -300,14 +300,14 @@ if (isset($_GET['create'])) {
                     confirm_query($result); ?>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Address</label>
+                    <label class="col-sm-3 control-label">Address</label>
                     <div class="col-sm-7">
                         <textarea class="form-control" name="address" rows="2"><?php echo $row['address'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-4 control-label">City, State, Zip</label>
+                    <label class="col-sm-3 control-label">City, State, Zip</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="city" value="<?php echo $row['city'] ?>">
                     </div>
@@ -322,21 +322,21 @@ if (isset($_GET['create'])) {
                 </div>
                 <br>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Phone</label>
+                    <label class="col-sm-3 control-label">Phone</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Web</label>
+                    <label class="col-sm-3 control-label">Web</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Account Mgr</label>
+                    <label class="col-sm-3 control-label">Account Mgr</label>
                     <div class="col-sm-4">
                         <select class="form-control" name="employeeID">
                             <option value=""></option>
@@ -352,7 +352,7 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Notes</label>
+                    <label class="col-sm-3 control-label">Notes</label>
                     <div class="col-sm-7">
                         <textarea class="form-control" name="notes" rows="6"><?php echo $row['notes'] ?></textarea>
                     </div>
