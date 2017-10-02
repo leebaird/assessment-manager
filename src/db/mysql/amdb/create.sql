@@ -1,109 +1,109 @@
 
 CREATE TABLE assessments (
-  assessmentID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
+  assessmentID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
   assessment ENUM('External', 'Internal', 'Mobile', 'Physical', 'Social Eng', 'War Dail', 'Web', 'Wireless'),
-  projectID int(6) NOT NULL,
+  projectID INT(6) NOT NULL,
   PRIMARY KEY (assessmentID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE status (
-  statusID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
+  statusID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
   status ENUM('', 'Contract', 'Scoping', 'In Progress', 'Reporting', 'Review', 'Delivered', 'Complete'),
-  projectID int(6) NOT NULL,
+  projectID INT(6) NOT NULL,
   PRIMARY KEY (statusID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE clients (
-  clientID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
-  client varchar(50) NOT NULL,
-  address varchar(50),
-  city varchar(25),
-  state varchar(2),
-  zip varchar(10),
-  phone varchar(20),
-  notes text,
-  web varchar(50),
-  employeeID varchar(6),
+  clientID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  client VARCHAR(50) NOT NULL,
+  address VARCHAR(50),
+  city VARCHAR(25),
+  state VARCHAR(2),
+  zip VARCHAR(10),
+  phone VARCHAR(20),
+  notes TEXT,
+  web VARCHAR(50),
+  employeeID VARCHAR(6),
   PRIMARY KEY (clientID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE contacts (
-  contactID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
-  contact varchar(50) NOT NULL,
-  title varchar(50),
-  work varchar(20),
-  cell varchar(12),
-  email varchar(50),
-  notes text,
-  clientID int(6) NOT NULL,
-  projectID int(6) NOT NULL,
+  contactID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  contact VARCHAR(50) NOT NULL,
+  title VARCHAR(50),
+  work VARCHAR(20),
+  cell VARCHAR(12),
+  email VARCHAR(50),
+  notes TEXT,
+  clientID INT(6) NOT NULL,
+  projectID INT(6) NOT NULL,
   PRIMARY KEY (contactID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE employees (
-  employeeID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
-  employee varchar(50) NOT NULL,
-  title varchar(25),
-  accountmgr varchar(3),
-  cell varchar(12),
-  email varchar(50),
-  notes text,
+  employeeID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  employee VARCHAR(50) NOT NULL,
+  title VARCHAR(25),
+  accountmgr VARCHAR(3),
+  cell VARCHAR(12),
+  email VARCHAR(50),
+  notes TEXT,
   PRIMARY KEY (employeeID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE employee_project (
-  employeeID int(6) NOT NULL,
-  projectID int(6) NOT NULL,
-  timestamp varchar(255) NOT NULL
+  employeeID INT(6) NOT NULL,
+  projectID INT(6) NOT NULL,
+  timestamp VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE findings (
-  findingID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
-  type varchar(25) NOT NULL,
-  finding varchar(50) NOT NULL,
-  severity text,
-  observation text,
-  remediation text,
-  see_also text,
+  findingID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  type VARCHAR(25) NOT NULL,
+  finding VARCHAR(50) NOT NULL,
+  severity TEXT,
+  observation TEXT,
+  remediation TEXT,
+  see_also TEXT,
   PRIMARY KEY (findingID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE hostvulns (
-  hostvulnID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
-  tool varchar(16) NOT NULL,
-  vulnerability varchar(128) NOT NULL,
-  findingID int(6) NOT NULL,
-  cvss_base int(2),
-  internal varchar(8),
-  external varchar(8),
-  description text,
-  remediation text,
-  see_also text,
-  published varchar(12),
-  updated varchar(12),
+  hostvulnID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  tool VARCHAR(16) NOT NULL,
+  vulnerability VARCHAR(128) NOT NULL,
+  findingID INT(6) NOT NULL,
+  cvss_base INT(2),
+  internal VARCHAR(8),
+  external VARCHAR(8),
+  description TEXT,
+  remediation TEXT,
+  see_also TEXT,
+  published VARCHAR(12),
+  updated VARCHAR(12),
   PRIMARY KEY (hostvulnID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE projects (
-  projectID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
-  project varchar(50) NOT NULL,
-  assessmentID int(6) NOT NULL,
-  clientID int(6) NOT NULL,
-  kickoff varchar(12),
-  start varchar(12),
-  finish varchar(12),
-  tech_qa varchar(12),
-  draft_delivery varchar(12),
-  final_delivery varchar(12),
-  notes text,
+  projectID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  project VARCHAR(50) NOT NULL,
+  assessmentID INT(6) NOT NULL,
+  clientID INT(6) NOT NULL,
+  kickoff VARCHAR(12),
+  start VARCHAR(12),
+  finish VARCHAR(12),
+  tech_qa VARCHAR(12),
+  draft_delivery VARCHAR(12),
+  final_delivery VARCHAR(12),
+  notes TEXT,
   PRIMARY KEY (projectID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -112,9 +112,9 @@ ALTER TABLE projects ADD (CONSTRAINT fk_client01 FOREIGN KEY (clientID) REFERENC
 ALTER TABLE projects ADD (CONSTRAINT fk_assessment01 FOREIGN KEY (assessmentID) REFERENCES assessments(assessmentID));
 
 CREATE TABLE project_employee (
-  projectID int(6) NOT NULL,
-  employeeID int(6) NOT NULL,
-  roleID int(6) NOT NULL,
+  projectID INT(6) NOT NULL,
+  employeeID INT(6) NOT NULL,
+  roleID INT(6) NOT NULL,
   status ENUM('active', 'inactive'),
   PRIMARY KEY (projectID, employeeID)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -122,21 +122,21 @@ CREATE TABLE project_employee (
 ALTER TABLE project_employee ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
 
 CREATE TABLE project_location (
-  locationID int(6) NOT NULL,
-  projectID int(6) NOT NULL,
-  address varchar(50),
-  city varchar(25),
-  state varchar(2),
-  zip varchar(10),
-  phone varchar(16),
+  locationID INT(6) NOT NULL,
+  projectID INT(6) NOT NULL,
+  address VARCHAR(50),
+  city VARCHAR(25),
+  state VARCHAR(2),
+  zip VARCHAR(10),
+  phone VARCHAR(16),
   PRIMARY KEY (locationID)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ALTER TABLE project_location ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
 
 CREATE TABLE project_status (
-  projectID int(6) NOT NULL,
-  statusID int(6) NOT NULL,
+  projectID INT(6) NOT NULL,
+  statusID INT(6) NOT NULL,
   created timestamp,
   PRIMARY KEY (projectID, statusID)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -146,59 +146,59 @@ CREATE TABLE project_status (
 ALTER TABLE project_status ADD (CONSTRAINT fk_status01 FOREIGN KEY (statusID) REFERENCES status(statusID));
 
 CREATE TABLE scans (
-  scanID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
-  scan varchar(50) NOT NULL,
-  location varchar(10),
-  severity varchar(10) NOT NULL,
-  ip_address varchar(15),
-  fqdn varchar(25),
-  os varchar(50),
-  port int(5),
-  proof text,
+  scanID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  scan VARCHAR(50) NOT NULL,
+  location VARCHAR(10),
+  severity VARCHAR(10) NOT NULL,
+  ip_address VARCHAR(15),
+  fqdn VARCHAR(25),
+  os VARCHAR(50),
+  port INT(5),
+  proof TEXT,
   date date,
-  projectID int(6) NOT NULL,
+  projectID INT(6) NOT NULL,
   PRIMARY KEY (scanID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE users (
-  userID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
-  username varchar(50) NOT NULL,
-  email varchar(50) NOT NULL,
-  password varchar(128) NOT NULL,
-  salt varchar(128) NOT NULL,
-  activated tinyint(1) NOT NULL,
-  role varchar(25) NOT NULL,
-  approved tinyint(1) NOT NULL,
+  userID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  username VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  password VARCHAR(128) NOT NULL,
+  salt VARCHAR(128) NOT NULL,
+  activated tinyINT(1) NOT NULL,
+  role VARCHAR(25) NOT NULL,
+  approved tinyINT(1) NOT NULL,
   PRIMARY KEY (userID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE vulnerabilities (
-  vulnerabilityID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
-  vulnerability varchar(100) NOT NULL,
-  description text,
-  solution text,
+  vulnerabilityID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  vulnerability VARCHAR(100) NOT NULL,
+  description TEXT,
+  solution TEXT,
   cvss_base_score decimal(3,1),
-  see_also text,
-  cve varchar(50),
-  internal varchar(10),
-  external varchar(10),
-  scanID int(6) NOT NULL,
+  see_also TEXT,
+  cve VARCHAR(50),
+  internal VARCHAR(10),
+  external VARCHAR(10),
+  scanID INT(6) NOT NULL,
   PRIMARY KEY (vulnerabilityID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE webvulns (
-  webvulnID int(6) NOT NULL AUTO_INCREMENT,
-  modified datetime NOT NULL,
-  tool varchar(16) NOT NULL,
-  vulnerability varchar(50) NOT NULL,
-  findingID int(3) NOT NULL,
-  severity varchar(8) NOT NULL,
-  description text,
-  remediation text,
-  see_also text,
+  webvulnID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  tool VARCHAR(16) NOT NULL,
+  vulnerability VARCHAR(50) NOT NULL,
+  findingID INT(3) NOT NULL,
+  severity VARCHAR(8) NOT NULL,
+  description TEXT,
+  remediation TEXT,
+  see_also TEXT,
   PRIMARY KEY (webvulnID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
