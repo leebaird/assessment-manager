@@ -16,12 +16,12 @@
     $sn .= $row['zip'].",";
     $sn .= $row['phone'].",";
     $sn .= $row['web'].",";
-    $sn .= $row['employeeID'].",";
+    //$sn .= $row['employeeID'].",";
 
     $query1 = "SELECT * FROM employees WHERE employeeID=".$row['employeeID'];
     $result1 = mysqli_query($connection, $query1);
     $row1 = mysqli_fetch_array($result1);
-
+	$sn .= $row1['employee'].",";
 /*
     $query2 = "SELECT * FROM employees WHERE employeeID=".$row['projectmgr'];
     $result2 = mysqli_query($connection, $query2);
