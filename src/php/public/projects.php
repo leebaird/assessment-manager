@@ -99,7 +99,7 @@ if (isset($_GET['create'])) {
             <div class="panel-body">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                    <li role="presentation"><a href="#report" aria-controls="report" role="tab" data-toggle="tab">Report</a></li>
+                    <li role="presentation"><a href="#resources" aria-controls="resources" role="tab" data-toggle="tab">Resources</a></li>
                     <li role="presentation"><a href="#external" aria-controls="external" role="tab" data-toggle="tab">External</a></li>
                     <li role="presentation"><a href="#internal" aria-controls="internal" role="tab" data-toggle="tab">Internal</a></li>
                     <li role="presentation"><a href="#mobile" aria-controls="mobile" role="tab" data-toggle="tab">Mobile</a></li>
@@ -233,111 +233,6 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
 
-                            <?php
-                                $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Project Mgr</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="projectmgr"  id="projectmgr">
-                                        <option value=""></option>
-                                        <?php
-                                            while ($c = mysqli_fetch_assoc($result)) {
-                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                            }
-
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <?php
-                                $query = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Consultant 1</label>
-                                <div class="col-sm-3">
-                                     <select class="form-control" name="consultant1"  id="consultant1">
-                                        <option value=""></option>
-                                        <?php
-                                            while ($c = mysqli_fetch_assoc($result)) {
-                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                            }
-
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <?php
-                                $query = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Consultant 2</label>
-                                <div class="col-sm-3">
-                                     <select class="form-control" name="consultant2"  id="consultant2">
-                                        <option value=""></option>
-                                        <?php
-                                            while ($c = mysqli_fetch_assoc($result)) {
-                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                            }
-
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <?php
-                                $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Consultant 3</label>
-                                <div class="col-sm-3">
-                                     <select class="form-control" name="consultant3"  id="consultant3">
-                                        <option value=""></option>
-                                        <?php
-                                            while ($c = mysqli_fetch_assoc($result)) {
-                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                            }
-
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <?php
-                                $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
-                                $result = mysqli_query($connection, $query);
-                                confirm_query($result); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Consultant 4</label>
-                                <div class="col-sm-3">
-                                     <select class="form-control" name="consultant4"  id="consultant4">
-                                        <option value=""></option>
-                                        <?php
-                                            while ($c = mysqli_fetch_assoc($result)) {
-                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                            }
-
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
-                                </div>
-                            </div>
-
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Kickoff</label>
                                 <div class="col-sm-2">
@@ -400,9 +295,211 @@ if (isset($_GET['create'])) {
                         </form>
                     </div>
 
-                    <!-- Report panel -->
-                    <div role="tabpanel" class="tab-pane" id="report">
-                    Need to think about this layout.
+                    <!-- Resources panel -->
+                    <div role="tabpanel" class="tab-pane" id="resources">
+                        <form class="form-horizontal" action="projects.php" method="post">
+                            <?php
+                                $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result); ?>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Project Mgr</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control" name="projectmgr"  id="projectmgr">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result)) {
+                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                </div>
+                            </div>
+
+                            <?php
+                                $query = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result); ?>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Consultant 1</label>
+                                <div class="col-sm-3">
+                                     <select class="form-control" name="consultant1"  id="consultant1">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result)) {
+                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                </div>
+                            </div>
+
+                            <?php
+                                $query = "SELECT * FROM employees WHERE accountmgr!='Yes' ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result); ?>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Consultant 2</label>
+                                <div class="col-sm-3">
+                                     <select class="form-control" name="consultant2"  id="consultant2">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result)) {
+                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                </div>
+                            </div>
+
+                            <?php
+                                $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result); ?>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Consultant 3</label>
+                                <div class="col-sm-3">
+                                     <select class="form-control" name="consultant3"  id="consultant3">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result)) {
+                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                </div>
+                            </div>
+
+                            <?php
+                                $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result); ?>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Consultant 4</label>
+                                <div class="col-sm-3">
+                                     <select class="form-control" name="consultant4"  id="consultant4">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result)) {
+                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                </div>
+                            </div>
+
+                            <?php
+                                $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result); ?>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Consultant 5</label>
+                                <div class="col-sm-3">
+                                     <select class="form-control" name="consultant5"  id="consultant5">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result)) {
+                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                </div>
+                            </div>
+
+                            <?php
+                                $query = "SELECT * FROM employees  WHERE accountmgr!='Yes' ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result); ?>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Consultant 6</label>
+                                <div class="col-sm-3">
+                                     <select class="form-control" name="consultant6"  id="consultant6">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result)) {
+                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                </div>
+                            </div>
                     </div>
 
                     <!-- External panel -->
@@ -418,14 +515,14 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="ex_targets" placeholder="Targets">
+                                    <input type="text" class="form-control" name="ext_targets" placeholder="Targets">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="ex_exclude" placeholder="Exclude">
+                                    <input type="text" class="form-control" name="ext_exclude" placeholder="Exclude">
                                 </div>
                             </div>
 
@@ -631,7 +728,7 @@ if (isset($_GET['create'])) {
             <div class="panel-body">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                    <li role="presentation"><a href="#report" aria-controls="report" role="tab" data-toggle="tab">Report</a></li>
+                    <li role="presentation"><a href="#resources" aria-controls="resources" role="tab" data-toggle="tab">Resources</a></li>
                     <li role="presentation"><a href="#external" aria-controls="external" role="tab" data-toggle="tab">External</a></li>
                     <li role="presentation"><a href="#internal" aria-controls="internal" role="tab" data-toggle="tab">Internal</a></li>
                     <li role="presentation"><a href="#mobile" aria-controls="mobile" role="tab" data-toggle="tab">Mobile</a></li>
@@ -959,8 +1056,8 @@ if (isset($_GET['create'])) {
                         </form>
                     </div>
 
-                    <!-- Report panel -->
-                    <div role="tabpanel" class="tab-pane" id="report">
+                    <!-- Resources panel -->
+                    <div role="tabpanel" class="tab-pane" id="resources">
                          Need to think about this layout.
                     </div>
 
@@ -1164,7 +1261,7 @@ if (isset($_GET['create'])) {
             <div class="panel-body">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                    <li role="presentation"><a href="#report" aria-controls="report" role="tab" data-toggle="tab">Report</a></li>
+                    <li role="presentation"><a href="#resources" aria-controls="resources" role="tab" data-toggle="tab">Resources</a></li>
                     <li role="presentation"><a href="#external" aria-controls="external" role="tab" data-toggle="tab">External</a></li>
                     <li role="presentation"><a href="#internal" aria-controls="internal" role="tab" data-toggle="tab">Internal</a></li>
                     <li role="presentation"><a href="#mobile" aria-controls="mobile" role="tab" data-toggle="tab">Mobile</a></li>
@@ -1617,8 +1714,8 @@ if (isset($_GET['create'])) {
                         </form>
                     </div>
 
-                    <!-- Report panel -->
-                    <div role="tabpanel" class="tab-pane" id="report">
+                    <!-- Resources panel -->
+                    <div role="tabpanel" class="tab-pane" id="resources">
                         Need to think about this layout.
                     </div>
 
