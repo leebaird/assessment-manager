@@ -8,6 +8,7 @@ if (isset($_POST['create'])) {
 
     // Check for blank fields.
     $type = trim($_POST['type']);
+
     if (empty($type)) {
         ?>
         <br>
@@ -18,6 +19,7 @@ if (isset($_POST['create'])) {
     }
 
     $finding = trim($_POST['finding']);
+
     if (empty($finding)) {
         ?>
         <br>

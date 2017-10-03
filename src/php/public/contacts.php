@@ -8,6 +8,7 @@ if (isset($_POST['create'])) {
 
     // Check for blank field.
     $contact = trim($_POST['contact']);
+
     if (empty($contact)) {
         ?>
         <br>

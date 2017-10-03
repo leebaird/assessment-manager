@@ -12,6 +12,7 @@ if (isset($_POST['create'])) {
 
     // Check for blank fields.
     $tool = trim($_POST['tool']);
+
     if (empty($tool)) {
         ?>
         <br>
@@ -22,6 +23,7 @@ if (isset($_POST['create'])) {
     }
 
     $vulnerability = trim($_POST['vulnerability']);
+
     if (empty($vulnerability)) {
         ?>
         <br>

@@ -1,9 +1,9 @@
 <?php
-$bodyid = "projects";
-include "../includes/header.php";
-require_once("../includes/common.php");
-
+    $bodyid = "projects";
+    include "../includes/header.php";
+    require_once("../includes/common.php");
 ?>
+
 <script type="text/javascript">
     $(document).ready(function(){
         $('#clientID').on('change',function(){
@@ -39,6 +39,7 @@ if (isset($_POST['create'])) {
 
     // Check for blank field.
     $project = trim($_POST['project']);
+
     if (empty($project)) {
         ?>
         <br>
@@ -49,6 +50,7 @@ if (isset($_POST['create'])) {
     }
 
     $clientID = trim($_POST['clientID']);
+
     if (empty($clientID)) {
         ?>
         <br>

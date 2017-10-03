@@ -8,6 +8,7 @@ if (isset($_POST['create'])) {
 
     // Check for blank field.
     $client = trim($_POST['client']);
+
     if (empty($client)) {
         ?>
         <br>

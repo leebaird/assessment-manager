@@ -16,7 +16,6 @@
     $sn .= $row['zip'].",";
     $sn .= $row['phone'].",";
     $sn .= $row['web'].",";
-    //$sn .= $row['employeeID'].",";
 
     $query1 = "SELECT * FROM employees WHERE employeeID=".$row['employeeID'];
     $result1 = mysqli_query($connection, $query1);
