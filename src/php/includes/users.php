@@ -128,8 +128,6 @@
 
                 $username = $_POST['username'];
                 $email = $_POST['email'];
-                //$password = $_POST['password'];
-                //$salt = $_POST['salt'];
                 $role = $_POST['role'];
                 $approval = $_POST['approval'];
 
@@ -168,13 +166,15 @@
             $query = "UPDATE users SET username='$_POST[username]', email='$_POST[email]', role='$_POST[role]', approved='$_POST[approved]' WHERE userID=".intval($_POST['update']);
             $result = mysqli_query($connection, $query);
             confirm_query($result);
-        } ?>
+        }
+?>
 
 <div><?php //if(isset($err)){ print "<br><br><br><br>".$err; }?></div>
 
 <?php
-if (isset($_GET['create'])) {
-            ?>
+    if (isset($_GET['create'])) {
+?>
+
 <div class="vertical-center">
     <div class="container col-md-8">
         <div class="panel panel-primary">
@@ -243,13 +243,14 @@ if (isset($_GET['create'])) {
 </div>
 
 <?php
-        } elseif (isset($_GET['read'])) {
+    } elseif (isset($_GET['read'])) {
 
-            // READ RECORD.
-            $query = "SELECT * FROM users WHERE userID=".intval($_GET['read']);
-            $result = mysqli_query($connection, $query);
-            confirm_query($result);
-            $row = mysqli_fetch_assoc($result); ?>
+        // READ RECORD.
+        $query = "SELECT * FROM users WHERE userID=".intval($_GET['read']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+        $row = mysqli_fetch_assoc($result);
+?>
 
 <div class="vertical-center">
     <div class="container col-md-8">
@@ -280,17 +281,18 @@ if (isset($_GET['create'])) {
                             <div class="col-sm-2">
 
                                 <?php
-                                if ($row['role']==1) {
-                                    ?>
-                                    <input type="text" class="form-control" name="email" placeholder="Email" value="Admin" readonly="readonly">
-                                    <?php
-                                }
+                                    if ($row['role']==1) {
+                                ?>
 
-            if ($row['role']==2) {
-                ?>
-                                    <input type="text" class="form-control" name="email" placeholder="Email" value="User" readonly="readonly">
-                                    <?php
-            } ?>
+                                <input type="text" class="form-control" name="email" placeholder="Email" value="Admin" readonly="readonly">
+                                <?php
+                                }
+                                    if ($row['role']==2) {
+                                ?>
+
+                                <input type="text" class="form-control" name="email" placeholder="Email" value="User" readonly="readonly">
+                                <?php
+                                } ?>
 
                             </div>
                         </div>
@@ -299,17 +301,16 @@ if (isset($_GET['create'])) {
                             <label class="col-sm-4 control-label">Approved</label>
                             <div class="col-sm-2">
                                 <?php
-                                if ($row['approved']==1) {
-                                    ?>
-                                    <input type="text" class="form-control" name="email" placeholder="Email" value="Yes" readonly="readonly">
-                                    <?php
+                                    if ($row['approved']==1) {
+                                ?>
+                                <input type="text" class="form-control" name="email" placeholder="Email" value="Yes" readonly="readonly">
+                                <?php
                                 }
-
-            if ($row['approved']==0) {
-                ?>
-                                    <input type="text" class="form-control" name="email" placeholder="Email" value="No" readonly="readonly">
-                                    <?php
-            } ?>
+                                    if ($row['approved']==0) {
+                                ?>
+                                <input type="text" class="form-control" name="email" placeholder="Email" value="No" readonly="readonly">
+                                <?php
+                                } ?>
                             </div>
                         </div>
 
@@ -321,6 +322,7 @@ if (isset($_GET['create'])) {
             </div>
         </div>
     </div>
+
     <?php
         } elseif (isset($_GET['update'])) {
 
@@ -364,12 +366,13 @@ if (isset($_GET['create'])) {
                             <option value="1">Admin</option>
                         <?php
                         }
+                            if ($row['role']==2) {
+                        ?>
 
-            if ($row['role']==2) {
-                ?>
-                            <option value="2">User</option>
+                        <option value="2">User</option>
+
                         <?php
-            } ?>
+                        } ?>
                             <option value="1">Admin</option>
                             <option value="2">User</option>
                         </select>
@@ -380,18 +383,18 @@ if (isset($_GET['create'])) {
                     <label class="col-sm-4 control-label">Approved</label>
                     <div class="col-sm-2">
                         <select class="form-control" name="approved">
-                        <?php
-                        if ($row['approved']==1) {
+                            <?php
+                                if ($row['approved']==1) {
                             ?>
-                            <option value="1">Yes</option>
-                        <?php
-                        }
+                                <option value="1">Yes</option>
+                            <?php
+                            }
+                                if ($row['approved']==0) {
+                            ?>
 
-            if ($row['approved']==0) {
-                ?>
                             <option value="0">No</option>
-                        <?php
-            } ?>
+                            <?php
+                            } ?>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
@@ -409,28 +412,29 @@ if (isset($_GET['create'])) {
 </div>
 
 <?php
-        } else {
-            ?>
+    } else {
+?>
+
 <br>
 <a class="btn btn-primary" href="users.php?create" input type="button">New</a>
 
 <?php
     print "<br><br>";
-            $query = "SELECT userID, username, email FROM users";
+    $query = "SELECT userID, username, email FROM users";
 
-            try {
-                $stmt = $db->prepare($query);
-                $stmt->execute();
-            } catch (PDOException $ex) {
-                // On a production website, you should not output $ex->getMessage().
-                die("Failed to run query: " . $ex->getMessage());
-            }
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+    } catch (PDOException $ex) {
+        // On a production website, you should not output $ex->getMessage().
+        die("Failed to run query: " . $ex->getMessage());
+    }
 
-            $rows = $stmt->fetchAll();
-
-            $query = "SELECT * FROM users ORDER BY username ASC";
-            $result = mysqli_query($connection, $query);
-            confirm_query($result); ?>
+    $rows = $stmt->fetchAll();
+    $query = "SELECT * FROM users ORDER BY username ASC";
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+?>
 
 <table style="width: auto;" class="table table-bordered table-condensed table-hover">
     <tr>
@@ -472,30 +476,31 @@ if (isset($_GET['create'])) {
             }
             echo '
                 <td width="100">'
+    ?>
 
-?>
-                <?php if ($row["approved"]==1) {
-    print "Yes";
-} elseif ($row["approved"]==0) {
-    print "No";
-} ?>
+    <?php if ($row["approved"]==1) {
+        print "Yes";
+    } elseif ($row["approved"]==0) {
+        print "No";
+    } ?>
 
-<?php
+    <?php
         echo
-            '</td>
-            <td width="175">'.$myDateFormat.'</td>
-            <td width="50">'.'<a class="btn btn-danger" href="users.php?delete='.$row['userID'].'"
-            onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>'
-            ?>
-            <td><?php if ($row["approved"]==0) {
-                ?> <a href="users.php?approval=<?php print $row["userID"]; ?>">Approval</a> <?php
-            } ?></td>
+        '</td>
+        <td width="175">'.$myDateFormat.'</td>
+        <td width="50">'.'<a class="btn btn-danger" href="users.php?delete='.$row['userID'].'"
+        onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>'
+    ?>
+
+    <td><?php if ($row["approved"]==0) {
+        ?> <a href="users.php?approval=<?php print $row["userID"]; ?>">Approval</a> <?php
+        } ?></td>
         </tr>
          <?php
         }
 
-            // Release returned data.
-            mysqli_free_result($result); ?>
+    // Release returned data.
+    mysqli_free_result($result); ?>
 </table>
 
 <?php
@@ -504,8 +509,12 @@ if (isset($_GET['create'])) {
         $result = mysqli_query($connection, $sql);
         confirm_query($result);
     }
-        } ?>
-<?php include '../includes/footer.php'; ?>
+} ?>
+
+<?php
+    include '../includes/footer.php';
+?>
+
 <?php
     } else {
         header("Location: ../index.php");

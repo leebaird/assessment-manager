@@ -20,8 +20,7 @@
         die("DB connection failed. " . mysql_error());
     }
 
-    function confirm_query($result)
-    {
+    function confirm_query($result) {
         if (!$result) {
             die("DB query failed. " . mysql_error());
         }
