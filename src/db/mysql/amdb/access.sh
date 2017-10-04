@@ -6,60 +6,46 @@ DB_NAME=amdb
 DB_USERNAME=amuser
 DB_PASSWORD=AmUs3r0354
 
-# Check for OS X
-check=`uname -a | awk '{print $1}'`
+case "$1" in
+  'setup')
+    mysql -uroot < sys_create.sql
+    mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < create.sql
+    ;;
 
-if [ $check = 'Darwin' ]; then
-    mysql=/Applications/XAMPP/xamppfiles/bin/mysql
-    web="open -a Safari http://localhost/assessment-manager/src/php/"
-else
-    mysql=/usr/bin/mysql
-    web="firefox -new-tab http://localhost/assessment-manager/src/php/"
-fi
+  'clear')
+    mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < drop.sql
+    mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < create.sql
+    ;;
 
-case $1 in
-    clear)
-        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < drop.sql
-        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < create.sql
-        echo; echo;;
+  'drop')
+    mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < drop.sql
+    ;;
 
-    connect)
-        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME
-        echo; echo;;
+  'load')
+    mysql --local-infile -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < load.sql
+    ;;
 
-    connect.admin)
-        $mysql -uroot
-        echo; echo;;
+  'reload')
+    $0 clear
+    $0 load
+    ;;
 
-    create)
-        $mysql -uroot < sys_create.sql
-        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < create.sql
-        $web
-        echo; echo;;
+  'connect')
+    mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME
+    ;;
 
-    create2)
-        $mysql -uroot < sys_create.sql
-        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < flat.sql
-        $web
-        echo; echo;;
+  'connect.admin')
+    mysql -uroot
+    ;;
 
-    drop)
-        $mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < drop.sql
-        $mysql -uroot < sys_drop.sql
-        echo; echo;;
+  'remove')
+    mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < drop.sql
+    mysql -uroot < sys_drop.sql
+    ;;
 
-    load)
-        $mysql --local-infile -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < sample_data.sql
-        echo; echo;;
+  *)
+    echo "Usage: $0 {clear | load | reload | connect | drop | remove}"
 
-    reload)
-        $0 clear
-        $0 load
-        echo; echo;;
-
-    *)
-        echo
-        echo "Usage: $0 (clear | connect | create | drop | load | reload)"
-        echo; echo
 esac
+exit 0
 
