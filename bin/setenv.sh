@@ -17,5 +17,5 @@ case "$1" in
     echo
     echo "Usage: $0 {linux | osx}"
     echo
-
 esac
+
