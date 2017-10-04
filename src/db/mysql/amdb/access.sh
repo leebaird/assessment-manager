@@ -7,14 +7,17 @@ DB_USERNAME=amuser
 DB_PASSWORD=AmUs3r0354
 
 case "$1" in
-  'setup')
-    mysql -uroot < sys_create.sql
-    mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < create.sql
-    ;;
-
   'clear')
     mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < drop.sql
     mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < create.sql
+    ;;
+
+  'connect')
+    mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME
+    ;;
+
+  'connect.admin')
+    mysql -uroot
     ;;
 
   'drop')
@@ -30,22 +33,18 @@ case "$1" in
     $0 load
     ;;
 
-  'connect')
-    mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME
-    ;;
-
-  'connect.admin')
-    mysql -uroot
-    ;;
-
   'remove')
     mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < drop.sql
     mysql -uroot < sys_drop.sql
     ;;
 
+  'setup')
+    mysql -uroot < sys_create.sql
+    mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < create.sql
+    ;;
+
   *)
-    echo "Usage: $0 {clear | load | reload | connect | drop | remove}"
+    echo "Usage: $0 (clear | connect | drop | load | reload | remove | setup)"
 
 esac
 exit 0
-
