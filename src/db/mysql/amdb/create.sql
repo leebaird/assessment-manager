@@ -1,35 +1,203 @@
+-- lookup tables
+CREATE TABLE user_roles (
+  userRoleID INT(2) NOT NULL,
+  user_role VARCHAR(32) NOT NULL,
+  PRIMARY KEY (userRoleID)
+);
 
-CREATE TABLE assessments (
-  assessmentID INT(6) NOT NULL AUTO_INCREMENT,
-  modified DATETIME NOT NULL,
-  assessment ENUM('External', 'Internal', 'Mobile', 'Physical', 'Social Eng', 'War Dail', 'Web', 'Wireless'),
-  projectID INT(6) NOT NULL,
-  PRIMARY KEY (assessmentID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+insert into user_roles values (1, "admin");
+insert into user_roles values (2, "user");
+
+CREATE TABLE roles (
+  roleID INT(2) NOT NULL,
+  role VARCHAR(32) NOT NULL,
+  PRIMARY KEY (roleID)
+);
+
+insert into roles values (1, "Account Manager");
+insert into roles values (2, "Program Manager");
+insert into roles values (3, "Project Manager");
+insert into roles values (4, "Tech Lead");
+insert into roles values (5, "Engineer");
 
 CREATE TABLE status (
-  statusID INT(6) NOT NULL AUTO_INCREMENT,
-  modified DATETIME NOT NULL,
-  status ENUM('', 'Contract', 'Scoping', 'In Progress', 'Reporting', 'Review', 'Delivered', 'Complete'),
-  projectID INT(6) NOT NULL,
+  statusID INT(2) NOT NULL,
+  status VARCHAR(16) NOT NULL,
   PRIMARY KEY (statusID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
+insert into status values (1, "Unknown");
+insert into status values (2, "Contract");
+insert into status values (3, "Scoping");
+insert into status values (4, "In Progress");
+insert into status values (5, "Reporting");
+insert into status values (6, "Review");
+insert into status values (7, "Delivered");
+insert into status values (8, "Complete");
+
+CREATE TABLE assessments (
+  assessmentID INT(2) NOT NULL,
+  assessment VARCHAR(32) NOT NULL,
+  PRIMARY KEY (assessmentID)
+);
+
+insert into assessments values (1, "External");
+insert into assessments values (2, "Internal");
+insert into assessments values (3, "Mobile");
+insert into assessments values (4, "Physical");
+insert into assessments values (5, "Social Engineering");
+insert into assessments values (6, "War Dail");
+insert into assessments values (7, "Web");
+insert into assessments values (8, "Wireless");
+
+-- users
+CREATE TABLE users (
+  userID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  username VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  password VARCHAR(128) NOT NULL,
+  salt VARCHAR(128) NOT NULL,
+  userRoleID INT(2) NOT NULL,
+  activated tinyINT(1) NOT NULL,
+  approved tinyINT(1) NOT NULL,
+  PRIMARY KEY (userID)
+);
+
+-- FK constraints
+ALTER TABLE users ADD (CONSTRAINT fk_urole01 FOREIGN KEY (userRoleID) REFERENCES user_roles(userRoleID));
+
+-- default admin user
+INSERT INTO `users` (`userID`, `modified`, `username`, `email`, `password`, `salt`, `userRoleID`, `activated`, `approved`) VALUES
+(1, '2017-09-18 19:11:15', 'admin', 'admin@acme.com', 'f542eebb272ff24784ddc8f53f1a930532cdfbc1df30e5e6ffbd7e4c01925ee1', '2946e24c29c4368d', 1, 1, 1);
+
+-- employees
+CREATE TABLE employees (
+  employeeID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  employee VARCHAR(50) NOT NULL,
+  title VARCHAR(25),
+  cell VARCHAR(12),
+  email VARCHAR(50),
+  notes TEXT,
+  PRIMARY KEY (employeeID)
+);
+
+-- clients
 CREATE TABLE clients (
   clientID INT(6) NOT NULL AUTO_INCREMENT,
-  modified DATETIME NOT NULL,
   client VARCHAR(50) NOT NULL,
+  modified DATETIME NOT NULL,
+  web VARCHAR(255),
+  PRIMARY KEY (clientID)
+);
+
+CREATE TABLE client_locations (
+  locationID INT(6) NOT NULL AUTO_INCREMENT,
+  clientID INT(6) NOT NULL,
+  modified DATETIME NOT NULL,
   address VARCHAR(50),
   city VARCHAR(25),
   state VARCHAR(2),
   zip VARCHAR(10),
   phone VARCHAR(20),
   notes TEXT,
-  web VARCHAR(50),
-  employeeID VARCHAR(6),
-  PRIMARY KEY (clientID)
+  web VARCHAR(255),
+  PRIMARY KEY (locationID)
+);
+
+-- FK constraints
+ALTER TABLE client_locations ADD (CONSTRAINT fk_clocation01 FOREIGN KEY (clientID) REFERENCES clients(clientID));
+
+-- contacts
+CREATE TABLE client_contacts (
+  contactID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  contact VARCHAR(50) NOT NULL,
+  title VARCHAR(50),
+  work VARCHAR(20),
+  cell VARCHAR(12),
+  email VARCHAR(50),
+  notes TEXT,
+  clientID INT(6) NOT NULL,
+  PRIMARY KEY (contactID)
+);
+
+-- FK constraints
+ALTER TABLE client_contacts ADD (CONSTRAINT fk_ccontact01 FOREIGN KEY (clientID) REFERENCES clients(clientID));
+
+CREATE TABLE client_account_managers (
+  clientID INT(6) NOT NULL,
+  employeeID INT(6) NOT NULL,
+  statusID INT(2) NOT NULL,
+  modified DATETIME NOT NULL,
+  PRIMARY KEY (clientID, employeeID)
+);
+
+-- FK constraints
+ALTER TABLE client_account_managers ADD (CONSTRAINT fk_cam01 FOREIGN KEY (clientID) REFERENCES clients(clientID));
+ALTER TABLE client_account_managers ADD (CONSTRAINT fk_cam02 FOREIGN KEY (employeeID) REFERENCES employees(employeeID));
+ALTER TABLE client_account_managers ADD (CONSTRAINT fk_cam03 FOREIGN KEY (statusID) REFERENCES status(statusID));
+
+-- projects
+CREATE TABLE projects (
+  projectID INT(6) NOT NULL AUTO_INCREMENT,
+  modified DATETIME NOT NULL,
+  project VARCHAR(50) NOT NULL,
+  assessmentID INT(6) NOT NULL,
+  clientID INT(6) NOT NULL,
+  kickoff VARCHAR(12),
+  start VARCHAR(12),
+  finish VARCHAR(12),
+  tech_qa VARCHAR(12),
+  draft_delivery VARCHAR(12),
+  final_delivery VARCHAR(12),
+  notes TEXT,
+  PRIMARY KEY (projectID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE projects ADD (CONSTRAINT fk_client01 FOREIGN KEY (clientID) REFERENCES clients(clientID));
+ALTER TABLE projects ADD (CONSTRAINT fk_assessment01 FOREIGN KEY (assessmentID) REFERENCES assessments(assessmentID));
+
+CREATE TABLE project_status (
+  projectID INT(6) NOT NULL,
+  statusID INT(3) NOT NULL,
+  created TIMESTAMP NOT NULL,
+  PRIMARY KEY (projectID, statusID)
+);
+
+ALTER TABLE project_status ADD (CONSTRAINT fk_ps01 FOREIGN KEY (statusID) REFERENCES status(statusID));
+ALTER TABLE project_status ADD (CONSTRAINT fk_ps02 FOREIGN KEY (projectID) REFERENCES projects(projectID));
+
+CREATE TABLE project_employees (
+  projectID INT(6) NOT NULL,
+  employeeID INT(6) NOT NULL,
+  roleID INT(2) NOT NULL,
+  statusID INT(2) NOT NULL,
+  modified DATETIME NOT NULL,
+  notes TEXT,
+  PRIMARY KEY (projectID, employeeID, roleID)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE project_employees ADD (CONSTRAINT fk_pe01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
+ALTER TABLE project_employees ADD (CONSTRAINT fk_pe02 FOREIGN KEY (employeeID) REFERENCES employees(employeeID));
+ALTER TABLE project_employees ADD (CONSTRAINT fk_pe03 FOREIGN KEY (roleID) REFERENCES roles(roleID));
+ALTER TABLE project_employees ADD (CONSTRAINT fk_pe04 FOREIGN KEY (statusID) REFERENCES status(statusID));
+
+CREATE TABLE project_locations (
+  locationID INT(6) NOT NULL,
+  projectID INT(6) NOT NULL,
+  address VARCHAR(50),
+  city VARCHAR(25),
+  state VARCHAR(2),
+  zip VARCHAR(10),
+  phone VARCHAR(16),
+  PRIMARY KEY (locationID)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE project_locations ADD (CONSTRAINT fk_plocation01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
+
+-- contacts
 CREATE TABLE contacts (
   contactID INT(6) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
@@ -44,23 +212,16 @@ CREATE TABLE contacts (
   PRIMARY KEY (contactID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE employees (
-  employeeID INT(6) NOT NULL AUTO_INCREMENT,
-  modified DATETIME NOT NULL,
-  employee VARCHAR(50) NOT NULL,
-  title VARCHAR(25),
-  accountmgr VARCHAR(3),
-  cell VARCHAR(12),
-  email VARCHAR(50),
-  notes TEXT,
-  PRIMARY KEY (employeeID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE employee_project (
-  employeeID INT(6) NOT NULL,
+CREATE TABLE project_location_contacts (
   projectID INT(6) NOT NULL,
-  timestamp VARCHAR(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  clientLocationID INT(6) NOT NULL,
+  contactID INT(6) NOT NULL,
+  PRIMARY KEY (projectID, clientLocationID, contactID)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE project_location_contacts ADD (CONSTRAINT fk_plc01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
+ALTER TABLE project_location_contacts ADD (CONSTRAINT fk_plc02 FOREIGN KEY (clientLocationID) REFERENCES client_locations(locationID));
+ALTER TABLE project_location_contacts ADD (CONSTRAINT fk_plc03 FOREIGN KEY (contactID) REFERENCES contacts(contactID));
 
 CREATE TABLE findings (
   findingID INT(6) NOT NULL AUTO_INCREMENT,
@@ -91,60 +252,6 @@ CREATE TABLE hostvulns (
   PRIMARY KEY (hostvulnID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE projects (
-  projectID INT(6) NOT NULL AUTO_INCREMENT,
-  modified DATETIME NOT NULL,
-  project VARCHAR(50) NOT NULL,
-  assessmentID INT(6) NOT NULL,
-  clientID INT(6) NOT NULL,
-  kickoff VARCHAR(12),
-  start VARCHAR(12),
-  finish VARCHAR(12),
-  tech_qa VARCHAR(12),
-  draft_delivery VARCHAR(12),
-  final_delivery VARCHAR(12),
-  notes TEXT,
-  PRIMARY KEY (projectID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-ALTER TABLE projects ADD (CONSTRAINT fk_client01 FOREIGN KEY (clientID) REFERENCES clients(clientID));
-
-ALTER TABLE projects ADD (CONSTRAINT fk_assessment01 FOREIGN KEY (assessmentID) REFERENCES assessments(assessmentID));
-
-CREATE TABLE project_employee (
-  projectID INT(6) NOT NULL,
-  employeeID INT(6) NOT NULL,
-  roleID INT(6) NOT NULL,
-  status ENUM('active', 'inactive'),
-  PRIMARY KEY (projectID, employeeID)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-ALTER TABLE project_employee ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
-
-CREATE TABLE project_location (
-  locationID INT(6) NOT NULL,
-  projectID INT(6) NOT NULL,
-  address VARCHAR(50),
-  city VARCHAR(25),
-  state VARCHAR(2),
-  zip VARCHAR(10),
-  phone VARCHAR(16),
-  PRIMARY KEY (locationID)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ALTER TABLE project_location ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
-
-CREATE TABLE project_status (
-  projectID INT(6) NOT NULL,
-  statusID INT(6) NOT NULL,
-  created timestamp,
-  PRIMARY KEY (projectID, statusID)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ALTER TABLE project_status ADD (CONSTRAINT fk_projects01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
-
-ALTER TABLE project_status ADD (CONSTRAINT fk_status01 FOREIGN KEY (statusID) REFERENCES status(statusID));
-
 CREATE TABLE scans (
   scanID INT(6) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
@@ -161,18 +268,6 @@ CREATE TABLE scans (
   PRIMARY KEY (scanID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE users (
-  userID INT(6) NOT NULL AUTO_INCREMENT,
-  modified DATETIME NOT NULL,
-  username VARCHAR(50) NOT NULL,
-  email VARCHAR(50) NOT NULL,
-  password VARCHAR(128) NOT NULL,
-  salt VARCHAR(128) NOT NULL,
-  activated tinyINT(1) NOT NULL,
-  role VARCHAR(25) NOT NULL,
-  approved tinyINT(1) NOT NULL,
-  PRIMARY KEY (userID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE vulnerabilities (
   vulnerabilityID INT(6) NOT NULL AUTO_INCREMENT,
@@ -202,7 +297,5 @@ CREATE TABLE webvulns (
   PRIMARY KEY (webvulnID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `users` (`userID`, `modified`, `username`, `email`, `password`, `salt`, `activated`, `role`, `approved`) VALUES
-(1, '2017-09-18 19:11:15', 'admin', 'admin@acme.com', 'f542eebb272ff24784ddc8f53f1a930532cdfbc1df30e5e6ffbd7e4c01925ee1', '2946e24c29c4368d', 1, '1', 1);
 
 COMMIT;
