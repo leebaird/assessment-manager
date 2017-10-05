@@ -19,9 +19,13 @@ Follow on Twitter [![Twitter Follow](https://img.shields.io/twitter/follow/disco
 
 ### Usage
 * cd assessment-manager/bin/
-* ./setenv.sh
+* . ./setenv.sh
+
 * cd ../src/db/mysql/amdb/
 * ./access.sh setup
+* ./access.sh clear
+* ./access.sh load
+
 * Default account: admin
 * Default password: 1234!@#$qwerQWER
 
