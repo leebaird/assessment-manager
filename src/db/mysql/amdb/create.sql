@@ -102,7 +102,6 @@ CREATE TABLE client_locations (
   zip VARCHAR(10),
   phone VARCHAR(20),
   notes TEXT,
-  web VARCHAR(255),
   PRIMARY KEY (locationID)
 );
 

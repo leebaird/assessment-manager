@@ -25,7 +25,7 @@ case "$1" in
     ;;
 
   'load')
-    mysql --local-infile -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < load.sql
+    mysql -u$DB_USERNAME -p$DB_PASSWORD -D $DB_NAME < sample_data.sql
     ;;
 
   'reload')

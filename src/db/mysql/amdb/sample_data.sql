@@ -1,9 +1,14 @@
+INSERT INTO `clients` (`clientID`, `client`, `modified`, `web`) VALUES
+(1, 'Apple', '2017-10-01 14:59:48', 'www.apple.com'),
+(2, 'Comcast', '2017-10-01 15:17:35', 'www.comcast.net'),
+(3, 'Palo Alto Networks', '2017-10-01 15:20:50', 'www.paloaltonetworks.com'),
+(4, 'Verizon', '2017-10-01 15:22:19', 'www.verizon.com');
 
-INSERT INTO `clients` (`clientID`, `modified`, `client`, `address`, `city`, `state`, `zip`, `phone`, `notes`, `web`, `employeeID`) VALUES
-(1, '2017-10-01 14:59:48', 'Apple', '1 Infinite Loop', 'Cupertino', 'CA', '95014', '408-996â€“1010', '', 'www.apple.com', '5'),
-(2, '2017-10-01 15:17:35', 'Comcast', '1701 JFK Boulevard', 'Philadelphia', 'PA', '19103', '800-934-6489', '', 'www.comcast.net', '5'),
-(3, '2017-10-01 15:20:50', 'Palo Alto Networks', '3000 Tannery Way', 'Santa Clara', 'CA', '95054', '408-753-4000', '', 'www.paloaltonetworks.com', '5'),
-(4, '2017-10-01 15:22:19', 'Verizon', '140 W. St.', 'New York', 'NY', '10007', '212-395-1000', '', 'www.verizon.com', '5');
+INSERT INTO `client_locations` (`locationID`, `clientID`, `modified`, `address`, `city`, `state`, `zip`, `phone`, `notes`) VALUES
+(1, 1, '2017-10-01 14:59:48', '1 Infinite Loop', 'Cupertino', 'CA', '95014', '408-996â€“1010', ''),
+(2, 2, '2017-10-01 15:17:35', '1701 JFK Boulevard', 'Philadelphia', 'PA', '19103', '800-934-6489', ''),
+(3, 3, '2017-10-01 15:20:50', '3000 Tannery Way', 'Santa Clara', 'CA', '95054', '408-753-4000', ''),
+(4, 4, '2017-10-01 15:22:19', '140 W. St.', 'New York', 'NY', '10007', '212-395-1000', '');
 
 INSERT INTO `contacts` (`contactID`, `modified`, `contact`, `title`, `work`, `cell`, `email`, `notes`, `clientID`, `projectID`) VALUES
 (1, '2017-09-18 20:43:51', 'Brian Roberts', 'CEO', '', '', '', '', 2, 0),
