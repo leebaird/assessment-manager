@@ -69,7 +69,7 @@ if (isset($_GET['create'])) {
         <form class="form-horizontal" action="findings.php" method="post">
             <div class="form-group">
                 <label class="col-sm-2 control-label">Type</label>
-                <div class="col-sm-9">
+                <div class="col-sm-2">
                     <select class="form-control" name="type">
                         <option value=""></option>
                         <option value="Host">Host</option>
@@ -167,7 +167,7 @@ if (isset($_GET['create'])) {
             <form class="form-horizontal" action="findings.php" method="post">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Type</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-2">
                         <input type="text" class="form-control" name="type" value="<?php echo $row['type'] ?>" readonly>
                     </div>
                 </div>
@@ -236,7 +236,7 @@ if (isset($_GET['create'])) {
                 <input type = "hidden" name = "update" value = "<?php echo $row['findingID'] ?>">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Type</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-2">
                         <select class="form-control" name="type">
                             <option value=""></option>
                             <option value="Host"<?php echo($row['type'] == 'Host' ? " selected" : "")?>>Host</option>
@@ -331,8 +331,8 @@ if (isset($_GET['create'])) {
                     <td width="50">'.'<a class="btn btn-primary" href="findings.php?read='.$row['findingID'].'"><span class="glyphicon glyphicon-play"></span></a>'.'</td>
                     <td width="50">'.'<a class="btn btn-warning" href="findings.php?update='.$row['findingID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                     <td width="150">'.$row["type"].'</td>
-                    <td width="425">'.$row["finding"].'</td>
-                    <td width="175">'.$myDateFormat.'</td>
+                    <td width="400">'.$row["finding"].'</td>
+                    <td width="150">'.$myDateFormat.'</td>
                     <td width="50">'.'<a class="btn btn-danger" href="findings.php?delete='.$row['findingID'].'"
                         onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
                 </tr>';

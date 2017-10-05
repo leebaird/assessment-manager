@@ -419,7 +419,7 @@ if (isset($_GET['create'])) {
                     <td width="50">'.'<a class="btn btn-warning" href="clients.php?update='.$row['clientID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                     <td width="300">'.$row["client"].'</td>
                     <td width="200">'.$finding['employee'].'</td>
-                    <td width="175">'.$myDateFormat.'</td>
+                    <td width="150">'.$myDateFormat.'</td>
                     <td width="50">'.'<a class="btn btn-danger" href="clients.php?delete='.$row['clientID'].'"
                         onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
                 </tr>';

@@ -423,8 +423,8 @@ if (isset($_GET['create'])) {
                     <td width="50">'.'<a class="btn btn-warning" href="contacts.php?update='.$row['contactID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                     <td width="200">'.$row["contact"].'</td>
                     <td width="300">'.$client['client'].'</td>
-                    <td width="350">'.$row["title"].'</td>
-                    <td width="175">'.$myDateFormat.'</td>
+                    <td width="300">'.$row["title"].'</td>
+                    <td width="150">'.$myDateFormat.'</td>
                     <td width="50">'.'<a class="btn btn-danger" href="contacts.php?delete='.$row['contactID'].'"
                         onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
                 </tr>';

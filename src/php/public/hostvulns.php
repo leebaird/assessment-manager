@@ -558,7 +558,7 @@ if (isset($_GET['create'])) {
                     <td width="50">'.'<a class="btn btn-warning" href="hostvulns.php?update='.$row['hostvulnID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                     <td width="100">'.$row["tool"].'</td>
                     <td width="500">'.$row["vulnerability"].'</td>
-                    <td width="425">'.$finding["finding"].'</td>
+                    <td width="400">'.$finding["finding"].'</td>
                     <td width="100">'.$row["cvss_base"].'</td>
                     <td width="100">'.$row["internal"].'</td>
                     <td width="100">'.$row["external"].'</td>

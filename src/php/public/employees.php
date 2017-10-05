@@ -327,8 +327,8 @@ if (isset($_GET['create'])) {
                     <td width="50">'.'<a class="btn btn-primary" href="employees.php?read='.$row['employeeID'].'"><span class="glyphicon glyphicon-play"></span></a>'.'</td>
                     <td width="50">'.'<a class="btn btn-warning" href="employees.php?update='.$row['employeeID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                     <td width="200">'.$row["employee"].'</td>
-                    <td width="350">'.$row["title"].'</td>
-                    <td width="175">'.$myDateFormat.'</td>
+                    <td width="300">'.$row["title"].'</td>
+                    <td width="150">'.$myDateFormat.'</td>
                     <td width="50">'.'<a class="btn btn-danger" href="employees.php?delete='.$row['employeeID'].'"
                         onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
                 </tr>';

@@ -489,7 +489,7 @@ if (isset($_GET['create'])) {
                     <td width="50">'.'<a class="btn btn-warning" href="webvulns.php?update='.$row['webvulnID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                     <td width="100">'.$row["tool"].'</td>
                     <td width="500">'.$row["vulnerability"].'</td>
-                    <td width="425">'.$finding['finding'].'</td>
+                    <td width="400">'.$finding['finding'].'</td>
                     <td width="100">'.$row["severity"].'</td>
                     <td width="50">'.'<a class="btn btn-danger" href="webvulns.php?delete='.$row['webvulnID'].'"
                         onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
