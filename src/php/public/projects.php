@@ -191,7 +191,16 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
                                 <div class="col-sm-5">
-                                    <textarea class="form-control" name="address" id="address" placeholder="Address" rows="2"></textarea>
+                                    <select class="form-control" name="clientID"  id="clientID">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result)) {
+                                                echo '<option value = "'.$c['clientID'].'">'.$c['address'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
                                 </div>
                             </div>
 
@@ -1454,7 +1463,24 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
                                 <div class="col-sm-4">
-                                    <textarea class="form-control" name="address" rows="2"  id="address"><?php echo @$row['address'] ?></textarea>
+                                    <select class="form-control" name="clientID" id="clientID">
+                            <?php
+                                $query1 = "SELECT * FROM clients where clientID=".$row['client'];
+                                $result1 = mysqli_query($connection, $query1);
+                                $row1 = mysqli_fetch_array($result1);
+                                $query11 = "SELECT * FROM clients ORDER BY client ASC";
+                                $result11 = mysqli_query($connection, $query11); ?>
+                                        <option value="<?php echo $row1['clientID'] ?>"><?php echo $row1['address'] ?></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result11)) {
+                                                ?>
+                                        <option value = '<?php print $c["clientID"]; ?>' ><?php print $c["address"]; ?></option>
+                                        <?php
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
                                 </div>
                             </div>
 
