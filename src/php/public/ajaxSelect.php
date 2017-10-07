@@ -6,26 +6,25 @@
     $dbname = "amdb";
 
     $connection = new mysqli($host, $username, $password, $dbname);
-    $query = "SELECT * FROM clients WHERE clientID=".$_POST['country_id'];
-    $result = mysqli_query($connection, $query);
-    $row = mysqli_fetch_array($result);
 
 
 	//query for location
-    $query_loc = "SELECT * FROM client_locations WHERE clientID=".$_POST['country_id'];
+    $query_loc = "SELECT * FROM client_locations WHERE locationID=".$_POST['country_id'];
     $result_loc = mysqli_query($connection, $query_loc);
-	$sn .= "<select class='form-control' name='address'  id='address'>"; 
-	$sn .= "<option value=''>Select Address</option>";
-    while($row_loc = mysqli_fetch_array($result_loc)){
+    $row_loc = mysqli_fetch_array($result_loc);
+
+
+    $query = "SELECT * FROM clients WHERE clientID=".$row_loc['clientID'];
+    $result = mysqli_query($connection, $query);
+    $row = mysqli_fetch_array($result);
 	
-    //$sn .= $row['web'].",";
-    $sn .= "<option value='".$row_loc['locationID']."'>".$row_loc['address']."</option>";
-    //$sn .= $row_loc['city'].",";
-    //$sn .= $row_loc['state'].",";
-    //$sn .= $row_loc['zip'].",";
-    //$sn .= $row_loc['phone'].",";
-	}
-	$sn .= "</select>";	
+	
+    $sn .= $row['web'].",";
+    //$sn .= $row_loc['address'].",";
+    $sn .= $row_loc['city'].",";
+    $sn .= $row_loc['state'].",";
+    $sn .= $row_loc['zip'].",";
+    $sn .= $row_loc['phone'].",";
     //$query1 = "SELECT * FROM employees WHERE employeeID=".$row['employeeID'];
     //$result1 = mysqli_query($connection, $query1);
     //
@@ -66,3 +65,4 @@
     $sn .= $row6['employee'].",";
 */
     print $sn;
+

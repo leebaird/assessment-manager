@@ -15,21 +15,48 @@
                     url:'ajaxHost.php',
                     data:'country_id='+countryID,
                     success:function(html){
-                        var res = html.split(",");
-
-                        $('#address').val(res[0]);
-                        $('#city').val(res[1]);
-                        $('#state').val(res[2]);
-                        $('#zip').val(res[3]);
-                        $('#phone').val(res[4]);
-                        $('#web').val(res[5]);
-                        $('#accountmgr').val(res[6]);
+                        //var res = html.split(",");
+						//alert(html);
+						document.getElementById('address').innerHTML = html;
+                        //$('#web').val(res[0]);
+                        //$('#address').val(res[1]);
+                        //$('#city').val(res[2]);
+                        //$('#state').val(res[3]);
+                        //$('#zip').val(res[4]);
+                        //$('#phone').val(res[5]);						
+                        //$('#accountmgr').val(res[6]);
                         }
                     });
                 }else{
                     //$('#city').html('Sorry');
                 }
             });
+			
+        $('#address').on('change',function(){
+            var countryID = $(this).val();
+			//alert(countryID);
+            if(countryID){
+                $.ajax({
+                    type:'POST',
+                    url:'ajaxSelect.php',
+                    data:'country_id='+countryID,
+                    success:function(html){
+                        var res = html.split(",");
+						//alert(res);
+
+                        $('#web').val(res[0]);
+                        //$('#address').val(res[1]);
+                        $('#city').val(res[1]);
+                        $('#state').val(res[2]);
+                        $('#zip').val(res[3]);
+                        $('#phone').val(res[4]);						
+                        //$('#accountmgr').val(res[6]);
+                        }
+                    });
+                }else{
+                    //$('#city').html('Sorry');
+                }
+            });			
         });
 </script>
 
@@ -140,7 +167,12 @@ if (isset($_GET['create'])) {
                             <?php
                                 $query = "SELECT * FROM clients ORDER BY client ASC";
                                 $result = mysqli_query($connection, $query);
-                                confirm_query($result); ?>
+                                confirm_query($result); 
+								
+                                $query1 = "SELECT * FROM client_locations ORDER BY clientID ASC";
+                                $result1 = mysqli_query($connection, $query1);
+                                confirm_query($result1); 								
+							?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Assessment</label>
@@ -190,12 +222,12 @@ if (isset($_GET['create'])) {
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
-                                <div class="col-sm-5">
-                                    <select class="form-control" name="clientID"  id="clientID">
+                                <div class="col-sm-5" >
+                                    <select class="form-control" name="address"  id="address">
                                         <option value=""></option>
                                         <?php
-                                            while ($c = mysqli_fetch_assoc($result)) {
-                                                echo '<option value = "'.$c['clientID'].'">'.$c['address'].'</option>';
+                                            while ($c = mysqli_fetch_assoc($result1)) {
+                                                echo '<option value = "'.$c['locationID'].'">'.$c['address'].'</option>';
                                             }
 
                                             // Release returned data.

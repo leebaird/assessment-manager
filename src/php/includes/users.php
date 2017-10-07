@@ -13,7 +13,7 @@
     include "../includes/header.php";
     require_once("../includes/common.php");
 
-    if ($_SESSION['user']['role']==1) {
+    if ($_SESSION['user']['userRoleID']==1) {
         if (isset($_POST['create'])) {
             // CREATE RECORD
             if (!empty($_POST)) {
@@ -131,7 +131,7 @@
                 $role = $_POST['role'];
                 $approval = $_POST['approval'];
 
-                $query = "INSERT INTO users (modified, username, email, password, salt, activated, role, approved) VALUES (now(), '$username', '$email', '$password', '$salt', 1, '$role', $approval)";
+                $query = "INSERT INTO users (modified, username, email, password, salt, activated, userRoleID, approved) VALUES (now(), '$username', '$email', '$password', '$salt', 1, '$role', $approval)";
 
                 try {
                     // Execute the query to create the user.
@@ -139,7 +139,8 @@
                     $result = $stmt->execute($query_params);
                 } catch (PDOException $ex) {
                     // On a production website, you should not output $ex->getMessage().
-                    die("Failed to run query: " . $ex->getMessage());
+                    die("<div align='center'><br><br><br><br><br><br>
+                    Failed to run query: " . $ex->getMessage()."</div>");
                 }
 
                 // Postfix not configured yet.
@@ -163,7 +164,7 @@
 
         if (isset($_POST['update'])) {
             // UPDATE RECORD.
-            $query = "UPDATE users SET username='$_POST[username]', email='$_POST[email]', role='$_POST[role]', approved='$_POST[approved]' WHERE userID=".intval($_POST['update']);
+            $query = "UPDATE users SET username='$_POST[username]', email='$_POST[email]', userRoleID='$_POST[role]', approved='$_POST[approved]' WHERE userID=".intval($_POST['update']);
             $result = mysqli_query($connection, $query);
             confirm_query($result);
         }
@@ -281,13 +282,13 @@
                             <div class="col-sm-2">
 
                                 <?php
-                                    if ($row['role']==1) {
+                                    if ($row['userRoleID']==1) {
                                 ?>
 
                                 <input type="text" class="form-control" name="email" placeholder="Email" value="Admin" readonly="readonly">
                                 <?php
                                 }
-                                    if ($row['role']==2) {
+                                    if ($row['userRoleID']==2) {
                                 ?>
 
                                 <input type="text" class="form-control" name="email" placeholder="Email" value="User" readonly="readonly">
@@ -361,12 +362,12 @@
                     <div class="col-sm-2">
                         <select class="form-control" name="role">
                         <?php
-                        if ($row['role']==1) {
+                        if ($row['userRoleID']==1) {
                             ?>
                             <option value="1">Admin</option>
                         <?php
                         }
-                            if ($row['role']==2) {
+                            if ($row['userRoleID']==2) {
                         ?>
 
                         <option value="2">User</option>
@@ -465,11 +466,11 @@
                 <td width="200">'.$row["username"].'</td>
                 <td width="300">'.$row["email"].'</td>
                 ';
-            if ($row["role"]==1) {
+            if ($row["userRoleID"]==1) {
                 echo'
                 <td width="100">Admin</td>
                 ';
-            } elseif ($row["role"]==2) {
+            } elseif ($row["userRoleID"]==2) {
                 echo'
                 <td width="100">User</td>
                 ';

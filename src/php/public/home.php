@@ -13,7 +13,8 @@
         <ul>
             <li><a href="../includes/edit_account.php">Edit Account</a></li>
             <?php
-                if ($_SESSION['user']['role']==1) {
+			
+                if ($_SESSION['user']['userRoleID']==1) {
             ?>
             <li><a href="../includes/users.php">Users</a></li>
             <?php

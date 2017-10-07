@@ -22,7 +22,7 @@
 
     function confirm_query($result) {
         if (!$result) {
-            die("DB query failed. " . mysql_error());
+            die("<div align='center'><br><br><br><br><br><br>DB query failed. " . mysql_error()."</div>");
         }
     }
 

@@ -80,8 +80,8 @@ if (isset($_GET['create'])) {
                                     echo '<option value = "'.$c["clientID"].'">'.$c["client"].'</option>';
                                 }
 
-    // Release returned data.
-    mysqli_free_result($result); ?>
+                            // Release returned data.
+                            mysqli_free_result($result); ?>
                         </select>
                     </div>
                 </div>
@@ -227,11 +227,12 @@ if (isset($_GET['create'])) {
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Client</label>
                     <div class="col-sm-7">
-                    <?php
-                $query = "SELECT * FROM clients where clientID = ".intval($row['clientID']);
-                $client = mysqli_query($connection, $query);
-                confirm_query($client);
-                $client = mysqli_fetch_assoc($client); ?>
+                        <?php
+                            $query = "SELECT * FROM clients where clientID = ".intval($row['clientID']);
+                            $client = mysqli_query($connection, $query);
+                            confirm_query($client);
+                            $client = mysqli_fetch_assoc($client);
+                        ?>
                         <input type="text" class="form-control" name="clientid" value="<?php echo $client['client'] ?>" readonly>
                     </div>
                 </div>
@@ -319,7 +320,8 @@ if (isset($_GET['create'])) {
                 <?php
                     $query = "SELECT * FROM clients ORDER BY client ASC";
                     $result = mysqli_query($connection, $query);
-                    confirm_query($result); ?>
+                    confirm_query($result);
+                ?>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Client</label>
@@ -331,8 +333,9 @@ if (isset($_GET['create'])) {
                                     echo '<option value = "'.$c["clientID"].'"'.($row['clientID'] == $c['clientID'] ? ' selected' : '').'>'.$c["client"].'</option>';
                                 }
 
-        // Release returned data.
-        mysqli_free_result($result); ?>
+                                // Release returned data.
+                                mysqli_free_result($result);
+                            ?>
                         </select>
                     </div>
                 </div>
@@ -430,8 +433,10 @@ if (isset($_GET['create'])) {
                 </tr>';
             }
 
-        // Release returned data.
-        mysqli_free_result($result); ?>
+            // Release returned data.
+            mysqli_free_result($result);
+        ?>
+
     </table>
     <?php
     }
