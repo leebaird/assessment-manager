@@ -5,7 +5,7 @@ INSERT INTO `clients` (`clientID`, `client`, `modified`, `web`) VALUES
 (4, 'Verizon', '2017-10-01 15:22:19', 'www.verizon.com');
 
 INSERT INTO `client_locations` (`locationID`, `clientID`, `modified`, `address`, `city`, `state`, `zip`, `phone`, `notes`) VALUES
-(1, 1, '2017-10-01 14:59:48', '1 Infinite Loop', 'Cupertino', 'CA', '95014', '408-996â€“1010', ''),
+(1, 1, '2017-10-01 14:59:48', '1 Infinite Loop', 'Cupertino', 'CA', '95014', '408-996-1010', ''),
 (2, 2, '2017-10-01 15:17:35', '1701 JFK Boulevard', 'Philadelphia', 'PA', '19103', '800-934-6489', ''),
 (3, 3, '2017-10-01 15:20:50', '3000 Tannery Way', 'Santa Clara', 'CA', '95054', '408-753-4000', ''),
 (4, 4, '2017-10-01 15:22:19', '140 W. St.', 'New York', 'NY', '10007', '212-395-1000', '');
