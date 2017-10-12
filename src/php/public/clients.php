@@ -58,26 +58,25 @@ if (isset($_POST['address_more'])) {
 }
 
 if (isset($_POST['update'])) {
-    for($i=1;$i<=15;$i++){
-    $address = @$_POST['address'.$i];
-    $city = @$_POST['city'.$i];
-    $state = @$_POST['state'.$i];
-    $zip = @$_POST['zip'.$i];
-    $phone = @$_POST['phone'.$i];
-    $notes = @$_POST['notes'.$i];
-    $locationID = @$_POST['locationID'.$i];
-    $notes = @$_POST['notes'.$i];
+    for($i=1;$i<=15;$i++) {
+        $address = @$_POST['address'.$i];
+        $city = @$_POST['city'.$i];
+        $state = @$_POST['state'.$i];
+        $zip = @$_POST['zip'.$i];
+        $phone = @$_POST['phone'.$i];
+        $notes = @$_POST['notes'.$i];
+        $locationID = @$_POST['locationID'.$i];
+        $notes = @$_POST['notes'.$i];
 
-    if (isset($address)){
-        $query_add = "UPDATE client_locations SET modified=now(), address='$address', city='$city', state='$state', zip='$zip', phone='$phone', notes='$notes' WHERE locationID=".$locationID;
-    $result_add = mysqli_query($connection, $query_add);
-    confirm_query($result_add);
-    }
-
+        if (isset($address)){
+            $query_add = "UPDATE client_locations SET modified=now(), address='$address', city='$city', state='$state', zip='$zip', phone='$phone', notes='$notes' WHERE locationID=".$locationID;
+            $result_add = mysqli_query($connection, $query_add);
+            confirm_query($result_add);
+        }
     }
 
     // UPDATE RECORD.
-    $query = "UPDATE clients SET modified=now(), client='$_POST[client]',  web='$_POST[web]' WHERE clientID=".intval($_POST['update']);	
+    $query = "UPDATE clients SET modified=now(), client='$_POST[client]',  web='$_POST[web]' WHERE clientID=".intval($_POST['update']);
     $result = mysqli_query($connection, $query);
     //confirm_query($result);
 }
@@ -104,7 +103,7 @@ if (isset($_GET['create'])) {
         justify-content: center;
     }
 </style>
-<br><br>
+
 <div class="vertical-center">
     <div class="container col-md-8">
         <div class="panel panel-primary">
@@ -113,7 +112,6 @@ if (isset($_GET['create'])) {
             </div>
 
         <div class="panel-body">
-
             <form class="form-horizontal" action="clients.php" method="post">
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Client</label>
@@ -175,7 +173,6 @@ if (isset($_GET['create'])) {
                 </div>
             </form>
         </div>
-        </div>
     </div>
 </div>
 
@@ -186,8 +183,6 @@ if (isset($_GET['create'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
     $row = mysqli_fetch_assoc($result);
-
-
 
     $query = "SELECT * FROM employees WHERE employeeID=".intval(@$row['employeeID']);
     $result = mysqli_query($connection, $query);
@@ -237,13 +232,6 @@ if (isset($_GET['create'])) {
                     <label class="col-sm-3 control-label">Client</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="client" value="<?php echo $row['client'] ?>" readonly>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Web</label>
-                    <div class="col-sm-7">
-                        <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>" readonly>
                     </div>
                 </div>
 
@@ -308,7 +296,6 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="clients.php">Back</a>
                 </div>
             </form>
-            </div>
         </div>
     </div>
 </div>
@@ -338,6 +325,7 @@ if (isset($_GET['create'])) {
             <div class="panel-heading">
                 <h3 class="panel-title">Update Client</h3>
             </div>
+
             <div class="panel-body">
 
             <form class="form-horizontal" action="clients.php" method="post">
@@ -349,13 +337,6 @@ if (isset($_GET['create'])) {
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Web</label>
-                    <div class="col-sm-7">
-                        <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>">
-                    </div>
-                </div>
-
                 <?php
                     // READ RECORD.
                     $query_more = "SELECT * FROM client_locations WHERE clientID=".intval($_GET['update']);
@@ -364,7 +345,7 @@ if (isset($_GET['create'])) {
                     while($row_more = mysqli_fetch_assoc($result_more)){
                 ?>
 
-                <input type="hidden" class="form-control" name="locationID<?php echo $row_more['locationID'] ?>" 
+                <input type="hidden" class="form-control" name="locationID<?php echo $row_more['locationID'] ?>"
                 value="<?php echo $row_more['locationID'] ?>" >
 
                 <div class="form-group">
@@ -401,6 +382,13 @@ if (isset($_GET['create'])) {
                 </div>
 
                 <div class="form-group">
+                    <label class="col-sm-3 control-label">Web</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" name="web" value="<?php echo $row['web'] ?>">
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="col-sm-3 control-label">Notes</label>
                     <div class="col-sm-7">
                         <textarea class="form-control" name="notes<?php echo $row_more['locationID'] ?>" rows="6" ><?php echo $row_more['notes'] ?></textarea>
@@ -412,7 +400,6 @@ if (isset($_GET['create'])) {
                     <a class="btn btn-default" href="clients.php">Back</a>
                 </div>
             </form>
-            </div>
         </div>
     </div>
 </div>
@@ -463,7 +450,7 @@ if (isset($_GET['create'])) {
                     <td width="150">'.$myDateFormat.'</td>
                     <td width="50">'.'<a class="btn btn-danger" href="clients.php?delete='.$row['clientID'].'"
                         onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
-                    <td><a class="btn btn-primary" data-toggle="modal" data-target="#myModal'.$row['clientID'].'">Add Address</a></td>	
+                    <td><a class="btn btn-primary" data-toggle="modal" data-target="#myModal'.$row['clientID'].'">+ Address</a></td>
                 </tr>';
             }
 
@@ -550,10 +537,10 @@ if (isset($_GET['create'])) {
                 </div>
             </form>
         </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
-      </div>
     </div>
 </div>
 
