@@ -2,7 +2,7 @@ Follow on Twitter [![Twitter Follow](https://img.shields.io/twitter/follow/disco
 
 ### About
 * This project is currently in the alpha stage of development.
-* Manage information for a pentest including clients, contacts, employees, findings, projects, scoping, and vulnerabilities.
+* Manage all logistical information for a pentest including clients, contacts, employees, findings, projects, scoping, and vulnerabilities.
 
 ### Requirements
 * Install XAMPP (PHP 7.1.9): https://www.apachefriends.org/download.html
