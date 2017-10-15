@@ -57,7 +57,7 @@ if (isset($_GET['delete'])) {
 if (isset($_GET['create'])) {
     ?>
 
-<br><br>
+<br><br><br>
 
 <div class="container">
     <div class="panel panel-primary">

@@ -44,7 +44,7 @@ if (isset($_GET['create'])) {
 
 <style>
     .vertical-center {
-        height: 79vh;
+        height: 73vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -73,17 +73,7 @@ if (isset($_GET['create'])) {
                         <input type="text" class="form-control" name="title" placeholder="Title">
                     </div>
                 </div>
-<!--
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Account Mgr</label>
-                    <div class="col-sm-2">
-                        <select class="form-control" name="accountmgr">
-                            <option value="No"></option>
-                            <option value="Yes">Yes</option>
-                        </select>
-                    </div>
-                </div>
--->
+
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Cell</label>
                     <div class="col-sm-4">
@@ -175,14 +165,7 @@ if (isset($_GET['create'])) {
                         <input type="text" class="form-control" name="title" value="<?php echo $row['title'] ?>" readonly>
                     </div>
                 </div>
-<!--
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Account Mgr</label>
-                    <div class="col-sm-2">
-                        <input type="text" class="form-control" name="accountmgr" value="<?php //echo $row['accountmgr'] ?>" readonly>
-                    </div>
-                </div>
--->
+
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Cell</label>
                     <div class="col-sm-4">
@@ -253,17 +236,7 @@ if (isset($_GET['create'])) {
                         <input type="text" class="form-control" name="title" value="<?php echo $row['title'] ?>">
                     </div>
                 </div>
-<!--
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Account Mgr</label>
-                    <div class="col-sm-2">
-                        <select class="form-control" name="accountmgr">
-                            <option value=""></option>
-                            <option value="Yes"<?php //echo($row['accountmgr'] == 'Yes' ? " selected" : "")?>>Yes</option>
-                        </select>
-                    </div>
-                </div>
--->
+
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Cell</label>
                     <div class="col-sm-4">
