@@ -11,8 +11,17 @@ if (isset($_POST['create'])) {
 
     if (empty($client)) {
         ?>
-        <br>
-        <button class="btn btn-danger" type="button"><strong>Warning!</strong> You must enter a client.</button>
+        <br><br>
+        <button class="btn btn-danger" type="button">You must enter a client.</button>
+        <br><br>
+        <a class="btn btn-default" href="clients.php?create" input type="button">Back</a>
+        <?php exit;
+    }
+
+    if (empty(trim($_POST['address']))||empty(trim($_POST['city']))||empty(trim($_POST['state']))||empty(trim($_POST['zip']) )) {
+        ?>
+        <br><br>
+        <button class="btn btn-danger" type="button">You must enter an address, city, state, and zip.</button>
         <br><br>
         <a class="btn btn-default" href="clients.php?create" input type="button">Back</a>
         <?php exit;
@@ -34,14 +43,16 @@ if (isset($_POST['create'])) {
 
 if (isset($_POST['address_more'])) {
     // CREATE RECORD.
+?>
 
+<?php
     // Check for blank field.
-    $client = trim($_POST['client']);
+    $client = trim($_POST['address']);
 
-    if (empty($client)) {
+    if (empty(trim($_POST['address']))||empty(trim($_POST['city']))||empty(trim($_POST['state']))||empty(trim($_POST['zip']) )) {
         ?>
-        <br>
-        <button class="btn btn-danger" type="button"><strong>Warning!</strong> You must enter a client.</button>
+        <br><br>
+        <button class="btn btn-danger" type="button">You must enter an address, city, state, and zip.</button>
         <br><br>
         <a class="btn btn-default" href="clients.php?create" input type="button">Back</a>
         <?php exit;
@@ -51,7 +62,7 @@ if (isset($_POST['address_more'])) {
     $result_max_id = mysqli_query($connection, $query_max_id);
     $max_id = mysqli_fetch_row($result_max_id);
 
-    $query_loc = "INSERT INTO client_locations (modified, clientID, address, city, state, zip, phone, notes) VALUES (now(), '$max_id[0]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]', '$_POST[notes]')";
+    @$query_loc = "INSERT INTO client_locations (modified, clientID, address, city, state, zip, phone, notes) VALUES (now(), '$max_id[0]', '$_POST[address]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[phone]', '$_POST[notes]')";
 
     $result_loc = mysqli_query($connection, $query_loc);
     confirm_query($result_loc);
@@ -94,9 +105,9 @@ if (isset($_GET['delete'])) {
     confirm_query($result);
 
 	if($total==1){
-        $query = "DELETE FROM clients WHERE clientID=".intval($_GET['delete']);
-        $result = mysqli_query($connection, $query);
-        confirm_query($result);
+    $query = "DELETE FROM clients WHERE clientID=".intval($_GET['delete']);
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
 	}
 }
 
@@ -428,6 +439,7 @@ if (isset($_GET['create'])) {
     <div align="center">
 
     </div>
+
     <?php
         // Perform db query.
         $query = "SELECT * FROM clients ORDER BY client ASC";
@@ -473,6 +485,7 @@ if (isset($_GET['create'])) {
 
             }
         }
+
     // Release returned data.
     mysqli_free_result($result); ?>
 
@@ -496,11 +509,12 @@ if (isset($_GET['create'])) {
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
-                <form class="form-horizontal" action="clients.php" method="post">
+                <form class="form-horizontal" name="frm" action="clients.php" method="post"
+                onsubmit="return check()">
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Client</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" name="client" placeholder="Client" 
+                            <input type="text" class="form-control" name="client" placeholder="Client"
                             value="<?php echo $row["client"]; ?>" readonly="readonly">
                         </div>
                     </div>
@@ -508,7 +522,7 @@ if (isset($_GET['create'])) {
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Address</label>
                         <div class="col-sm-7">
-                            <textarea class="form-control" name="address" placeholder="Address" rows="2"></textarea>
+                            <textarea class="form-control" name="address" id="address" placeholder="Address" rows="2"></textarea>
                         </div>
                     </div>
 
@@ -539,7 +553,7 @@ if (isset($_GET['create'])) {
                     </div>
 
                     <div class="form-actions">
-                        <button class="btn btn-primary" type="submit" name="address_more">Create</button>
+                        <input class="btn btn-primary" type="submit" name="address_more" value="Create">
                         <a class="btn btn-default" href="clients.php">Back</a>
                     </div>
                 </form>
