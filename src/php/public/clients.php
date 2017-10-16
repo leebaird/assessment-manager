@@ -83,13 +83,21 @@ if (isset($_POST['update'])) {
 
 if (isset($_GET['delete'])) {
     // DELETE RECORD.
-    $query = "DELETE FROM client_locations WHERE clientID=".intval($_GET['delete']);
+
+    $query = "DELETE FROM client_locations WHERE locationID=".intval($_GET['id']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 
-    $query = "DELETE FROM clients WHERE clientID=".intval($_GET['delete']);
+    $query = "select * FROM client_locations WHERE clientID=".intval($_GET['delete']);
     $result = mysqli_query($connection, $query);
+	$total = mysqli_num_rows($result);
     confirm_query($result);
+
+	if($total==1){
+        $query = "DELETE FROM clients WHERE clientID=".intval($_GET['delete']);
+        $result = mysqli_query($connection, $query);
+        confirm_query($result);
+	}
 }
 
 if (isset($_GET['create'])) {
@@ -97,7 +105,7 @@ if (isset($_GET['create'])) {
 
 <style>
     .vertical-center {
-        /*height: 88vh;*/
+        height: 88vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -419,7 +427,7 @@ if (isset($_GET['create'])) {
     <br>
     <div align="center">
 
-            </div>
+    </div>
     <?php
         // Perform db query.
         $query = "SELECT * FROM clients ORDER BY client ASC";
@@ -457,13 +465,14 @@ if (isset($_GET['create'])) {
                     <td width="150">'.$finding["city"].'</td>
                     <td width="75">'.$finding["state"].'</td>
                     <td width="150">'.$myDateFormat.'</td>
-                    <td><a class="btn btn-primary" data-toggle="modal" data-target="#myModal'.$row['clientID'].'">+Address</a></td>
-                    <td width="50">'.'<a class="btn btn-danger" href="clients.php?delete='.$row['clientID'].'"
-                        onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
+                    <td>
+<a class="btn btn-primary" data-toggle="modal" data-target="#myModal'.$row['clientID'].'">+Address</a></td>
+<td width="50">'.'<a class="btn btn-danger" href="clients.php?delete='.$row['clientID'].'&id='
+.$finding['locationID'].'" onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
                 </tr>';
 
             }
-            }
+        }
     // Release returned data.
     mysqli_free_result($result); ?>
 
@@ -472,7 +481,6 @@ if (isset($_GET['create'])) {
 }
 ?>
 
-<!--<div class="container">
 <!-- Trigger the modal with a button -->
 <?php
     // Perform db query.
