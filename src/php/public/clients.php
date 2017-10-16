@@ -97,7 +97,7 @@ if (isset($_GET['create'])) {
 
 <style>
     .vertical-center {
-        height: 88vh;
+        /*height: 88vh;*/
         display: flex;
         align-items: center;
         justify-content: center;
@@ -245,7 +245,7 @@ if (isset($_GET['create'])) {
 
                 <?php
                     // READ RECORD.
-                    $query_more = "SELECT * FROM client_locations WHERE clientID=".intval($_GET['read']);
+                    $query_more = "SELECT * FROM client_locations WHERE locationID=".intval($_GET['id']);
                     $result_more = mysqli_query($connection, $query_more);
                     confirm_query($result_more);
                     while($row_more = mysqli_fetch_assoc($result_more)){
@@ -318,7 +318,7 @@ if (isset($_GET['create'])) {
 
 <style>
     .vertical-center {
-        height: 83vh;
+        /*height: 83vh;*/
         display: flex;
         align-items: center;
         justify-content: center;
@@ -351,7 +351,7 @@ if (isset($_GET['create'])) {
 
                 <?php
                     // READ RECORD.
-                    $query_more = "SELECT * FROM client_locations WHERE clientID=".intval($_GET['update']);
+                    $query_more = "SELECT * FROM client_locations WHERE locationID=".intval($_GET['id']);
                     $result_more = mysqli_query($connection, $query_more);
                     confirm_query($result_more);
                     while($row_more = mysqli_fetch_assoc($result_more)){
@@ -450,8 +450,8 @@ if (isset($_GET['create'])) {
 
                 echo '
                 <tr>
-                    <td width="50">'.'<a class="btn btn-primary" href="clients.php?read='.$row['clientID'].'"><span class="glyphicon glyphicon-play"></span></a>'.'</td>
-                    <td width="50">'.'<a class="btn btn-warning" href="clients.php?update='.$row['clientID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
+                    <td width="50">'.'<a class="btn btn-primary" href="clients.php?read='.$row['clientID'].'&id='.$finding['locationID'].'"><span class="glyphicon glyphicon-play"></span></a>'.'</td>
+                    <td width="50">'.'<a class="btn btn-warning" href="clients.php?update='.$row['clientID'].'&id='.$finding['locationID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                     <td width="250">'.$row["client"].'</td>
                     <td width="250">'.$finding["address"].'</td>
                     <td width="150">'.$finding["city"].'</td>
