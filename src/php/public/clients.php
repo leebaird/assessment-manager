@@ -50,11 +50,71 @@ if (isset($_POST['address_more'])) {
     $client = trim($_POST['address']);
 
     if (empty(trim($_POST['address']))||empty(trim($_POST['city']))||empty(trim($_POST['state']))||empty(trim($_POST['zip']) )) {
+        $cl = $_POST['client'];
         ?>
         <br><br>
         <button class="btn btn-danger" type="button">You must enter an address, city, state, and zip.</button>
         <br><br>
-        <a class="btn btn-default" href="clients.php?create" input type="button">Back</a>
+        <a class="btn btn-default" data-toggle="modal" data-target="#myModal" input type="button">Back</a>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="form-horizontal" name="frm" action="clients.php" method="post"
+                onsubmit="return check()">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Client</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="client" placeholder="Client"
+                            value="<?php echo $cl; ?>" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Address</label>
+                        <div class="col-sm-7">
+                            <textarea class="form-control" name="address" id="address" placeholder="Address" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-sm-3 control-label">City</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="city" placeholder="City">
+                        </div>
+
+                        <label class="col-sm-1 control-label">State</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="state" placeholder="State">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Zip</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="zip" placeholder="Zip">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Phone</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="phone" placeholder="Phone">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input class="btn btn-primary" type="submit" name="address_more" value="Create">
+                        <a class="btn btn-default" href="clients.php">Back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
         <?php exit;
     }
 
@@ -101,14 +161,14 @@ if (isset($_GET['delete'])) {
 
     $query = "select * FROM client_locations WHERE clientID=".intval($_GET['delete']);
     $result = mysqli_query($connection, $query);
-	$total = mysqli_num_rows($result);
+    $total = mysqli_num_rows($result);
     confirm_query($result);
 
-	if($total==1){
+    if($total==1){
     $query = "DELETE FROM clients WHERE clientID=".intval($_GET['delete']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
-	}
+    }
 }
 
 if (isset($_GET['create'])) {
