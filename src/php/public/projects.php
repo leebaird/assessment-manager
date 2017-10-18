@@ -4,6 +4,9 @@
     require_once("../includes/common.php");
 ?>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#clientID').on('change',function(){
@@ -15,8 +18,23 @@
                     url:'ajaxHost.php',
                     data:'country_id='+countryID,
                     success:function(html){
+                        //var res = html.split(",");
+                        //alert(html);
                         document.getElementById('address').innerHTML = html;
-                    }
+                        document.getElementById('address1').innerHTML = html;
+                        document.getElementById('address2').innerHTML = html;
+                        document.getElementById('address3').innerHTML = html;
+                        document.getElementById('address4').innerHTML = html;
+                        document.getElementById('address5').innerHTML = html;
+
+                        //$('#web').val(res[0]);
+                        //$('#address').val(res[1]);
+                        //$('#city').val(res[2]);
+                        //$('#state').val(res[3]);
+                        //$('#zip').val(res[4]);
+                        //$('#phone').val(res[5]);
+                        //$('#accountmgr').val(res[6]);
+                        }
                     });
                 }else{
                     //$('#city').html('Sorry');
@@ -25,6 +43,7 @@
 
         $('#address').on('change',function(){
             var countryID = $(this).val();
+            //alert(countryID);
             if(countryID){
                 $.ajax({
                     type:'POST',
@@ -32,18 +51,197 @@
                     data:'country_id='+countryID,
                     success:function(html){
                         var res = html.split(",");
+                        //alert(res);
+
                         $('#web').val(res[0]);
+                        //$('#address').val(res[1]);
                         $('#city').val(res[1]);
                         $('#state').val(res[2]);
                         $('#zip').val(res[3]);
                         $('#phone').val(res[4]);
-                    }
+                        //$('#accountmgr').val(res[6]);
+                        }
+                    });
+                }else{
+                    //$('#city').html('Sorry');
+                }
+            });
+
+        $('#address1').on('change',function(){
+            var countryID = $(this).val();
+            //alert(countryID);
+            if(countryID){
+                $.ajax({
+                    type:'POST',
+                    url:'ajaxSelect.php',
+                    data:'country_id='+countryID,
+                    success:function(html){
+                        var res = html.split(",");
+                        //alert(res);
+
+                        //$('#web').val(res[0]);
+                        //$('#address').val(res[1]);
+                        $('#city1').val(res[1]);
+                        $('#state1').val(res[2]);
+                        $('#zip1').val(res[3]);
+                        $('#phone1').val(res[4]);
+                        //$('#accountmgr').val(res[6]);
+                        }
+                    });
+                }else{
+                    //$('#city').html('Sorry');
+                }
+            });
+        $('#address2').on('change',function(){
+            var countryID = $(this).val();
+            //alert(countryID);
+            if(countryID){
+                $.ajax({
+                    type:'POST',
+                    url:'ajaxSelect.php',
+                    data:'country_id='+countryID,
+                    success:function(html){
+                        var res = html.split(",");
+                        //alert(res);
+                        //$('#web').val(res[0]);
+                        //$('#address').val(res[1]);
+                        $('#city2').val(res[1]);
+                        $('#state2').val(res[2]);
+                        $('#zip2').val(res[3]);
+                        $('#phone2').val(res[4]);
+                        //$('#accountmgr').val(res[6]);
+                        }
+                    });
+                }else{
+                    //$('#city').html('Sorry');
+                }
+            });
+
+        $('#address3').on('change',function(){
+            var countryID = $(this).val();
+            //alert(countryID);
+            if(countryID){
+                $.ajax({
+                    type:'POST',
+                    url:'ajaxSelect.php',
+                    data:'country_id='+countryID,
+                    success:function(html){
+                        var res = html.split(",");
+                        //alert(res);
+                        //$('#web').val(res[0]);
+                        //$('#address').val(res[1]);
+                        $('#city3').val(res[1]);
+                        $('#state3').val(res[2]);
+                        $('#zip3').val(res[3]);
+                        $('#phone3').val(res[4]);
+                        //$('#accountmgr').val(res[6]);
+                        }
+                    });
+                }else{
+                    //$('#city').html('Sorry');
+                }
+            });
+
+        $('#address4').on('change',function(){
+            var countryID = $(this).val();
+            //alert(countryID);
+            if(countryID){
+                $.ajax({
+                    type:'POST',
+                    url:'ajaxSelect.php',
+                    data:'country_id='+countryID,
+                    success:function(html){
+                        var res = html.split(",");
+                        //alert(res);
+                        //$('#web').val(res[0]);
+                        //$('#address').val(res[1]);
+                        $('#city4').val(res[1]);
+                        $('#state4').val(res[2]);
+                        $('#zip4').val(res[3]);
+                        $('#phone4').val(res[4]);
+                        //$('#accountmgr').val(res[6]);
+                        }
+                    });
+                }else{
+                    //$('#city').html('Sorry');
+                }
+            });
+
+        $('#address5').on('change',function(){
+            var countryID = $(this).val();
+            //alert(countryID);
+            if(countryID){
+                $.ajax({
+                    type:'POST',
+                    url:'ajaxSelect.php',
+                    data:'country_id='+countryID,
+                    success:function(html){
+                        var res = html.split(",");
+                        //alert(res);
+                        //$('#web').val(res[0]);
+                        //$('#address').val(res[1]);
+                        $('#city5').val(res[1]);
+                        $('#state5').val(res[2]);
+                        $('#zip5').val(res[3]);
+                        $('#phone5').val(res[4]);
+                        //$('#accountmgr').val(res[6]);
+                        }
                     });
                 }else{
                     //$('#city').html('Sorry');
                 }
             });
         });
+</script>
+
+<script>
+    $(document).ready(function(){
+    $("#one").hide();
+    $("#two").hide();
+    $("#three").hide();
+    $("#four").hide();
+    $("#five").hide();
+
+    $("#show").click(function(){
+        $("#one").show();
+    });
+
+    $("#hide1").click(function(){
+        $("#one").hide();
+    });
+
+    $("#show1").click(function(){
+        $("#two").show();
+    });
+
+    $("#hide2").click(function(){
+        $("#two").hide();
+    });
+
+    $("#show2").click(function(){
+        $("#three").show();
+    });
+
+    $("#hide3").click(function(){
+        $("#three").hide();
+    });
+
+    $("#show3").click(function(){
+        $("#four").show();
+    });
+
+    $("#hide4").click(function(){
+        $("#four").hide();
+    });
+
+    $("#show4").click(function(){
+        $("#five").show();
+    });
+
+    $("#hide5").click(function(){
+        $("#five").hide();
+    });
+});
 </script>
 
 <?php
@@ -227,6 +425,7 @@ if (isset($_GET['create'])) {
                                             // Release returned data.
                                             mysqli_free_result($result); ?>
                                     </select>
+                                    <a href="#" id="show">+Address</a>
                                 </div>
 
                                 <label class="col-sm-2 control-label">Start</label>
@@ -280,6 +479,282 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
 
+<!--- start -->
+                            <?php
+                                $query = "SELECT * FROM clients ORDER BY client ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+
+                                $query1 = "SELECT * FROM client_locations ORDER BY clientID ASC";
+                                $result1 = mysqli_query($connection, $query1);
+                                confirm_query($result1);
+                            ?>
+
+                            <span id="one">
+                            <div class="form-group ">
+                                <label class="col-sm-2 control-label">Address</label>
+                                <div class="col-sm-5" >
+                                    <select class="form-control" name="address1"  id="address1">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result1)) {
+                                                echo '<option value = "'.$c['locationID'].'">'.$c['address'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
+                                    <a href="#" id="show1">+Address</a>|<a href="#" id="hide1">Hide</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 control-label">City</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="city1" id="city1" placeholder="City">
+                                </div>
+
+                                <label class="col-sm-1 control-label">State</label>
+                                <div class="col-sm-1">
+                                    <input type="text" class="form-control" name="state1" id="state1" placeholder="State">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Zip</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="zip1" id="zip1" placeholder="Zip">
+                                </div>
+                            </div>
+
+                            <div class="form-group  input_fields_wrap">
+                                <label class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="phone1" id="phone1" placeholder="Phone">
+                                </div>
+                            </div>
+                            </span>
+
+                            <?php
+                                $query = "SELECT * FROM clients ORDER BY client ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+
+                                $query1 = "SELECT * FROM client_locations ORDER BY clientID ASC";
+                                $result1 = mysqli_query($connection, $query1);
+                                confirm_query($result1);
+                            ?>
+
+                            <span id="two">
+                            <div class="form-group ">
+                                <label class="col-sm-2 control-label">Address</label>
+                                <div class="col-sm-5" >
+                                    <select class="form-control" name="address2"  id="address2">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result1)) {
+                                                echo '<option value = "'.$c['locationID'].'">'.$c['address'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
+                                    <a href="#" id="show2">+Address</a>|<a href="#" id="hide2">Hide</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 control-label">City</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="city2" id="city2" placeholder="City">
+                                </div>
+
+                                <label class="col-sm-1 control-label">State</label>
+                                <div class="col-sm-1">
+                                    <input type="text" class="form-control" name="state2" id="state2" placeholder="State">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Zip</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="zip2" id="zip2" placeholder="Zip">
+                                </div>
+                            </div>
+
+                            <div class="form-group  input_fields_wrap">
+                                <label class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="phone2" id="phone2" placeholder="Phone">
+                                </div>
+                            </div>
+                            </span>
+
+                            <?php
+                                $query = "SELECT * FROM clients ORDER BY client ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+
+                                $query1 = "SELECT * FROM client_locations ORDER BY clientID ASC";
+                                $result1 = mysqli_query($connection, $query1);
+                                confirm_query($result1);
+                            ?>
+
+                            <span id="three">
+                            <div class="form-group ">
+                                <label class="col-sm-2 control-label">Address</label>
+                                <div class="col-sm-5" >
+                                    <select class="form-control" name="address3"  id="address3">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result1)) {
+                                                echo '<option value = "'.$c['locationID'].'">'.$c['address'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
+                                    <a href="#" id="show3">+Address</a>|<a href="#" id="hide3">Hide</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 control-label">City</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="city3" id="city3" placeholder="City">
+                                </div>
+
+                                <label class="col-sm-1 control-label">State</label>
+                                <div class="col-sm-1">
+                                    <input type="text" class="form-control" name="state3" id="state3" placeholder="State">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Zip</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="zip3" id="zip3" placeholder="Zip">
+                                </div>
+                            </div>
+
+                            <div class="form-group  input_fields_wrap">
+                                <label class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="phone3" id="phone3" placeholder="Phone">
+                                </div>
+                            </div>
+                            </span>
+
+                            <?php
+                                $query = "SELECT * FROM clients ORDER BY client ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+
+                                $query1 = "SELECT * FROM client_locations ORDER BY clientID ASC";
+                                $result1 = mysqli_query($connection, $query1);
+                                confirm_query($result1);
+                            ?>
+
+                            <span id="four">
+                            <div class="form-group ">
+                                <label class="col-sm-2 control-label">Address</label>
+                                <div class="col-sm-5" >
+                                    <select class="form-control" name="address4"  id="address4">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result1)) {
+                                                echo '<option value = "'.$c['locationID'].'">'.$c['address'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
+                                    <a href="#" id="show4">+Address</a>|<a href="#" id="hide4">Hide</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 control-label">City</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="city4" id="city4" placeholder="City">
+                                </div>
+
+                                <label class="col-sm-1 control-label">State</label>
+                                <div class="col-sm-1">
+                                    <input type="text" class="form-control" name="state4" id="state4" placeholder="State">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Zip</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="zip4" id="zip4" placeholder="Zip">
+                                </div>
+                            </div>
+
+                            <div class="form-group  input_fields_wrap">
+                                <label class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="phone4" id="phone4" placeholder="Phone">
+                                </div>
+                            </div>
+                            </span>
+
+                            <?php
+                                $query = "SELECT * FROM clients ORDER BY client ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+
+                                $query1 = "SELECT * FROM client_locations ORDER BY clientID ASC";
+                                $result1 = mysqli_query($connection, $query1);
+                                confirm_query($result1);
+                            ?>
+
+                            <span id="five">
+                            <div class="form-group ">
+                                <label class="col-sm-2 control-label">Address</label>
+                                <div class="col-sm-5" >
+                                    <select class="form-control" name="address5"  id="address5">
+                                        <option value=""></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result1)) {
+                                                echo '<option value = "'.$c['locationID'].'">'.$c['address'].'</option>';
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
+                                    <!--<a href="#" id="show5">+Address</a>|--><a href="#" id="hide5">Hide</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 control-label">City</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="city5" id="city5" placeholder="City">
+                                </div>
+
+                                <label class="col-sm-1 control-label">State</label>
+                                <div class="col-sm-1">
+                                    <input type="text" class="form-control" name="state5" id="state5" placeholder="State">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Zip</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="zip5" id="zip5" placeholder="Zip">
+                                </div>
+                            </div>
+
+                            <div class="form-group  input_fields_wrap">
+                                <label class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="phone5" id="phone5" placeholder="Phone">
+                                </div>
+                            </div>
+                            </span>
+<!-- end  -->
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Web</label>
                                 <div class="col-sm-5">
