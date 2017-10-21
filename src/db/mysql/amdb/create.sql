@@ -52,7 +52,7 @@ insert into assessments values (8, "Wireless");
 
 -- users
 CREATE TABLE users (
-  userID INT(6) NOT NULL AUTO_INCREMENT,
+  userID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
   username VARCHAR(50) NOT NULL,
   email VARCHAR(50) NOT NULL,
@@ -73,7 +73,7 @@ INSERT INTO `users` (`userID`, `modified`, `username`, `email`, `password`, `sal
 
 -- employees
 CREATE TABLE employees (
-  employeeID INT(6) NOT NULL AUTO_INCREMENT,
+  employeeID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
   employee VARCHAR(50) NOT NULL,
   title VARCHAR(25),
@@ -85,7 +85,7 @@ CREATE TABLE employees (
 
 -- clients
 CREATE TABLE clients (
-  clientID INT(6) NOT NULL AUTO_INCREMENT,
+  clientID INT(11) NOT NULL AUTO_INCREMENT,
   client VARCHAR(50) NOT NULL,
   modified DATETIME NOT NULL,
   web VARCHAR(255),
@@ -93,8 +93,8 @@ CREATE TABLE clients (
 );
 
 CREATE TABLE client_locations (
-  locationID INT(6) NOT NULL AUTO_INCREMENT,
-  clientID INT(6) NOT NULL,
+  locationID INT(11) NOT NULL AUTO_INCREMENT,
+  clientID INT(11) NOT NULL,
   modified DATETIME NOT NULL,
   address VARCHAR(50),
   city VARCHAR(25),
@@ -110,7 +110,7 @@ ALTER TABLE client_locations ADD (CONSTRAINT fk_clocation01 FOREIGN KEY (clientI
 
 -- contacts
 CREATE TABLE client_contacts (
-  contactID INT(6) NOT NULL AUTO_INCREMENT,
+  contactID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
   contact VARCHAR(50) NOT NULL,
   title VARCHAR(50),
@@ -118,7 +118,7 @@ CREATE TABLE client_contacts (
   cell VARCHAR(12),
   email VARCHAR(50),
   notes TEXT,
-  clientID INT(6) NOT NULL,
+  clientID INT(11) NOT NULL,
   PRIMARY KEY (contactID)
 );
 
@@ -126,8 +126,8 @@ CREATE TABLE client_contacts (
 ALTER TABLE client_contacts ADD (CONSTRAINT fk_ccontact01 FOREIGN KEY (clientID) REFERENCES clients(clientID));
 
 CREATE TABLE client_account_managers (
-  clientID INT(6) NOT NULL,
-  employeeID INT(6) NOT NULL,
+  clientID INT(11) NOT NULL,
+  employeeID INT(11) NOT NULL,
   statusID INT(2) NOT NULL,
   modified DATETIME NOT NULL,
   PRIMARY KEY (clientID, employeeID)
@@ -140,11 +140,11 @@ ALTER TABLE client_account_managers ADD (CONSTRAINT fk_cam03 FOREIGN KEY (status
 
 -- projects
 CREATE TABLE projects (
-  projectID INT(6) NOT NULL AUTO_INCREMENT,
+  projectID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
   project VARCHAR(50) NOT NULL,
-  assessmentID INT(6) NOT NULL,
-  clientID INT(6) NOT NULL,
+  assessmentID INT(11) NOT NULL,
+  clientID INT(11) NOT NULL,
   kickoff VARCHAR(12),
   start VARCHAR(12),
   finish VARCHAR(12),
@@ -159,7 +159,7 @@ ALTER TABLE projects ADD (CONSTRAINT fk_client01 FOREIGN KEY (clientID) REFERENC
 ALTER TABLE projects ADD (CONSTRAINT fk_assessment01 FOREIGN KEY (assessmentID) REFERENCES assessments(assessmentID));
 
 CREATE TABLE project_status (
-  projectID INT(6) NOT NULL,
+  projectID INT(11) NOT NULL,
   statusID INT(3) NOT NULL,
   created TIMESTAMP NOT NULL,
   PRIMARY KEY (projectID, statusID)
@@ -168,9 +168,16 @@ CREATE TABLE project_status (
 ALTER TABLE project_status ADD (CONSTRAINT fk_ps01 FOREIGN KEY (statusID) REFERENCES status(statusID));
 ALTER TABLE project_status ADD (CONSTRAINT fk_ps02 FOREIGN KEY (projectID) REFERENCES projects(projectID));
 
+CREATE TABLE project_assessment (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  projectID INT(11) NOT NULL,
+  assessmentID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE project_employees (
-  projectID INT(6) NOT NULL,
-  employeeID INT(6) NOT NULL,
+  projectID INT(11) NOT NULL,
+  employeeID INT(11) NOT NULL,
   roleID INT(2) NOT NULL,
   statusID INT(2) NOT NULL,
   modified DATETIME NOT NULL,
@@ -184,8 +191,8 @@ ALTER TABLE project_employees ADD (CONSTRAINT fk_pe03 FOREIGN KEY (roleID) REFER
 ALTER TABLE project_employees ADD (CONSTRAINT fk_pe04 FOREIGN KEY (statusID) REFERENCES status(statusID));
 
 CREATE TABLE project_locations (
-  locationID INT(6) NOT NULL,
-  projectID INT(6) NOT NULL,
+  locationID INT(11) NOT NULL,
+  projectID INT(11) NOT NULL,
   address VARCHAR(50),
   city VARCHAR(25),
   state VARCHAR(2),
@@ -198,7 +205,7 @@ ALTER TABLE project_locations ADD (CONSTRAINT fk_plocation01 FOREIGN KEY (projec
 
 -- contacts
 CREATE TABLE contacts (
-  contactID INT(6) NOT NULL AUTO_INCREMENT,
+  contactID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
   contact VARCHAR(50) NOT NULL,
   title VARCHAR(50),
@@ -206,15 +213,15 @@ CREATE TABLE contacts (
   cell VARCHAR(12),
   email VARCHAR(50),
   notes TEXT,
-  clientID INT(6) NOT NULL,
-  projectID INT(6) NOT NULL,
+  clientID INT(11) NOT NULL,
+  projectID INT(11) NOT NULL,
   PRIMARY KEY (contactID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE project_location_contacts (
-  projectID INT(6) NOT NULL,
-  clientLocationID INT(6) NOT NULL,
-  contactID INT(6) NOT NULL,
+  projectID INT(11) NOT NULL,
+  clientLocationID INT(11) NOT NULL,
+  contactID INT(11) NOT NULL,
   PRIMARY KEY (projectID, clientLocationID, contactID)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -223,7 +230,7 @@ ALTER TABLE project_location_contacts ADD (CONSTRAINT fk_plc02 FOREIGN KEY (clie
 ALTER TABLE project_location_contacts ADD (CONSTRAINT fk_plc03 FOREIGN KEY (contactID) REFERENCES contacts(contactID));
 
 CREATE TABLE findings (
-  findingID INT(6) NOT NULL AUTO_INCREMENT,
+  findingID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
   type VARCHAR(25) NOT NULL,
   finding VARCHAR(50) NOT NULL,
@@ -235,11 +242,11 @@ CREATE TABLE findings (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE hostvulns (
-  hostvulnID INT(6) NOT NULL AUTO_INCREMENT,
+  hostvulnID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
   tool VARCHAR(16) NOT NULL,
   vulnerability VARCHAR(128) NOT NULL,
-  findingID INT(6) NOT NULL,
+  findingID INT(11) NOT NULL,
   cvss_base INT(2),
   internal VARCHAR(8),
   external VARCHAR(8),
@@ -252,7 +259,7 @@ CREATE TABLE hostvulns (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE scans (
-  scanID INT(6) NOT NULL AUTO_INCREMENT,
+  scanID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
   scan VARCHAR(50) NOT NULL,
   location VARCHAR(10),
@@ -263,13 +270,13 @@ CREATE TABLE scans (
   port INT(5),
   proof TEXT,
   date date,
-  projectID INT(6) NOT NULL,
+  projectID INT(11) NOT NULL,
   PRIMARY KEY (scanID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE vulnerabilities (
-  vulnerabilityID INT(6) NOT NULL AUTO_INCREMENT,
+  vulnerabilityID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
   vulnerability VARCHAR(100) NOT NULL,
   description TEXT,
@@ -279,12 +286,12 @@ CREATE TABLE vulnerabilities (
   cve VARCHAR(50),
   internal VARCHAR(10),
   external VARCHAR(10),
-  scanID INT(6) NOT NULL,
+  scanID INT(11) NOT NULL,
   PRIMARY KEY (vulnerabilityID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE webvulns (
-  webvulnID INT(6) NOT NULL AUTO_INCREMENT,
+  webvulnID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
   tool VARCHAR(16) NOT NULL,
   vulnerability VARCHAR(50) NOT NULL,
@@ -295,6 +302,5 @@ CREATE TABLE webvulns (
   see_also TEXT,
   PRIMARY KEY (webvulnID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 COMMIT;

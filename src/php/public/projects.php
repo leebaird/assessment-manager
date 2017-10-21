@@ -18,22 +18,12 @@
                     url:'ajaxHost.php',
                     data:'country_id='+countryID,
                     success:function(html){
-                        //var res = html.split(",");
-                        //alert(html);
                         document.getElementById('address').innerHTML = html;
                         document.getElementById('address1').innerHTML = html;
                         document.getElementById('address2').innerHTML = html;
                         document.getElementById('address3').innerHTML = html;
                         document.getElementById('address4').innerHTML = html;
                         document.getElementById('address5').innerHTML = html;
-
-                        //$('#web').val(res[0]);
-                        //$('#address').val(res[1]);
-                        //$('#city').val(res[2]);
-                        //$('#state').val(res[3]);
-                        //$('#zip').val(res[4]);
-                        //$('#phone').val(res[5]);
-                        //$('#accountmgr').val(res[6]);
                         }
                     });
                 }else{
@@ -43,7 +33,6 @@
 
         $('#address').on('change',function(){
             var countryID = $(this).val();
-            //alert(countryID);
             if(countryID){
                 $.ajax({
                     type:'POST',
@@ -51,16 +40,12 @@
                     data:'country_id='+countryID,
                     success:function(html){
                         var res = html.split(",");
-                        //alert(res);
-
                         $('#web').val(res[0]);
-                        //$('#address').val(res[1]);
                         $('#city').val(res[1]);
                         $('#state').val(res[2]);
                         $('#zip').val(res[3]);
                         $('#phone').val(res[4]);
-                        //$('#accountmgr').val(res[6]);
-                        }
+                    }
                     });
                 }else{
                     //$('#city').html('Sorry');
@@ -69,7 +54,6 @@
 
         $('#address1').on('change',function(){
             var countryID = $(this).val();
-            //alert(countryID);
             if(countryID){
                 $.ajax({
                     type:'POST',
@@ -77,16 +61,11 @@
                     data:'country_id='+countryID,
                     success:function(html){
                         var res = html.split(",");
-                        //alert(res);
-
-                        //$('#web').val(res[0]);
-                        //$('#address').val(res[1]);
                         $('#city1').val(res[1]);
                         $('#state1').val(res[2]);
                         $('#zip1').val(res[3]);
                         $('#phone1').val(res[4]);
-                        //$('#accountmgr').val(res[6]);
-                        }
+                    }
                     });
                 }else{
                     //$('#city').html('Sorry');
@@ -94,7 +73,6 @@
             });
         $('#address2').on('change',function(){
             var countryID = $(this).val();
-            //alert(countryID);
             if(countryID){
                 $.ajax({
                     type:'POST',
@@ -102,15 +80,11 @@
                     data:'country_id='+countryID,
                     success:function(html){
                         var res = html.split(",");
-                        //alert(res);
-                        //$('#web').val(res[0]);
-                        //$('#address').val(res[1]);
                         $('#city2').val(res[1]);
                         $('#state2').val(res[2]);
                         $('#zip2').val(res[3]);
                         $('#phone2').val(res[4]);
-                        //$('#accountmgr').val(res[6]);
-                        }
+                    }
                     });
                 }else{
                     //$('#city').html('Sorry');
@@ -119,7 +93,6 @@
 
         $('#address3').on('change',function(){
             var countryID = $(this).val();
-            //alert(countryID);
             if(countryID){
                 $.ajax({
                     type:'POST',
@@ -127,15 +100,11 @@
                     data:'country_id='+countryID,
                     success:function(html){
                         var res = html.split(",");
-                        //alert(res);
-                        //$('#web').val(res[0]);
-                        //$('#address').val(res[1]);
                         $('#city3').val(res[1]);
                         $('#state3').val(res[2]);
                         $('#zip3').val(res[3]);
                         $('#phone3').val(res[4]);
-                        //$('#accountmgr').val(res[6]);
-                        }
+                    }
                     });
                 }else{
                     //$('#city').html('Sorry');
@@ -144,7 +113,6 @@
 
         $('#address4').on('change',function(){
             var countryID = $(this).val();
-            //alert(countryID);
             if(countryID){
                 $.ajax({
                     type:'POST',
@@ -152,15 +120,11 @@
                     data:'country_id='+countryID,
                     success:function(html){
                         var res = html.split(",");
-                        //alert(res);
-                        //$('#web').val(res[0]);
-                        //$('#address').val(res[1]);
                         $('#city4').val(res[1]);
                         $('#state4').val(res[2]);
                         $('#zip4').val(res[3]);
                         $('#phone4').val(res[4]);
-                        //$('#accountmgr').val(res[6]);
-                        }
+                    }
                     });
                 }else{
                     //$('#city').html('Sorry');
@@ -169,7 +133,6 @@
 
         $('#address5').on('change',function(){
             var countryID = $(this).val();
-            //alert(countryID);
             if(countryID){
                 $.ajax({
                     type:'POST',
@@ -177,15 +140,11 @@
                     data:'country_id='+countryID,
                     success:function(html){
                         var res = html.split(",");
-                        //alert(res);
-                        //$('#web').val(res[0]);
-                        //$('#address').val(res[1]);
                         $('#city5').val(res[1]);
                         $('#state5').val(res[2]);
                         $('#zip5').val(res[3]);
                         $('#phone5').val(res[4]);
-                        //$('#accountmgr').val(res[6]);
-                        }
+                    }
                     });
                 }else{
                     //$('#city').html('Sorry');
@@ -269,33 +228,92 @@ if (isset($_POST['create'])) {
         <br> href="projects.php" title="projects"<br>
         <a class="btn btn-default" href="projects.php?create" input type="button">Back</a>
         <?php exit;
-    }include 'projects.php';
+    }
 
     $ass="";
-
-    $query = "INSERT INTO projects (modified, project, assessmentID, clientID, kickoff, start, finish, tech_qa, draft_delivery, final_delivery, notes) VALUES (now(), '$_POST[project]', '$_POST[assessmentID]', '$_POST[clientID]', '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[tech_qa]', '$_POST[draft_delivery]', '$_POST[final_delivery]', '$_POST[notes]')";
-include 'projects.php';
-include 'projects.php';
+    $clientID = $_POST['clientID'];
+    $query = "INSERT INTO projects (modified, project, assessmentID, clientID, kickoff, start, finish, tech_qa, draft_delivery, final_delivery, notes) VALUES (now(), '$_POST[project]', 1 ,$clientID , '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[tech_qa]', '$_POST[draft_delivery]', '$_POST[final_delivery]', '$_POST[notes]')";
 
     $result = mysqli_query($connection, $query);
     confirm_query($result);
+
+    $query = "select max(projectID) from projects";
+    $result = mysqli_query($connection, $query);
+    $projectid = mysqli_fetch_row($result);
+    $projectid =$projectid[0];
+    $ass = "";
+    foreach($_POST['assessment'] as $selected){
+    if(isset($_POST['assessment'])){
+        $ass = $ass.$selected." ";  }
+}
+    $query= "insert into project_assisment values('',$projectid,'$ass')";
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+
+    for($i=1;$i<=5;$i++){
+    $address=$_POST['address'.$i];
+    $city=$_POST['city'.$i];
+    $state=$_POST['state'.$i];
+    $zip=$_POST['zip'.$i];
+    $phone=$_POST['phone'.$i];
+
+    $query= "insert into project_locations values('',$projectid,'$address','$city','$state','$zip','$phone')";
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+    }
 }
 
 if (isset($_POST['update'])) {
     $ass="";
-    foreach ($_POST['assessment'] as $selected) {
-        $ass .= $selected.",";
-    }
 
     // UPDATE RECORD.
-    @$query = "UPDATE projects SET modified=now(), project='$_POST[project]', assessmentID='$_POST[assessmentID]', clientID='$_POST[clientID]', kickoff='$_POST[kickoff]', start='$_POST[start_date]', finish='$_POST[finish]', tech_qa='$_POST[tech_qa]', draft_delivery='$_POST[draft_delivery]', final_delivery='$_POST[final_delivery]', notes='$_POST[notes]' WHERE projectID=".intval($_POST['update']);
+    @$query = "UPDATE projects SET modified=now(), project='$_POST[project]', assessmentID=1, clientID='$_POST[clientID]', kickoff='$_POST[kickoff]', start='$_POST[start_date]', finish='$_POST[finish]', tech_qa='$_POST[tech_qa]', draft_delivery='$_POST[draft_delivery]', final_delivery='$_POST[final_delivery]', notes='$_POST[notes]' WHERE projectID=".intval($_POST['update']);
 
     $result = mysqli_query($connection, $query);
     confirm_query($result);
+
+    $query = "DELETE FROM project_assisment WHERE project_id=".intval($_POST['update']);
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+
+    foreach(@$_POST['assessment'] as $selected){
+    if(isset($_POST['assessment'])){
+$ass = $ass.$selected." ";  }
+}
+    $projectid=$_POST['update'];
+
+    $query= "insert into project_assisment values('',$projectid,'$ass')";
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+
+    $query = "DELETE FROM project_locations WHERE projectID=".intval($_POST['update']);
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+
+    for($i=1;$i<=5;$i++){
+    @$address=$_POST['address'.$i];
+    @$city=$_POST['city'.$i];
+    @$state=$_POST['state'.$i];
+    @$zip=$_POST['zip'.$i];
+    @$phone=$_POST['phone'.$i];
+
+    $query= "insert into project_locations values('',$projectid,'$address','$city','$state','$zip','$phone')";
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+    }
 }
 
 if (isset($_GET['delete'])) {
     // DELETE RECORD.
+
+    $query = "DELETE FROM project_locations WHERE projectID=".intval($_GET['delete']);
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+
+    $query = "DELETE FROM project_assisment WHERE project_id=".intval($_GET['delete']);
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+
     $query = "DELETE FROM projects WHERE projectID=".intval($_GET['delete']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
@@ -333,28 +351,28 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-9">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="External">External
+                                        <input type="checkbox" name="assessment[]" value="1">External
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="Internal">Internal
+                                        <input type="checkbox" name="assessment[]" value="2">Internal
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="Mobile">Mobile
+                                        <input type="checkbox" name="assessment[]" value="3">Mobile
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="Physical">Physical
+                                        <input type="checkbox" name="assessment[]" value="4">Physical
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="Social Eng">Social Eng
+                                        <input type="checkbox" name="assessment[]" value="5">Social Eng
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="War Dialing">War Dialing
+                                        <input type="checkbox" name="assessment[]" value="6">War Dialing
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="Web">Web
+                                        <input type="checkbox" name="assessment[]" value="7">Web
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="assessment[]" value="Wireless">Wireless
+                                        <input type="checkbox" name="assessment[]" value="8">Wireless
                                     </label>
                                 </div>
                             </div>
@@ -1144,17 +1162,19 @@ if (isset($_GET['create'])) {
     $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['read']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
-    $row = mysqli_fetch_assoc($result);
 
+    $row = mysqli_fetch_assoc($result);
     $query = "SELECT * FROM clients WHERE client=".intval(@$row['clientID']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
+
     $c = mysqli_fetch_assoc($result);
 
     // Find number of records.
     $query2 = "SELECT * FROM projects";
     $result2 = mysqli_query($connection, $query2);
     confirm_query($result2);
+
     $limit = mysqli_num_rows($result2);
 
     // Free result set.
@@ -1206,122 +1226,137 @@ if (isset($_GET['create'])) {
                                     <input type="text" class="form-control" name="current_status" value="<?php echo @$row['status'] ?>" readonly>
                                 </div>
                             </div>
-
                             <div class="form-group">
+
                             <?php
-                                $assisment = @explode(",", $row['assessment']); ?>
+                                $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['read']);
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+
+                                $row = mysqli_fetch_assoc($result);
+                                $query_assisment = "SELECT * FROM project_assisment WHERE project_id=".intval($_GET['read']);
+                                $result_assisment = mysqli_query($connection, $query_assisment);
+                                confirm_query($result_assisment);
+
+                                $row_assisment = mysqli_fetch_assoc($result_assisment);
+                                $assisment = @explode(" ", $row_assisment['assesment_id']); ?>
 
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-9">
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("External", @$assisment)) {
+                                    <?php if (in_array(1, @$assisment)
+                                    ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="External" checked="checked" disabled="disabled">External
+                                        value="1" checked="checked">External
                                     <?php
                                 } else {
                                     ?>
-                                         <input type="checkbox" name="assessment[]"
-                                         value="External" disabled="disabled">External
+                                        <input type="checkbox" name="assessment[]"
+                                        value="1" >External
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("Internal", @$assisment)) {
+                                    <?php if (in_array(2, @$assisment)
+                                    ) {
                                     ?>
-
                                         <input type="checkbox" name="assessment[]"
-                                        value="Internal" checked="checked" disabled="disabled">Internal
+                                        value="2" checked="checked">Internal
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Internal" disabled="disabled">Internal
+                                        value="2" >Internal
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("Mobile", @$assisment)) {
+                                    <?php if (in_array(3, @$assisment)
+                                    ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Mobile" checked="checked" disabled="disabled">Mobile
-                                        <?php
+                                        value="3" checked="checked">Mobile
+                                    <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Mobile" disabled="disabled">Mobile
+                                        value="3" >Mobile
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("Physical", @$assisment)) {
+                                    <?php if (in_array(4, @$assisment)
+                                    ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Physical" checked="checked" disabled="disabled">Physical
-                                        <?php
+                                        value="4" checked="checked">Physical
+                                    <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Physical" disabled="disabled">Physical
+                                        value="4">Physical
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("Social Eng", @$assisment)) {
+                                    <?php if (in_array(5, @$assisment)
+                                    ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Social Eng" checked="checked" disabled="disabled">Social Eng
+                                        value="5" checked="checked">Social Eng
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Social Eng" disabled="disabled">Social Eng
-                                        <?php
-                                } ?>
-                                    </label>
-
-                                    <label class="checkbox-inline">
-                                    <?php if (in_array("War Dialing", @$assisment)) {
-                                    ?>
-                                        <input type="checkbox" name="assessment[]"
-                                        value="War Dialing" checked="checked" disabled="disabled">War Dialing
-                                    <?php
-                                } else {
-                                    ?>
-                                        <input type="checkbox" name="assessment[]"
-                                        value="War Dialing" disabled="disabled">War Dialing
+                                        value="5">Social Eng
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("Web", @$assisment)) {
+                                    <?php if (in_array(6, @$assisment)) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Web" checked="checked" disabled="disabled">Web
+                                        value="6" checked="checked">War Dialing
+                                    <?php
+                                } else {
+                                    ?>
+                                        <input type="checkbox" name="assessment[]"
+                                        value="6" >War Dialing
+                                    <?php
+                                } ?>
+                                    </label>
+
+                                    <label class="checkbox-inline">
+                                    <?php if (in_array(7, @$assisment)
+                                    ) {
+                                    ?>
+                                        <input type="checkbox" name="assessment[]" value="7" checked="checked">Web
                                     <?php
                                 } else {
                                     ?>
                                     <input type="checkbox" name="assessment[]"
-                                    value="Web" disabled="disabled">Web
+                                    value="7" >Web
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("Wireless", @$assisment)) {
+                                    <?php if (in_array(8, @$assisment)
+                                    ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Wireless" checked="checked" disabled="disabled">Wireless
+                                        value="8" checked="checked">Wireless
                                     <?php
                                 } else {
                                     ?>
                                     <input type="checkbox" name="assessment[]"
-                                        value="Wireless" disabled="disabled">Wireless
+                                        value="8" >Wireless
                                     <?php
                                 } ?>
                                     </label>
@@ -1329,7 +1364,7 @@ if (isset($_GET['create'])) {
                             </div>
 
                         <?php
-                            $query1 = "SELECT * FROM clients where clientID=".$row['client'];
+                            $query1 = "SELECT * FROM clients where clientID=".$row['clientID'];
                             $result1 = mysqli_query($connection, $query1);
                             $row1 = mysqli_fetch_array($result1); ?>
 
@@ -1341,104 +1376,67 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
 
+                            <?php
+                                $query1 = "SELECT * FROM client_locations where clientID=".$row['clientID'];
+                                $result1 = mysqli_query($connection, $query1);
+                                $i=0;
+                                while($row1 = mysqli_fetch_array($result1)){
+                                $query11 = "SELECT * FROM client_locations ORDER BY clientID ASC";
+                                $result11 = mysqli_query($connection, $query11); ?>
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
-                                    <div class="col-sm-4">
-                                    <textarea class="form-control" name="address" rows="2" readonly><?php echo $row['address'] ?></textarea>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="address<?php if($i>0) print $i; ?>" id="address<?php  if($i>0) print $i; ?>" disabled>
+
+                                        <option value="<?php echo $row1['clientID'] ?>"><?php echo $row1['address'] ?></option>
+                                        <?php
+                                            while ($c = mysqli_fetch_assoc($result11)) {
+                                                ?>
+                                        <option value = '<?php print $c["clientID"]; ?>' ><?php print $c["address"]; ?></option>
+                                        <?php
+                                            }
+
+                                            // Release returned data.
+                                            mysqli_free_result($result); ?>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <label class="col-sm-2 control-label">City</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="city" value="<?php echo $row['city'] ?>" readonly>
+                                    <input type="text" class="form-control" name="city<?php  if($i!=0) print $i; ?>" value="<?php echo $row1['city'] ?>" id="city<?php  if($i!=0) print $i; ?>" disabled>
                                 </div>
 
-                                <label class="col-sm-1 control-label">State</label>
+                                <label class="col-sm-2 control-label">State</label>
                                 <div class="col-sm-1">
-                                    <input type="text" class="form-control" name="state" value="<?php echo $row['state'] ?>" readonly>
+                                    <input type="text" class="form-control" name="state<?php  if($i!=0) print $i; ?>" value="<?php echo $row1['state'] ?>" id="state<?php  if($i!=0) print $i; ?>" disabled>
                                 </div>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Zip</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="zip" value="<?php echo @$row['zip'] ?>" readonly>
+                                <div class="col-sm-1">
+                                    <input type="text" class="form-control" name="zip<?php  if($i!=0) print $i; ?>" value="<?php echo @$row1['zip'] ?>" id="zip<?php  if($i!=0) print $i; ?>" disabled>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Phone</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="phone" value="<?php echo @$row['phone'] ?>" readonly>
+                                    <input type="text" class="form-control" name="phone<?php  if($i!=0) print $i; ?>" value="<?php echo @$row1['phone'] ?>" id="phone<?php  if($i!=0) print $i; ?>" disabled>
                                 </div>
                             </div>
+
+<?php $i++;
+
+} ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Web</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" name="web" value="<?php echo @$row['web'] ?>" readonly>
-                                </div>
-                            </div>
-
-                            <?php
-                                $query11 = "SELECT * FROM employees where employeeID=".$row['projectmgr'];
-                                $result11 = mysqli_query($connection, $query11);
-                                $row11 = @mysqli_fetch_array($result11); 
-                            ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Project Mgr</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="projectmgr" value="<?php echo $row11['employee'] ?>" readonly>
-                                </div>
-                            </div>
-
-                            <?php
-                                $query12 = "SELECT * FROM employees where employeeID=".$row['consultant1'];
-                                $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Consultant 1</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="consultant1" value="<?php echo $row12['employee'] ?>" readonly>
-                                </div>
-                            </div>
-
-                            <?php
-                                $query12 = "SELECT * FROM employees where employeeID=".$row['consultant2'];
-                                $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Consultant 2</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="consultant2" value="<?php echo $row12['employee'] ?>" readonly>
-                                </div>
-                            </div>
-
-                            <?php
-                                $query12 = "SELECT * FROM employees where employeeID=".$row['consultant3'];
-                                $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12); ?>
-
-                            <div class="form-group">
-                               <label class="col-sm-2 control-label">Consultant 3</label>
-                               <div class="col-sm-3">
-                                   <input type="text" class="form-control" name="consultant3" value="<?php echo $row12['employee'] ?>" readonly>
-                               </div>
-                            </div>
-
-                            <?php
-                                $query12 = "SELECT * FROM employees where employeeID=".$row['consultant4'];
-                                $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Consultant 4</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="consultant4" value="<?php echo $row12['employee'] ?>" readonly>
                                 </div>
                             </div>
 
@@ -1692,7 +1690,14 @@ if (isset($_GET['create'])) {
     $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
-    $row = mysqli_fetch_assoc($result); ?>
+
+    $row = mysqli_fetch_assoc($result);
+    $query_assisment = "SELECT * FROM project_assisment WHERE project_id=".intval($_GET['update']);
+    $result_assisment = mysqli_query($connection, $query_assisment);
+    confirm_query($result_assisment);
+
+    $row_assisment = mysqli_fetch_assoc($result_assisment);
+    ?>
 
     <div class="container">
         <div class="panel panel-primary">
@@ -1727,7 +1732,7 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Status</label>
                                 <div class="col-sm-2">
                                     <select class="form-control" name="current_status"  id="current_status">
-                                        <option value="<?php echo $row['status']; ?>"><?php echo $row['status']; ?></option>
+                                        <option value="<?php //echo $row['status']; ?>"><?php echo $row['status']; ?></option>
                                         <option value="Contract"<?php echo($row['status'] == 'Contract' ? " selected" : "")?>>Contract</option>
                                         <option value="Scoping"<?php echo($row['status'] == 'Scoping' ? " selected" : "")?>>Scoping</option>
                                         <option value="In Progress"<?php echo($row['status'] == 'In Progress' ? " selected" : "")?>>In Progress</option>
@@ -1742,124 +1747,124 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
 
                             <?php
-                                $assisment = @explode(",", $row['assessment']); ?>
+                                $assisment = @explode(" ", $row_assisment['assesment_id']); ?>
 
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-9">
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("External", @$assisment)
+                                    <?php if (in_array(1, @$assisment)
                                     ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="External" checked="checked">External
+                                        value="1" checked="checked">External
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="External" >External
+                                        value="1" >External
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("Internal", @$assisment)
+                                    <?php if (in_array(2, @$assisment)
                                     ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Internal" checked="checked">Internal
+                                        value="2" checked="checked">Internal
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Internal" >Internal
+                                        value="2" >Internal
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("Mobile", @$assisment)
+                                    <?php if (in_array(3, @$assisment)
                                     ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Mobile" checked="checked">Mobile
+                                        value="3" checked="checked">Mobile
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Mobile" >Mobile
+                                        value="3" >Mobile
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("Physical", @$assisment)
+                                    <?php if (in_array(4, @$assisment)
                                     ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Physical" checked="checked">Physical
+                                        value="4" checked="checked">Physical
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Physical">Physical
+                                        value="4">Physical
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("Social Eng", @$assisment)
+                                    <?php if (in_array(5, @$assisment)
                                     ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Social Eng" checked="checked">Social Eng
+                                        value="5" checked="checked">Social Eng
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Social Eng">Social Eng
+                                        value="5">Social Eng
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("War Dialing", @$assisment)) {
+                                    <?php if (in_array(6, @$assisment)) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="War Dialing" checked="checked">War Dialing
+                                        value="6" checked="checked">War Dialing
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="War Dialing" >War Dialing
+                                        value="6" >War Dialing
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("Web", @$assisment)
+                                    <?php if (in_array(7, @$assisment)
                                     ) {
                                     ?>
-                                        <input type="checkbox" name="assessment[]" value="Web" checked="checked">Web
+                                        <input type="checkbox" name="assessment[]" value="7" checked="checked">Web
                                     <?php
                                 } else {
                                     ?>
                                     <input type="checkbox" name="assessment[]"
-                                    value="Web" >Web
+                                    value="7" >Web
                                     <?php
                                 } ?>
                                     </label>
 
                                     <label class="checkbox-inline">
-                                    <?php if (in_array("Wireless", @$assisment)
+                                    <?php if (in_array(8, @$assisment)
                                     ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="Wireless" checked="checked">Wireless
+                                        value="8" checked="checked">Wireless
                                     <?php
                                 } else {
                                     ?>
                                     <input type="checkbox" name="assessment[]"
-                                        value="Wireless" >Wireless
+                                        value="8" >Wireless
                                     <?php
                                 } ?>
                                     </label>
@@ -1870,16 +1875,17 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Client</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="clientID" id="clientID">
-                            <?php
-                                $query1 = "SELECT * FROM clients where clientID=".$row['client'];
-                                $result1 = mysqli_query($connection, $query1);
-                                $row1 = mysqli_fetch_array($result1);
-                                $query11 = "SELECT * FROM clients ORDER BY client ASC";
-                                $result11 = mysqli_query($connection, $query11); ?>
-                                        <option value="<?php echo $row1['clientID'] ?>"><?php echo $row1['client'] ?></option>
+                                        <?php
+                                            $query1 = "SELECT * FROM clients where clientID=".$row['clientID'];
+                                            $result1 = mysqli_query($connection, $query1);
+                                            $row11 = mysqli_fetch_array($result1);
+                                            $query11 = "SELECT * FROM clients ORDER BY client ASC";
+                                            $result11 = mysqli_query($connection, $query11); ?>
+
+                                        <option value="<?php echo $row11['clientID'] ?>"><?php echo $row11['client'] ?></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result11)) {
-                                                ?>
+                                        ?>
                                         <option value = '<?php print $c["clientID"]; ?>' ><?php print $c["client"]; ?></option>
                                         <?php
                                             }
@@ -1890,16 +1896,19 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
 
+                            <?php
+                                $query1 = "SELECT * FROM client_locations where clientID=".$row['clientID'];
+                                $result1 = mysqli_query($connection, $query1);
+                                $i=0;
+                                while($row1 = mysqli_fetch_array($result1)){
+                                $query11 = "SELECT * FROM client_locations ORDER BY clientID ASC";
+                                $result11 = mysqli_query($connection, $query11); ?>
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
                                 <div class="col-sm-4">
-                                    <select class="form-control" name="clientID" id="clientID">
-                            <?php
-                                $query1 = "SELECT * FROM clients where clientID=".$row['client'];
-                                $result1 = mysqli_query($connection, $query1);
-                                $row1 = mysqli_fetch_array($result1);
-                                $query11 = "SELECT * FROM clients ORDER BY client ASC";
-                                $result11 = mysqli_query($connection, $query11); ?>
+                                    <select class="form-control" name="address<?php if($i>0) print $i; ?>" id="address<?php  if($i>0) print $i; ?>">
+
                                         <option value="<?php echo $row1['clientID'] ?>"><?php echo $row1['address'] ?></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result11)) {
@@ -1917,148 +1926,37 @@ if (isset($_GET['create'])) {
                             <div class="row">
                                 <label class="col-sm-2 control-label">City</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="city" value="<?php echo $row['city'] ?>" id="city" >
+                                    <input type="text" class="form-control" name="city<?php  if($i!=0) print $i; ?>" value="<?php echo $row1['city'] ?>" id="city<?php  if($i!=0) print $i; ?>" >
                                 </div>
 
                                 <label class="col-sm-2 control-label">State</label>
                                 <div class="col-sm-1">
-                                    <input type="text" class="form-control" name="state" value="<?php echo $row['state'] ?>" id="state">
+                                    <input type="text" class="form-control" name="state<?php  if($i!=0) print $i; ?>" value="<?php echo $row1['state'] ?>" id="state<?php  if($i!=0) print $i; ?>">
                                 </div>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label class="col-sm-1 control-label">Zip</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="zip" value="<?php echo @$row['zip'] ?>" id="zip" >
+                                <label class="col-sm-2 control-label">Zip</label>
+                                <div class="col-sm-1">
+                                    <input type="text" class="form-control" name="zip<?php  if($i!=0) print $i; ?>" value="<?php echo @$row1['zip'] ?>" id="zip<?php  if($i!=0) print $i; ?>" >
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Phone</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="phone" value="<?php echo @$row['phone'] ?>" id="phone" >
+                                    <input type="text" class="form-control" name="phone<?php  if($i!=0) print $i; ?>" value="<?php echo @$row1['phone'] ?>" id="phone<?php  if($i!=0) print $i; ?>" >
                                 </div>
                             </div>
+
+<?php $i++;
+
+} ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Web</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="web" value="<?php echo @$row['web'] ?>" id="web">
-                                </div>
-                            </div>
-
-                            <?php
-                                $query = "SELECT * FROM employees WHERE projectmgr='Yes' ORDER BY employee ASC";
-                                $result = mysqli_query($connection, $query); ?>
-
-                            <?php
-                                $query12 = "SELECT * FROM employees where employeeID=".$row['projectmgr'];
-                                $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Project Mgr</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="projectmgr" id="projectmgr">
-                                        <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
-                                        <?php
-                                            while ($c1 = @mysqli_fetch_array($resulty)) {
-                                                ?>
-                                            <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
-                                        <?php
-                                            }
-
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <?php
-                                $query12 = "SELECT * FROM employees where employeeID=".$row['consultant1'];
-                                $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Consultant 1</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="consultant1" id="consultant1">
-                                        <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
-                                        <?php
-                                            while ($c1 = @mysqli_fetch_array($resulty)) {
-                                                ?>
-                                                <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
-                                        <?php
-                                            }
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <?php
-                                $query12 = "SELECT * FROM employees where employeeID=".$row['consultant2'];
-                                $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Consultant 2</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="consultant2" id="consultant2">
-                                        <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
-                                        <?php
-                                            while ($c1 = @mysqli_fetch_array($resulty)) {
-                                                ?>
-                                            <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
-                                        <?php
-                                            }
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <?php
-                                $query12 = "SELECT * FROM employees where employeeID=".$row['consultant3'];
-                                $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Consultant 3</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="consultant3" id="consultant3">
-                                        <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
-                                        <?php
-                                            while ($c1 = @mysqli_fetch_array($resulty)) {
-                                                ?>
-                                            <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
-                                        <?php
-                                            }
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <?php
-                                $query12 = "SELECT * FROM employees where employeeID=".$row['consultant4'];
-                                $result12 = mysqli_query($connection, $query12);
-                                $row12 = @mysqli_fetch_array($result12); ?>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Consultant 4</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="consultant4" id="consultant4">
-                                        <option value="<?php echo @$row12['employeeID'] ?>"><?php echo @$row12['employee'] ?></option>
-                                        <?php
-                                            while ($c1 = @mysqli_fetch_array($resulty)) {
-                                                ?>
-                                            <option value = "<?php print $c1["employeeID"]; ?>"><?php print $c1["employee"]; ?></option>
-                                        <?php
-                                            }
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
+                                    <input type="text" class="form-control" name="web<?php print $i; ?>" value="<?php echo @$row11['web'] ?>" id="web<?php print $i; ?>">
                                 </div>
                             </div>
 
@@ -2347,7 +2245,7 @@ if (isset($_GET['create'])) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $time = strtotime($row['modified']);
                 $myDateFormat = date("m-d-y g:i A", $time);
-                $query = "SELECT * FROM clients where clientID = ".intval($row['client']);
+                $query = "SELECT * FROM clients where clientID = ".@$row['clientID'];
                 $client = mysqli_query($connection, $query);
                 confirm_query($client);
                 $client = mysqli_fetch_assoc($client);
@@ -2359,7 +2257,7 @@ if (isset($_GET['create'])) {
                     <td width="350">'.$row["project"].'</td>
                     <td width="300">'.$client['client'].'</td>
                     <td width="100">'.$row["start"].'</td>
-                    <td width="100">'.$row["status"].'</td>
+                    <td width="100">'.@$row["status"].'</td>
                     <td width="150">'.$myDateFormat.'</td>
                     <td width="50">'.'<a class="btn btn-danger" href="projects.php?delete='.$row['projectID'].'"
                         onclick="return confirm(\'Are you sure you want to delete this record?\');"><span class="glyphicon glyphicon-trash"></span></a>'.'</td>
