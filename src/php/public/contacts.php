@@ -395,7 +395,6 @@ if (isset($_GET['create'])) {
     <br>
 
     <?php
-        // Perform db query.
         $query = "SELECT * FROM contacts LEFT JOIN clients ON contacts.clientid=clients.clientid ORDER BY contact ASC";
         $result = mysqli_query($connection, $query);
         confirm_query($result); ?>

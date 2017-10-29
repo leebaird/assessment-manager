@@ -8,6 +8,7 @@ CREATE TABLE user_roles (
 insert into user_roles values (1, "admin");
 insert into user_roles values (2, "user");
 
+
 CREATE TABLE roles (
   roleID INT(2) NOT NULL,
   role VARCHAR(32) NOT NULL,
@@ -19,6 +20,7 @@ insert into roles values (2, "Program Manager");
 insert into roles values (3, "Project Manager");
 insert into roles values (4, "Tech Lead");
 insert into roles values (5, "Engineer");
+
 
 CREATE TABLE status (
   statusID INT(2) NOT NULL,
@@ -35,6 +37,7 @@ insert into status values (6, "Review");
 insert into status values (7, "Delivered");
 insert into status values (8, "Complete");
 
+
 CREATE TABLE assessments (
   assessmentID INT(2) NOT NULL,
   assessment VARCHAR(32) NOT NULL,
@@ -50,7 +53,7 @@ insert into assessments values (6, "War Dail");
 insert into assessments values (7, "Web");
 insert into assessments values (8, "Wireless");
 
--- users
+
 CREATE TABLE users (
   userID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
@@ -71,7 +74,7 @@ ALTER TABLE users ADD (CONSTRAINT fk_urole01 FOREIGN KEY (userRoleID) REFERENCES
 INSERT INTO `users` (`userID`, `modified`, `username`, `email`, `password`, `salt`, `userRoleID`, `activated`, `approved`) VALUES
 (1, '2017-09-18 19:11:15', 'admin', 'admin@acme.com', 'f542eebb272ff24784ddc8f53f1a930532cdfbc1df30e5e6ffbd7e4c01925ee1', '2946e24c29c4368d', 1, 1, 1);
 
--- employees
+
 CREATE TABLE employees (
   employeeID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
@@ -83,7 +86,7 @@ CREATE TABLE employees (
   PRIMARY KEY (employeeID)
 );
 
--- clients
+
 CREATE TABLE clients (
   clientID INT(11) NOT NULL AUTO_INCREMENT,
   client VARCHAR(50) NOT NULL,
@@ -91,6 +94,7 @@ CREATE TABLE clients (
   web VARCHAR(255),
   PRIMARY KEY (clientID)
 );
+
 
 CREATE TABLE client_locations (
   locationID INT(11) NOT NULL AUTO_INCREMENT,
@@ -108,7 +112,7 @@ CREATE TABLE client_locations (
 -- FK constraints
 ALTER TABLE client_locations ADD (CONSTRAINT fk_clocation01 FOREIGN KEY (clientID) REFERENCES clients(clientID));
 
--- contacts
+
 CREATE TABLE client_contacts (
   contactID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
@@ -125,6 +129,7 @@ CREATE TABLE client_contacts (
 -- FK constraints
 ALTER TABLE client_contacts ADD (CONSTRAINT fk_ccontact01 FOREIGN KEY (clientID) REFERENCES clients(clientID));
 
+
 CREATE TABLE client_account_managers (
   clientID INT(11) NOT NULL,
   employeeID INT(11) NOT NULL,
@@ -138,25 +143,29 @@ ALTER TABLE client_account_managers ADD (CONSTRAINT fk_cam01 FOREIGN KEY (client
 ALTER TABLE client_account_managers ADD (CONSTRAINT fk_cam02 FOREIGN KEY (employeeID) REFERENCES employees(employeeID));
 ALTER TABLE client_account_managers ADD (CONSTRAINT fk_cam03 FOREIGN KEY (statusID) REFERENCES status(statusID));
 
--- projects
+
 CREATE TABLE projects (
-  projectID INT(11) NOT NULL AUTO_INCREMENT,
+  projectID INT(11) NOT NULL,
   modified DATETIME NOT NULL,
   project VARCHAR(50) NOT NULL,
   assessmentID INT(11) NOT NULL,
   clientID INT(11) NOT NULL,
-  kickoff VARCHAR(12),
-  start VARCHAR(12),
-  finish VARCHAR(12),
-  tech_qa VARCHAR(12),
-  draft_delivery VARCHAR(12),
-  final_delivery VARCHAR(12),
-  notes TEXT,
-  PRIMARY KEY (projectID)
+  kickoff VARCHAR(12) DEFAULT NULL,
+  start VARCHAR(12) DEFAULT NULL,
+  finish VARCHAR(12) DEFAULT NULL,
+  tech_qa VARCHAR(12) DEFAULT NULL,
+  draft_delivery VARCHAR(12) DEFAULT NULL,
+  final_delivery VARCHAR(12) DEFAULT NULL,
+  notes TEXT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE projects ADD (CONSTRAINT fk_client01 FOREIGN KEY (clientID) REFERENCES clients(clientID));
-ALTER TABLE projects ADD (CONSTRAINT fk_assessment01 FOREIGN KEY (assessmentID) REFERENCES assessments(assessmentID));
+ALTER TABLE projects ADD PRIMARY KEY (projectID), ADD KEY fk_client01 (clientID), ADD KEY fk_assessment01 (assessmentID);
+ALTER TABLE projects MODIFY projectID INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+ALTER TABLE projects
+  ADD CONSTRAINT fk_assessment01 FOREIGN KEY (assessmentID) REFERENCES assessments (assessmentID),
+  ADD CONSTRAINT fk_client01 FOREIGN KEY (clientID) REFERENCES clients (clientID);
+
 
 CREATE TABLE project_status (
   projectID INT(11) NOT NULL,
@@ -168,12 +177,16 @@ CREATE TABLE project_status (
 ALTER TABLE project_status ADD (CONSTRAINT fk_ps01 FOREIGN KEY (statusID) REFERENCES status(statusID));
 ALTER TABLE project_status ADD (CONSTRAINT fk_ps02 FOREIGN KEY (projectID) REFERENCES projects(projectID));
 
+
 CREATE TABLE project_assessment (
-  id INT(11) NOT NULL AUTO_INCREMENT,
+  id INT(11) NOT NULL,
   projectID INT(11) NOT NULL,
-  assessmentID VARCHAR(255) NOT NULL,
-  PRIMARY KEY (id)
+  assessmentID VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE project_assessment ADD PRIMARY KEY (id);
+ALTER TABLE project_assessment MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;COMMIT;
+
 
 CREATE TABLE project_employees (
   projectID INT(11) NOT NULL,
@@ -190,20 +203,22 @@ ALTER TABLE project_employees ADD (CONSTRAINT fk_pe02 FOREIGN KEY (employeeID) R
 ALTER TABLE project_employees ADD (CONSTRAINT fk_pe03 FOREIGN KEY (roleID) REFERENCES roles(roleID));
 ALTER TABLE project_employees ADD (CONSTRAINT fk_pe04 FOREIGN KEY (statusID) REFERENCES status(statusID));
 
+
 CREATE TABLE project_locations (
-  locationID INT(11) NOT NULL,
-  projectID INT(11) NOT NULL,
-  address VARCHAR(50),
-  city VARCHAR(25),
-  state VARCHAR(2),
-  zip VARCHAR(10),
-  phone VARCHAR(16),
-  PRIMARY KEY (locationID)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  locationID int(11) NOT NULL,
+  projectID int(11) NOT NULL,
+  address varchar(50) DEFAULT NULL,
+  city varchar(25) DEFAULT NULL,
+  state varchar(2) DEFAULT NULL,
+  zip varchar(10) DEFAULT NULL,
+  phone varchar(16) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE project_locations ADD (CONSTRAINT fk_plocation01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
+ALTER TABLE project_locations ADD PRIMARY KEY (locationID), ADD KEY fk_plocation01 (projectID);
+ALTER TABLE project_locations MODIFY locationID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+ALTER TABLE project_locations ADD CONSTRAINT fk_plocation01 FOREIGN KEY (projectID) REFERENCES projects (projectID);
 
--- contacts
+
 CREATE TABLE contacts (
   contactID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
@@ -218,6 +233,7 @@ CREATE TABLE contacts (
   PRIMARY KEY (contactID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 CREATE TABLE project_location_contacts (
   projectID INT(11) NOT NULL,
   clientLocationID INT(11) NOT NULL,
@@ -228,6 +244,7 @@ CREATE TABLE project_location_contacts (
 ALTER TABLE project_location_contacts ADD (CONSTRAINT fk_plc01 FOREIGN KEY (projectID) REFERENCES projects(projectID));
 ALTER TABLE project_location_contacts ADD (CONSTRAINT fk_plc02 FOREIGN KEY (clientLocationID) REFERENCES client_locations(locationID));
 ALTER TABLE project_location_contacts ADD (CONSTRAINT fk_plc03 FOREIGN KEY (contactID) REFERENCES contacts(contactID));
+
 
 CREATE TABLE findings (
   findingID INT(11) NOT NULL AUTO_INCREMENT,
@@ -240,6 +257,7 @@ CREATE TABLE findings (
   see_also TEXT,
   PRIMARY KEY (findingID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE hostvulns (
   hostvulnID INT(11) NOT NULL AUTO_INCREMENT,
@@ -257,6 +275,7 @@ CREATE TABLE hostvulns (
   updated VARCHAR(12),
   PRIMARY KEY (hostvulnID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE scans (
   scanID INT(11) NOT NULL AUTO_INCREMENT,
@@ -290,6 +309,7 @@ CREATE TABLE vulnerabilities (
   PRIMARY KEY (vulnerabilityID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 CREATE TABLE webvulns (
   webvulnID INT(11) NOT NULL AUTO_INCREMENT,
   modified DATETIME NOT NULL,
@@ -302,5 +322,6 @@ CREATE TABLE webvulns (
   see_also TEXT,
   PRIMARY KEY (webvulnID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 COMMIT;

@@ -306,7 +306,6 @@ if (isset($_GET['create'])) {
     <br>
 
     <?php
-        // Perform db query.
         $query = "SELECT * FROM findings ORDER BY type, finding ASC";
         $result = mysqli_query($connection, $query);
         confirm_query($result); ?>

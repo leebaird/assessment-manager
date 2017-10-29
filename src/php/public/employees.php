@@ -278,7 +278,6 @@ if (isset($_GET['create'])) {
     <br>
 
     <?php
-        // Perform db query.
         $query = "SELECT * FROM employees ORDER BY employee ASC";
         $result = mysqli_query($connection, $query);
         confirm_query($result); ?>

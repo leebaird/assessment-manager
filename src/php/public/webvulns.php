@@ -458,7 +458,6 @@ if (isset($_GET['create'])) {
 
         $left_rec = $rec_count - ($page * $rec_limit);
 
-        // Perform db query.
         $query = "SELECT * FROM webvulns ORDER BY tool, vulnerability ASC LIMIT $offset, $rec_limit";
         $hostset = mysqli_query($connection, $query);
         confirm_query($result); ?>

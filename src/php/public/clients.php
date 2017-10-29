@@ -115,7 +115,8 @@ if (isset($_POST['address_more'])) {
         </div>
     </div>
 </div>
-        <?php exit;
+
+    <?php exit;
     }
 
     $query_max_id = "select clientID from clients where client='$_POST[client]'";
@@ -129,27 +130,22 @@ if (isset($_POST['address_more'])) {
 }
 
 if (isset($_POST['update'])) {
-    for($i=1;$i<=15;$i++){
-    $address = @$_POST['address'.$i];
-    $city = @$_POST['city'.$i];
-    $state = @$_POST['state'.$i];
-    $zip = @$_POST['zip'.$i];
-    $phone = @$_POST['phone'.$i];
-    $notes = @$_POST['notes'.$i];
-    $locationID = @$_POST['locationID'.$i];
-    $notes = @$_POST['notes'.$i];
-
-    if (isset($address)) {
-        $query_add = "UPDATE client_locations SET modified=now(), address='$address', city='$city', state='$state', zip='$zip', phone='$phone', notes='$notes' WHERE locationID=".$locationID;
-        $result_add = mysqli_query($connection, $query_add);
-        confirm_query($result_add);
-    }
-}
+    $address = @$_POST['address'];
+    $city = @$_POST['city'];
+    $state = @$_POST['state'];
+    $zip = @$_POST['zip'];
+    $phone = @$_POST['phone'];
+    $notes = @$_POST['notes'];
+    $locationID = @$_POST['locationID'];
+    $notes = @$_POST['notes'];
 
     // UPDATE RECORD.
     $query = "UPDATE clients SET modified=now(), client='$_POST[client]',  web='$_POST[web]' WHERE clientID=".intval($_POST['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
+    $query_add = "UPDATE client_locations SET modified=now(), address='$address', city='$city', state='$state', zip='$zip', phone='$phone', notes='$notes' WHERE locationID=".$locationID;
+    $result_add = mysqli_query($connection, $query_add);
+    confirm_query($result_add);
 }
 
 if (isset($_GET['delete'])) {
@@ -164,7 +160,7 @@ if (isset($_GET['delete'])) {
     $total = mysqli_num_rows($result);
     confirm_query($result);
 
-    if($total==1){
+    if($total<=1){
     $query = "DELETE FROM clients WHERE clientID=".intval($_GET['delete']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
@@ -436,46 +432,46 @@ if (isset($_GET['create'])) {
                     while($row_more = mysqli_fetch_assoc($result_more)){
                 ?>
 
-                <input type="hidden" class="form-control" name="locationID<?php echo $row_more['locationID'] ?>" 
-                value="<?php echo $row_more['locationID'] ?>" >
+                <input type="hidden" class="form-control" name="locationID"
+                value="<?php echo $_GET['id'] ?>" >
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Address</label>
                     <div class="col-sm-7">
-                        <textarea class="form-control" name="address<?php echo $row_more['locationID'] ?>" rows="2" ><?php echo $row_more['address'] ?></textarea>
+                        <textarea class="form-control" name="address" rows="2" ><?php echo $row_more['address'] ?></textarea>
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="col-sm-3 control-label">City</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" name="city<?php echo $row_more['locationID'] ?>" value="<?php echo $row_more['city'] ?>" >
+                        <input type="text" class="form-control" name="city" value="<?php echo $row_more['city'] ?>" >
                     </div>
 
                     <label class="col-sm-1 control-label">State</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="state<?php echo $row_more['locationID'] ?>" value="<?php echo $row_more['state'] ?>" >
+                        <input type="text" class="form-control" name="state" value="<?php echo $row_more['state'] ?>" >
                     </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Zip</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" name="zip<?php echo $row_more['locationID'] ?>" value="<?php echo $row_more['zip'] ?>" >
+                        <input type="text" class="form-control" name="zip" value="<?php echo $row_more['zip'] ?>" >
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Phone</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" name="phone<?php echo $row_more['locationID'] ?>" value="<?php echo $row_more['phone'] ?>" >
+                        <input type="text" class="form-control" name="phone" value="<?php echo $row_more['phone'] ?>" >
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Notes</label>
                     <div class="col-sm-7">
-                        <textarea class="form-control" name="notes<?php echo $row_more['locationID'] ?>" rows="6" ><?php echo $row_more['notes'] ?></textarea>
+                        <textarea class="form-control" name="notes" rows="6" ><?php echo $row_more['notes'] ?></textarea>
                     </div>
                 </div>
 <?php } ?>
@@ -501,7 +497,6 @@ if (isset($_GET['create'])) {
     </div>
 
     <?php
-        // Perform db query.
         $query = "SELECT * FROM clients ORDER BY client ASC";
         $result = mysqli_query($connection, $query);
         confirm_query($result); ?>
@@ -556,7 +551,6 @@ if (isset($_GET['create'])) {
 
 <!-- Trigger the modal with a button -->
 <?php
-    // Perform db query.
     $query = "SELECT * FROM clients ORDER BY client ASC";
     $result = mysqli_query($connection, $query);
     confirm_query($result);
