@@ -4,9 +4,6 @@
     require_once("../includes/common.php");
 ?>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#clientID').on('change',function(){
@@ -71,7 +68,6 @@
                     //$('#city').html('Sorry');
                 }
             });
-
         $('#address2').on('change',function(){
             var countryID = $(this).val();
             if(countryID){
@@ -229,13 +225,17 @@ if (isset($_POST['create'])) {
         <br> href="projects.php" title="projects"<br>
         <a class="btn btn-default" href="projects.php?create" input type="button">Back</a>
         <?php exit;
-    }
+    }//include 'projects.php';
 
     $ass="";
-    $clientID = $_POST['clientID'];
-    $query = "INSERT INTO projects (modified, project, assessmentID, clientID, kickoff, start, finish, tech_qa, draft_delivery, final_delivery, notes) VALUES (now(), '$_POST[project]', 1 ,$clientID , '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[tech_qa]', '$_POST[draft_delivery]', '$_POST[final_delivery]', '$_POST[notes]')";
+
+$clientID = $_POST['clientID'];
+    $query = "INSERT INTO projects (modified, project, assessmentID, clientID, kickoff, start, finish, tech_qa, draft_delivery, final_delivery, notes, status) VALUES (now(), '$_POST[project]', 1 ,$clientID , '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[tech_qa]', '$_POST[draft_delivery]', '$_POST[final_delivery]', '$_POST[notes]','$_POST[current_status]')";
+
+
     $result = mysqli_query($connection, $query);
     confirm_query($result);
+    
 
 /* start */
     $query = "select max(projectID) from projects";
@@ -243,33 +243,22 @@ if (isset($_POST['create'])) {
     $projectid = mysqli_fetch_row($result);
     $projectid =$projectid[0];
     $ass = "";
-
     foreach($_POST['assessment'] as $selected){
-        if(isset($_POST['assessment'])){
-            $ass = $ass.$selected." ";
-        }
+
+    if(isset($_POST['assessment'])){
+        $ass = $ass.$selected." ";  }
     }
 
-    $query= "insert into project_assessment values('',$projectid,'$ass')";
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-
-    $address=$_POST['address'];
-    $city=$_POST['city'];
-    $state=$_POST['state'];
-    $zip=$_POST['zip'];
-    $phone=$_POST['phone'];
-
-    $query= "insert into project_locations values('',$projectid,'$address','$city','$state','$zip','$phone')";
+    $query= "insert into project_assisment values('',$projectid,'$ass')";
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 
     for($i=1;$i<=5;$i++){
-        $address=$_POST['address'.$i];
-        $city=$_POST['city'.$i];
-        $state=$_POST['state'.$i];
-        $zip=$_POST['zip'.$i];
-        $phone=$_POST['phone'.$i];
+    $address=$_POST['address'.$i];
+    $city=$_POST['city'.$i];
+    $state=$_POST['state'.$i];
+    $zip=$_POST['zip'.$i];
+    $phone=$_POST['phone'.$i];
 
     $query= "insert into project_locations values('',$projectid,'$address','$city','$state','$zip','$phone')";
     $result = mysqli_query($connection, $query);
@@ -281,35 +270,35 @@ if (isset($_POST['update'])) {
     $ass="";
 
     // UPDATE RECORD.
-    @$query = "UPDATE projects SET modified=now(), project='$_POST[project]', assessmentID=1, clientID='$_POST[clientID]', kickoff='$_POST[kickoff]', start='$_POST[start_date]', finish='$_POST[finish]', tech_qa='$_POST[tech_qa]', draft_delivery='$_POST[draft_delivery]', final_delivery='$_POST[final_delivery]', notes='$_POST[notes]' WHERE projectID=".intval($_POST['update']);
+    @$query = "UPDATE projects SET modified=now(), project='$_POST[project]', assessmentID=1, clientID='$_POST[clientID]', kickoff='$_POST[kickoff]', start='$_POST[start_date]', finish='$_POST[finish]', tech_qa='$_POST[tech_qa]', draft_delivery='$_POST[draft_delivery]', final_delivery='$_POST[final_delivery]', notes='$_POST[notes]',status='$_POST[current_status]' WHERE projectID=".intval($_POST['update']);
+
+    $result = mysqli_query($connection, $query);
+    confirm_query($result);
+    
+    $query = "DELETE FROM project_assisment WHERE project_id=".intval($_POST['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 
-    $query = "DELETE FROM project_assessment WHERE projectID=".intval($_POST['update']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
-
-    foreach(@$_POST['assessment'] as $selected){
-
+    foreach((array)@$_POST['assessment'] as $selected){
     if(isset($_POST['assessment'])){
         $ass = $ass.$selected." ";  }
     }
 
     $projectid=$_POST['update'];
-    $query= "insert into project_assessment values('',$projectid,'$ass')";
+    $query= "insert into project_assisment values('',$projectid,'$ass')";
     $result = mysqli_query($connection, $query);
-    confirm_query($result);
+    confirm_query($result); 
 
     $query = "DELETE FROM project_locations WHERE projectID=".intval($_POST['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 
     for($i=1;$i<=5;$i++){
-        @$address=$_POST['address'.$i];
-        @$city=$_POST['city'.$i];
-        @$state=$_POST['state'.$i];
-        @$zip=$_POST['zip'.$i];
-        @$phone=$_POST['phone'.$i];
+    @$address=$_POST['address'.$i];
+    @$city=$_POST['city'.$i];
+    @$state=$_POST['state'.$i];
+    @$zip=$_POST['zip'.$i];
+    @$phone=$_POST['phone'.$i];
 
     $query= "insert into project_locations values('',$projectid,'$address','$city','$state','$zip','$phone')";
     $result = mysqli_query($connection, $query);
@@ -326,7 +315,7 @@ if (isset($_GET['delete'])) {
 
     $query = "DELETE FROM project_assisment WHERE project_id=".intval($_GET['delete']);
     $result = mysqli_query($connection, $query);
-    confirm_query($result);
+    confirm_query($result); 
 
     $query = "DELETE FROM projects WHERE projectID=".intval($_GET['delete']);
     $result = mysqli_query($connection, $query);
@@ -510,8 +499,8 @@ if (isset($_GET['create'])) {
                                     <script> $( "#draft_delivery" ).datepicker(); </script>
                                 </div>
                             </div>
-<!--- start -->
 
+<!--- start -->
                             <?php
                                 $query = "SELECT * FROM clients ORDER BY client ASC";
                                 $result = mysqli_query($connection, $query);
@@ -756,7 +745,7 @@ if (isset($_GET['create'])) {
                                             // Release returned data.
                                             mysqli_free_result($result); ?>
                                     </select>
-                                    <a href="#" id="hide5">Hide</a>
+                                    <!--<a href="#" id="show5">+Address</a>|--><a href="#" id="hide5">Hide</a>
                                 </div>
                             </div>
 
@@ -787,7 +776,6 @@ if (isset($_GET['create'])) {
                             </div>
                             </span>
 <!-- end  -->
-
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Web</label>
                                 <div class="col-sm-5">
@@ -1177,17 +1165,19 @@ if (isset($_GET['create'])) {
     $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['read']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
-    $row = mysqli_fetch_assoc($result);
 
+    $row = mysqli_fetch_assoc($result);
     $query = "SELECT * FROM clients WHERE client=".intval(@$row['clientID']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
+
     $c = mysqli_fetch_assoc($result);
 
     // Find number of records.
     $query2 = "SELECT * FROM projects";
     $result2 = mysqli_query($connection, $query2);
     confirm_query($result2);
+
     $limit = mysqli_num_rows($result2);
 
     // Free result set.
@@ -1211,8 +1201,8 @@ if (isset($_GET['create'])) {
                 <h3 class="panel-title">Read Project</h3>
             </div>
             <div class="panel-body">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                <ul class="nav nav-tabs" role="tablist" >
+                    <li role="presentation" class="active" ><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
                     <li role="presentation"><a href="#resources" aria-controls="resources" role="tab" data-toggle="tab">Resources</a></li>
                     <li role="presentation"><a href="#external" aria-controls="external" role="tab" data-toggle="tab">External</a></li>
                     <li role="presentation"><a href="#internal" aria-controls="internal" role="tab" data-toggle="tab">Internal</a></li>
@@ -1242,18 +1232,17 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
 
                             <?php
+                                $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['read']);
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
 
-    $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['read']);
-    $result = mysqli_query($connection, $query);
-    confirm_query($result);
+                                $row = mysqli_fetch_assoc($result);
+                                $query_assisment = "SELECT * FROM project_assisment WHERE project_id=".intval($_GET['read']);
+                                $result_assisment = mysqli_query($connection, $query_assisment);
+                                confirm_query($result_assisment);
 
-    $row = mysqli_fetch_assoc($result);
-    $query_assisment = "SELECT * FROM project_assessment WHERE projectID=".intval($_GET['read']);
-    $result_assisment = mysqli_query($connection, $query_assisment);
-    confirm_query($result_assisment);
-
-    $row_assisment = mysqli_fetch_assoc($result_assisment);
-    $assisment = @explode(" ", $row_assisment['assessmentID']); ?>
+                                $row_assisment = mysqli_fetch_assoc($result_assisment);
+                                $assisment = @explode(" ", $row_assisment['assesment_id']); ?>
 
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-9">
@@ -1262,12 +1251,12 @@ if (isset($_GET['create'])) {
                                     ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="1" checked="checked">External
+                                        value="1" checked="checked" disabled readonly="readonly">External
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="1" >External
+                                        value="1" disabled readonly="readonly" >External
                                     <?php
                                 } ?>
                                     </label>
@@ -1277,12 +1266,12 @@ if (isset($_GET['create'])) {
                                     ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="2" checked="checked">Internal
+                                        value="2" checked="checked" disabled readonly="readonly">Internal
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="2" >Internal
+                                        value="2" disabled readonly="readonly">Internal
                                     <?php
                                 } ?>
                                     </label>
@@ -1292,12 +1281,12 @@ if (isset($_GET['create'])) {
                                     ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="3" checked="checked">Mobile
+                                        value="3" checked="checked" disabled readonly="readonly">Mobile
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="3" >Mobile
+                                        value="3" disabled readonly="readonly">Mobile
                                     <?php
                                 } ?>
                                     </label>
@@ -1307,12 +1296,12 @@ if (isset($_GET['create'])) {
                                     ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="4" checked="checked">Physical
+                                        value="4" disabled checked="checked" readonly="readonly">Physical
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="4">Physical
+                                        value="4" disabled readonly="readonly">Physical
                                     <?php
                                 } ?>
                                     </label>
@@ -1322,12 +1311,12 @@ if (isset($_GET['create'])) {
                                     ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="5" checked="checked">Social Eng
+                                        value="5" disabled checked="checked" readonly="readonly">Social Eng
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="5">Social Eng
+                                        value="5" disabled readonly="readonly">Social Eng
                                     <?php
                                 } ?>
                                     </label>
@@ -1336,12 +1325,12 @@ if (isset($_GET['create'])) {
                                     <?php if (in_array(6, @$assisment)) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="6" checked="checked">War Dialing
+                                        value="6" disabled checked="checked" readonly="readonly">War Dialing
                                     <?php
                                 } else {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="6" >War Dialing
+                                        value="6" disabled readonly="readonly">War Dialing
                                     <?php
                                 } ?>
                                     </label>
@@ -1350,12 +1339,12 @@ if (isset($_GET['create'])) {
                                     <?php if (in_array(7, @$assisment)
                                     ) {
                                     ?>
-                                        <input type="checkbox" name="assessment[]" value="7" checked="checked">Web
+                                        <input type="checkbox" name="assessment[]" value="7" checked="checked" disabled readonly="readonly">Web
                                     <?php
                                 } else {
                                     ?>
                                     <input type="checkbox" name="assessment[]"
-                                    value="7" >Web
+                                    value="7" disabled readonly="readonly">Web
                                     <?php
                                 } ?>
                                     </label>
@@ -1365,12 +1354,12 @@ if (isset($_GET['create'])) {
                                     ) {
                                     ?>
                                         <input type="checkbox" name="assessment[]"
-                                        value="8" checked="checked">Wireless
+                                        value="8" checked="checked" disabled readonly="readonly">Wireless
                                     <?php
                                 } else {
                                     ?>
                                     <input type="checkbox" name="assessment[]"
-                                        value="8" >Wireless
+                                        value="8" disabled readonly="readonly">Wireless
                                     <?php
                                 } ?>
                                     </label>
@@ -1443,9 +1432,9 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
 
-<?php $i++;
+                            <?php $i++;
 
-} ?>
+                            } ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Web</label>
@@ -1706,9 +1695,10 @@ if (isset($_GET['create'])) {
     confirm_query($result);
 
     $row = mysqli_fetch_assoc($result);
-    $query_assisment = "SELECT * FROM project_assessment WHERE projectID=".intval($_GET['update']);
+    $query_assisment = "SELECT * FROM project_assisment WHERE project_id=".intval($_GET['update']);
     $result_assisment = mysqli_query($connection, $query_assisment);
     confirm_query($result_assisment);
+
     $row_assisment = mysqli_fetch_assoc($result_assisment);
     ?>
 
@@ -1760,7 +1750,7 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
 
                             <?php
-                                $assisment = @explode(" ", $row_assisment['assessmentID']); ?>
+                                $assisment = @explode(" ", $row_assisment['assesment_id']); ?>
 
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-9">
@@ -1888,6 +1878,7 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Client</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="clientID" id="clientID">
+
                             <?php
                                 $query1 = "SELECT * FROM clients where clientID=".$row['clientID'];
                                 $result1 = mysqli_query($connection, $query1);
@@ -1913,10 +1904,9 @@ if (isset($_GET['create'])) {
                                 $query1 = "SELECT * FROM client_locations where clientID=".$row['clientID'];
                                 $result1 = mysqli_query($connection, $query1);
                                 $i=0;
-
                                 while($row1 = mysqli_fetch_array($result1)){
-                                    $query11 = "SELECT * FROM client_locations ORDER BY clientID ASC";
-                                    $result11 = mysqli_query($connection, $query11); ?>
+                                $query11 = "SELECT * FROM client_locations ORDER BY clientID ASC";
+                                $result11 = mysqli_query($connection, $query11); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
@@ -1963,9 +1953,8 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
 
-<?php $i++;
-
-} ?>
+                            <?php $i++;
+                            } ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Web</label>
@@ -2232,27 +2221,26 @@ if (isset($_GET['create'])) {
 
     <?php
 } else {
-    // DISPLAY LIST OF RECORDS.
-    ?>
+    // DISPLAY LIST OF RECORDS. ?>
+    <div style="padding-left:50px;">
+
     <br>
     <a class="btn btn-primary" href="projects.php?create" input type="button">New</a>
     <br>
     <br>
-    <div align="center">
-
-    </div>
 
     <?php
         $query = "SELECT * FROM projects ORDER BY project ASC";
         $result = mysqli_query($connection, $query);
         confirm_query($result); ?>
 
-    <table style="width: auto;" class="table table-bordered table-condensed table-hover">
+    <table style="width: auto; padding-left:50px;" class="table table-bordered table-condensed table-hover">
         <tr>
             <th style="background-color:#E8E8E8;"></th>
             <th style="background-color:#E8E8E8;"></th>
             <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Project</th>
             <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Client</th>
+            <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Start</th>
             <th style="background-color:#E8E8E8; color:#0397B7; font-weight:bold; text-align:center;">Status</th>
             <th style="background-color:#E8E8E8; color:#0397B7; text-align:center;">Modified</th>
             <th style="background-color:#E8E8E8;"></th>
@@ -2273,6 +2261,7 @@ if (isset($_GET['create'])) {
                     <td width="50">'.'<a class="btn btn-warning" href="projects.php?update='.$row['projectID'].'"><span class="glyphicon glyphicon-pencil"></span></a>'.'</td>
                     <td width="350">'.$row["project"].'</td>
                     <td width="300">'.$client['client'].'</td>
+                    <td width="100">'.$row["start"].'</td>
                     <td width="100">'.@$row["status"].'</td>
                     <td width="150">'.$myDateFormat.'</td>
                     <td width="50">'.'<a class="btn btn-danger" href="projects.php?delete='.$row['projectID'].'"
@@ -2283,6 +2272,7 @@ if (isset($_GET['create'])) {
     // Release returned data.
     mysqli_free_result($result); ?>
     </table>
+    </div>
     <?php
 }
 ?>
