@@ -156,11 +156,17 @@ CREATE TABLE projects (
   tech_qa VARCHAR(12) DEFAULT NULL,
   draft_delivery VARCHAR(12) DEFAULT NULL,
   final_delivery VARCHAR(12) DEFAULT NULL,
-  notes TEXT
+  notes TEXT,
+  status VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE projects ADD PRIMARY KEY (projectID), ADD KEY fk_client01 (clientID), ADD KEY fk_assessment01 (assessmentID);
-ALTER TABLE projects MODIFY projectID INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+ALTER TABLE projects
+  ADD PRIMARY KEY (projectID),
+  ADD KEY fk_client01 (clientID),
+  ADD KEY fk_assessment01 (assessmentID);
+
+ALTER TABLE projects
+  MODIFY projectID INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 ALTER TABLE projects
   ADD CONSTRAINT fk_assessment01 FOREIGN KEY (assessmentID) REFERENCES assessments (assessmentID),
