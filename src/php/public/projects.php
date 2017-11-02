@@ -228,10 +228,19 @@ if (isset($_POST['create'])) {
     }//include 'projects.php';
 
     $ass="";
+<<<<<<< HEAD
     $clientID = $_POST['clientID'];
     $query = "INSERT INTO projects (modified, project, assessmentID, clientID, kickoff, start, finish, tech_qa, draft_delivery, final_delivery, notes, status) VALUES (now(), '$_POST[project]', 1 ,$clientID , '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[tech_qa]', '$_POST[draft_delivery]', '$_POST[final_delivery]', '$_POST[notes]','$_POST[current_status]')";
+=======
+
+$clientID = $_POST['clientID'];
+    $query = "INSERT INTO projects (modified, project, assessmentID, clientID, kickoff, start, finish, tech_qa, draft_delivery, final_delivery, notes, status) VALUES (now(), '$_POST[project]', 1 ,$clientID , '$_POST[kickoff]', '$_POST[start_date]', '$_POST[finish]', '$_POST[tech_qa]', '$_POST[draft_delivery]', '$_POST[final_delivery]', '$_POST[notes]','$_POST[current_status]')";
+
+
+>>>>>>> fd6fec1609f8c52714134e14696c645d674ac377
     $result = mysqli_query($connection, $query);
     confirm_query($result);
+    
 
 /* start */
     $query = "select max(projectID) from projects";
@@ -240,11 +249,20 @@ if (isset($_POST['create'])) {
     $projectid =$projectid[0];
     $ass = "";
     foreach($_POST['assessment'] as $selected){
+<<<<<<< HEAD
     if(isset($_POST['assessment'])){
         $ass = $ass.$selected." ";  }
     }
 
     $query= "insert into project_assessment values('',$projectid,'$ass')";
+=======
+
+    if(isset($_POST['assessment'])){
+        $ass = $ass.$selected." ";  }
+    }
+
+    $query= "insert into project_assisment values('',$projectid,'$ass')";
+>>>>>>> fd6fec1609f8c52714134e14696c645d674ac377
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 
@@ -269,8 +287,8 @@ if (isset($_POST['update'])) {
 
     $result = mysqli_query($connection, $query);
     confirm_query($result);
-
-    $query = "DELETE FROM project_assessment WHERE projectID=".intval($_POST['update']);
+    
+    $query = "DELETE FROM project_assisment WHERE project_id=".intval($_POST['update']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 
@@ -279,9 +297,9 @@ if (isset($_POST['update'])) {
         $ass = $ass.$selected." ";  }
 }
     $projectid=$_POST['update'];
-    $query= "insert into project_assessment values('',$projectid,'$ass')";
+    $query= "insert into project_assisment values('',$projectid,'$ass')";
     $result = mysqli_query($connection, $query);
-    confirm_query($result);
+    confirm_query($result); 
 
     $query = "DELETE FROM project_locations WHERE projectID=".intval($_POST['update']);
     $result = mysqli_query($connection, $query);
@@ -309,7 +327,7 @@ if (isset($_GET['delete'])) {
 
     $query = "DELETE FROM project_assessment WHERE projectID=".intval($_GET['delete']);
     $result = mysqli_query($connection, $query);
-    confirm_query($result);
+    confirm_query($result); 
 
     $query = "DELETE FROM projects WHERE projectID=".intval($_GET['delete']);
     $result = mysqli_query($connection, $query);
@@ -1231,12 +1249,20 @@ if (isset($_GET['create'])) {
                                 confirm_query($result);
 
                                 $row = mysqli_fetch_assoc($result);
+<<<<<<< HEAD
                                 $query_assisment = "SELECT * FROM project_assessment WHERE projectID=".intval($_GET['read']);
+=======
+                                $query_assisment = "SELECT * FROM project_assisment WHERE project_id=".intval($_GET['read']);
+>>>>>>> fd6fec1609f8c52714134e14696c645d674ac377
                                 $result_assisment = mysqli_query($connection, $query_assisment);
                                 confirm_query($result_assisment);
 
                                 $row_assisment = mysqli_fetch_assoc($result_assisment);
+<<<<<<< HEAD
                                 $assisment = @explode(" ", $row_assisment['assessmentID']); ?>
+=======
+                                $assisment = @explode(" ", $row_assisment['assesment_id']); ?>
+>>>>>>> fd6fec1609f8c52714134e14696c645d674ac377
 
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-9">
@@ -1427,6 +1453,10 @@ if (isset($_GET['create'])) {
                             </div>
 
                             <?php $i++;
+<<<<<<< HEAD
+=======
+
+>>>>>>> fd6fec1609f8c52714134e14696c645d674ac377
                             } ?>
 
                             <div class="form-group">
@@ -1688,7 +1718,7 @@ if (isset($_GET['create'])) {
     confirm_query($result);
 
     $row = mysqli_fetch_assoc($result);
-    $query_assisment = "SELECT * FROM project_assessment WHERE projectID=".intval($_GET['update']);
+    $query_assisment = "SELECT * FROM project_assisment WHERE project_id=".intval($_GET['update']);
     $result_assisment = mysqli_query($connection, $query_assisment);
     confirm_query($result_assisment);
 
@@ -1743,7 +1773,7 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
 
                             <?php
-                                $assisment = @explode(" ", $row_assisment['assessmentID']); ?>
+                                $assisment = @explode(" ", $row_assisment['assesment_id']); ?>
 
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-9">
@@ -1871,6 +1901,7 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Client</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="clientID" id="clientID">
+
                             <?php
                                 $query1 = "SELECT * FROM clients where clientID=".$row['clientID'];
                                 $result1 = mysqli_query($connection, $query1);
