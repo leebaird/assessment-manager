@@ -967,7 +967,9 @@ if (isset($_GET['create'])) {
                                     <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
                                 </div>
                             </div>
+                            </form>
                     </div>
+
 
                     <!-- External panel -->
                     <div role="tabpanel" class="tab-pane" id="external">
@@ -2215,7 +2217,6 @@ if (isset($_GET['create'])) {
     <?php
 } else {
     // DISPLAY LIST OF RECORDS. ?>
-    <div style="padding-left:50px;">
 
     <br>
     <a class="btn btn-primary" href="projects.php?create" input type="button">New</a>
@@ -2227,7 +2228,7 @@ if (isset($_GET['create'])) {
         $result = mysqli_query($connection, $query);
         confirm_query($result); ?>
 
-    <table style="width: auto; padding-left:50px;" class="table table-bordered table-condensed table-hover">
+    <table style="width: auto; " class="table table-bordered table-condensed table-hover">
         <tr>
             <th style="background-color:#E8E8E8;"></th>
             <th style="background-color:#E8E8E8;"></th>
@@ -2265,7 +2266,6 @@ if (isset($_GET['create'])) {
     // Release returned data.
     mysqli_free_result($result); ?>
     </table>
-    </div>
     <?php
 }
 ?>
