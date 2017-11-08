@@ -1163,12 +1163,11 @@ if (isset($_GET['create'])) {
     confirm_query($result);
 
     $row = mysqli_fetch_assoc($result);
-    $query = "SELECT * FROM clients WHERE client=".intval(@$row['clientID']);
+    $query = "SELECT * FROM clients WHERE clientID=".intval(@$row['clientID']);
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 
     $c = mysqli_fetch_assoc($result);
-
     // Find number of records.
     $query2 = "SELECT * FROM projects";
     $result2 = mysqli_query($connection, $query2);
@@ -1214,17 +1213,6 @@ if (isset($_GET['create'])) {
                     <!-- Home panel -->
                     <div role="tabpanel" class="tab-pane active" id="home">
                         <form class="form-horizontal" action="projects.php" method="post">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Project</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="project" value="<?php echo $row['project'] ?>" readonly>
-                                </div>
-
-                                <label class="col-sm-2 control-label">Status</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="current_status" value="<?php echo @$row['status'] ?>" readonly>
-                                </div>
-                            </div>
                             <div class="form-group">
 
                             <?php
@@ -1361,6 +1349,27 @@ if (isset($_GET['create'])) {
                                     </label>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Project</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="project" value="<?php echo $row['project'] ?>" readonly>
+                                </div>
+
+                                <label class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="current_status" id="current_status"  readonly disabled="disabled">
+                                        <option value="<?php echo @$row['status'] ?>"><?php echo @$row['status'] ?></option>
+                                        <option value="Contract">Contract</option>
+                                        <option value="Scoping">Scoping</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Reporting">Reporting</option>
+                                        <option value="Review">Review</option>
+                                        <option value="Delivered">Delivered</option>
+                                        <option value="Complete">Complete</option>
+                                    </select>
+                                </div>
+                            </div>
+
 
                         <?php
                             $query1 = "SELECT * FROM clients where clientID=".$row['clientID'];
@@ -1369,9 +1378,15 @@ if (isset($_GET['create'])) {
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Client</label>
-                                <div class="col-sm-4">
+                                <div class="col-sm-5">
                                     <input type="text" class="form-control" name="clientID"
                                     value="<?php echo $row1['client'] ?>" readonly>
+                                </div>
+
+
+                                <label class="col-sm-2 control-label">Kickoff</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="kickoff" value="<?php echo @$row['kickoff'] ?>" readonly>
                                 </div>
                             </div>
 
@@ -1385,7 +1400,7 @@ if (isset($_GET['create'])) {
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
-                                <div class="col-sm-4">
+                                <div class="col-sm-5">
                                     <select class="form-control" name="address<?php if($i>0) print $i; ?>" id="address<?php  if($i>0) print $i; ?>" disabled>
 
                                         <option value="<?php echo $row1['clientID'] ?>"><?php echo $row1['address'] ?></option>
@@ -1400,6 +1415,12 @@ if (isset($_GET['create'])) {
                                             mysqli_free_result($result); ?>
                                     </select>
                                 </div>
+                                <?php if($i==0){ ?>
+                                <label class="col-sm-2 control-label">Start</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="start_date" value="<?php echo @$row['start'] ?>" readonly>
+                                </div>
+                                <?php } ?>
                             </div>
 
                             <div class="row">
@@ -1412,20 +1433,38 @@ if (isset($_GET['create'])) {
                                 <div class="col-sm-1">
                                     <input type="text" class="form-control" name="state<?php  if($i!=0) print $i; ?>" value="<?php echo $row1['state'] ?>" id="state<?php  if($i!=0) print $i; ?>" disabled>
                                 </div>
+                                <?php if($i==0){ ?>
+                                <label class="col-sm-2 control-label">Finish</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="finish" value="<?php echo @$row['finish'] ?>" readonly>
+                                </div>
+                                <?php } ?>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Zip</label>
-                                <div class="col-sm-1">
+                                <div class="col-sm-2">
                                     <input type="text" class="form-control" name="zip<?php  if($i!=0) print $i; ?>" value="<?php echo @$row1['zip'] ?>" id="zip<?php  if($i!=0) print $i; ?>" disabled>
                                 </div>
+                                <?php if($i==0){ ?>
+                                <label class="col-sm-5 control-label">Tech QA</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="tech_qa" value="<?php echo @$row['tech_qa'] ?>" readonly>
+                                </div>
+                                <?php } ?>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Phone</label>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <input type="text" class="form-control" name="phone<?php  if($i!=0) print $i; ?>" value="<?php echo @$row1['phone'] ?>" id="phone<?php  if($i!=0) print $i; ?>" disabled>
                                 </div>
+                                <?php if($i==0){ ?>
+                                <label class="col-sm-4 control-label">Draft Delivery</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="draft_delivery" value="<?php echo @$row['draft_delivery'] ?>" readonly>
+                                </div>
+                                <?php } ?>
                             </div>
 
                             <?php $i++;
@@ -1433,47 +1472,22 @@ if (isset($_GET['create'])) {
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Web</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="web" value="<?php echo @$row['web'] ?>" readonly>
-                                </div>
-                            </div>
+                                <div class="col-sm-5">
+                                    <?php
+                                        // READ RECORD
+                                        $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['read']);
+                                        $result = mysqli_query($connection, $query);
+                                        confirm_query($result);
 
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Kickoff</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="kickoff" value="<?php echo @$row['kickoff'] ?>" readonly>
-                                </div>
-                            </div>
+                                        $row = mysqli_fetch_assoc($result);
+                                        $query = "SELECT * FROM clients WHERE clientID=".intval(@$row['clientID']);
+                                        $result = mysqli_query($connection, $query);
+                                        confirm_query($result);
 
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Start</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="start_date" value="<?php echo @$row['start'] ?>" readonly>
+                                        $c = mysqli_fetch_assoc($result);
+                                    ?>
+                                    <input type="text" class="form-control" name="web" value="<?php echo @$c['web']; ?>" readonly>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Finish</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="finish" value="<?php echo @$row['finish'] ?>" readonly>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Tech QA</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="tech_qa" value="<?php echo @$row['tech_qa'] ?>" readonly>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Draft Delivery</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="draft_delivery" value="<?php echo @$row['draft_delivery'] ?>" readonly>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Final Delivery</label>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="final_delivery" value="<?php echo @$row['final_delivery'] ?>" readonly>
@@ -1482,7 +1496,7 @@ if (isset($_GET['create'])) {
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-9">
                                     <textarea class="form-control" name="notes" rows="6" readonly><?php echo $row['notes'] ?></textarea>
                                 </div>
                             </div>
@@ -1722,29 +1736,7 @@ if (isset($_GET['create'])) {
                     <!-- Home panel -->
                     <div role="tabpanel" class="tab-pane active" id="home">
                         <form class="form-horizontal" action="projects.php" method="post">
-                            <input type = "hidden" name = "update" value = "<?php echo $row['projectID'] ?>">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Project</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="project" value="<?php echo $row['project'] ?>">
-                                </div>
-
-                                <label class="col-sm-2 control-label">Status</label>
-                                <div class="col-sm-2">
-                                    <select class="form-control" name="current_status"  id="current_status">
-                                        <option value="<?php //echo $row['status']; ?>"><?php echo $row['status']; ?></option>
-                                        <option value="Contract"<?php echo($row['status'] == 'Contract' ? " selected" : "")?>>Contract</option>
-                                        <option value="Scoping"<?php echo($row['status'] == 'Scoping' ? " selected" : "")?>>Scoping</option>
-                                        <option value="In Progress"<?php echo($row['status'] == 'In Progress' ? " selected" : "")?>>In Progress</option>
-                                        <option value="Reporting"<?php echo($row['status'] == 'Reporting' ? " selected" : "")?>>Reporting</option>
-                                        <option value="Review"<?php echo($row['status'] == 'Review' ? " selected" : "")?>>Review</option>
-                                        <option value="Delivered"<?php echo($row['status'] == 'Delivered' ? " selected" : "")?>>Delivered</option>
-                                        <option value="Complete"<?php echo($row['status'] == 'Complete' ? " selected" : "")?>>Complete</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
+                             <div class="form-group">
 
                             <?php
                                 $assessment = @explode(" ", $row_assessment['assessmentID']); ?>
@@ -1870,28 +1862,60 @@ if (isset($_GET['create'])) {
                                     </label>
                                 </div>
                             </div>
+                            <input type = "hidden" name = "update" value = "<?php echo $row['projectID'] ?>">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Project</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="project" value="<?php echo $row['project'] ?>">
+                                </div>
+
+                                <label class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="current_status"  id="current_status">
+                                        <option value="<?php //echo $row['status']; ?>"><?php echo $row['status']; ?></option>
+                                        <option value="Contract"<?php echo($row['status'] == 'Contract' ? " selected" : "")?>>Contract</option>
+                                        <option value="Scoping"<?php echo($row['status'] == 'Scoping' ? " selected" : "")?>>Scoping</option>
+                                        <option value="In Progress"<?php echo($row['status'] == 'In Progress' ? " selected" : "")?>>In Progress</option>
+                                        <option value="Reporting"<?php echo($row['status'] == 'Reporting' ? " selected" : "")?>>Reporting</option>
+                                        <option value="Review"<?php echo($row['status'] == 'Review' ? " selected" : "")?>>Review</option>
+                                        <option value="Delivered"<?php echo($row['status'] == 'Delivered' ? " selected" : "")?>>Delivered</option>
+                                        <option value="Complete"<?php echo($row['status'] == 'Complete' ? " selected" : "")?>>Complete</option>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Client</label>
-                                <div class="col-sm-4">
+                                <div class="col-sm-5">
                                     <select class="form-control" name="clientID" id="clientID">
-                            <?php
-                                $query1 = "SELECT * FROM clients where clientID=".$row['clientID'];
-                                $result1 = mysqli_query($connection, $query1);
-                                $row11 = mysqli_fetch_array($result1);
-                                $query11 = "SELECT * FROM clients ORDER BY client ASC";
-                                $result11 = mysqli_query($connection, $query11); ?>
+                                        <?php
+                                            $query1 = "SELECT * FROM clients where clientID=".$row['clientID'];
+                                            $result1 = mysqli_query($connection, $query1);
+                                            $row11 = mysqli_fetch_array($result1);
+                                            $query11 = "SELECT * FROM clients ORDER BY client ASC";
+                                            $result11 = mysqli_query($connection, $query11);
+                                            ?>
+
                                         <option value="<?php echo $row11['clientID'] ?>"><?php echo $row11['client'] ?></option>
+
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result11)) {
-                                                ?>
+                                        ?>
+
                                         <option value = '<?php print $c["clientID"]; ?>' ><?php print $c["client"]; ?></option>
+
                                         <?php
                                             }
 
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
+                                        // Release returned data.
+                                        mysqli_free_result($result);
+                                        ?>
                                     </select>
+                                </div>
+                                <label class="col-sm-2 control-label">Kickoff</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="kickoff" name="kickoff" value="<?php echo @$row['kickoff'] ?>">
+                                    <script> $( "#kickoff" ).datepicker(); </script>
                                 </div>
                             </div>
 
@@ -1899,13 +1923,14 @@ if (isset($_GET['create'])) {
                                 $query1 = "SELECT * FROM client_locations where clientID=".$row['clientID'];
                                 $result1 = mysqli_query($connection, $query1);
                                 $i=0;
+
                                 while($row1 = mysqli_fetch_array($result1)){
-                                $query11 = "SELECT * FROM client_locations ORDER BY clientID ASC";
-                                $result11 = mysqli_query($connection, $query11); ?>
+                                    $query11 = "SELECT * FROM client_locations ORDER BY clientID ASC";
+                                    $result11 = mysqli_query($connection, $query11); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
-                                <div class="col-sm-4">
+                                <div class="col-sm-5">
                                     <select class="form-control" name="address<?php if($i>0) print $i; ?>" id="address<?php  if($i>0) print $i; ?>">
 
                                         <option value="<?php echo $row1['clientID'] ?>"><?php echo $row1['address'] ?></option>
@@ -1917,9 +1942,18 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result); ?>
+                                            mysqli_free_result($result);
+                                        ?>
                                     </select>
                                 </div>
+
+                                <?php if($i==0){ ?>
+                                <label class="col-sm-2 control-label">Start</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="start_date" name="start_date" value="<?php echo @$row['start'] ?>">
+                                    <script> $( "#start_date" ).datepicker(); </script>
+                                </div>
+                                <?php } ?>
                             </div>
 
                             <div class="row">
@@ -1932,20 +1966,42 @@ if (isset($_GET['create'])) {
                                 <div class="col-sm-1">
                                     <input type="text" class="form-control" name="state<?php  if($i!=0) print $i; ?>" value="<?php echo $row1['state'] ?>" id="state<?php  if($i!=0) print $i; ?>">
                                 </div>
+                                <?php if($i==0){ ?>
+
+                                <label class="col-sm-2 control-label">Finish</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="finish" name="finish" value="<?php echo @$row['finish'] ?>">
+                                    <script> $( "#finish" ).datepicker(); </script>
+                                </div>
+                                <?php } ?>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Zip</label>
-                                <div class="col-sm-1">
+                                <div class="col-sm-2">
                                     <input type="text" class="form-control" name="zip<?php  if($i!=0) print $i; ?>" value="<?php echo @$row1['zip'] ?>" id="zip<?php  if($i!=0) print $i; ?>" >
                                 </div>
+                                <?php if($i==0){ ?>
+                                <label class="col-sm-5 control-label">Tech QA</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="tech_qa" name="tech_qa" value="<?php echo @$row['tech_qa'] ?>">
+                                    <script> $( "#tech_qa" ).datepicker(); </script>
+                                </div>
+                                <?php } ?>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Phone</label>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <input type="text" class="form-control" name="phone<?php  if($i!=0) print $i; ?>" value="<?php echo @$row1['phone'] ?>" id="phone<?php  if($i!=0) print $i; ?>" >
                                 </div>
+                                <?php if($i==0){ ?>
+                                <label class="col-sm-4 control-label">Draft Delivery</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="draft_delivery" name="draft_delivery" value="<?php echo @$row['draft_delivery'] ?>">
+                                    <script> $( "#draft_delivery" ).datepicker(); </script>
+                                </div>
+                                <?php } ?>
                             </div>
 
                             <?php $i++;
@@ -1953,67 +2009,27 @@ if (isset($_GET['create'])) {
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Web</label>
-                                <div class="col-sm-3">
+                                <div class="col-sm-5">
                                     <input type="text" class="form-control" name="web<?php print $i; ?>" value="<?php echo @$row11['web'] ?>" id="web<?php print $i; ?>">
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Kickoff</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="kickoff" name="kickoff" value="<?php echo @$row['kickoff'] ?>">
-                                    <script> $( "#kickoff" ).datepicker(); </script>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Start</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="start_date" name="start_date" value="<?php echo @$row['start'] ?>">
-                                    <script> $( "#start_date" ).datepicker(); </script>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Finish</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="finish" name="finish" value="<?php echo @$row['finish'] ?>">
-                                    <script> $( "#finish" ).datepicker(); </script>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Tech QA</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="tech_qa" name="tech_qa" value="<?php echo @$row['tech_qa'] ?>">
-                                    <script> $( "#tech_qa" ).datepicker(); </script>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Draft Delivery</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="draft_delivery" name="draft_delivery" value="<?php echo @$row['draft_delivery'] ?>">
-                                    <script> $( "#draft_delivery" ).datepicker(); </script>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
+                                <?php if($i==0){ ?>
                                 <label class="col-sm-2 control-label">Final Delivery</label>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" id="final_delivery" name="final_delivery" value="<?php echo @$row['final_delivery'] ?>">
                                     <script> $( "#final_delivery" ).datepicker(); </script>
                                 </div>
+                                <?php } ?>
                             </div>
 
                             <?php
                                 $query = "SELECT * FROM clients ORDER BY client ASC";
                                 $result = mysqli_query($connection, $query);
-                                confirm_query($result); ?>
+                                confirm_query($result);
+                            ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-9">
                                     <textarea class="form-control" name="notes" rows="6"><?php echo $row['notes'] ?></textarea>
                                 </div>
                             </div>
