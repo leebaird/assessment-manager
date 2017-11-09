@@ -17,11 +17,11 @@ INSERT INTO `contacts` (`contactID`, `modified`, `contact`, `title`, `work`, `ce
 (4, '2017-09-18 20:42:22', 'Tim Cook', 'CEO', '', '', '', '', 1, 0);
 
 INSERT INTO `employees` (`employeeID`, `modified`, `employee`, `title`, `cell`, `email`, `notes`) VALUES
-(1, '2017-09-18 20:53:41', 'Bugs Bunny', 'Manager', '', 'bugs.bunny@acme.com', 'Linux'),
-(2, '2017-09-18 20:54:40', 'Moe Howard', 'Red Team', '', 'moe.howard@acme.com', 'Linux'),
-(3, '2017-09-18 20:55:02', 'Larry Fine', 'Red Team', '', 'larry.fine@acme.com', 'Windows'),
-(4, '2017-09-18 20:55:27', 'Curly Howard', 'Red Team', '', 'curly.howard@acme.com', 'Web'),
-(5, '2017-09-22 22:11:25', 'Wile E Coyote', 'Pure Genius', '', 'wile.e.coyote@acme.com', '');
+(1, '2017-09-18 20:53:41', 'Bugs Bunny', 'Manager', '100-200-0001', 'bugs.bunny@acme.com', 'Linux'),
+(2, '2017-09-18 20:54:40', 'Moe Howard', 'Red Team', '100-200-0002', 'moe.howard@acme.com', 'Linux'),
+(3, '2017-09-18 20:55:02', 'Larry Fine', 'Red Team', '100-200-0003', 'larry.fine@acme.com', 'Windows'),
+(4, '2017-09-18 20:55:27', 'Curly Howard', 'Red Team', '100-200-0004', 'curly.howard@acme.com', 'Web'),
+(5, '2017-09-22 22:11:25', 'Wile E Coyote', 'Pure Genius', '100-200-0005', 'wile.e.coyote@acme.com', '');
 
 INSERT INTO `findings` (`findingID`, `modified`, `type`, `finding`, `observation`, `severity`, `remediation`, `see_also`) VALUES
 (1, '2017-09-18 20:56:27', 'Host', 'Access to Administrative Interface', '', '', '', ''),

@@ -801,30 +801,6 @@ if (isset($_GET['create'])) {
                     <div role="tabpanel" class="tab-pane" id="resources">
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Project Mgr</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="projectmgr"  id="projectmgr">
-                                        <option value=""></option>
-                                        <?php
-                                            while ($c = mysqli_fetch_assoc($result)) {
-                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                            }
-
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 1</label>
                                 <div class="col-sm-3">
                                     <select class="form-control" name="consultant1"  id="consultant1">
@@ -1511,30 +1487,6 @@ if (isset($_GET['create'])) {
                     <div role="tabpanel" class="tab-pane" id="resources">
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Project Mgr</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="projectmgr"  id="projectmgr" disabled="disabled">
-                                        <option value=""></option>
-                                        <?php
-                                            while ($c = mysqli_fetch_assoc($result)) {
-                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                            }
-
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" disabled="disabled">
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 1</label>
                                 <div class="col-sm-3">
                                     <select class="form-control" name="consultant1"  id="consultant1" disabled="disabled">
@@ -2212,30 +2164,6 @@ if (isset($_GET['create'])) {
                     <!-- Resources panel -->
                     <div role="tabpanel" class="tab-pane" id="resources">
                         <form class="form-horizontal" action="projects.php" method="post">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Project Mgr</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="projectmgr"  id="projectmgr">
-                                        <option value=""></option>
-                                        <?php
-                                            while ($c = mysqli_fetch_assoc($result)) {
-                                                echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
-                                            }
-
-                                            // Release returned data.
-                                            mysqli_free_result($result); ?>
-                                    </select>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
-                                </div>
-                            </div>
-
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 1</label>
                                 <div class="col-sm-3">
