@@ -1513,7 +1513,7 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Project Mgr</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control" name="projectmgr"  id="projectmgr">
+                                    <select class="form-control" name="projectmgr"  id="projectmgr" disabled="disabled">
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -1526,18 +1526,18 @@ if (isset($_GET['create'])) {
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" disabled="disabled">
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 1</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control" name="consultant1"  id="consultant1">
+                                    <select class="form-control" name="consultant1"  id="consultant1" disabled="disabled">
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -1550,7 +1550,7 @@ if (isset($_GET['create'])) {
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" disabled="disabled">
                                 </div>
 
                                 <div class="col-sm-2">
@@ -1561,7 +1561,7 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 2</label>
                                 <div class="col-sm-3">
-                                     <select class="form-control" name="consultant2"  id="consultant2">
+                                     <select class="form-control" name="consultant2"  id="consultant2" disabled="disabled">
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -1574,18 +1574,18 @@ if (isset($_GET['create'])) {
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" disabled="disabled">
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 3</label>
                                 <div class="col-sm-3">
-                                     <select class="form-control" name="consultant3"  id="consultant3">
+                                     <select class="form-control" name="consultant3"  id="consultant3" disabled="disabled">
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -1598,18 +1598,18 @@ if (isset($_GET['create'])) {
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" disabled="disabled">
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 4</label>
                                 <div class="col-sm-3">
-                                     <select class="form-control" name="consultant4"  id="consultant4">
+                                     <select class="form-control" name="consultant4"  id="consultant4" disabled="disabled">
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -1622,18 +1622,18 @@ if (isset($_GET['create'])) {
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" disabled="disabled">
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 5</label>
                                 <div class="col-sm-3">
-                                     <select class="form-control" name="consultant5"  id="consultant5">
+                                     <select class="form-control" name="consultant5"  id="consultant5" disabled="disabled">
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -1646,18 +1646,18 @@ if (isset($_GET['create'])) {
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" disabled="disabled">
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 6</label>
                                 <div class="col-sm-3">
-                                     <select class="form-control" name="consultant6"  id="consultant6">
+                                     <select class="form-control" name="consultant6"  id="consultant6" disabled="disabled">
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -1670,11 +1670,11 @@ if (isset($_GET['create'])) {
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" disabled="disabled">
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled">
                                 </div>
                             </div>
                             </form>
