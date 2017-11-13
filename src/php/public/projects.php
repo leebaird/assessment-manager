@@ -68,6 +68,7 @@
                     //$('#city').html('Sorry');
                 }
             });
+
         $('#address2').on('change',function(){
             var countryID = $(this).val();
             if(countryID){
@@ -150,6 +151,43 @@
 
         $('#consultant1').on('change',function(){
             var consultant1 = $(this).val();
+            if(consultant1==$('#consultant2').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant1').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant3').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant1').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant4').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant1').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant5').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant1').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant6').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant1').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#projectmgr').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant1').val("");
+                return false;
+            }
+
+            else {
             if(consultant1){
                 $.ajax({
                     type:'POST',
@@ -164,11 +202,48 @@
                 }else{
                     //$('#city').html('Sorry');
                 }
-
+            }
             });
 
         $('#consultant2').on('change',function(){
             var consultant1 = $(this).val();
+            if(consultant1==$('#consultant1').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant2').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant3').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant2').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant4').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant2').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant5').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant2').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant6').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant2').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#projectmgr').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant2').val("");
+                return false;
+            }
+
+            else {
             if(consultant1){
                 $.ajax({
                     type:'POST',
@@ -183,10 +258,49 @@
                 }else{
                     //$('#city').html('Sorry');
                 }
+            }
             });
 
-            $('#consultant3').on('change',function(){
+        $('#consultant3').on('change',function(){
             var consultant1 = $(this).val();
+
+            if(consultant1==$('#consultant2').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant3').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant1').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant3').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant4').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant3').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant5').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant3').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant6').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant3').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#projectmgr').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant3').val("");
+                return false;
+            }
+
+            else {
             if(consultant1){
                 $.ajax({
                     type:'POST',
@@ -201,10 +315,48 @@
                 }else{
                     //$('#city').html('Sorry');
                 }
+            }
             });
-
         $('#consultant4').on('change',function(){
             var consultant1 = $(this).val();
+
+            if(consultant1==$('#consultant2').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant4').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant3').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant4').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant1').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant4').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant5').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant4').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant6').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant4').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#projectmgr').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant4').val("");
+                return false;
+            }
+
+            else {
             if(consultant1){
                 $.ajax({
                     type:'POST',
@@ -219,10 +371,48 @@
                 }else{
                     //$('#city').html('Sorry');
                 }
+            }
             });
 
         $('#consultant5').on('change',function(){
             var consultant1 = $(this).val();
+            if(consultant1==$('#consultant2').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant5').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant3').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant5').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant4').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant5').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant1').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant5').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant6').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant5').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#projectmgr').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant5').val("");
+                return false;
+            }
+
+            else {
             if(consultant1){
                 $.ajax({
                     type:'POST',
@@ -237,10 +427,48 @@
                 }else{
                     //$('#city').html('Sorry');
                 }
+            }
             });
 
         $('#consultant6').on('change',function(){
             var consultant1 = $(this).val();
+            if(consultant1==$('#consultant2').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant6').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant3').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant6').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant4').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant6').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant5').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant6').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant1').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant6').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#projectmgr').val()){
+                alert("This person has already been chosen, select another.");
+                $('#consultant6').val("");
+                return false;
+            }
+
+            else {
             if(consultant1){
                 $.ajax({
                     type:'POST',
@@ -255,10 +483,48 @@
                 }else{
                     //$('#city').html('Sorry');
                 }
+            }
             });
 
         $('#projectmgr').on('change',function(){
             var consultant1 = $(this).val();
+            if(consultant1==$('#consultant2').val()){
+                alert("This person has already been chosen, select another.");
+                $('#projectmgr').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant3').val()){
+                alert("This person has already been chosen, select another.");
+                $('#projectmgr').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant4').val()){
+                alert("This person has already been chosen, select another.");
+                $('#projectmgr').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant5').val()){
+                alert("This person has already been chosen, select another.");
+                $('#projectmgr').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant1').val()){
+                alert("This person has already been chosen, select another.");
+                $('#projectmgr').val("");
+                return false;
+            }
+
+            else if(consultant1==$('#consultant6').val()){
+                alert("This person has already been chosen, select another.");
+                $('#projectmgr').val("");
+                return false;
+            }
+
+            else {
             if(consultant1){
                 $.ajax({
                     type:'POST',
@@ -273,11 +539,9 @@
                 }else{
                     //$('#city').html('Sorry');
                 }
+            }
             });
         });
-
-//project manager
-
 </script>
 
 <script>
@@ -370,7 +634,7 @@ if (isset($_POST['create'])) {
     $projectid =$projectid[0];
     $ass = "";
 
-    foreach($_POST['assessment'] as $selected){
+    foreach(@$_POST['assessment'] as $selected){
         if(isset($_POST['assessment'])){
             $ass = $ass.$selected." ";  }
 }
@@ -647,8 +911,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                     <a href="#" id="show1">+Address</a>|<a href="#" id="hide1">Hide</a>
                                 </div>
@@ -703,8 +966,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                     <a href="#" id="show2">+Address</a>|<a href="#" id="hide2">Hide</a>
                                 </div>
@@ -759,8 +1021,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                     <a href="#" id="show3">+Address</a>|<a href="#" id="hide3">Hide</a>
                                 </div>
@@ -815,8 +1076,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                     <a href="#" id="show4">+Address</a>|<a href="#" id="hide4">Hide</a>
                                 </div>
@@ -871,8 +1131,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                     <a href="#" id="hide5">Hide</a>
                                 </div>
@@ -938,7 +1197,6 @@ if (isset($_GET['create'])) {
                                 $result = mysqli_query($connection, $query);
                                 confirm_query($result);
                             ?>
-
                     <div role="tabpanel" class="tab-pane" id="resources">
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
@@ -952,8 +1210,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -971,19 +1228,19 @@ if (isset($_GET['create'])) {
                                 <div class="col-sm-3">
                                     <select class="form-control" name="consultant1"  id="consultant1">
                                         <option value=""></option>
-                                        <?php
-                                            $query = "SELECT * FROM employees ORDER BY employee ASC";
-                                            $result = mysqli_query($connection, $query);
-                                            confirm_query($result);
-                                        ?>
+
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -999,12 +1256,13 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Consultant 2</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control" name="consultant2"  id="consultant2">
-                                        <?php
-                                            $query = "SELECT * FROM employees ORDER BY employee ASC";
-                                            $result = mysqli_query($connection, $query);
-                                            confirm_query($result);
-                                        ?>
+                                     <select class="form-control" name="consultant2"  id="consultant2">
+
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -1012,8 +1270,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -1030,11 +1287,12 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Consultant 3</label>
                                 <div class="col-sm-3">
                                      <select class="form-control" name="consultant3"  id="consultant3">
-                                        <?php
-                                            $query = "SELECT * FROM employees ORDER BY employee ASC";
-                                            $result = mysqli_query($connection, $query);
-                                            confirm_query($result);
-                                        ?>
+
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -1042,8 +1300,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -1060,11 +1317,12 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Consultant 4</label>
                                 <div class="col-sm-3">
                                      <select class="form-control" name="consultant4"  id="consultant4">
-                                        <?php
-                                            $query = "SELECT * FROM employees ORDER BY employee ASC";
-                                            $result = mysqli_query($connection, $query);
-                                            confirm_query($result);
-                                        ?>
+
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -1072,8 +1330,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -1090,11 +1347,12 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Consultant 5</label>
                                 <div class="col-sm-3">
                                      <select class="form-control" name="consultant5"  id="consultant5">
-                                        <?php
-                                            $query = "SELECT * FROM employees ORDER BY employee ASC";
-                                            $result = mysqli_query($connection, $query);
-                                            confirm_query($result);
-                                        ?>
+
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -1102,8 +1360,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -1120,11 +1377,12 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Consultant 6</label>
                                 <div class="col-sm-3">
                                      <select class="form-control" name="consultant6"  id="consultant6">
-                                        <?php
-                                            $query = "SELECT * FROM employees ORDER BY employee ASC";
-                                            $result = mysqli_query($connection, $query);
-                                            confirm_query($result);
-                                        ?>
+
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -1132,8 +1390,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -1392,19 +1649,18 @@ if (isset($_GET['create'])) {
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
 
-                                <?php
-                                    $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['read']);
-                                    $result = mysqli_query($connection, $query);
-                                    confirm_query($result);
+                            <?php
+                                $query = "SELECT * FROM projects WHERE projectID=".intval($_GET['read']);
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
 
-                                    $row = mysqli_fetch_assoc($result);
-                                    $query_assessment = "SELECT * FROM project_assessment WHERE projectID=".intval($_GET['read']);
-                                    $result_assessment = mysqli_query($connection, $query_assessment);
-                                    confirm_query($result_assessment);
+                                $row = mysqli_fetch_assoc($result);
+                                $query_assessment = "SELECT * FROM project_assessment WHERE projectID=".intval($_GET['read']);
+                                $result_assessment = mysqli_query($connection, $query_assessment);
+                                confirm_query($result_assessment);
 
-                                    $row_assessment = mysqli_fetch_assoc($result_assessment);
-                                    $assessment = @explode(" ", $row_assessment['assessmentID']);
-                                ?>
+                                $row_assessment = mysqli_fetch_assoc($result_assessment);
+                                $assessment = @explode(" ", $row_assessment['assessmentID']); ?>
 
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-9">
@@ -1548,11 +1804,10 @@ if (isset($_GET['create'])) {
                                 </div>
                             </div>
 
-                            <?php
-                                $query1 = "SELECT * FROM clients where clientID=".$row['clientID'];
-                                $result1 = mysqli_query($connection, $query1);
-                                $row1 = mysqli_fetch_array($result1);
-                            ?>
+                        <?php
+                            $query1 = "SELECT * FROM clients where clientID=".$row['clientID'];
+                            $result1 = mysqli_query($connection, $query1);
+                            $row1 = mysqli_fetch_array($result1); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Client</label>
@@ -1560,6 +1815,7 @@ if (isset($_GET['create'])) {
                                     <input type="text" class="form-control" name="clientID"
                                     value="<?php echo $row1['client'] ?>" readonly>
                                 </div>
+
 
                                 <label class="col-sm-2 control-label">Kickoff</label>
                                 <div class="col-sm-2">
@@ -1573,8 +1829,7 @@ if (isset($_GET['create'])) {
                                 $i=0;
                                 while($row1 = mysqli_fetch_array($result1)){
                                 $query11 = "SELECT * FROM client_locations ORDER BY clientID ASC";
-                                $result11 = mysqli_query($connection, $query11);
-                            ?>
+                                $result11 = mysqli_query($connection, $query11); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Address</label>
@@ -1732,7 +1987,7 @@ if (isset($_GET['create'])) {
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell">
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled">
                                 </div>
                             </div>
 
@@ -1771,8 +2026,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -1796,8 +2050,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -1821,8 +2074,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -1846,8 +2098,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -1859,7 +2110,7 @@ if (isset($_GET['create'])) {
                                     <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled">
                                 </div>
                             </div>
-                        </form>
+                            </form>
                     </div>
 
                     <!-- External panel -->
@@ -2086,10 +2337,10 @@ if (isset($_GET['create'])) {
                     <!-- Home panel -->
                     <div role="tabpanel" class="tab-pane active" id="home">
                         <form class="form-horizontal" action="projects.php" method="post">
-                            <div class="form-group">
-                                <?php
-                                    $assessment = @explode(" ", $row_assessment['assessmentID']);
-                                ?>
+                             <div class="form-group">
+
+                            <?php
+                                $assessment = @explode(" ", $row_assessment['assessmentID']); ?>
 
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-9">
@@ -2212,7 +2463,6 @@ if (isset($_GET['create'])) {
                                     </label>
                                 </div>
                             </div>
-
                             <input type = "hidden" name = "update" value = "<?php echo $row['projectID'] ?>">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Project</label>
@@ -2245,7 +2495,7 @@ if (isset($_GET['create'])) {
                                             $row11 = mysqli_fetch_array($result1);
                                             $query11 = "SELECT * FROM clients ORDER BY client ASC";
                                             $result11 = mysqli_query($connection, $query11);
-                                        ?>
+                                            ?>
 
                                         <option value="<?php echo $row11['clientID'] ?>"><?php echo $row11['client'] ?></option>
 
@@ -2393,12 +2643,11 @@ if (isset($_GET['create'])) {
                     </div>
 
                     <!-- Resources panel -->
-                    <?php
-                        $query = "SELECT * FROM employees ORDER BY employee ASC";
-                        $result = mysqli_query($connection, $query);
-                        confirm_query($result);
-                    ?>
-
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                     <div role="tabpanel" class="tab-pane" id="resources">
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
@@ -2412,8 +2661,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -2432,20 +2680,18 @@ if (isset($_GET['create'])) {
                                     <select class="form-control" name="consultant1"  id="consultant1">
                                         <option value=""></option>
 
-                                        <?php
-                                            $query = "SELECT * FROM employees ORDER BY employee ASC";
-                                            $result = mysqli_query($connection, $query);
-                                            confirm_query($result);
-                                        ?>
-
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
                                                 echo '<option value = "'.$c['employeeID'].'">'.$c['employee'].'</option>';
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -2462,11 +2708,12 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Consultant 2</label>
                                 <div class="col-sm-3">
                                      <select class="form-control" name="consultant2"  id="consultant2">
-                                        <?php
-                                            $query = "SELECT * FROM employees ORDER BY employee ASC";
-                                            $result = mysqli_query($connection, $query);
-                                            confirm_query($result);
-                                        ?>
+
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -2474,8 +2721,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -2492,11 +2738,12 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Consultant 3</label>
                                 <div class="col-sm-3">
                                      <select class="form-control" name="consultant3"  id="consultant3">
-                                        <?php
-                                            $query = "SELECT * FROM employees ORDER BY employee ASC";
-                                            $result = mysqli_query($connection, $query);
-                                            confirm_query($result);
-                                        ?>
+
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -2504,8 +2751,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -2522,11 +2768,12 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Consultant 4</label>
                                 <div class="col-sm-3">
                                      <select class="form-control" name="consultant4"  id="consultant4">
-                                        <?php
-                                            $query = "SELECT * FROM employees ORDER BY employee ASC";
-                                            $result = mysqli_query($connection, $query);
-                                            confirm_query($result);
-                                        ?>
+
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -2534,8 +2781,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -2552,11 +2798,12 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Consultant 5</label>
                                 <div class="col-sm-3">
                                      <select class="form-control" name="consultant5"  id="consultant5">
-                                        <?php
-                                            $query = "SELECT * FROM employees ORDER BY employee ASC";
-                                            $result = mysqli_query($connection, $query);
-                                            confirm_query($result);
-                                        ?>
+
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -2564,8 +2811,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -2582,11 +2828,12 @@ if (isset($_GET['create'])) {
                                 <label class="col-sm-2 control-label">Consultant 6</label>
                                 <div class="col-sm-3">
                                      <select class="form-control" name="consultant6"  id="consultant6">
-                                        <?php
-                                            $query = "SELECT * FROM employees ORDER BY employee ASC";
-                                            $result = mysqli_query($connection, $query);
-                                            confirm_query($result);
-                                        ?>
+
+                            <?php
+                                $query = "SELECT * FROM employees ORDER BY employee ASC";
+                                $result = mysqli_query($connection, $query);
+                                confirm_query($result);
+                            ?>
                                         <option value=""></option>
                                         <?php
                                             while ($c = mysqli_fetch_assoc($result)) {
@@ -2594,8 +2841,7 @@ if (isset($_GET['create'])) {
                                             }
 
                                             // Release returned data.
-                                            mysqli_free_result($result);
-                                        ?>
+                                            mysqli_free_result($result); ?>
                                     </select>
                                 </div>
 
@@ -2607,7 +2853,7 @@ if (isset($_GET['create'])) {
                                     <input type="text" class="form-control" name="cell6" id="cell6" placeholder="Cell">
                                 </div>
                             </div>
-                        </form>
+                            </form>
                     </div>
 
                     <!-- External panel -->
@@ -2827,7 +3073,6 @@ if (isset($_GET['create'])) {
                 $query = "SELECT * FROM clients where clientID = ".@$row['clientID'];
                 $client = mysqli_query($connection, $query);
                 confirm_query($client);
-
                 $client = mysqli_fetch_assoc($client);
 
                 echo '
