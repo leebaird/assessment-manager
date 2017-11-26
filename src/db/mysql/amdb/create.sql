@@ -157,7 +157,27 @@ CREATE TABLE projects (
   draft_delivery VARCHAR(12) DEFAULT NULL,
   final_delivery VARCHAR(12) DEFAULT NULL,
   notes TEXT,
-  status VARCHAR(255) NOT NULL
+  status VARCHAR(255) NOT NULL,
+  external_objective TEXT,
+  external_targets TEXT,
+  external_exclude TEXT,
+  external_notes TEXT,
+  internal_objective TEXT,
+  internal_targets TEXT,
+  internal_exclude TEXT,
+  internal_notes TEXT,
+  mobile_objective TEXT,
+  mobile_notes TEXT,
+  physical_objective TEXT,
+  physical_notes TEXT,
+  social_objective TEXT,
+  social_notes TEXT,
+  war_objective TEXT,
+  war_notes TEXT,
+  web_objective TEXT,
+  web_notes TEXT,
+  wireless_objective TEXT,
+  wireless_notes TEXT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE projects
