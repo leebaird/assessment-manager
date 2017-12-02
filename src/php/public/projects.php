@@ -317,6 +317,7 @@
                 }
             }
             });
+
         $('#consultant4').on('change',function(){
             var consultant1 = $(this).val();
 
@@ -651,8 +652,57 @@ if (isset($_POST['create'])) {
 
         $query= "insert into project_locations values('',$projectid,'$address','$city','$state','$zip','$phone')";
         $result = mysqli_query($connection, $query);
+        print "<script>window.location='projects.php?create&psl=external'</script>";
         confirm_query($result);
     }
+
+    //resource
+    /*
+    $projectmgr = $_POST['projectmgr'];
+    $emailpmg = $_POST['emailpmg'];
+    $cellpmg = $_POST['cellpmg'];
+    $consultant1 = $_POST['consultant1'];
+    $email1 = $_POST['email1'];
+    $cell1 = $_POST['cell1'];
+    $consultant2 = $_POST['consultant2'];
+    $email2 = $_POST['email2'];
+    $cell2 = $_POST['cell2'];
+    $consultant3 = $_POST['consultant3'];
+    $email3 = $_POST['email3'];
+    $cell3 = $_POST['cell3'];
+    $consultant4 = $_POST['consultant4'];
+    $email4 = $_POST['email4'];
+    $cell4 = $_POST['cell4'];
+    $consultant5 = $_POST['consultant5'];
+    $email5 = $_POST['email5'];
+    $cell5 = $_POST['cell5'];
+    $consultant6 = $_POST['consultant6'];
+    $email6 = $_POST['email6'];
+    $cell6 = $_POST['cell6'];
+
+    //external
+    $ext_objective = $_POST['ext_objective'];
+    $ext_targets = $_POST['ext_targets'];
+    $ext_exclude = $_POST['ext_exclude'];
+    $ext_notes = $_POST['ext_notes'];
+    print $query_external = "INSERT INTO projects (external_objective, external_targets, external_exclude, external_notes) VALUES ('$ext_objective', '$ext_targets', '$ext_exclude', '$ext_notes')";exit;
+    $result = mysqli_query($connection, $query_external);
+    confirm_query($result);
+
+    //internal
+
+    //mobile
+
+    //physical
+
+    //social eng
+
+    //war dall
+
+    //web
+
+    //wireless
+    */
 }
 
 if (isset($_POST['update'])) {
@@ -693,7 +743,277 @@ if (isset($_POST['update'])) {
     $result = mysqli_query($connection, $query);
     confirm_query($result);
     }
+
+    //resource
+    /*
+    $projectmgr = $_POST['projectmgr'];
+    $emailpmg = $_POST['emailpmg'];
+    $cellpmg = $_POST['cellpmg'];
+    $consultant1 = $_POST['consultant1'];
+    $email1 = $_POST['email1'];
+    $cell1 = $_POST['cell1'];
+    $consultant2 = $_POST['consultant2'];
+    $email2 = $_POST['email2'];
+    $cell2 = $_POST['cell2'];
+    $consultant3 = $_POST['consultant3'];
+    $email3 = $_POST['email3'];
+    $cell3 = $_POST['cell3'];
+    $consultant4 = $_POST['consultant4'];
+    $email4 = $_POST['email4'];
+    $cell4 = $_POST['cell4'];
+    $consultant5 = $_POST['consultant5'];
+    $email5 = $_POST['email5'];
+    $cell5 = $_POST['cell5'];
+    $consultant6 = $_POST['consultant6'];
+    $email6 = $_POST['email6'];
+    $cell6 = $_POST['cell6'];
+    */
+
+    //internal
+
+    //mobile
+
+    //physical
+
+    //social eng
+
+    //war dall
+
+    //web
+
+    //wireless
+
 }
+
+    //update external
+    if(isset($_POST['update_ext'])){
+    $ext_objective = $_POST['ext_objective'];
+    $ext_targets = $_POST['ext_targets'];
+    $ext_exclude = $_POST['ext_exclude'];
+    $ext_notes = $_POST['ext_notes'];
+
+    // UPDATE RECORD.
+    @$query_external = "UPDATE projects SET external_objective='$ext_objective',  external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes' WHERE projectID=".$_POST['projectID'];
+    $result = mysqli_query($connection, $query_external);
+    confirm_query($result);
+    }
+
+    //update external Create
+    if(isset($_POST['create_external'])){
+        $maxid = 0;
+        $query = 'SELECT MAX(projectID) AS `maxid` FROM `projects`';
+        $row = mysqli_query($connection, $query);
+        $row1 = mysqli_fetch_row($row);
+        $idn = $row1[0]+1;
+
+        //if ($idn==$_POST['projectID']) {
+        $ext_objective = $_POST['ext_objective'];
+        $ext_targets = $_POST['ext_targets'];
+        $ext_exclude = $_POST['ext_exclude'];
+        $ext_notes = $_POST['ext_notes'];
+
+        // UPDATE RECORD.
+        @$query_external = "UPDATE projects SET external_objective='$ext_objective',  external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes' WHERE projectID=".$row1[0];
+        $result = mysqli_query($connection, $query_external);
+        print "<script>window.location='projects.php?create&psl=internal'</script>";
+        confirm_query($result);
+        //}
+        /*  else {
+            print "<script>
+            alert('Enter project information first');
+            window.location='projects.php?create&projectID='+$idn;
+            </script>";
+        }*/
+    }
+
+    //update internal
+    if(isset($_POST['int_submit'])){
+        $int_objective = $_POST['int_objective'];
+        $int_targets = $_POST['int_targets'];
+        $int_exclude = $_POST['int_exclude'];
+        $int_notes = $_POST['int_notes'];
+
+        // UPDATE RECORD.
+        @$query_external = "UPDATE projects SET internal_objective='$int_objective',  internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes' WHERE projectID=".$_POST['projectID'];
+        $result = mysqli_query($connection, $query_external);
+        confirm_query($result);
+    }
+
+    //update internal create
+    if(isset($_POST['create_internal'])){
+        $maxid = 0;
+        $query = 'SELECT MAX(projectID) AS `maxid` FROM `projects`';
+        $row = mysqli_query($connection, $query);
+        $row1 = mysqli_fetch_row($row);
+        $int_objective = $_POST['int_objective'];
+        $int_targets = $_POST['int_targets'];
+        $int_exclude = $_POST['int_exclude'];
+        $int_notes = $_POST['int_notes'];
+
+        // UPDATE RECORD.
+        @$query_internal = "UPDATE projects SET internal_objective='$int_objective',  internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes' WHERE projectID=".$row1[0];
+        $result = mysqli_query($connection, $query_internal);
+        print "<script>window.location='projects.php?create&psl=mobile'</script>";
+        confirm_query($result);
+    }
+
+    //update internal
+    if(isset($_POST['mob_submit'])){
+        $mob_objective = $_POST['mob_objective'];
+        $mob_notes = $_POST['mob_notes'];
+
+        // UPDATE RECORD.
+        @$query_external = "UPDATE projects SET mobile_objective='$mob_objective',  mobile_notes='$mob_notes' WHERE projectID=".$_POST['projectID'];
+        $result = mysqli_query($connection, $query_external);
+        confirm_query($result);
+    }
+
+    //update mobile create
+    if(isset($_POST['create_mobile'])){
+        $maxid = 0;
+        $query = 'SELECT MAX(projectID) AS `maxid` FROM `projects`';
+        $row = mysqli_query($connection, $query);
+        $row1 = mysqli_fetch_row($row);
+        $mob_objective = $_POST['mob_objective'];
+        $mob_notes = $_POST['mob_notes'];
+        @$query_mobile = "UPDATE projects SET mobile_objective='$mob_objective',  mobile_notes='$mob_notes' WHERE projectID=".$row1[0];
+        $result = mysqli_query($connection, $query_mobile);
+        print "<script>window.location='projects.php?create&psl=physical'</script>";
+        confirm_query($result);
+    }
+
+    //update physical
+    if(isset($_POST['physical_submit'])){
+        $physical_objective = $_POST['phy_objective'];
+        $physical_notes = $_POST['phy_notes'];
+
+        // UPDATE RECORD.
+        @$query_external = "UPDATE projects SET physical_objective='$physical_objective',  physical_notes='$physical_notes' WHERE projectID=".$_POST['projectID'];
+        $result = mysqli_query($connection, $query_external);
+        confirm_query($result);
+    }
+
+    //update physical create
+    if(isset($_POST['create_physical'])){
+        $maxid = 0;
+        $query = 'SELECT MAX(projectID) AS `maxid` FROM `projects`';
+        $row = mysqli_query($connection, $query);
+        $row1 = mysqli_fetch_row($row);
+        $physical_objective = $_POST['phy_objective'];
+        $physical_notes = $_POST['phy_notes'];
+        @$query_physical = "UPDATE projects SET physical_objective='$physical_objective',  physical_notes='$physical_notes' WHERE projectID=".$row1[0];
+        $result = mysqli_query($connection, $query_physical);
+        print "<script>window.location='projects.php?create&psl=social-eng'</script>";
+        confirm_query($result);
+    }
+
+    //update social
+    if(isset($_POST['se_submit'])){
+        $social_objective = $_POST['se_objective'];
+        $social_notes = $_POST['se_notes'];
+
+        // UPDATE RECORD.
+        @$query_external = "UPDATE projects SET social_objective='$social_objective',  social_notes='$social_notes' WHERE projectID=".$_POST['projectID'];
+        $result = mysqli_query($connection, $query_external);
+        confirm_query($result);
+    }
+
+    //update social create
+    if(isset($_POST['create_se'])){
+        $maxid = 0;
+        $query = 'SELECT MAX(projectID) AS `maxid` FROM `projects`';
+        $row = mysqli_query($connection, $query);
+        $row1 = mysqli_fetch_row($row);
+        $social_objective = $_POST['se_objective'];
+        $social_notes = $_POST['se_notes'];
+        @$query_social = "UPDATE projects SET social_objective='$social_objective',  social_notes='$social_notes' WHERE projectID=".$row1[0];
+        $result = mysqli_query($connection, $query_social);
+        print "<script>window.location='projects.php?create&psl=war-dail'</script>";
+        confirm_query($result);
+    }
+
+    //update war
+    if(isset($_POST['war_submit'])){
+        $war_objective = $_POST['war_objective'];
+        $war_notes = $_POST['war_notes'];
+
+        // UPDATE RECORD.
+        @$query_external = "UPDATE projects SET war_objective='$war_objective',  war_notes='$war_notes' WHERE projectID=".$_POST['projectID'];
+        $result = mysqli_query($connection, $query_external);
+        confirm_query($result);
+    }
+
+    //update social create
+    if(isset($_POST['create_war'])){
+        $maxid = 0;
+        $query = 'SELECT MAX(projectID) AS `maxid` FROM `projects`';
+        $row = mysqli_query($connection, $query);
+        $row1 = mysqli_fetch_row($row);
+        $war_objective = $_POST['war_objective'];
+        $war_notes = $_POST['war_notes'];
+        @$query_war = "UPDATE projects SET war_objective='$war_objective',  war_notes='$war_notes' WHERE projectID=".$row1[0];
+        $result = mysqli_query($connection, $query_war);
+        print "<script>window.location='projects.php?create&psl=web'</script>";
+        confirm_query($result);
+    }
+
+    //update social
+    if(isset($_POST['web_submit'])){
+        $web_objective = $_POST['web_objective'];
+        $web_notes = $_POST['web_notes'];
+
+        // UPDATE RECORD.
+        @$query_external = "UPDATE projects SET web_objective='$web_objective',  web_notes='$web_notes' WHERE projectID=".$_POST['projectID'];
+        $result = mysqli_query($connection, $query_external);
+        confirm_query($result);
+    }
+
+    //update web create
+    if(isset($_POST['create_web'])){
+        $maxid = 0;
+        $query = 'SELECT MAX(projectID) AS `maxid` FROM `projects`';
+        $row = mysqli_query($connection, $query);
+        $row1 = mysqli_fetch_row($row);
+        $web_objective = $_POST['web_objective'];
+        $web_notes = $_POST['web_notes'];
+        @$query_web = "UPDATE projects SET web_objective='$web_objective',  web_notes='$web_notes' WHERE projectID=".$row1[0];
+        $result = mysqli_query($connection, $query_web);
+        print "<script>window.location='projects.php?create&psl=wireless'</script>";
+        confirm_query($result);
+    }
+
+    if(isset($_POST['wireless_submit'])){
+        $wireless_objective = $_POST['wireless_objective'];
+        $wireless_notes = $_POST['wireless_notes'];
+
+        // UPDATE RECORD.
+        @$query_external = "UPDATE projects SET wireless_objective='$wireless_objective',  wireless_notes='$wireless_notes' WHERE projectID=".$_POST['projectID'];
+        $result = mysqli_query($connection, $query_external);
+        confirm_query($result);
+    }
+
+    //update web create
+    if(isset($_POST['create_wire'])){
+        $maxid = 0;
+        $query = 'SELECT MAX(projectID) AS `maxid` FROM `projects`';
+        $row = mysqli_query($connection, $query);
+        $row1 = mysqli_fetch_row($row);
+        $wireless_objective = $_POST['wire_objective'];
+        $wireless_notes = $_POST['wire_notes'];
+        @$query_wireless = "UPDATE projects SET wireless_objective='$wireless_objective',  wireless_notes='$wireless_notes' WHERE projectID=".$row1[0];
+        $result = mysqli_query($connection, $query_wireless);
+        confirm_query($result);
+    }
+
+    if(isset($_POST['wire_submit'])){
+        $wireless_objective = $_POST['wire_objective'];
+        $wireless_notes = $_POST['wire_notes'];
+
+        // UPDATE RECORD.
+        @$query_external = "UPDATE projects SET wireless_objective='$wireless_objective',  wireless_notes='$wireless_notes' WHERE projectID=".$_POST['projectID'];
+        $result = mysqli_query($connection, $query_external);
+        confirm_query($result);
+    }
 
 if (isset($_GET['delete'])) {
     // DELETE RECORD.
@@ -722,23 +1042,77 @@ if (isset($_GET['create'])) {
             </div>
             <div class="panel-body">
                 <ul class="nav nav-tabs" role="tablist">
+                     <?php if(@$_GET['psl']!='external' && @$_GET['psl']!='internal' && @$_GET['psl']!='mobile' && @$_GET['psl']!='physical' && @$_GET['psl']!='social-eng' && @$_GET['psl']!='war-dail' && @$_GET['psl']!='web' && @$_GET['psl']!='wireless') { ?>
                     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                    <?php } else { ?>
+
+                    <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                    <?php } ?>
                     <li role="presentation"><a href="#resources" aria-controls="resources" role="tab" data-toggle="tab">Resources</a></li>
+                     <?php if(@$_GET['psl']=='external') { ?>
+                    <li role="presentation" class="active"><a href="#external" aria-controls="external" role="tab" data-toggle="tab">External</a></li>
+                    <?php } else {?>
+
                     <li role="presentation"><a href="#external" aria-controls="external" role="tab" data-toggle="tab">External</a></li>
+                    <?php } ?>
+                    <?php if(@$_GET['psl']=='internal') { ?>
+
+                    <li role="presentation" class="active"><a href="#internal" aria-controls="internal" role="tab" data-toggle="tab">Internal</a></li>
+                    <?php } else {?>
                     <li role="presentation"><a href="#internal" aria-controls="internal" role="tab" data-toggle="tab">Internal</a></li>
+                    <?php } ?>
+                    <?php if(@$_GET['psl']=='mobile') { ?>
+
+                    <li role="presentation" class="active"><a href="#mobile" aria-controls="mobile" role="tab" data-toggle="tab">Mobile</a></li>
+                    <?php } else {?>
                     <li role="presentation"><a href="#mobile" aria-controls="mobile" role="tab" data-toggle="tab">Mobile</a></li>
+
+                    <?php } ?>
+                    <?php if(@$_GET['psl']=='physical') { ?>
+
+                    <li role="presentation" class="active"><a href="#physical" aria-controls="physical" role="tab" data-toggle="tab">Physical</a></li>
+                    <?php } else {?>
                     <li role="presentation"><a href="#physical" aria-controls="physical" role="tab" data-toggle="tab">Physical</a></li>
+                    <?php } ?>
+                    <?php if(@$_GET['psl']=='social-eng') { ?>
+                    <li role="presentation" class="active"><a href="#social-eng" aria-controls="social-eng" role="tab" data-toggle="tab">Social Eng</a></li>
+                    <?php } else {?>
                     <li role="presentation"><a href="#social-eng" aria-controls="social-eng" role="tab" data-toggle="tab">Social Eng</a></li>
+
+                    <?php } ?>
+                    <?php if(@$_GET['psl']=='war-dail') { ?>
+                    <li role="presentation" class="active"><a href="#war-dail" aria-controls="war-dail" role="tab" data-toggle="tab">War Dail</a></li>
+                    <?php } else {?>
                     <li role="presentation"><a href="#war-dail" aria-controls="war-dail" role="tab" data-toggle="tab">War Dail</a></li>
+                    <?php } ?>
+                    <?php if(@$_GET['psl']=='web') { ?>
+                    <li role="presentation" class="active"><a href="#web" aria-controls="web" role="tab" data-toggle="tab">Web</a></li>
+                    <?php } else {?>
                     <li role="presentation"><a href="#web" aria-controls="web" role="tab" data-toggle="tab">Web</a></li>
+                    <?php } ?>
+                     <?php if(@$_GET['psl']=='wireless') { ?>
+
+                    <li role="presentation" class="active"><a href="#wireless" aria-controls="wireless" role="tab" data-toggle="tab">Wireless</a></li>
+                    <?php } else {?>
+
                     <li role="presentation"><a href="#wireless" aria-controls="wireless" role="tab" data-toggle="tab">Wireless</a></li>
+
+                    <?php } ?>
+
                 </ul>
                 <br>
                 <div class="tab-content">
                     <!-- External panel -->
+                    <?php if(@$_GET['psl']!='external' && @$_GET['psl']!='internal' && @$_GET['psl']!='mobile' && @$_GET['psl']!='physical' && @$_GET['psl']!='social-eng' && @$_GET['psl']!='war-dail' && @$_GET['psl']!='web' && @$_GET['psl']!='wireless') { ?>
                     <div role="tabpanel" class="tab-pane active" id="home">
+
+                    <?php } else { ?>
+
+                    <div role="tabpanel" class="tab-pane " id="home">
+                    <?php } ?>
                         <form class="form-horizontal" action="projects.php" method="post">
-                            <div class="form-group">
+                        <input type="hidden" name="psl" value="external" />
+                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Assessment</label>
                                 <div class="col-sm-9">
                                     <label class="checkbox-inline">
@@ -1402,12 +1776,26 @@ if (isset($_GET['create'])) {
                                     <input type="text" class="form-control" name="cell6" id="cell6" placeholder="Cell">
                                 </div>
                             </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-primary" type="submit" name="create">Create</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
+                            </div>
                             </form>
                     </div>
 
-                    <!-- External panel -->
-                    <div role="tabpanel" class="tab-pane" id="external">
+                   <!-- External panel -->
+                    <?php if(@$_GET['psl']=='external') { ?>
+                    <div role="tabpanel" class="tab-pane active" id="external">
+
+                    <?php } else { ?>
+
+                    <div role="tabpanel" class="tab-pane " id="external">
+                    <?php } ?>
+
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="
+                        <?php print $_GET['projectID']; ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
@@ -1435,12 +1823,24 @@ if (isset($_GET['create'])) {
                                     <textarea class="form-control" name="ext_notes" placeholder="Notes" rows="6"></textarea>
                                 </div>
                             </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-primary" type="submit" name="create_external">Create</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
+                            </div>
                         </form>
                     </div>
 
-                    <!-- Internal panel -->
-                    <div role="tabpanel" class="tab-pane" id="internal">
+                   <!-- Internal panel -->
+                    <?php if(@$_GET['psl']=='internal') { ?>
+                    <div role="tabpanel" class="tab-pane active" id="internal">
+
+                    <?php } else { ?>
+
+                    <div role="tabpanel" class="tab-pane " id="internal">
+                    <?php } ?>
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['projectID'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
@@ -1468,12 +1868,23 @@ if (isset($_GET['create'])) {
                                     <textarea class="form-control" name="int_notes" placeholder="Notes" rows="6"></textarea>
                                 </div>
                             </div>
+                            <div class="form-actions">
+                                <button class="btn btn-primary" type="submit" name="create_internal">Create</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
+                            </div>
                         </form>
                     </div>
 
                     <!-- Mobile panel -->
-                    <div role="tabpanel" class="tab-pane" id="mobile">
+                    <?php if(@$_GET['psl']=='mobile') { ?>
+                    <div role="tabpanel" class="tab-pane active" id="mobile">
+
+                    <?php } else { ?>
+
+                    <div role="tabpanel" class="tab-pane " id="mobile">
+                    <?php } ?>
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['projectID'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
@@ -1487,12 +1898,25 @@ if (isset($_GET['create'])) {
                                     <textarea class="form-control" name="mob_notes" placeholder="Notes" rows="6"></textarea>
                                 </div>
                             </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-primary" type="submit" name="create_mobile">Create</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
+                            </div>
                         </form>
                     </div>
 
                     <!-- Physical panel -->
-                    <div role="tabpanel" class="tab-pane" id="physical">
+                    <?php if(@$_GET['psl']=='physical') { ?>
+                    <div role="tabpanel" class="tab-pane active" id="physical">
+
+                    <?php } else { ?>
+
+                    <div role="tabpanel" class="tab-pane " id="physical">
+                    <?php } ?>
+
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['projectID'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
@@ -1506,12 +1930,25 @@ if (isset($_GET['create'])) {
                                     <textarea class="form-control" name="phy_notes" placeholder="Notes" rows="6"></textarea>
                                 </div>
                             </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-primary" type="submit" name="create_physical">Create</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
+                            </div>
                         </form>
                     </div>
 
                     <!-- Social Eng panel -->
-                    <div role="tabpanel" class="tab-pane" id="social-eng">
+                    <?php if(@$_GET['psl']=='social-eng') { ?>
+                    <div role="tabpanel" class="tab-pane active" id="social-eng">
+
+                    <?php } else { ?>
+
+                    <div role="tabpanel" class="tab-pane " id="social-eng">
+                    <?php } ?>
+
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['projectID'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
@@ -1525,12 +1962,24 @@ if (isset($_GET['create'])) {
                                     <textarea class="form-control" name="se_notes" placeholder="Notes" rows="6"></textarea>
                                 </div>
                             </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-primary" type="submit" name="create_se">Create</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
+                            </div>
                         </form>
                     </div>
 
                     <!-- War Dail panel -->
-                    <div role="tabpanel" class="tab-pane" id="war-dail">
+                    <?php if(@$_GET['psl']=='war-dail') { ?>
+                    <div role="tabpanel" class="tab-pane active" id="war-dail">
+
+                    <?php } else { ?>
+
+                    <div role="tabpanel" class="tab-pane " id="war-dail">
+                    <?php } ?>
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['projectID'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
@@ -1544,12 +1993,25 @@ if (isset($_GET['create'])) {
                                     <textarea class="form-control" name="war_notes" placeholder="Notes" rows="6"></textarea>
                                 </div>
                             </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-primary" type="submit" name="create_war">Create</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
+                            </div>
                         </form>
                     </div>
 
                     <!-- Web panel -->
-                    <div role="tabpanel" class="tab-pane" id="web">
+                    <?php if(@$_GET['psl']=='web') { ?>
+                    <div role="tabpanel" class="tab-pane active" id="web">
+
+                    <?php } else { ?>
+
+                    <div role="tabpanel" class="tab-pane " id="web">
+                    <?php } ?>
+
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['projectID'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
@@ -1563,12 +2025,23 @@ if (isset($_GET['create'])) {
                                     <textarea class="form-control" name="web_notes" placeholder="Notes" rows="6"></textarea>
                                 </div>
                             </div>
+                            <div class="form-actions">
+                                <button class="btn btn-primary" type="submit" name="create_web">Create</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
+                            </div>
                         </form>
                     </div>
 
                     <!-- Wireless panel -->
-                    <div role="tabpanel" class="tab-pane" id="wireless">
+                    <?php if(@$_GET['psl']=='wireless') { ?>
+                    <div role="tabpanel" class="tab-pane active" id="wireless">
+
+                    <?php } else { ?>
+
+                    <div role="tabpanel" class="tab-pane " id="wireless">
+                    <?php } ?>
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['projectID'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
@@ -1581,6 +2054,11 @@ if (isset($_GET['create'])) {
                                 <div class="col-sm-9">
                                     <textarea class="form-control" name="wire_notes" placeholder="Notes" rows="6"></textarea>
                                 </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-primary" type="submit" name="create_wire">Create</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
                     </div>
@@ -1807,7 +2285,7 @@ if (isset($_GET['create'])) {
                         <?php
                             $query1 = "SELECT * FROM clients where clientID=".$row['clientID'];
                             $result1 = mysqli_query($connection, $query1);
-                            $row1 = mysqli_fetch_array($result1); ?>
+                            $row1 = @mysqli_fetch_array($result1); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Client</label>
@@ -1827,7 +2305,7 @@ if (isset($_GET['create'])) {
                                 $query1 = "SELECT * FROM client_locations where clientID=".$row['clientID'];
                                 $result1 = mysqli_query($connection, $query1);
                                 $i=0;
-                                while($row1 = mysqli_fetch_array($result1)){
+                                while($row1 = @mysqli_fetch_array($result1)){
                                 $query11 = "SELECT * FROM client_locations ORDER BY clientID ASC";
                                 $result11 = mysqli_query($connection, $query11); ?>
 
@@ -2119,28 +2597,28 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="ext_objective" rows="2" readonly></textarea>
+                                    <textarea class="form-control" name="ext_objective" rows="2" readonly><?php echo @$row['external_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="ext_targets" value="" readonly>
+                                    <input type="text" class="form-control" name="ext_targets" value="<?php echo @$row['external_targets'] ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="ext_exclude" value="" readonly>
+                                    <input type="text" class="form-control" name="ext_exclude" value="<?php echo @$row['external_exclude'] ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="ext_notes" rows="6" readonly></textarea>
+                                    <textarea class="form-control" name="ext_notes" rows="6" readonly><?php echo @$row['external_notes'] ?></textarea>
                                 </div>
                             </div>
                         </form>
@@ -2152,28 +2630,28 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="int_objective" rows="2" readonly></textarea>
+                                    <textarea class="form-control" name="int_objective" rows="2" readonly><?php echo @$row['internal_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="int_targets" value="" readonly>
+                                    <input type="text" class="form-control" name="int_targets" value="<?php echo @$row['internal_targets'] ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="int_exclude" value="" readonly>
+                                    <input type="text" class="form-control" name="int_exclude" value="<?php echo @$row['internal_exclude'] ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="int_notes" rows="6" readonly></textarea>
+                                    <textarea class="form-control" name="int_notes" rows="6" readonly><?php echo @$row['internal_notes'] ?></textarea>
                                 </div>
                             </div>
                         </form>
@@ -2185,14 +2663,14 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="mob_objective" rows="2" readonly></textarea>
+                                    <textarea class="form-control" name="mob_objective" rows="2" readonly><?php echo @$row['mobile_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="mob_notes" rows="6" readonly></textarea>
+                                    <textarea class="form-control" name="mob_notes" rows="6" readonly><?php echo @$row['mobile_notes'] ?></textarea>
                                 </div>
                             </div>
                         </form>
@@ -2204,14 +2682,14 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="phy_objective" rows="2" readonly></textarea>
+                                    <textarea class="form-control" name="phy_objective" rows="2" readonly><?php echo @$row['physical_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="phy_notes" rows="6" readonly></textarea>
+                                    <textarea class="form-control" name="phy_notes" rows="6" readonly><?php echo @$row['physical_notes'] ?></textarea>
                                 </div>
                             </div>
                         </form>
@@ -2223,14 +2701,14 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="se_objective" rows="2" readonly></textarea>
+                                    <textarea class="form-control" name="se_objective" rows="2" readonly><?php echo @$row['social_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="se_notes" rows="6" readonly></textarea>
+                                    <textarea class="form-control" name="se_notes" rows="6" readonly><?php echo @$row['social_notes'] ?></textarea>
                                 </div>
                             </div>
                         </form>
@@ -2242,14 +2720,14 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="war_objective" rows="2" readonly></textarea>
+                                    <textarea class="form-control" name="war_objective" rows="2" readonly><?php echo @$row['war_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="war_notes" rows="6" readonly></textarea>
+                                    <textarea class="form-control" name="war_notes" rows="6" readonly><?php echo @$row['war_notes'] ?></textarea>
                                 </div>
                             </div>
                         </form>
@@ -2261,14 +2739,14 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="web_objective" rows="2" readonly></textarea>
+                                    <textarea class="form-control" name="web_objective" rows="2" readonly><?php echo @$row['web_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="web_notes" rows="6" readonly></textarea>
+                                    <textarea class="form-control" name="web_notes" rows="6" readonly><?php echo @$row['web_notes'] ?></textarea>
                                 </div>
                             </div>
                         </form>
@@ -2280,14 +2758,14 @@ if (isset($_GET['create'])) {
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="wire_objective" rows="2" readonly></textarea>
+                                    <textarea class="form-control" name="wire_objective" rows="2" readonly><?php echo @$row['wireless_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="wire_notes" rows="6" readonly></textarea>
+                                    <textarea class="form-control" name="wire_notes" rows="6" readonly><?php echo @$row['wireless_notes'] ?></textarea>
                                 </div>
                             </div>
                         </form>
@@ -2853,38 +3331,49 @@ if (isset($_GET['create'])) {
                                     <input type="text" class="form-control" name="cell6" id="cell6" placeholder="Cell">
                                 </div>
                             </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-warning" type="submit">Update</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
+                            </div>
                             </form>
                     </div>
 
                     <!-- External panel -->
                     <div role="tabpanel" class="tab-pane" id="external">
                         <form class="form-horizontal" action="projects.php" method="post">
-                            <div class="form-group">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
+                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="ext_objective" rows="2"></textarea>
+                                    <textarea class="form-control" name="ext_objective" rows="2"><?php echo $row['external_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="ext_targets" value="">
+                                    <input type="text" class="form-control" name="ext_targets" value="<?php echo $row['external_targets'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="ext_exclude" value="">
+                                    <input type="text" class="form-control" name="ext_exclude" value="<?php echo $row['external_exclude'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="ext_notes" rows="6"></textarea>
+                                    <textarea class="form-control" name="ext_notes" rows="6"><?php echo $row['external_notes'] ?></textarea>
                                 </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-warning" type="submit" name="update_ext">Update</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
                     </div>
@@ -2892,32 +3381,38 @@ if (isset($_GET['create'])) {
                     <!-- Internal panel -->
                     <div role="tabpanel" class="tab-pane" id="internal">
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="int_objective" rows="2"></textarea>
+                                    <textarea class="form-control" name="int_objective" rows="2"><?php echo $row['internal_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="int_targets" value="">
+                                    <input type="text" class="form-control" name="int_targets" value="<?php echo $row['internal_targets'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="int_exclude" value="">
+                                    <input type="text" class="form-control" name="int_exclude" value="<?php echo $row['internal_exclude'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="int_notes" rows="6"></textarea>
+                                    <textarea class="form-control" name="int_notes" rows="6"><?php echo $row['internal_notes'] ?></textarea>
                                 </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-warning" type="submit" name="int_submit">Update</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
                     </div>
@@ -2925,18 +3420,25 @@ if (isset($_GET['create'])) {
                     <!-- Mobile panel -->
                     <div role="tabpanel" class="tab-pane" id="mobile">
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="mob_objective" rows="2"></textarea>
+                                    <textarea class="form-control" name="mob_objective" rows="2"><?php echo $row['mobile_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="mob_notes" rows="6"></textarea>
+                                    <textarea class="form-control" name="mob_notes" rows="6"><?php echo $row['mobile_notes'] ?></textarea>
                                 </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-warning" type="submit" name="mob_submit">Update</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
                     </div>
@@ -2944,18 +3446,24 @@ if (isset($_GET['create'])) {
                     <!-- Physical panel -->
                     <div role="tabpanel" class="tab-pane" id="physical">
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="phy_objective" rows="2"></textarea>
+                                    <textarea class="form-control" name="phy_objective" rows="2"><?php echo $row['physical_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="phy_notes" rows="6"></textarea>
+                                    <textarea class="form-control" name="phy_notes" rows="6"><?php echo $row['physical_notes'] ?></textarea>
                                 </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-warning" type="submit" name="physical_submit">Update</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
                     </div>
@@ -2963,18 +3471,24 @@ if (isset($_GET['create'])) {
                     <!-- Social Eng panel -->
                     <div role="tabpanel" class="tab-pane" id="social-eng">
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="se_objective" rows="2"></textarea>
+                                    <textarea class="form-control" name="se_objective" rows="2"><?php echo $row['social_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="se_notes" rows="6"></textarea>
+                                    <textarea class="form-control" name="se_notes" rows="6"><?php echo $row['social_notes'] ?></textarea>
                                 </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-warning" type="submit" name="se_submit">Update</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
                     </div>
@@ -2982,18 +3496,24 @@ if (isset($_GET['create'])) {
                     <!-- War Dail panel -->
                     <div role="tabpanel" class="tab-pane" id="war-dail">
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="war_objective" rows="2"></textarea>
+                                    <textarea class="form-control" name="war_objective" rows="2"><?php echo $row['war_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="war_notes" rows="6"></textarea>
+                                    <textarea class="form-control" name="war_notes" rows="6"><?php echo $row['war_notes'] ?></textarea>
                                 </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-warning" type="submit" name="war_submit">Update</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
                     </div>
@@ -3001,18 +3521,24 @@ if (isset($_GET['create'])) {
                     <!-- Web panel -->
                     <div role="tabpanel" class="tab-pane" id="web">
                         <form class="form-horizontal" action="projects.php" method="post">
+                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="web_objective" rows="2"></textarea>
+                                    <textarea class="form-control" name="web_objective" rows="2"><?php echo $row['web_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="web_notes" rows="6"></textarea>
+                                    <textarea class="form-control" name="web_notes" rows="6"><?php echo $row['web_notes'] ?></textarea>
                                 </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-warning" type="submit" name="web_submit">Update</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
                     </div>
@@ -3020,18 +3546,24 @@ if (isset($_GET['create'])) {
                     <!-- Wireless panel -->
                     <div role="tabpanel" class="tab-pane" id="wireless">
                         <form class="form-horizontal" action="projects.php" method="post">
-                            <div class="form-group">
+                         <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
+                           <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="wire_objective" rows="2"></textarea>
+                                    <textarea class="form-control" name="wire_objective" rows="2"><?php echo $row['wireless_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="wire_notes" rows="6"></textarea>
+                                    <textarea class="form-control" name="wire_notes" rows="6"><?php echo $row['wireless_notes'] ?></textarea>
                                 </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-warning" type="submit" name="wire_submit">Update</button>
+                                <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
                     </div>
@@ -3045,7 +3577,18 @@ if (isset($_GET['create'])) {
     // DISPLAY LIST OF RECORDS. ?>
 
     <br>
-    <a class="btn btn-primary" href="projects.php?create" input type="button">New</a>
+    <?php
+        $maxid = 0;
+        $query = 'SELECT MAX(projectID) AS `maxid` FROM `projects`';
+        $row = mysqli_query($connection, $query);
+        $row1 = mysqli_fetch_row($row);
+
+        if ($row1[0]) {
+            $maxid = $row1[0]+1;
+    }
+    ?>
+
+    <a class="btn btn-primary" href="projects.php?create&projectID=<?php echo $maxid ?>" input type="button">New</a>
     <br>
     <br>
 
