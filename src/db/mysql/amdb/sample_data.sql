@@ -30,7 +30,7 @@ INSERT INTO `findings` (`findingID`, `modified`, `type`, `finding`, `observation
 (4, '2017-09-18 20:58:18', 'Web', 'Reflected XSS', '', '', '', '');
 
 INSERT INTO `projects` (`projectID`, `modified`, `project`, `assessmentID`, `clientID`, `kickoff`, `start`, `finish`, `tech_qa`, `draft_delivery`, `final_delivery`, `notes`, `status`) VALUES
-(11, '2017-11-12 19:48:17', '2017 Fall External Assessment', 1, 3, '11/13/2017', '11/14/2017', '11/17/2017', '11/22/2017', '11/24/2017', '', '', 'Contract');
+(1, '2017-11-12 19:48:17', '2017 Fall External Assessment', 1, 3, '11/13/2017', '11/14/2017', '11/17/2017', '11/22/2017', '11/24/2017', '', '', 'Contract');
 
 INSERT INTO `hostvulns` (`hostvulnID`, `modified`, `tool`, `vulnerability`, `findingID`, `cvss_base`, `internal`, `external`, `description`, `remediation`, `see_also`, `published`, `updated`) VALUES
 (1, '2017-09-22 20:45:52', 'Nessus', 'OS X <10.10', 2, 10, 'High', 'Critical', 'qqq', 'www', 'eee', '', ''),

@@ -617,7 +617,7 @@ if (isset($_POST['create'])) {
         ?>
         <br>
         <button class="btn btn-danger" type="button"><strong>Warning!</strong> You must enter a client.</button>
-        <br> href="projects.php" title="projects"<br>
+        <br><br>
         <a class="btn btn-default" href="projects.php?create" input type="button">Back</a>
         <?php exit;
     }
@@ -652,7 +652,6 @@ if (isset($_POST['create'])) {
 
         $query= "insert into project_locations values('',$projectid,'$address','$city','$state','$zip','$phone')";
         $result = mysqli_query($connection, $query);
-        print "<script>window.location='projects.php?create&psl=external'</script>";
         confirm_query($result);
     }
 
@@ -815,7 +814,6 @@ if (isset($_POST['update'])) {
         // UPDATE RECORD.
         @$query_external = "UPDATE projects SET external_objective='$ext_objective',  external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_external);
-        print "<script>window.location='projects.php?create&psl=internal'</script>";
         confirm_query($result);
         //}
         /*  else {
@@ -853,7 +851,6 @@ if (isset($_POST['update'])) {
         // UPDATE RECORD.
         @$query_internal = "UPDATE projects SET internal_objective='$int_objective',  internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_internal);
-        print "<script>window.location='projects.php?create&psl=mobile'</script>";
         confirm_query($result);
     }
 
@@ -878,7 +875,6 @@ if (isset($_POST['update'])) {
         $mob_notes = $_POST['mob_notes'];
         @$query_mobile = "UPDATE projects SET mobile_objective='$mob_objective',  mobile_notes='$mob_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_mobile);
-        print "<script>window.location='projects.php?create&psl=physical'</script>";
         confirm_query($result);
     }
 
@@ -903,7 +899,6 @@ if (isset($_POST['update'])) {
         $physical_notes = $_POST['phy_notes'];
         @$query_physical = "UPDATE projects SET physical_objective='$physical_objective',  physical_notes='$physical_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_physical);
-        print "<script>window.location='projects.php?create&psl=social-eng'</script>";
         confirm_query($result);
     }
 
@@ -928,7 +923,6 @@ if (isset($_POST['update'])) {
         $social_notes = $_POST['se_notes'];
         @$query_social = "UPDATE projects SET social_objective='$social_objective',  social_notes='$social_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_social);
-        print "<script>window.location='projects.php?create&psl=war-dail'</script>";
         confirm_query($result);
     }
 
@@ -953,7 +947,6 @@ if (isset($_POST['update'])) {
         $war_notes = $_POST['war_notes'];
         @$query_war = "UPDATE projects SET war_objective='$war_objective',  war_notes='$war_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_war);
-        print "<script>window.location='projects.php?create&psl=web'</script>";
         confirm_query($result);
     }
 
@@ -978,7 +971,6 @@ if (isset($_POST['update'])) {
         $web_notes = $_POST['web_notes'];
         @$query_web = "UPDATE projects SET web_objective='$web_objective',  web_notes='$web_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_web);
-        print "<script>window.location='projects.php?create&psl=wireless'</script>";
         confirm_query($result);
     }
 
