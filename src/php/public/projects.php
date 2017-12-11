@@ -637,7 +637,7 @@ if (isset($_POST['create'])) {
 
     foreach(@$_POST['assessment'] as $selected){
         if(isset($_POST['assessment'])){
-            $ass = $ass.$selected." ";  }
+            $ass = $ass.$selected." "; }
 }
     $query= "insert into project_assessment values('',$projectid,'$ass')";
     $result = mysqli_query($connection, $query);
@@ -654,54 +654,6 @@ if (isset($_POST['create'])) {
         $result = mysqli_query($connection, $query);
         confirm_query($result);
     }
-
-    //resource
-    /*
-    $projectmgr = $_POST['projectmgr'];
-    $emailpmg = $_POST['emailpmg'];
-    $cellpmg = $_POST['cellpmg'];
-    $consultant1 = $_POST['consultant1'];
-    $email1 = $_POST['email1'];
-    $cell1 = $_POST['cell1'];
-    $consultant2 = $_POST['consultant2'];
-    $email2 = $_POST['email2'];
-    $cell2 = $_POST['cell2'];
-    $consultant3 = $_POST['consultant3'];
-    $email3 = $_POST['email3'];
-    $cell3 = $_POST['cell3'];
-    $consultant4 = $_POST['consultant4'];
-    $email4 = $_POST['email4'];
-    $cell4 = $_POST['cell4'];
-    $consultant5 = $_POST['consultant5'];
-    $email5 = $_POST['email5'];
-    $cell5 = $_POST['cell5'];
-    $consultant6 = $_POST['consultant6'];
-    $email6 = $_POST['email6'];
-    $cell6 = $_POST['cell6'];
-
-    //external
-    $ext_objective = $_POST['ext_objective'];
-    $ext_targets = $_POST['ext_targets'];
-    $ext_exclude = $_POST['ext_exclude'];
-    $ext_notes = $_POST['ext_notes'];
-    print $query_external = "INSERT INTO projects (external_objective, external_targets, external_exclude, external_notes) VALUES ('$ext_objective', '$ext_targets', '$ext_exclude', '$ext_notes')";exit;
-    $result = mysqli_query($connection, $query_external);
-    confirm_query($result);
-
-    //internal
-
-    //mobile
-
-    //physical
-
-    //social eng
-
-    //war dall
-
-    //web
-
-    //wireless
-    */
 }
 
 if (isset($_POST['update'])) {
@@ -719,7 +671,7 @@ if (isset($_POST['update'])) {
 
     foreach((array)@$_POST['assessment'] as $selected){
         if(isset($_POST['assessment'])){
-            $ass = $ass.$selected." ";  }
+            $ass = $ass.$selected." "; }
 }
 
     $projectid=$_POST['update'];
@@ -781,20 +733,10 @@ if (isset($_POST['update'])) {
     //web
 
     //wireless
-
 }
 
     //update external
     if(isset($_POST['update_ext'])){
-    $ext_objective = $_POST['ext_objective'];
-    $ext_targets = $_POST['ext_targets'];
-    $ext_exclude = $_POST['ext_exclude'];
-    $ext_notes = $_POST['ext_notes'];
-
-    // UPDATE RECORD.
-    @$query_external = "UPDATE projects SET external_objective='$ext_objective',  external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes' WHERE projectID=".$_POST['projectID'];
-    $result = mysqli_query($connection, $query_external);
-    confirm_query($result);
     }
 
     //update external Create
@@ -812,7 +754,7 @@ if (isset($_POST['update'])) {
         $ext_notes = $_POST['ext_notes'];
 
         // UPDATE RECORD.
-        @$query_external = "UPDATE projects SET external_objective='$ext_objective',  external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes' WHERE projectID=".$row1[0];
+        @$query_external = "UPDATE projects SET external_objective='$ext_objective', external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_external);
         confirm_query($result);
         //}
@@ -825,18 +767,41 @@ if (isset($_POST['update'])) {
     }
 
     //update internal
+    /*
     if(isset($_POST['int_submit'])){
-        $int_objective = $_POST['int_objective'];
-        $int_targets = $_POST['int_targets'];
-        $int_exclude = $_POST['int_exclude'];
-        $int_notes = $_POST['int_notes'];
+    $ext_objective = $_POST['ext_objective'];
+    $ext_targets = $_POST['ext_targets'];
+    $ext_exclude = $_POST['ext_exclude'];
+    $ext_notes = $_POST['ext_notes'];
+    $int_objective = $_POST['int_objective'];
+    $int_targets = $_POST['int_targets'];
+    $int_exclude = $_POST['int_exclude'];
+    $int_notes = $_POST['int_notes'];
 
-        // UPDATE RECORD.
-        @$query_external = "UPDATE projects SET internal_objective='$int_objective',  internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes' WHERE projectID=".$_POST['projectID'];
-        $result = mysqli_query($connection, $query_external);
-        confirm_query($result);
+    $mob_objective = $_POST['mob_objective'];
+    $mob_notes = $_POST['mob_notes'];
+
+    $physical_objective = $_POST['phy_objective'];
+    $physical_notes = $_POST['phy_notes'];
+
+        $social_objective = $_POST['se_objective'];
+        $social_notes = $_POST['se_notes'];
+
+        $war_objective = $_POST['war_objective'];
+        $war_notes = $_POST['war_notes'];
+
+        $web_objective = $_POST['web_objective'];
+        $web_notes = $_POST['web_notes'];
+
+        $wireless_objective = $_POST['wireless_objective'];
+        $wireless_notes = $_POST['wireless_notes'];
+
+    // UPDATE RECORD.
+    @$query_external = "UPDATE projects SET external_objective='$ext_objective', external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes',internal_objective='$int_objective', internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes',mobile_objective='$mob_objective', mobile_notes='$mob_notes',physical_objective='$physical_objective', physical_notes='$physical_notes',social_objective='$social_objective', social_notes='$social_notes',war_objective='$war_objective', war_notes='$war_notes',web_objective='$web_objective', web_notes='$web_notes',wireless_objective='$wireless_objective', wireless_notes='$wireless_notes' WHERE projectID=".$_POST['projectID'];
+    $result = mysqli_query($connection, $query_external);
+    confirm_query($result);
     }
-
+    */
     //update internal create
     if(isset($_POST['create_internal'])){
         $maxid = 0;
@@ -849,22 +814,47 @@ if (isset($_POST['update'])) {
         $int_notes = $_POST['int_notes'];
 
         // UPDATE RECORD.
-        @$query_internal = "UPDATE projects SET internal_objective='$int_objective',  internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes' WHERE projectID=".$row1[0];
+        @$query_internal = "UPDATE projects SET internal_objective='$int_objective', internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_internal);
         confirm_query($result);
     }
 
     //update internal
+    /*
     if(isset($_POST['mob_submit'])){
-        $mob_objective = $_POST['mob_objective'];
-        $mob_notes = $_POST['mob_notes'];
+    $ext_objective = $_POST['ext_objective'];
+    $ext_targets = $_POST['ext_targets'];
+    $ext_exclude = $_POST['ext_exclude'];
+    $ext_notes = $_POST['ext_notes'];
+    $int_objective = $_POST['int_objective'];
+    $int_targets = $_POST['int_targets'];
+    $int_exclude = $_POST['int_exclude'];
+    $int_notes = $_POST['int_notes'];
 
-        // UPDATE RECORD.
-        @$query_external = "UPDATE projects SET mobile_objective='$mob_objective',  mobile_notes='$mob_notes' WHERE projectID=".$_POST['projectID'];
-        $result = mysqli_query($connection, $query_external);
-        confirm_query($result);
+    $mob_objective = $_POST['mob_objective'];
+    $mob_notes = $_POST['mob_notes'];
+
+    $physical_objective = $_POST['phy_objective'];
+    $physical_notes = $_POST['phy_notes'];
+
+        $social_objective = $_POST['se_objective'];
+        $social_notes = $_POST['se_notes'];
+
+        $war_objective = $_POST['war_objective'];
+        $war_notes = $_POST['war_notes'];
+
+        $web_objective = $_POST['web_objective'];
+        $web_notes = $_POST['web_notes'];
+
+        $wireless_objective = $_POST['wireless_objective'];
+        $wireless_notes = $_POST['wireless_notes'];
+
+    // UPDATE RECORD.
+    @$query_external = "UPDATE projects SET external_objective='$ext_objective', external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes',internal_objective='$int_objective', internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes',mobile_objective='$mob_objective', mobile_notes='$mob_notes',physical_objective='$physical_objective', physical_notes='$physical_notes',social_objective='$social_objective', social_notes='$social_notes',war_objective='$war_objective', war_notes='$war_notes',web_objective='$web_objective', web_notes='$web_notes',wireless_objective='$wireless_objective', wireless_notes='$wireless_notes' WHERE projectID=".$_POST['projectID'];
+    $result = mysqli_query($connection, $query_external);
+    confirm_query($result);
     }
-
+    */
     //update mobile create
     if(isset($_POST['create_mobile'])){
         $maxid = 0;
@@ -873,22 +863,47 @@ if (isset($_POST['update'])) {
         $row1 = mysqli_fetch_row($row);
         $mob_objective = $_POST['mob_objective'];
         $mob_notes = $_POST['mob_notes'];
-        @$query_mobile = "UPDATE projects SET mobile_objective='$mob_objective',  mobile_notes='$mob_notes' WHERE projectID=".$row1[0];
+        @$query_mobile = "UPDATE projects SET mobile_objective='$mob_objective', mobile_notes='$mob_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_mobile);
         confirm_query($result);
     }
 
     //update physical
+    /*
     if(isset($_POST['physical_submit'])){
-        $physical_objective = $_POST['phy_objective'];
-        $physical_notes = $_POST['phy_notes'];
+    $ext_objective = $_POST['ext_objective'];
+    $ext_targets = $_POST['ext_targets'];
+    $ext_exclude = $_POST['ext_exclude'];
+    $ext_notes = $_POST['ext_notes'];
+    $int_objective = $_POST['int_objective'];
+    $int_targets = $_POST['int_targets'];
+    $int_exclude = $_POST['int_exclude'];
+    $int_notes = $_POST['int_notes'];
 
-        // UPDATE RECORD.
-        @$query_external = "UPDATE projects SET physical_objective='$physical_objective',  physical_notes='$physical_notes' WHERE projectID=".$_POST['projectID'];
-        $result = mysqli_query($connection, $query_external);
-        confirm_query($result);
+    $mob_objective = $_POST['mob_objective'];
+    $mob_notes = $_POST['mob_notes'];
+
+    $physical_objective = $_POST['phy_objective'];
+    $physical_notes = $_POST['phy_notes'];
+
+        $social_objective = $_POST['se_objective'];
+        $social_notes = $_POST['se_notes'];
+
+        $war_objective = $_POST['war_objective'];
+        $war_notes = $_POST['war_notes'];
+
+        $web_objective = $_POST['web_objective'];
+        $web_notes = $_POST['web_notes'];
+
+        $wireless_objective = $_POST['wireless_objective'];
+        $wireless_notes = $_POST['wireless_notes'];
+
+    // UPDATE RECORD.
+    @$query_external = "UPDATE projects SET external_objective='$ext_objective', external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes',internal_objective='$int_objective', internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes',mobile_objective='$mob_objective', mobile_notes='$mob_notes',physical_objective='$physical_objective', physical_notes='$physical_notes',social_objective='$social_objective', social_notes='$social_notes',war_objective='$war_objective', war_notes='$war_notes',web_objective='$web_objective', web_notes='$web_notes',wireless_objective='$wireless_objective', wireless_notes='$wireless_notes' WHERE projectID=".$_POST['projectID'];
+    $result = mysqli_query($connection, $query_external);
+    confirm_query($result);
     }
-
+    */
     //update physical create
     if(isset($_POST['create_physical'])){
         $maxid = 0;
@@ -897,22 +912,47 @@ if (isset($_POST['update'])) {
         $row1 = mysqli_fetch_row($row);
         $physical_objective = $_POST['phy_objective'];
         $physical_notes = $_POST['phy_notes'];
-        @$query_physical = "UPDATE projects SET physical_objective='$physical_objective',  physical_notes='$physical_notes' WHERE projectID=".$row1[0];
+        @$query_physical = "UPDATE projects SET physical_objective='$physical_objective', physical_notes='$physical_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_physical);
         confirm_query($result);
     }
 
     //update social
+    /*
     if(isset($_POST['se_submit'])){
+    $ext_objective = $_POST['ext_objective'];
+    $ext_targets = $_POST['ext_targets'];
+    $ext_exclude = $_POST['ext_exclude'];
+    $ext_notes = $_POST['ext_notes'];
+    $int_objective = $_POST['int_objective'];
+    $int_targets = $_POST['int_targets'];
+    $int_exclude = $_POST['int_exclude'];
+    $int_notes = $_POST['int_notes'];
+
+    $mob_objective = $_POST['mob_objective'];
+    $mob_notes = $_POST['mob_notes'];
+
+    $physical_objective = $_POST['phy_objective'];
+    $physical_notes = $_POST['phy_notes'];
+
         $social_objective = $_POST['se_objective'];
         $social_notes = $_POST['se_notes'];
 
-        // UPDATE RECORD.
-        @$query_external = "UPDATE projects SET social_objective='$social_objective',  social_notes='$social_notes' WHERE projectID=".$_POST['projectID'];
-        $result = mysqli_query($connection, $query_external);
-        confirm_query($result);
-    }
+        $war_objective = $_POST['war_objective'];
+        $war_notes = $_POST['war_notes'];
 
+        $web_objective = $_POST['web_objective'];
+        $web_notes = $_POST['web_notes'];
+
+        $wireless_objective = $_POST['wireless_objective'];
+        $wireless_notes = $_POST['wireless_notes'];
+
+    // UPDATE RECORD.
+    @$query_external = "UPDATE projects SET external_objective='$ext_objective', external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes',internal_objective='$int_objective', internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes',mobile_objective='$mob_objective', mobile_notes='$mob_notes',physical_objective='$physical_objective', physical_notes='$physical_notes',social_objective='$social_objective', social_notes='$social_notes',war_objective='$war_objective', war_notes='$war_notes',web_objective='$web_objective', web_notes='$web_notes',wireless_objective='$wireless_objective', wireless_notes='$wireless_notes' WHERE projectID=".$_POST['projectID'];
+    $result = mysqli_query($connection, $query_external);
+    confirm_query($result);
+    }
+    */
     //update social create
     if(isset($_POST['create_se'])){
         $maxid = 0;
@@ -921,22 +961,47 @@ if (isset($_POST['update'])) {
         $row1 = mysqli_fetch_row($row);
         $social_objective = $_POST['se_objective'];
         $social_notes = $_POST['se_notes'];
-        @$query_social = "UPDATE projects SET social_objective='$social_objective',  social_notes='$social_notes' WHERE projectID=".$row1[0];
+        @$query_social = "UPDATE projects SET social_objective='$social_objective', social_notes='$social_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_social);
         confirm_query($result);
     }
 
     //update war
+    /*
     if(isset($_POST['war_submit'])){
+    $ext_objective = $_POST['ext_objective'];
+    $ext_targets = $_POST['ext_targets'];
+    $ext_exclude = $_POST['ext_exclude'];
+    $ext_notes = $_POST['ext_notes'];
+    $int_objective = $_POST['int_objective'];
+    $int_targets = $_POST['int_targets'];
+    $int_exclude = $_POST['int_exclude'];
+    $int_notes = $_POST['int_notes'];
+
+    $mob_objective = $_POST['mob_objective'];
+    $mob_notes = $_POST['mob_notes'];
+
+    $physical_objective = $_POST['phy_objective'];
+    $physical_notes = $_POST['phy_notes'];
+
+        $social_objective = $_POST['se_objective'];
+        $social_notes = $_POST['se_notes'];
+
         $war_objective = $_POST['war_objective'];
         $war_notes = $_POST['war_notes'];
 
-        // UPDATE RECORD.
-        @$query_external = "UPDATE projects SET war_objective='$war_objective',  war_notes='$war_notes' WHERE projectID=".$_POST['projectID'];
-        $result = mysqli_query($connection, $query_external);
-        confirm_query($result);
-    }
+        $web_objective = $_POST['web_objective'];
+        $web_notes = $_POST['web_notes'];
 
+        $wireless_objective = $_POST['wireless_objective'];
+        $wireless_notes = $_POST['wireless_notes'];
+
+    // UPDATE RECORD.
+    @$query_external = "UPDATE projects SET external_objective='$ext_objective', external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes',internal_objective='$int_objective', internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes',mobile_objective='$mob_objective', mobile_notes='$mob_notes',physical_objective='$physical_objective', physical_notes='$physical_notes',social_objective='$social_objective', social_notes='$social_notes',war_objective='$war_objective', war_notes='$war_notes',web_objective='$web_objective', web_notes='$web_notes',wireless_objective='$wireless_objective', wireless_notes='$wireless_notes' WHERE projectID=".$_POST['projectID'];
+    $result = mysqli_query($connection, $query_external);
+    confirm_query($result);
+    }
+*/
     //update social create
     if(isset($_POST['create_war'])){
         $maxid = 0;
@@ -945,22 +1010,47 @@ if (isset($_POST['update'])) {
         $row1 = mysqli_fetch_row($row);
         $war_objective = $_POST['war_objective'];
         $war_notes = $_POST['war_notes'];
-        @$query_war = "UPDATE projects SET war_objective='$war_objective',  war_notes='$war_notes' WHERE projectID=".$row1[0];
+        @$query_war = "UPDATE projects SET war_objective='$war_objective', war_notes='$war_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_war);
         confirm_query($result);
     }
 
     //update social
+    /*
     if(isset($_POST['web_submit'])){
+    $ext_objective = $_POST['ext_objective'];
+    $ext_targets = $_POST['ext_targets'];
+    $ext_exclude = $_POST['ext_exclude'];
+    $ext_notes = $_POST['ext_notes'];
+    $int_objective = $_POST['int_objective'];
+    $int_targets = $_POST['int_targets'];
+    $int_exclude = $_POST['int_exclude'];
+    $int_notes = $_POST['int_notes'];
+
+    $mob_objective = $_POST['mob_objective'];
+    $mob_notes = $_POST['mob_notes'];
+
+    $physical_objective = $_POST['phy_objective'];
+    $physical_notes = $_POST['phy_notes'];
+
+        $social_objective = $_POST['se_objective'];
+        $social_notes = $_POST['se_notes'];
+
+        $war_objective = $_POST['war_objective'];
+        $war_notes = $_POST['war_notes'];
+
         $web_objective = $_POST['web_objective'];
         $web_notes = $_POST['web_notes'];
 
-        // UPDATE RECORD.
-        @$query_external = "UPDATE projects SET web_objective='$web_objective',  web_notes='$web_notes' WHERE projectID=".$_POST['projectID'];
-        $result = mysqli_query($connection, $query_external);
-        confirm_query($result);
-    }
+        $wireless_objective = $_POST['wireless_objective'];
+        $wireless_notes = $_POST['wireless_notes'];
 
+    // UPDATE RECORD.
+    @$query_external = "UPDATE projects SET external_objective='$ext_objective', external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes',internal_objective='$int_objective', internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes',mobile_objective='$mob_objective', mobile_notes='$mob_notes',physical_objective='$physical_objective', physical_notes='$physical_notes',social_objective='$social_objective', social_notes='$social_notes',war_objective='$war_objective', war_notes='$war_notes',web_objective='$web_objective', web_notes='$web_notes',wireless_objective='$wireless_objective', wireless_notes='$wireless_notes' WHERE projectID=".$_POST['projectID'];
+    $result = mysqli_query($connection, $query_external);
+    confirm_query($result);
+    }
+    */
     //update web create
     if(isset($_POST['create_web'])){
         $maxid = 0;
@@ -969,19 +1059,43 @@ if (isset($_POST['update'])) {
         $row1 = mysqli_fetch_row($row);
         $web_objective = $_POST['web_objective'];
         $web_notes = $_POST['web_notes'];
-        @$query_web = "UPDATE projects SET web_objective='$web_objective',  web_notes='$web_notes' WHERE projectID=".$row1[0];
+        @$query_web = "UPDATE projects SET web_objective='$web_objective', web_notes='$web_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_web);
         confirm_query($result);
     }
 
     if(isset($_POST['wireless_submit'])){
+        $ext_objective = $_POST['ext_objective'];
+        $ext_targets = $_POST['ext_targets'];
+        $ext_exclude = $_POST['ext_exclude'];
+        $ext_notes = $_POST['ext_notes'];
+        $int_objective = $_POST['int_objective'];
+        $int_targets = $_POST['int_targets'];
+        $int_exclude = $_POST['int_exclude'];
+        $int_notes = $_POST['int_notes'];
+
+        $mob_objective = $_POST['mob_objective'];
+        $mob_notes = $_POST['mob_notes'];
+
+        $physical_objective = $_POST['phy_objective'];
+        $physical_notes = $_POST['phy_notes'];
+
+        $social_objective = $_POST['se_objective'];
+        $social_notes = $_POST['se_notes'];
+
+        $war_objective = $_POST['war_objective'];
+        $war_notes = $_POST['war_notes'];
+
+        $web_objective = $_POST['web_objective'];
+        $web_notes = $_POST['web_notes'];
+
         $wireless_objective = $_POST['wireless_objective'];
         $wireless_notes = $_POST['wireless_notes'];
 
-        // UPDATE RECORD.
-        @$query_external = "UPDATE projects SET wireless_objective='$wireless_objective',  wireless_notes='$wireless_notes' WHERE projectID=".$_POST['projectID'];
-        $result = mysqli_query($connection, $query_external);
-        confirm_query($result);
+    // UPDATE RECORD.
+    @$query_external = "UPDATE projects SET external_objective='$ext_objective', external_targets='$ext_targets', external_exclude='$ext_exclude', external_notes='$ext_notes',internal_objective='$int_objective', internal_targets='$int_targets', internal_exclude='$int_exclude', internal_notes='$int_notes',mobile_objective='$mob_objective', mobile_notes='$mob_notes',physical_objective='$physical_objective', physical_notes='$physical_notes',social_objective='$social_objective', social_notes='$social_notes', war_objective='$war_objective', war_notes='$war_notes',web_objective='$web_objective', web_notes='$web_notes', wireless_objective='$wireless_objective', wireless_notes='$wireless_notes' WHERE projectID=".$_POST['projectID'];
+    $result = mysqli_query($connection, $query_external);
+    confirm_query($result);
     }
 
     //update web create
@@ -992,21 +1106,21 @@ if (isset($_POST['update'])) {
         $row1 = mysqli_fetch_row($row);
         $wireless_objective = $_POST['wire_objective'];
         $wireless_notes = $_POST['wire_notes'];
-        @$query_wireless = "UPDATE projects SET wireless_objective='$wireless_objective',  wireless_notes='$wireless_notes' WHERE projectID=".$row1[0];
+        @$query_wireless = "UPDATE projects SET wireless_objective='$wireless_objective', wireless_notes='$wireless_notes' WHERE projectID=".$row1[0];
         $result = mysqli_query($connection, $query_wireless);
         confirm_query($result);
     }
-
+    /*
     if(isset($_POST['wire_submit'])){
         $wireless_objective = $_POST['wire_objective'];
         $wireless_notes = $_POST['wire_notes'];
 
         // UPDATE RECORD.
-        @$query_external = "UPDATE projects SET wireless_objective='$wireless_objective',  wireless_notes='$wireless_notes' WHERE projectID=".$_POST['projectID'];
+        @$query_external = "UPDATE projects SET wireless_objective='$wireless_objective', wireless_notes='$wireless_notes' WHERE projectID=".$_POST['projectID'];
         $result = mysqli_query($connection, $query_external);
         confirm_query($result);
     }
-
+    */
 if (isset($_GET['delete'])) {
     // DELETE RECORD.
     $query = "DELETE FROM project_locations WHERE projectID=".intval($_GET['delete']);
@@ -3331,40 +3445,42 @@ if (isset($_GET['create'])) {
                             </form>
                     </div>
 
+<!-- Update data -->
+<?php include "projects_extra.php"; ?>
                     <!-- External panel -->
                     <div role="tabpanel" class="tab-pane" id="external">
                         <form class="form-horizontal" action="projects.php" method="post">
-                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
+                        <input type="hidden" name="projectID" id="projectID" value="<?php print $_GET['update'] ?>" />
                              <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="ext_objective" rows="2"><?php echo $row['external_objective'] ?></textarea>
+                                    <textarea class="form-control" name="ext_objective" id="ext_objective" rows="2"><?php echo $row['external_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="ext_targets" value="<?php echo $row['external_targets'] ?>">
+                                    <input type="text" class="form-control" name="ext_targets" id="ext_targets" value="<?php echo $row['external_targets'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="ext_exclude" value="<?php echo $row['external_exclude'] ?>">
+                                    <input type="text" class="form-control" name="ext_exclude" id="ext_exclude" value="<?php echo $row['external_exclude'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="ext_notes" rows="6"><?php echo $row['external_notes'] ?></textarea>
+                                    <textarea class="form-control" name="ext_notes" id="ext_notes" rows="6"><?php echo $row['external_notes'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-actions">
-                                <button class="btn btn-warning" type="submit" name="update_ext">Update</button>
+                                <a class="btn btn-warning"  name="update_ext" id="update_ext">Update</button>
                                 <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
@@ -3373,37 +3489,36 @@ if (isset($_GET['create'])) {
                     <!-- Internal panel -->
                     <div role="tabpanel" class="tab-pane" id="internal">
                         <form class="form-horizontal" action="projects.php" method="post">
-                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="int_objective" rows="2"><?php echo $row['internal_objective'] ?></textarea>
+                                    <textarea class="form-control" name="int_objective"  id="int_objective"rows="2"><?php echo $row['internal_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Targets</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="int_targets" value="<?php echo $row['internal_targets'] ?>">
+                                    <input type="text" class="form-control" name="int_targets" id="int_targets" value="<?php echo $row['internal_targets'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Exclude</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="int_exclude" value="<?php echo $row['internal_exclude'] ?>">
+                                    <input type="text" class="form-control" name="int_exclude" id="int_exclude" value="<?php echo $row['internal_exclude'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="int_notes" rows="6"><?php echo $row['internal_notes'] ?></textarea>
+                                    <textarea class="form-control" name="int_notes" id="int_notes" rows="6"><?php echo $row['internal_notes'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-actions">
-                                <button class="btn btn-warning" type="submit" name="int_submit">Update</button>
+                                <a class="btn btn-warning" name="int_submit" id="int_submit">Update</a>
                                 <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
@@ -3412,24 +3527,22 @@ if (isset($_GET['create'])) {
                     <!-- Mobile panel -->
                     <div role="tabpanel" class="tab-pane" id="mobile">
                         <form class="form-horizontal" action="projects.php" method="post">
-                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
-
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="mob_objective" rows="2"><?php echo $row['mobile_objective'] ?></textarea>
+                                    <textarea class="form-control" name="mob_objective" id="mob_objective" rows="2"><?php echo $row['mobile_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="mob_notes" rows="6"><?php echo $row['mobile_notes'] ?></textarea>
+                                    <textarea class="form-control" name="mob_notes" id="mob_notes" rows="6"><?php echo $row['mobile_notes'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-actions">
-                                <button class="btn btn-warning" type="submit" name="mob_submit">Update</button>
+                                <a class="btn btn-warning" name="mob_submit" id="mob_submit">Update</a>
                                 <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
@@ -3438,23 +3551,22 @@ if (isset($_GET['create'])) {
                     <!-- Physical panel -->
                     <div role="tabpanel" class="tab-pane" id="physical">
                         <form class="form-horizontal" action="projects.php" method="post">
-                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="phy_objective" rows="2"><?php echo $row['physical_objective'] ?></textarea>
+                                    <textarea class="form-control" name="phy_objective" id="phy_objective" rows="2"><?php echo $row['physical_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="phy_notes" rows="6"><?php echo $row['physical_notes'] ?></textarea>
+                                    <textarea class="form-control" name="phy_notes" id="phy_notes" rows="6"><?php echo $row['physical_notes'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-actions">
-                                <button class="btn btn-warning" type="submit" name="physical_submit">Update</button>
+                                <a class="btn btn-warning" name="physical_submit" id="physical_submit">Update</a>
                                 <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
@@ -3463,23 +3575,22 @@ if (isset($_GET['create'])) {
                     <!-- Social Eng panel -->
                     <div role="tabpanel" class="tab-pane" id="social-eng">
                         <form class="form-horizontal" action="projects.php" method="post">
-                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="se_objective" rows="2"><?php echo $row['social_objective'] ?></textarea>
+                                    <textarea class="form-control" name="se_objective" id="se_objective" rows="2"><?php echo $row['social_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="se_notes" rows="6"><?php echo $row['social_notes'] ?></textarea>
+                                    <textarea class="form-control" name="se_notes" id="se_notes" rows="6"><?php echo $row['social_notes'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-actions">
-                                <button class="btn btn-warning" type="submit" name="se_submit">Update</button>
+                                <a class="btn btn-warning" name="se_submit" id="se_submit">Update</a>
                                 <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
@@ -3488,23 +3599,22 @@ if (isset($_GET['create'])) {
                     <!-- War Dail panel -->
                     <div role="tabpanel" class="tab-pane" id="war-dail">
                         <form class="form-horizontal" action="projects.php" method="post">
-                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="war_objective" rows="2"><?php echo $row['war_objective'] ?></textarea>
+                                    <textarea class="form-control" name="war_objective" id="war_objective" rows="2"><?php echo $row['war_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="war_notes" rows="6"><?php echo $row['war_notes'] ?></textarea>
+                                    <textarea class="form-control" name="war_notes" id="war_notes" rows="6"><?php echo $row['war_notes'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-actions">
-                                <button class="btn btn-warning" type="submit" name="war_submit">Update</button>
+                                <a class="btn btn-warning" name="war_submit" id="war_submit">Update</a>
                                 <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
@@ -3513,23 +3623,22 @@ if (isset($_GET['create'])) {
                     <!-- Web panel -->
                     <div role="tabpanel" class="tab-pane" id="web">
                         <form class="form-horizontal" action="projects.php" method="post">
-                        <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="web_objective" rows="2"><?php echo $row['web_objective'] ?></textarea>
+                                    <textarea class="form-control" name="web_objective" id="web_objective" rows="2"><?php echo $row['web_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="web_notes" rows="6"><?php echo $row['web_notes'] ?></textarea>
+                                    <textarea class="form-control" name="web_notes" id="web_notes" rows="6"><?php echo $row['web_notes'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-actions">
-                                <button class="btn btn-warning" type="submit" name="web_submit">Update</button>
+                                <a class="btn btn-warning" name="web_submit" id="web_submit">Update</a>
                                 <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
@@ -3538,23 +3647,22 @@ if (isset($_GET['create'])) {
                     <!-- Wireless panel -->
                     <div role="tabpanel" class="tab-pane" id="wireless">
                         <form class="form-horizontal" action="projects.php" method="post">
-                         <input type="hidden" name="projectID" value="<?php print $_GET['update'] ?>" />
                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Objective</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="wire_objective" rows="2"><?php echo $row['wireless_objective'] ?></textarea>
+                                    <textarea class="form-control" name="wire_objective" id="wire_objective" rows="2"><?php echo $row['wireless_objective'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="wire_notes" rows="6"><?php echo $row['wireless_notes'] ?></textarea>
+                                    <textarea class="form-control" name="wire_notes" id="wire_notes" rows="6"><?php echo $row['wireless_notes'] ?></textarea>
                                 </div>
                             </div>
 
                             <div class="form-actions">
-                                <button class="btn btn-warning" type="submit" name="wire_submit">Update</button>
+                                <a class="btn btn-warning" name="wire_submit" id="wire_submit">Update</a>
                                 <a class="btn btn-default" href="projects.php">Back</a>
                             </div>
                         </form>
