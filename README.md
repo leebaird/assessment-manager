@@ -4,7 +4,7 @@ Follow on Twitter [![Twitter Follow](https://img.shields.io/twitter/follow/disco
 ### About
 * This project is currently in the beta stage of development.
 * Manage all logistical information for a pentest including clients, contacts, employees, findings, projects, scoping, and vulnerabilities.
-* Special thanks to Shipul Biswas for all your help on this project! https://www.guru.com/freelancers/far-bis
+* Special thanks to Shipul Biswas for all his help on this project! https://www.guru.com/freelancers/far-bis
 
 ### Requirements
 * Install XAMPP (PHP 7.2.0): https://www.apachefriends.org/download.html
