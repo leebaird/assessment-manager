@@ -3,17 +3,18 @@ Follow on Twitter [![Twitter Follow](https://img.shields.io/twitter/follow/disco
 ### About
 * This project is currently in the beta stage of development.
 * Manage all logistical information for a pentest including clients, contacts, employees, findings, projects, scoping, and vulnerabilities.
+* Special thanks to Shipul Biswas https://www.guru.com/freelancers/far-bis for all your help on this project!
 
 ### Requirements
-* Install XAMPP (PHP 7.1.9): https://www.apachefriends.org/download.html
+* Install XAMPP (PHP 7.2.0): https://www.apachefriends.org/download.html
 
 ### OS X Setup
-* Use /Applications/XAMPP/manager-osx to start MySQL and Apache.
+* Use XAMPP to start MySQL and Apache.
 * cd /Applications/XAMPP/htdocs/
 * git clone https://github.com/leebaird/assessment-manager.git
 
 ### Linux Setup
-* Start MySQL and Apache.
+* Use XAMPP to start MySQL and Apache.
 * cd /opt/xampp/htdocs/
 * git clone https://github.com/leebaird/assessment-manager.git
 
