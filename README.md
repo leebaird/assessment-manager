@@ -10,26 +10,25 @@ Follow on Twitter [![Twitter Follow](https://img.shields.io/twitter/follow/disco
 * Install XAMPP (PHP 7.2.0): https://www.apachefriends.org/download.html
 
 ### OS X Setup
-* Use XAMPP to start MySQL and Apache.
+* Use XAMPP control panel to start MySQL and Apache.
 * cd /Applications/XAMPP/htdocs/
-* git clone https://github.com/leebaird/assessment-manager.git
-
-### Linux Setup
-* Use XAMPP to start MySQL and Apache.
-* cd /opt/xampp/htdocs/
+* Change line 8 in index.php to header('Location: '.$uri.'/assessment-manager/src/php/index.php');
 * git clone https://github.com/leebaird/assessment-manager.git
 
 ### Usage
+```
 * cd assessment-manager/bin/
-* . ./setenv.sh
+* . ./setenv.sh osx
 
 * cd ../src/db/mysql/amdb/
 * ./access.sh setup
 * ./access.sh clear
 * ./access.sh load
 
+* Open Safari to localhost
 * Default account: admin
 * Default password: 1234!@#$qwerQWER
+```
 
 ### Pages
 ```
