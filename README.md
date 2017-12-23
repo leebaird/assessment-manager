@@ -12,7 +12,7 @@ Follow on Twitter [![Twitter Follow](https://img.shields.io/twitter/follow/disco
 ### OS X Setup
 * Use XAMPP control panel to start MySQL and Apache.
 * cd /Applications/XAMPP/htdocs/
-* Change line 8 in index.php to header('Location: '.$uri.'/assessment-manager/src/php/index.php');
+* Change line 8 in index.php to ```header('Location: '.$uri.'/assessment-manager/src/php/index.php');```
 * git clone https://github.com/leebaird/assessment-manager.git
 
 ### Usage
