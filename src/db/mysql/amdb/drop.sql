@@ -8,6 +8,9 @@ DROP TABLE IF EXISTS project_employees;
 DROP TABLE IF EXISTS project_locations;
 DROP TABLE IF EXISTS project_status;
 
+DROP TABLE IF EXISTS project_assessment;
+DROP TABLE IF EXISTS project_location_contacts;
+
 DROP TABLE IF EXISTS contacts;
 
 DROP TABLE IF EXISTS projects;

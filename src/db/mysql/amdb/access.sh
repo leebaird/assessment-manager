@@ -46,4 +46,3 @@ case "$1" in
   *)
     echo "Usage: $0 (clear | connect | drop | load | reload | remove | setup)"
 esac
-

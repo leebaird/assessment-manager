@@ -1,4 +1,5 @@
 <?php
+    //print "hi";
     $username = "root";
     $password = "";
     $host = "localhost";
@@ -8,6 +9,8 @@
 ?>
 
 <?php
+    include "update_home.php";
+
     $ext_objective = @$_POST['ext_objective'];
     $ext_targets = @$_POST['ext_targets'];
     $ext_exclude = @$_POST['ext_exclude'];
@@ -36,35 +39,37 @@
     $wireless_notes = @$_POST['wireless_notes'];
 
     // UPDATE RECORD.
-    print @$query_external = "UPDATE projects SET
-    external_objective='$ext_objective',
-    external_targets='$ext_targets',
-    external_exclude='$ext_exclude',
+    @$query_external = "UPDATE projects SET 
+    external_objective='$ext_objective', 
+    external_targets='$ext_targets', 
+    external_exclude='$ext_exclude', 
     external_notes='$ext_notes',
 
-    internal_objective='$int_objective',
-    internal_targets='$int_targets',
-    internal_exclude='$int_exclude',
-    internal_notes='$int_notes',
+    internal_objective='$int_objective', 
+    internal_targets='$int_targets', 
+    internal_exclude='$int_exclude', 
+    internal_notes='$int_notes', 
 
-    mobile_objective='$mob_objective',
-    mobile_notes='$mob_notes',
+    mobile_objective='$mob_objective', 
+    mobile_notes='$mob_notes', 
 
-    physical_objective='$physical_objective',
-    physical_notes='$physical_notes',
+    physical_objective='$physical_objective', 
+    physical_notes='$physical_notes', 
 
-    social_objective='$social_objective',
-    social_notes='$social_notes',
+    social_objective='$social_objective', 
+    social_notes='$social_notes', 
 
-    war_objective='$war_objective',
-    war_notes='$war_notes',
+    war_objective='$war_objective', 
+    war_notes='$war_notes', 
 
-    web_objective='$web_objective',
-    web_notes='$web_notes',
+    web_objective='$web_objective', 
+    web_notes='$web_notes', 
 
-    wireless_objective='$wireless_objective',
-    wireless_notes='$wireless_notes'
+    wireless_objective='$wireless_objective', 
+    wireless_notes='$wireless_notes' 
     WHERE projectID=".$_POST['projectID'];
 
     $result = mysqli_query($connection, $query_external);
+    //confirm_query($result);
+
 ?>
