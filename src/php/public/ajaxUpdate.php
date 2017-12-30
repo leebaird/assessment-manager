@@ -1,5 +1,4 @@
 <?php
-    //print "hi";
     $username = "root";
     $password = "";
     $host = "localhost";
@@ -70,6 +69,50 @@
     WHERE projectID=".$_POST['projectID'];
 
     $result = mysqli_query($connection, $query_external);
-    //confirm_query($result);
 
+    $projectmgr = @$_POST['projectmgr'];
+    $emailpmg = @$_POST['emailpmg'];
+    $cellpmg = @$_POST['cellpmg'];
+
+    $consultant1 = @$_POST['consultant1'];
+    $email1 = @$_POST['email1'];
+    $cell1 = @$_POST['cell1'];
+
+    $consultant2 = @$_POST['consultant2'];
+    $email2 = @$_POST['email2'];
+    $cell2 = @$_POST['cell2'];
+
+    $consultant3 = @$_POST['consultant3'];
+    $email3 = @$_POST['email3'];
+    $cell3 = @$_POST['cell3'];
+
+    $consultant4 = @$_POST['consultant4'];
+    $email4 = @$_POST['email4'];
+    $cell4 = $_POST['cell4'];
+
+    $consultant5 = @$_POST['consultant5'];
+    $email5 = @$_POST['email5'];
+    $cell5 = @$_POST['cell5'];
+
+    $consultant6 = @$_POST['consultant6'];
+    $email6 = @$_POST['email6'];
+    $cell6 = @$_POST['cell6'];
+
+    @$query_resource = "UPDATE projects SET resource_title1='Project Mgr
+',resource_name1='$projectmgr', resource_email1='$emailpmg', resource_cell1='$cellpmg',
+
+resource_title2='Consultant 1', resource_name2='$consultant1', resource_email2='$email1', resource_cell2='$cell1',
+
+resource_title3='Consultant 2', resource_name3='$consultant2', resource_email3='$email2', resource_cell3='$cell2',
+
+resource_title4='Consultant 3', resource_name4='$consultant3', resource_email4='$email3', resource_cell4='$cell3',
+
+resource_title5='Consultant 4', resource_name5='$consultant4', resource_email5='$email4', resource_cell5='$cell4',
+
+resource_title6='Consultant 5', resource_name6='$consultant5', resource_email6='$email5', resource_cell6='$cell5',
+
+resource_title7='Consultant 6', resource_name7='$consultant6', resource_email7='$email6', resource_cell7='$cell6'
+
+WHERE projectID=".$_POST['projectID'];
+    $result = @mysqli_query($connection, $query_resource);
 ?>

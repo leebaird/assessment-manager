@@ -12,7 +12,7 @@
 
     $query_loc = "SELECT * FROM client_locations WHERE clientID=".$_POST['country_id'];
     $result_loc = mysqli_query($connection, $query_loc);
-    $sn .= "<select class='form-control' name='address'  id='address'>"; 
+    $sn .= "<select class='form-control' name='address'  id='address'>";
     $sn .= "<option value=''>Select Address</option>";
 
     while($row_loc = mysqli_fetch_array($result_loc)){

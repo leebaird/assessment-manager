@@ -1,5 +1,5 @@
 <?php
-    // First we execute our common code to connection to the db and start the session.
+    // Execute common code to connection to the db and start the session.
     require_once("../includes/common.php");
 
     // Unset all of the session variables.
@@ -18,7 +18,7 @@
         );
     }
 
-    // Finally, destroy the session.
+    // Destroy the session.
     session_destroy();
 
     header("Location: ../index.php");

@@ -21,4 +21,3 @@
     $sn .= $row_loc['phone'].",";
 
     print $sn;
-

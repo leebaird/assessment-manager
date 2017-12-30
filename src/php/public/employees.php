@@ -19,8 +19,6 @@ if (isset($_POST['create'])) {
     }
 
     $query = "INSERT INTO employees (modified, employee, title, cell, email, notes) VALUES (now(), '$_POST[employee]', '$_POST[title]', '$_POST[cell]', '$_POST[email]', '$_POST[notes]')";
-
-    //$query = "INSERT INTO employees (modified, employee, title, accountmgr, cell, email, notes) VALUES (now(), '$_POST[employee]', '$_POST[title]', '$_POST[accountmgr]', '$_POST[cell]', '$_POST[email]', '$_POST[notes]')";
     $result = mysqli_query($connection, $query);
     confirm_query($result);
 }

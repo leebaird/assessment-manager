@@ -185,7 +185,36 @@ CREATE TABLE projects (
     web_notes TEXT,
 
     wireless_objective TEXT,
-    wireless_notes TEXT
+    wireless_notes TEXT,
+
+    resource_title1 VARCHAR(50) NOT NULL,
+    resource_name1 VARCHAR(50) NOT NULL,
+    resource_email1 VARCHAR(50) NOT NULL,
+    resource_cell1 VARCHAR(15) NOT NULL,
+    resource_title2 VARCHAR(50) NOT NULL,
+    resource_name2 VARCHAR(50) NOT NULL,
+    resource_email2 VARCHAR(50) NOT NULL,
+    resource_cell2 VARCHAR(15) NOT NULL,
+    resource_title3 VARCHAR(50) NOT NULL,
+    resource_name3 VARCHAR(50) NOT NULL,
+    resource_email3 VARCHAR(50) NOT NULL,
+    resource_cell3 VARCHAR(15) NOT NULL,
+    resource_title4 VARCHAR(50) NOT NULL,
+    resource_name4 VARCHAR(50) NOT NULL,
+    resource_email4 VARCHAR(50) NOT NULL,
+    resource_cell4 VARCHAR(15) NOT NULL,
+    resource_title5 VARCHAR(50) NOT NULL,
+    resource_name5 VARCHAR(50) NOT NULL,
+    resource_email5 VARCHAR(50) NOT NULL,
+    resource_cell5 VARCHAR(15) NOT NULL,
+    resource_title6 VARCHAR(50) NOT NULL,
+    resource_name6 VARCHAR(50) NOT NULL,
+    resource_email6 VARCHAR(50) NOT NULL,
+    resource_cell6 VARCHAR(15) NOT NULL,
+    resource_title7 VARCHAR(50) NOT NULL,
+    resource_name7 VARCHAR(50) NOT NULL,
+    resource_email7 VARCHAR(50) NOT NULL,
+    resource_cell7 VARCHAR(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE projects
