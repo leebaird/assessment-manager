@@ -675,9 +675,9 @@ if (isset($_GET['create'])) {
 
                     <?php } ?>
                     <?php if(@$_GET['psl']=='war-dail') { ?>
-                    <li role="presentation" class="active"><a href="#war-dail" aria-controls="war-dail" role="tab" data-toggle="tab">War Dail</a></li>
+                    <li role="presentation" class="active"><a href="#war-dail" aria-controls="war-dail" role="tab" data-toggle="tab">War Dial</a></li>
                     <?php } else {?>
-                    <li role="presentation"><a href="#war-dail" aria-controls="war-dail" role="tab" data-toggle="tab">War Dail</a></li>
+                    <li role="presentation"><a href="#war-dail" aria-controls="war-dail" role="tab" data-toggle="tab">War Dial</a></li>
                     <?php } ?>
                     <?php if(@$_GET['psl']=='web') { ?>
                     <li role="presentation" class="active"><a href="#web" aria-controls="web" role="tab" data-toggle="tab">Web</a></li>
@@ -1573,7 +1573,7 @@ if (isset($_GET['create'])) {
                         </form>
                     </div>
 
-                    <!-- War Dail panel -->
+                    <!-- War Dial panel -->
                     <?php if(@$_GET['psl']=='war-dail') { ?>
                     <div role="tabpanel" class="tab-pane active" id="war-dail">
 
@@ -1720,7 +1720,7 @@ if (isset($_GET['create'])) {
                     <li role="presentation"><a href="#mobile" aria-controls="mobile" role="tab" data-toggle="tab">Mobile</a></li>
                     <li role="presentation"><a href="#physical" aria-controls="physical" role="tab" data-toggle="tab">Physical</a></li>
                     <li role="presentation"><a href="#social-eng" aria-controls="social-eng" role="tab" data-toggle="tab">Social Eng</a></li>
-                    <li role="presentation"><a href="#war-dail" aria-controls="war-dail" role="tab" data-toggle="tab">War Dail</a></li>
+                    <li role="presentation"><a href="#war-dail" aria-controls="war-dail" role="tab" data-toggle="tab">War Dial</a></li>
                     <li role="presentation"><a href="#web" aria-controls="web" role="tab" data-toggle="tab">Web</a></li>
                     <li role="presentation"><a href="#wireless" aria-controls="wireless" role="tab" data-toggle="tab">Wireless</a></li>
                 </ul>
@@ -2386,7 +2386,7 @@ value="<?php echo $row_resource['resource_email7']; ?>">
                         </form>
                     </div>
 
-                    <!-- War Dailing panel -->
+                    <!-- War Dialing panel -->
                     <div role="tabpanel" class="tab-pane" id="war-dail">
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
@@ -2478,7 +2478,7 @@ value="<?php echo $row_resource['resource_email7']; ?>">
                     <li role="presentation"><a href="#mobile" aria-controls="mobile" role="tab" data-toggle="tab">Mobile</a></li>
                     <li role="presentation"><a href="#physical" aria-controls="physical" role="tab" data-toggle="tab">Physical</a></li>
                     <li role="presentation"><a href="#social-eng" aria-controls="social-eng" role="tab" data-toggle="tab">Social Eng</a></li>
-                    <li role="presentation"><a href="#war-dail" aria-controls="war-dail" role="tab" data-toggle="tab">War Dail</a></li>
+                    <li role="presentation"><a href="#war-dail" aria-controls="war-dail" role="tab" data-toggle="tab">War Dial</a></li>
                     <li role="presentation"><a href="#web" aria-controls="web" role="tab" data-toggle="tab">Web</a></li>
                     <li role="presentation"><a href="#wireless" aria-controls="wireless" role="tab" data-toggle="tab">Wireless</a></li>
                 </ul>
@@ -3231,7 +3231,7 @@ value="<?php echo @ltrim($row_resource['resource_cell1']," "); ?>"  placeholder=
                         </form>
                     </div>
 
-                    <!-- War Dail panel -->
+                    <!-- War Dial panel -->
                     <div role="tabpanel" class="tab-pane" id="war-dail">
                         <form class="form-horizontal" action="projects.php" method="post">
                             <div class="form-group">
