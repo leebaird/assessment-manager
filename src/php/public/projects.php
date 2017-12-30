@@ -2225,7 +2225,7 @@ if (isset($_GET['create'])) {
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled" value="<?php echo $row_resource['resource_cell6']; ?>">>
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled" value="<?php echo $row_resource['resource_cell6']; ?>">
                                 </div>
                             </div>
 <?php
@@ -2257,7 +2257,7 @@ value="<?php echo $row_resource['resource_email7']; ?>">
                                 </div>
 
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled" value="<?php echo $row_resource['resource_cell7']; ?>">>
+                                    <input type="text" class="form-control" name="cell" id="cell" placeholder="Cell" disabled="disabled" value="<?php echo $row_resource['resource_cell7']; ?>">
                                 </div>
                             </div>
                             </form>
@@ -2820,7 +2820,7 @@ value="<?php echo $row_resource['resource_email7']; ?>">
 
                                 <div class="col-sm-3">
                                     <select class="form-control" name="projectmgr"  id="projectmgr">
-                                        <option value="<?php echo $row_resource['resource_name1']; ?>"><?php echo $row_loc['employee']; ?></option>
+                                        <option value="<?php echo $row_resource['resource_name1']; ?>" placeholder="Project Mgr"><?php echo $row_loc['employee']; ?></option>
                             <?php
                                 $query = "SELECT * FROM employees ORDER BY employee ASC";
                                 $result = mysqli_query($connection, $query);
@@ -2838,12 +2838,12 @@ value="<?php echo $row_resource['resource_email7']; ?>">
 
                                 <div class="col-sm-4">
 
-                                    <input type="text" class="form-control" name="emailpmg" id="emailpmg" value="<?php echo @ltrim($row_resource['resource_email1']); ?>">
+                                    <input type="text" class="form-control" name="emailpmg" id="emailpmg" value="<?php echo @ltrim($row_resource['resource_email1']); ?>" placeholder="Email">
                                 </div>
 
                                 <div class="col-sm-2" align="left">
 <input type="text" class="form-control" name="cellpmg" id="cellpmg" 
-value="<?php echo @ltrim($row_resource['resource_cell1']," "); ?>" >
+value="<?php echo @ltrim($row_resource['resource_cell1']," "); ?>"  placeholder="Cell">
                                 </div>
                             </div>
 
